@@ -4,6 +4,12 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Facilities Hub — Genial Care</title>
+<meta name="theme-color" content="#0E0D1A" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Facilities Hub" />
+<link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;Facilities Hub&quot;,&quot;short_name&quot;:&quot;Hub&quot;,&quot;start_url&quot;:&quot;/&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%230E0D1A&quot;,&quot;theme_color&quot;:&quot;%230E0D1A&quot;}" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
 <style>
@@ -342,11 +348,19 @@ footer {
   50%       { opacity: 0.6; transform: scale(0.8); }
 }
 
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 600px) {
-  header { padding: 20px 20px 0; }
-  .hero  { padding: 40px 20px 28px; }
-  .grid  { padding: 0 20px 48px; grid-template-columns: 1fr; }
-  footer { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+  header { padding: 14px 16px 0; height: auto; }
+  .hero  { padding: 28px 16px 20px; }
+  .hero-title { font-size: 28px; }
+  .grid  { padding: 0 16px 48px; grid-template-columns: 1fr; gap: 14px; }
+  .card  { padding: 22px 18px; }
+  footer { padding: 20px 16px; flex-direction: column; gap: 12px; text-align: center; }
+  .header-badge { display: none; }
+  .fields-row { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -832,8 +846,3 @@ function loadPreventivas() {
 }
 
 loadPreventivas();
-
-
-</script>
-</body>
-</html>
