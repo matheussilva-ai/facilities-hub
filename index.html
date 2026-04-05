@@ -750,38 +750,36 @@ initSchedule();
 
 // ── MANUTENÇÕES PREVENTIVAS ──────────────────────────────────
 function loadPreventivas() {
-  // Usa o proxy do Apps Script para evitar CORS
-  const PROXY = 'https://nf-cartao-corporativo.vercel.app/api/proxy';
-
-  fetch(PROXY, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'getPreventivas' }),
-  })
-    .then(r => r.json())
-    .then(data => {
-      if (!data.rows) throw new Error(data.error || 'Sem dados');
-      const rows = data.rows;
+  const SHEET_ID = '1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q';
+  
+  // Use JSONP via script tag to bypass CORS
+  const callbackName = 'gvizCallback_' + Date.now();
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&callback=' + callbackName;
+  
+  window[callbackName] = function(data) {
+    delete window[callbackName];
+    document.head.removeChild(script);
+    try {
+      const rows = data.table.rows;
       const rows = json.table.rows;
 
       let vencido = 0, avencer = 0, emdia = 0;
       const atencao = [];
 
       rows.forEach(row => {
-        if (!row || !row[0]) return;
-        const cg      = row[0] || '';
-        const servico = row[1] || '';
-        const status  = row[5] || '';
-        const proxRaw = row[4] || null;
+        if (!row.c || !row.c[0] || !row.c[0].v) return;
+        const cg      = row.c[0] ? (row.c[0].v || '') : '';
+        const servico = row.c[1] ? (row.c[1].v || '') : '';
+        const status  = row.c[5] ? (row.c[5].v || '') : '';
+        const proxRaw = row.c[4] ? row.c[4].v : null;
 
-        // Parse próxima execução (DD/MM/AAAA)
         let proxDate = null;
-        if (proxRaw && typeof proxRaw === 'string' && proxRaw.includes('/')) {
-          const parts = proxRaw.split('/');
-          if (parts.length === 3) proxDate = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
+        if (proxRaw && typeof proxRaw === 'string' && proxRaw.startsWith('Date(')) {
+          const parts = proxRaw.replace('Date(','').replace(')','').split(',');
+          proxDate = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
         }
 
-        const statusLower = String(status).toLowerCase();
+        const statusLower = status.toLowerCase();
         if (statusLower.includes('vencido')) {
           vencido++;
           atencao.push({ cg, servico, status: 'vencido', proxDate });
@@ -843,10 +841,21 @@ function loadPreventivas() {
         list.appendChild(more);
       }
     })
-    .catch(err => {
+    } catch(e) {
       document.getElementById('prevList').innerHTML =
         '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
-    });
+    }
+  };
+  
+  script.onerror = function() {
+    document.getElementById('prevList').innerHTML =
+      '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
+    delete window[callbackName];
+  };
+  
+  const script = document.createElement('script');
+  script.src = url;
+  document.head.appendChild(script);
 }
 
 loadPreventivas();
