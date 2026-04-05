@@ -757,7 +757,9 @@ function loadPreventivas() {
     .then(r => r.text())
     .then(text => {
       // Google wraps response in google.visualization.Query.setResponse(...)
-      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+      const match = text.match(/setResponse\(([\s\S]*)\)/);
+      if (!match) throw new Error('Formato inesperado da resposta');
+      const json = JSON.parse(match[1]);
       const rows = json.table.rows;
 
       let vencido = 0, avencer = 0, emdia = 0;
