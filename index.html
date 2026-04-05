@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8" />
@@ -750,36 +750,38 @@ initSchedule();
 
 // ── MANUTENÇÕES PREVENTIVAS ──────────────────────────────────
 function loadPreventivas() {
-  const SHEET_ID = '1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q';
-  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json';
+  // Usa o proxy do Apps Script para evitar CORS
+  const PROXY = 'https://nf-cartao-corporativo.vercel.app/api/proxy';
 
-  fetch(url)
-    .then(r => r.text())
-    .then(text => {
-      // Google wraps response in google.visualization.Query.setResponse(...)
-      const match = text.match(/setResponse\(([\s\S]*)\)/);
-      if (!match) throw new Error('Formato inesperado da resposta');
-      const json = JSON.parse(match[1]);
+  fetch(PROXY, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'getPreventivas' }),
+  })
+    .then(r => r.json())
+    .then(data => {
+      if (!data.rows) throw new Error(data.error || 'Sem dados');
+      const rows = data.rows;
       const rows = json.table.rows;
 
       let vencido = 0, avencer = 0, emdia = 0;
       const atencao = [];
 
       rows.forEach(row => {
-        if (!row.c || !row.c[0] || !row.c[0].v) return;
-        const cg      = row.c[0] ? (row.c[0].v || '') : '';
-        const servico = row.c[1] ? (row.c[1].v || '') : '';
-        const status  = row.c[5] ? (row.c[5].v || '') : '';
-        const proxRaw = row.c[4] ? row.c[4].v : null;
+        if (!row || !row[0]) return;
+        const cg      = row[0] || '';
+        const servico = row[1] || '';
+        const status  = row[5] || '';
+        const proxRaw = row[4] || null;
 
-        // Parse próxima execução
+        // Parse próxima execução (DD/MM/AAAA)
         let proxDate = null;
-        if (proxRaw && typeof proxRaw === 'string' && proxRaw.startsWith('Date(')) {
-          const parts = proxRaw.replace('Date(','').replace(')','').split(',');
-          proxDate = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+        if (proxRaw && typeof proxRaw === 'string' && proxRaw.includes('/')) {
+          const parts = proxRaw.split('/');
+          if (parts.length === 3) proxDate = new Date(parseInt(parts[2]), parseInt(parts[1])-1, parseInt(parts[0]));
         }
 
-        const statusLower = status.toLowerCase();
+        const statusLower = String(status).toLowerCase();
         if (statusLower.includes('vencido')) {
           vencido++;
           atencao.push({ cg, servico, status: 'vencido', proxDate });
