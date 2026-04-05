@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Facilities Hub — Genial Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --purple:      #6E69AD;
+  --purple-dark: #3D3A7A;
+  --teal:        #7BBFC4;
+  --teal-light:  #B0E0E4;
+  --bg:          #0E0D1A;
+  --surface:     #16152A;
+  --surface2:    #1E1C35;
+  --border:      rgba(110,105,173,0.20);
+  --text:        #F0EFF8;
+  --text-muted:  #7874A0;
+  --radius:      20px;
+  --radius-sm:   12px;
+}
+
+html, body {
+  min-height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 10%, rgba(110,105,173,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 85% 90%, rgba(123,191,196,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 50% 50%, rgba(61,58,122,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Grid pattern */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(110,105,173,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110,105,173,0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── HEADER ── */
+header {
+  padding: 28px 32px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-mark {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, var(--purple) 0%, var(--purple-dark) 100%);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(110,105,173,0.40);
+}
+
+.brand-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+
+.brand-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 1px;
+}
+
+.header-time {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 14px;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 56px 32px 40px;
+  max-width: 680px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--purple);
+  background: rgba(110,105,173,0.10);
+  border: 1px solid rgba(110,105,173,0.25);
+  border-radius: 20px;
+  padding: 5px 12px;
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, var(--purple) 0%, var(--teal) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+/* ── GRID ── */
+.grid {
+  padding: 0 32px 64px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  max-width: 1100px;
+}
+
+/* ── CARD ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  text-decoration: none;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+  animation: fadeUp 0.5s cubic-bezier(.4,0,.2,1) both;
+}
+
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.10s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.20s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.3s;
+  border-radius: var(--radius);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(110,105,173,0.40);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.40);
+}
+
+.card:hover::before { opacity: 1; }
+
+/* Card color variants */
+.card-purple::before {
+  background: linear-gradient(135deg, rgba(110,105,173,0.06) 0%, transparent 60%);
+}
+.card-teal::before {
+  background: linear-gradient(135deg, rgba(123,191,196,0.06) 0%, transparent 60%);
+}
+.card-green::before {
+  background: linear-gradient(135deg, rgba(61,171,114,0.06) 0%, transparent 60%);
+}
+.card-orange::before {
+  background: linear-gradient(135deg, rgba(232,168,74,0.06) 0%, transparent 60%);
+}
+
+/* ── CARD ICON ── */
+.card-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.icon-purple { background: rgba(110,105,173,0.15); box-shadow: 0 4px 16px rgba(110,105,173,0.20); }
+.icon-teal   { background: rgba(123,191,196,0.15); box-shadow: 0 4px 16px rgba(123,191,196,0.20); }
+.icon-green  { background: rgba(61,171,114,0.15);  box-shadow: 0 4px 16px rgba(61,171,114,0.20);  }
+.icon-orange { background: rgba(232,168,74,0.15);  box-shadow: 0 4px 16px rgba(232,168,74,0.20);  }
+
+/* ── CARD CONTENT ── */
+.card-body { position: relative; z-index: 1; flex: 1; }
+
+.card-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+
+.tag-purple { color: #9B97D4; background: rgba(110,105,173,0.12); }
+.tag-teal   { color: #7BBFC4; background: rgba(123,191,196,0.12); }
+.tag-green  { color: #3DAB72; background: rgba(61,171,114,0.12);  }
+.tag-orange { color: #E8A84A; background: rgba(232,168,74,0.12);  }
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── CARD FOOTER ── */
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.card-users {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-arrow {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  color: var(--text-muted);
+}
+
+.card:hover .card-arrow {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: white;
+  transform: translateX(2px);
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: auto;
+  padding: 24px 32px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-text {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.footer-dot {
+  width: 6px; height: 6px;
+  background: #3DAB72;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #3DAB72;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(0.8); }
+}
+
+@media (max-width: 600px) {
+  header { padding: 20px 20px 0; }
+  .hero  { padding: 40px 20px 28px; }
+  .grid  { padding: 0 20px 48px; grid-template-columns: 1fr; }
+  footer { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <header>
+    <div class="brand">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI3NyAyOTAgMTQyMCA1MzAiPgogIDxzdHlsZT4uc3Qwe2ZpbGw6IzZFNjlBRDt9LnN0MntmaWxsOiNCMEUwRTQ7fTwvc3R5bGU+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTU0Ny4yLDM1MC4wNmMtMzAuNTYsMC01OC4yNywxMi4yMS03OC41MywzMi4wMWw0MC4wNiw0MC4wNmMxMC4wOS05LjM3LDIzLjYxLTE1LjEsMzguNDYtMTUuMWMzMS4yNCwwLDU2LjU3LDI1LjMzLDU2LjU3LDU2LjU3cy0yNS4zMyw1Ni41Ny01Ni41Nyw1Ni41N2MtMTQuOTIsMC0yOC40OS01Ljc5LTM4LjYtMTUuMjNsLTAuMDEsMC4wMWwtMC4yMS0wLjIxYy0wLjE2LTAuMTUtMC4zMS0wLjMxLTAuNDYtMC40NmMtMC41My0wLjUxLTEuMDUtMS4wMy0xLjU2LTEuNTZjLTAuNTItMC41NC0xLjA0LTEuMDktMS41NC0xLjY2bC03Ny4wNi03OS41bDAsMGMtMTAuMDQtOS4wOC0yMy4zNy0xNC41OS0zOC4wMy0xNC41NGMtMzEuMjQsMC4xMS01Ni41NywyNS4zMy01Ni41Nyw1Ni41N2MwLDMxLjI0LDI1LjMzLDU2LjU3LDU2LjU3LDU2LjU3YzE1LjY0LDAsMjkuNzctNi4zNCwzOS45OS0xNi42bDMzLjU4LDMzLjU4YzIwLjU4LDIzLjA4LDUwLjUzLDM3LjYyLDgzLjg5LDM3LjYyYzYyLjA1LDAsMTEyLjM2LTUwLjMsMTEyLjM2LTExMi4zNlM2MDkuMjUsMzUwLjA2LDU0Ny4yLDM1MC4wNnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTQ3LjIsNDA3LjAzYy0xNC44NiwwLTI4LjM3LDUuNzMtMzguNDYsMTUuMWwtMzguMDItMzguMDJjLTIwLjQ2LTIxLjQ3LTQ5LjM0LTM0Ljg2LTgxLjM1LTM0Ljg2Yy02Mi4wNSwwLTExMi4zNiw1MC4zLTExMi4zNiwxMTIuMzZzNTAuMywxMTIuMzYsMTEyLjM2LDExMi4zNmMzMC42MiwwLDU4LjM3LTEyLjI1LDc4LjY0LTMyLjEybC0zOC4yOC0zOC4yOGMtMTAuMjMsMTAuMjUtMjQuMzYsMTYuNi0zOS45OSwxNi42Yy0zMS4yNCwwLTU2LjU3LTI1LjMzLTU2LjU3LTU2LjU3YzAtMzEuMjQsMjUuMzMtNTYuNDYsNTYuNTctNTYuNTdjMTQuNjUtMC4wNSwyNy45OSw1LjQ2LDM4LjAzLDE0LjU0bDAsMGw3Ny4wNiw3OS41YzEuMTMsMS4yOCwyLjMyLDIuNSwzLjU2LDMuNjdsMC4yMSwwLjIxbDAuMDEtMC4wMWMxMC4xMSw5LjQ0LDIzLjY3LDE1LjIzLDM4LjYsMTUuMjNjMzEuMjQsMCw1Ni41Ny0yNS4zMyw1Ni41Ny01Ni41N1M1NzguNDQsNDA3LjAzLDU0Ny4yLDQwNy4wM3oiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNODk0LjE4LDQ3Mi4yNWMwLTQ5LjkyLTQwLjQ3LTkwLjM5LTkwLjM5LTkwLjM5Yy00OS44OCwwLTkwLjM5LDQwLjUxLTkwLjM5LDkwLjM5YzAsNDkuOTIsNDAuNDcsOTAuMzksOTAuMzksOTAuMzljMTQuOTcsMCwyOS4wOS0zLjY0LDQxLjUzLTEwLjA5bDAsMGMtOC43NCwzMy42OS01MS42MywzMC41NC02NC4wNywyOC44OGMtMS44LTAuMjQtMy4zOSwxLjE2LTMuMzksMi45N3YzOS45M2MwLDEuNjcsMS4zNiwzLjAyLDMuMDMsM2wzMS4xLTAuMzZjODAuNTktMTEuOTMsODIuMTgtODMuNDUsODIuMTgtODMuNDV2LTY2LjgxbC0wLjEyLDAuMThDODk0LjE0LDQ3NS4zNyw4OTQuMTgsNDczLjgxLDg5NC4xOCw0NzIuMjV6IE04MDQuMTcsNTE3LjI1Yy0yNC44OSwwLTQ1LjA3LTIwLjE4LTQ1LjA3LTQ1LjA3YzAtMjQuODksMjAuMTgtNDUuMDcsNDUuMDctNDUuMDdjMjQuODksMCw0NS4wNywyMC4xOCw0NS4wNyw0NS4wN0M4NDkuMjQsNDk3LjA3LDgyOS4wNiw1MTcuMjUsODA0LjE3LDUxNy4yNXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTA2Ni4xNCw0OTMuMjJIOTU5LjUzYzUuMDMsMTkuNzQsMjAuODIsMzAuMTYsNDUuMjMsMzAuMTZjMTEuNDksMCwyMS41NC0yLjUxLDM0LjEtMTAuNDFjMy4yMy0yLjE1LDUuMzgtMS43OSw3LjksMC43MmwxOC42NywxNy45NWMyLjE1LDIuNTIsMi4xNSw1LjAzLTAuNzIsNy45Yy0xNi44NywxNi44Ny0zOS44NSwyNi45Mi02NS4zMywyNi45MmMtNTUuMjgsMC05My4zMy00MC41Ni05My4zMy05Mi4yNXMzOC4wNS05Mi4yNSw4OS4zOC05Mi4yNWM1MC45OCwwLDgzLjY0LDQwLjU2LDgzLjY0LDg5LjAyQzEwNzkuMDYsNDg1LjY4LDEwNzcuMjcsNDkzLjIyLDEwNjYuMTQsNDkzLjIyeiBNOTU4LjgxLDQ1OS4xMmg3Mi41MWMtMy4yMy0yMS41NC0xNy45NS0zMS45NS0zNS41NC0zMS45NUM5NzcuODMsNDI3LjE3LDk2Mi43Niw0MzcuNTgsOTU4LjgxLDQ1OS4xMnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTI2Ny4yMSw0NTcuNjh2OTguNzJjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOHYtODcuOTVjMC0yOC4zNi0xNS43OS0zNi42Mi0zMC4xNS0zNi42MmMtMjQuMDUsMC0zNC4xLDIzLjY5LTM0LjEsMzIuMzF2OTIuMjVjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdjMC0zLjIzLDIuMTUtNS4zOCw1LjM4LTUuMzhoNDEuNjRjMy4yMywwLDUuMDMsMi4xNSw1LjM4LDUuMzhsMS40MywyMi4yNWMxMS4xMy0xOC4zLDI5LjA4LTMxLjU5LDU0LjItMzEuNTlDMTIzOC44NSwzODEuOTQsMTI2Ny4yMSw0MTAuNjYsMTI2Ny4yMSw0NTcuNjh6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyOTcuMzYsMzI2LjNjMC0xNi4xNSwxMi45Mi0yOS4wOCwyOS4wOC0yOS4wOGMxNS43OSwwLDI4LjcyLDEyLjkyLDI4LjcyLDI5LjA4YzAsMTUuNzktMTIuOTIsMjguNzItMjguNzIsMjguNzJDMTMxMC4yOCwzNTUuMDIsMTI5Ny4zNiwzNDIuMDksMTI5Ny4zNiwzMjYuM3ogTTEzMDQuOSwzODUuODloNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdDMTI5OS41MSwzODguMDQsMTMwMS42NywzODUuODksMTMwNC45LDM4NS44OXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTU2Ni4yMiwzOTEuMjdWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTM5LjEzYy0zLjIzLDAtNS4wMy0yLjE1LTUuMzgtNS4zOGwtMS4wOC0xMi45MmMtMTIuMjEsMTMuNjQtMjguNzIsMjIuOTctNTAuMjYsMjIuOTdjLTQ4LjgyLDAtODQuNzItNDAuOTItODQuNzItOTIuMjVzMzUuOS05Mi4yNSw4NC43Mi05Mi4yNWMyMC44MiwwLDM3LjY5LDkuNjksNTAuMjYsMjQuMDVsMS4wOC0xNC43MmMwLjM2LTMuMjMsMi4xNS01LjM4LDUuMzgtNS4zOGgzOS4xM0MxNTY0LjA3LDM4NS44OSwxNTY2LjIyLDM4OC4wNCwxNTY2LjIyLDM5MS4yN3ogTTE1MTEuMyw0NzMuODRjMC0yMy4zNC0xNi44Ny00My4wOC0zOS40OS00My4wOGMtMjIuOTcsMC0zOS44NCwxOC42Ny0zOS44NCw0My4wOGMwLDI0Ljc3LDE2Ljg3LDQzLjQzLDM5Ljg0LDQzLjQzQzE0OTQuNDMsNTE3LjI3LDE1MTEuMyw0OTcuMTcsMTUxMS4zLDQ3My44NHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTYwMy4xOSwyOTkuNzNoNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzMDUuMTJDMTU5Ny44MSwzMDEuODksMTU5OS45NiwyOTkuNzMsMTYwMy4xOSwyOTkuNzN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTExNjMuMzQsNzQ3LjM0YzIuNzktMi43OSw1LjIzLTIuNDQsNy42OCwwbDUuNTgsNC44OWMyLjA5LDIuMDksMi40NCw0Ljg4LDAuMzUsNy4zM2MtMTYuMDYsMTguNS0zOC4zOSwzMC4zNy02Ni4zMiwzMC4zN2MtNDkuMjEsMC04NS41Mi0zOS40NC04NS41Mi04OS43czM2LjMtODkuNyw4NS41Mi04OS43YzI3LjIzLDAsNDkuMjIsMTEuODcsNjUuMjcsMzAuMzdjMi4wOSwyLjQ0LDEuNzQsNS4yNC0wLjM1LDcuMzNsLTUuNTgsNC41NGMtMi40NCwyLjQ1LTQuODksMi43OS03LjY4LDAuMzVjLTEwLjEyLTkuNDItMjEuOTktMjMuNzQtNTEuNjYtMjMuNzRjLTM4LjM5LDAtNjUuMjcsMzAuMzctNjUuMjcsNzAuODZjMCw0MC40OSwyNi44OCw3MC44Niw2NS4yNyw3MC44NkMxMTQxLDc3MS4wNywxMTUzLjU3LDc1Ny40NiwxMTYzLjM0LDc0Ny4zNHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTM2NC43NCw2MTkuNTh2MTYwLjU2YzAsMy4xNC0yLjA5LDUuMjQtNS4yNCw1LjI0aC05LjQyYy0zLjE0LDAtNC44OS0yLjA5LTUuMjMtNS4yNGwtMS43NS0yMi42OWMtMTMuMjYsMTkuNTUtMzQuOSwzMi4xMS02Mi40OCwzMi4xMWMtNDkuMjIsMC04NC4xMi0zOS40NC04NC4xMi04OS4zNnMzNC45LTg5LjM2LDg0LjEyLTg5LjM2YzI3LjkyLDAsNDkuNTYsMTIuNTcsNjIuODMsMzIuNDZsMS40LTIzLjczYzAuMzUtMy4xNCwyLjA5LTUuMjQsNS4yMy01LjI0aDkuNDJDMTM2Mi42NCw2MTQuMzUsMTM2NC43NCw2MTYuNDQsMTM2NC43NCw2MTkuNTh6IE0xMzQ1LjE5LDcxNC44OGwwLjctMTQuNjZsLTAuNy0xNS4wMWMtNS45My0zMS40Mi0zMC43Mi01NS41LTYzLjE4LTU1LjVjLTM3LjcsMC02NS4yNywzMC4wMi02NS4yNyw3MC4xNmMwLDQwLjQ5LDI3LjU3LDcwLjUxLDY1LjI3LDcwLjUxQzEzMTQuNDcsNzcwLjM3LDEzMzkuMjYsNzQ2LjI5LDEzNDUuMTksNzE0Ljg4eiIvPgogIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDg0LjExLDYyMC42M2wtNC4xOSw4LjczYy0xLjQsMi40NS0zLjE0LDIuNzktNS45MywyLjA5Yy0zLjE0LTAuNy02LjI4LTEuNzQtMTMuNjEtMS43NGMtMjAuOTQsMC0zOC43NCwxNi4wNi0zOC43NCwzOC4zOXYxMTIuMDRjMCwzLjE0LTIuMDksNS4yNC01LjI0LDUuMjRoLTEwLjQ3Yy0zLjE0LDAtNS4yNC0yLjA5LTUuMjQtNS4yNFY2MTkuNThjMC0zLjE0LDIuMDktNS4yNCw1LjI0LTUuMjRoOC43M2MzLjE0LDAsNC44OSwyLjA5LDUuMjQsNS4yNGwxLjQsMTQuMzFjOS43Ny0xMy45NywyMy43NC0yMy4zOSw0MS44OS0yMy4zOWM4LjAzLDAsMTUuMzYsMS43NCwyMC4yNCw0Ljg4QzE0ODUuMTUsNjE2LjQ0LDE0ODUuNSw2MTcuODQsMTQ4NC4xMSw2MjAuNjN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE2NTEuNjUsNjkyLjg4YzAsMTEuMTctMS40LDE2LjQtOS43NywxNi40aC0xMzIuOTljMy44NCwzNC41NiwyOC45Nyw2MS43OCw2Ny43Miw2MS43OGMyMy4wNCwwLDM4LjM5LTguNzMsNDkuMjEtMTguNWMyLjQ0LTIuMDksNC41NC0zLjQ5LDcuMzMtMS4wNWw0LjU0LDQuMTljMi43OSwyLjc5LDMuMTQsNS4yNCwwLjM1LDguMDNjLTE2LjA2LDE2Ljc1LTM4LjM5LDI2LjE4LTYzLjg4LDI2LjE4Yy01MC4yNiwwLTg1Ljg2LTM5LjQ0LTg1Ljg2LTg5LjdzMzQuMjEtODkuNyw4My40Mi04OS43QzE2MjAuNTksNjEwLjUxLDE2NTEuNjUsNjQ5Ljk1LDE2NTEuNjUsNjkyLjg4eiBNMTUwOC44OSw2OTEuODRoMTI0LjI2Yy0wLjctMzMuODYtMjUuODMtNjIuNDgtNjEuNzgtNjIuNDhDMTUzNi4xMiw2MjkuMzYsMTUxMi4wMyw2NTYuNTgsMTUwOC44OSw2OTEuODR6Ii8+Cjwvc3ZnPg==" alt="Genial Care" style="height:44px; width:auto; display:block;" />
+      <div>
+        <div class="brand-sub" style="margin-top:0">Facilities · Hub de ferramentas</div>
+      </div>
+    </div>
+    <div class="header-time" id="clock">--:--</div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-eyebrow">
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
+      Painel principal
+    </div>
+    <h1 class="hero-title">Suas ferramentas,<br><span>num só lugar.</span></h1>
+    <p class="hero-sub">Acesse rapidamente todas as aplicações do time de Facilities da Genial Care.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- Checklist -->
+    <a href="https://checklist-genial.vercel.app/" target="_blank" class="card card-teal">
+      <div class="card-icon icon-teal">✅</div>
+      <div class="card-body">
+        <div class="card-tag tag-teal">Inspeção</div>
+        <div class="card-title">Checklist de Unidades</div>
+        <div class="card-desc">Realize inspeções nas Casas Geniais com registro de fotos e acompanhamento por unidade.</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-users">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Matheus + Técnicos
+        </div>
+        <div class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Estoque -->
+    <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card card-green">
+      <div class="card-icon icon-green">📦</div>
+      <div class="card-body">
+        <div class="card-tag tag-green">Almoxarifado</div>
+        <div class="card-title">Controle de Estoque</div>
+        <div class="card-desc">Gerencie o estoque de materiais de manutenção, solicitações de compra e movimentações por unidade.</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-users">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Matheus + Técnicos
+        </div>
+        <div class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- NF Cartão -->
+    <a href="https://nf-cartao-corporativo.vercel.app/" target="_blank" class="card card-purple">
+      <div class="card-icon icon-purple">🧾</div>
+      <div class="card-body">
+        <div class="card-tag tag-purple">Financeiro</div>
+        <div class="card-title">NF Cartão Corporativo</div>
+        <div class="card-desc">Registre notas fiscais do Cartão Corporativo Facilities (0852) com extração automática de dados via IA.</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-users">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Somente Matheus
+        </div>
+        <div class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </a>
+
+    <!-- Em breve -->
+    <div class="card card-orange" style="opacity:0.6; cursor:not-allowed; pointer-events:none;">
+      <div class="card-icon icon-orange">📄</div>
+      <div class="card-body">
+        <div class="card-tag tag-orange">Em breve</div>
+        <div class="card-title">Portal de NFs</div>
+        <div class="card-desc">Upload em lote de notas fiscais de fornecedores com organização automática no Drive via IA.</div>
+      </div>
+      <div class="card-footer">
+        <div class="card-users">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Somente Matheus
+        </div>
+        <div class="card-arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Escala Técnicos -->
+    <div class="card card-purple" style="cursor:default;" id="escalaCard">
+      <div style="position:relative; z-index:1;">
+        <div class="card-icon icon-purple" style="margin-bottom:12px;">📅</div>
+        <div class="card-tag tag-purple">Escala</div>
+        <div class="card-title">Técnicos de Manutenção</div>
+        <div id="weekBadge" style="display:inline-block; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; background:rgba(110,105,173,0.15); color:#9B97D4; border:1px solid rgba(110,105,173,0.25); margin-bottom:14px;"></div>
+      </div>
+
+      <!-- Esta semana compacta -->
+      <div style="position:relative; z-index:1; background:rgba(110,105,173,0.08); border:1px solid rgba(110,105,173,0.20); border-radius:10px; padding:12px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:#9B97D4; margin-bottom:8px;">Esta semana</div>
+        <div id="currentWeekSchedule"></div>
+      </div>
+
+      <!-- Calendário compacto -->
+      <div style="position:relative; z-index:1; margin-top:4px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Abr · Mai · Jun 2026</div>
+        <div id="quarterCalendar" style="display:flex; flex-direction:column; gap:2px;"></div>
+      </div>
+
+      <div class="card-footer">
+        <div class="card-users">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Romário · Roger
+        </div>
+      </div>
+    </div>
+    <!-- Manutenções Preventivas -->
+    <div class="card card-orange" style="cursor:default;" id="prevCard">
+      <div style="position:relative;z-index:1;">
+        <div class="card-icon icon-orange" style="margin-bottom:12px;">🔧</div>
+        <div class="card-tag tag-orange">Preventivas</div>
+        <div class="card-title">Manutenções Preventivas</div>
+        <div class="card-desc" style="margin-bottom:14px;">Status dos serviços recorrentes por unidade.</div>
+      </div>
+
+      <!-- Contadores -->
+      <div id="prevCounters" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+        <div style="text-align:center;padding:10px 6px;background:rgba(217,79,79,0.10);border:1px solid rgba(217,79,79,0.20);border-radius:10px;">
+          <div id="cntVencido" style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#D94F4F;">–</div>
+          <div style="font-size:10px;color:#D94F4F;font-weight:600;margin-top:2px;">Vencido</div>
+        </div>
+        <div style="text-align:center;padding:10px 6px;background:rgba(232,168,74,0.10);border:1px solid rgba(232,168,74,0.20);border-radius:10px;">
+          <div id="cntAvencer" style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#E8A84A;">–</div>
+          <div style="font-size:10px;color:#E8A84A;font-weight:600;margin-top:2px;">A vencer</div>
+        </div>
+        <div style="text-align:center;padding:10px 6px;background:rgba(61,171,114,0.10);border:1px solid rgba(61,171,114,0.20);border-radius:10px;">
+          <div id="cntEmdia" style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#3DAB72;">–</div>
+          <div style="font-size:10px;color:#3DAB72;font-weight:600;margin-top:2px;">Em dia</div>
+        </div>
+      </div>
+
+      <!-- Lista de atenção -->
+      <div style="position:relative;z-index:1;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Requer atenção</div>
+        <div id="prevList" style="display:flex;flex-direction:column;gap:4px;">
+          <div style="font-size:12px;color:var(--text-muted);text-align:center;padding:8px;">Carregando...</div>
+        </div>
+      </div>
+
+      <div class="card-footer" style="margin-top:12px;">
+        <div class="card-users">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Somente Matheus
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" style="font-size:11px;color:var(--purple);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-text">Genial Care Facilities © 2026 — Hub interno</div>
+    <div class="footer-dot"></div>
+  </footer>
+
+</div>
+
+<script>
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, '0');
+  const m = String(now.getMinutes()).padStart(2, '0');
+  document.getElementById('clock').textContent = h + ':' + m;
+}
+updateClock();
+setInterval(updateClock, 1000);
+
+// ── ESCALA DE TÉCNICOS ──────────────────────────────────────
+const SCHEDULE = {
+  1: {
+    romario: { horario: '07h–16h48', dias: ['CG Morumbi','CG Anália Franco / Tatuapé','CG Santana','CG Paraíso','Dia flex'] },
+    roger:   { horario: '14h–22h48', dias: ['CG Morumbi','CG Anália Franco / Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville'] }
+  },
+  2: {
+    romario: { horario: '07h–16h48', dias: ['CG Morumbi','CG Anália Franco / Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville'] },
+    roger:   { horario: '14h–22h48', dias: ['CG Morumbi','CG Anália Franco / Tatuapé','CG Santana','CG Paraíso','Dia flex'] }
+  }
+};
+
+const DAYS_SHORT = ['Seg','Ter','Qua','Qui','Sex'];
+const MONTH_NAMES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+
+function getWeeksOfMonth(year, month) {
+  const weeks = [];
+  let d = new Date(year, month, 1);
+  while (d.getDay() !== 1) d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+  while (d.getMonth() === month) {
+    const mon = new Date(d);
+    const fri = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 4);
+    const type = mon.getDate() % 2 !== 0 ? 1 : 2;
+    weeks.push({ mon, fri, type });
+    d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 7);
+  }
+  return weeks;
+}
+
+function getMonday(d) {
+  const copy = new Date(d);
+  const day = copy.getDay();
+  const diff = copy.getDate() - day + (day === 0 ? -6 : 1);
+  return new Date(copy.setDate(diff));
+}
+
+function weekType(monday) { return monday.getDate() % 2 !== 0 ? 1 : 2; }
+function fmt(d) { return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0'); }
+
+function buildWeekDetail(wtype) {
+  const s = SCHEDULE[wtype];
+  const colors = { romario: '#9B97D4', roger: '#7BBFC4' };
+  const names = { romario: 'Romário', roger: 'Roger' };
+  let html = '<div style="display:grid;gap:10px;padding:10px 0 4px;">';
+  ['romario','roger'].forEach((tech, ti) => {
+    const info = s[tech];
+    if (ti > 0) html += '<div style="height:1px;background:rgba(110,105,173,0.12);margin:0;"></div>';
+    html += '<div>';
+    html += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">';
+    html += '<span style="font-size:12px;font-weight:700;color:' + colors[tech] + '">' + names[tech] + '</span>';
+    html += '<span style="font-size:10px;color:var(--text-muted)">' + info.horario + '</span>';
+    html += '</div><div style="display:grid;gap:2px;">';
+    info.dias.forEach((local, i) => {
+      const isFlex = local === 'Dia flex';
+      html += '<div style="display:flex;align-items:center;gap:8px;font-size:11px;padding:2px 4px;border-radius:4px;">';
+      html += '<span style="font-weight:700;color:var(--text-muted);min-width:26px">' + DAYS_SHORT[i] + '</span>';
+      html += '<span style="color:' + (isFlex ? '#3DAB72' : 'var(--text)') + '">' + local + '</span>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  html += '</div>';
+  return html;
+}
+
+function initSchedule() {
+  const today = new Date();
+  const monday = getMonday(new Date());
+  const wtype = weekType(monday);
+  const todayIdx = today.getDay() - 1;
+
+  // Badge
+  document.getElementById('weekBadge').textContent =
+    'Semana ' + wtype + '  ·  ' + fmt(monday) + ' – ' + fmt(new Date(monday.getTime() + 4*86400000));
+
+  // Esta semana — hoje
+  const sched = document.getElementById('currentWeekSchedule');
+  const s = SCHEDULE[wtype];
+  const isWeekday = todayIdx >= 0 && todayIdx <= 4;
+
+  if (isWeekday) {
+    ['romario','roger'].forEach((tech, ti) => {
+      const color = tech === 'romario' ? '#9B97D4' : '#7BBFC4';
+      const name = tech === 'romario' ? 'Romário' : 'Roger';
+      const local = s[tech].dias[todayIdx];
+      const isFlex = local === 'Dia flex';
+      const row = document.createElement('div');
+      row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;font-size:12px;' +
+        (ti > 0 ? 'margin-top:6px;padding-top:6px;border-top:1px solid rgba(110,105,173,0.12);' : '');
+      row.innerHTML = '<span style="font-weight:700;color:' + color + '">' + name + '</span>' +
+        '<span style="color:' + (isFlex ? '#3DAB72' : 'var(--text)') + ';font-weight:500">' + local + '</span>';
+      sched.appendChild(row);
+    });
+    const note = document.createElement('div');
+    note.style.cssText = 'margin-top:6px;font-size:10px;color:var(--text-muted);text-align:center;';
+    note.textContent = DAYS_SHORT[todayIdx] + ' · hoje';
+    sched.appendChild(note);
+  } else {
+    sched.innerHTML = '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:4px 0">Fim de semana 🏖️</div>';
+  }
+
+  // Calendário — mês atual clicável
+  const cal = document.getElementById('quarterCalendar');
+  const weeks = getWeeksOfMonth(today.getFullYear(), today.getMonth());
+
+  const monthLabel = document.createElement('div');
+  monthLabel.style.cssText = 'font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:4px;';
+  monthLabel.textContent = MONTH_NAMES[today.getMonth()] + ' ' + today.getFullYear();
+  cal.appendChild(monthLabel);
+
+  weeks.forEach((week, idx) => {
+    const isCurrentWeek = week.mon.toDateString() === monday.toDateString();
+    const isPast = week.fri < today && !isCurrentWeek;
+
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'border-radius:8px;overflow:hidden;margin-bottom:2px;border:1px solid ' +
+      (isCurrentWeek ? 'rgba(110,105,173,0.35)' : 'transparent') + ';';
+
+    // Row
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:5px 8px;font-size:11px;cursor:pointer;transition:background 0.15s;user-select:none;' +
+      (isCurrentWeek ? 'background:rgba(110,105,173,0.18);' : isPast ? 'opacity:0.35;' : 'background:rgba(255,255,255,0.02);');
+
+    // Chevron element
+    const chevron = document.createElement('span');
+    chevron.textContent = isCurrentWeek ? '▲' : '▼';
+    chevron.style.cssText = 'font-size:9px;color:var(--text-muted);transition:transform 0.2s;margin-left:4px;';
+
+    const badge = document.createElement('span');
+    badge.style.cssText = 'font-weight:700;padding:1px 7px;border-radius:8px;font-size:10px;' +
+      (week.type === 1 ? 'background:rgba(110,105,173,0.15);color:#9B97D4;' : 'background:rgba(123,191,196,0.15);color:#7BBFC4;');
+    badge.textContent = 'S' + week.type;
+
+    const dateSpan = document.createElement('span');
+    dateSpan.style.cssText = 'color:var(--text-muted);font-weight:500;flex:1;';
+    dateSpan.textContent = fmt(week.mon) + ' – ' + fmt(week.fri);
+
+    const rightSide = document.createElement('div');
+    rightSide.style.cssText = 'display:flex;align-items:center;gap:4px;';
+
+    if (isCurrentWeek) {
+      const nowTag = document.createElement('span');
+      nowTag.style.cssText = 'font-size:9px;color:#6E69AD;font-weight:700;margin-right:4px;';
+      nowTag.textContent = '← agora';
+      rightSide.appendChild(nowTag);
+    }
+    rightSide.appendChild(badge);
+    rightSide.appendChild(chevron);
+
+    row.appendChild(dateSpan);
+    row.appendChild(rightSide);
+
+    // Detail panel
+    const detail = document.createElement('div');
+    detail.style.cssText = 'overflow:hidden;transition:max-height 0.3s ease;padding:0 10px;background:rgba(110,105,173,0.06);max-height:' +
+      (isCurrentWeek ? '300px' : '0') + ';';
+    detail.innerHTML = buildWeekDetail(week.type);
+
+    // Click toggle
+    row.addEventListener('click', function() {
+      if (isPast) return;
+      const isOpen = detail.style.maxHeight !== '0px';
+      // Close all
+      cal.querySelectorAll('.week-detail').forEach(d => { d.style.maxHeight = '0px'; });
+      cal.querySelectorAll('.week-chevron').forEach(c => { c.textContent = '▼'; });
+      cal.querySelectorAll('.week-wrapper').forEach(w => { w.style.border = '1px solid transparent'; });
+      // Open if was closed
+      if (!isOpen) {
+        detail.style.maxHeight = '300px';
+        chevron.textContent = '▲';
+        wrapper.style.border = '1px solid rgba(110,105,173,0.40)';
+      } else if (isCurrentWeek) {
+        wrapper.style.border = '1px solid rgba(110,105,173,0.35)';
+      }
+    });
+
+    // Hover
+    if (!isPast) {
+      row.addEventListener('mouseenter', () => { if (detail.style.maxHeight === '0px') row.style.background = 'rgba(110,105,173,0.08)'; });
+      row.addEventListener('mouseleave', () => { if (!isCurrentWeek) row.style.background = detail.style.maxHeight !== '0px' ? 'rgba(110,105,173,0.10)' : 'rgba(255,255,255,0.02)'; });
+    }
+
+    detail.classList.add('week-detail');
+    chevron.classList.add('week-chevron');
+    wrapper.classList.add('week-wrapper');
+
+    wrapper.appendChild(row);
+    wrapper.appendChild(detail);
+    cal.appendChild(wrapper);
+  });
+}
+
+initSchedule();
+
+// ── MANUTENÇÕES PREVENTIVAS ──────────────────────────────────
+function loadPreventivas() {
+  const SHEET_ID = '1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q';
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json';
+
+  fetch(url)
+    .then(r => r.text())
+    .then(text => {
+      // Google wraps response in google.visualization.Query.setResponse(...)
+      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+      const rows = json.table.rows;
+
+      let vencido = 0, avencer = 0, emdia = 0;
+      const atencao = [];
+
+      rows.forEach(row => {
+        if (!row.c || !row.c[0] || !row.c[0].v) return;
+        const cg      = row.c[0] ? (row.c[0].v || '') : '';
+        const servico = row.c[1] ? (row.c[1].v || '') : '';
+        const status  = row.c[5] ? (row.c[5].v || '') : '';
+        const proxRaw = row.c[4] ? row.c[4].v : null;
+
+        // Parse próxima execução
+        let proxDate = null;
+        if (proxRaw && typeof proxRaw === 'string' && proxRaw.startsWith('Date(')) {
+          const parts = proxRaw.replace('Date(','').replace(')','').split(',');
+          proxDate = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+        }
+
+        const statusLower = status.toLowerCase();
+        if (statusLower.includes('vencido')) {
+          vencido++;
+          atencao.push({ cg, servico, status: 'vencido', proxDate });
+        } else if (statusLower.includes('vencer')) {
+          avencer++;
+          atencao.push({ cg, servico, status: 'avencer', proxDate });
+        } else if (statusLower.includes('dia')) {
+          emdia++;
+        }
+      });
+
+      document.getElementById('cntVencido').textContent = vencido;
+      document.getElementById('cntAvencer').textContent = avencer;
+      document.getElementById('cntEmdia').textContent = emdia;
+
+      const list = document.getElementById('prevList');
+      list.innerHTML = '';
+
+      if (atencao.length === 0) {
+        list.innerHTML = '<div style="font-size:12px;color:#3DAB72;text-align:center;padding:8px;">Tudo em dia ✅</div>';
+        return;
+      }
+
+      // Sort: vencidos primeiro, depois a vencer por data
+      atencao.sort((a, b) => {
+        if (a.status !== b.status) return a.status === 'vencido' ? -1 : 1;
+        if (a.proxDate && b.proxDate) return a.proxDate - b.proxDate;
+        return 0;
+      });
+
+      // Show max 6 items
+      atencao.slice(0, 6).forEach(item => {
+        const isVencido = item.status === 'vencido';
+        const color = isVencido ? '#D94F4F' : '#E8A84A';
+        const bg = isVencido ? 'rgba(217,79,79,0.08)' : 'rgba(232,168,74,0.08)';
+        const border = isVencido ? 'rgba(217,79,79,0.20)' : 'rgba(232,168,74,0.20)';
+
+        const dateStr = item.proxDate
+          ? String(item.proxDate.getDate()).padStart(2,'0') + '/' + String(item.proxDate.getMonth()+1).padStart(2,'0')
+          : '';
+
+        const el = document.createElement('div');
+        el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:5px 8px;border-radius:7px;background:' + bg + ';border:1px solid ' + border + ';';
+        el.innerHTML =
+          '<div style="flex:1;min-width:0;">' +
+            '<div style="font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.cg + ' · ' + item.servico + '</div>' +
+          '</div>' +
+          '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:6px;">' +
+            (dateStr ? '<span style="font-size:10px;color:var(--text-muted)">' + dateStr + '</span>' : '') +
+            '<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;background:' + (isVencido ? 'rgba(217,79,79,0.15)' : 'rgba(232,168,74,0.15)') + ';color:' + color + '">' + (isVencido ? 'VENCIDO' : 'A VENCER') + '</span>' +
+          '</div>';
+        list.appendChild(el);
+      });
+
+      if (atencao.length > 6) {
+        const more = document.createElement('div');
+        more.style.cssText = 'font-size:11px;color:var(--text-muted);text-align:center;padding:4px;';
+        more.textContent = '+ ' + (atencao.length - 6) + ' mais na planilha';
+        list.appendChild(more);
+      }
+    })
+    .catch(err => {
+      document.getElementById('prevList').innerHTML =
+        '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
+    });
+}
+
+loadPreventivas();
+
+
+</script>
+</body>
+</html>
