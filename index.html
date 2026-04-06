@@ -453,29 +453,74 @@ footer {
 
     <!-- Escala Técnicos -->
     <div class="card card-purple" style="cursor:default;" id="escalaCard">
-      <div style="display:flex; align-items:center; justify-content:space-between; position:relative; z-index:1;">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <div class="card-icon icon-purple">📅</div>
-          <div>
-            <div class="card-tag tag-purple">Escala</div>
-            <div class="card-title" style="margin-bottom:0">Técnicos de Manutenção</div>
-          </div>
-        </div>
-        <div id="weekBadge" style="font-family:'Syne',sans-serif; font-size:13px; font-weight:700; padding:6px 14px; border-radius:20px; background:rgba(110,105,173,0.15); color:#9B97D4; border:1px solid rgba(110,105,173,0.25); white-space:nowrap;"></div>
-      </div>
-
-      <!-- Semana atual -->
-      <div id="currentWeekInfo" style="position:relative; z-index:1; background:rgba(110,105,173,0.10); border:1px solid rgba(110,105,173,0.25); border-radius:12px; padding:14px 16px;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#9B97D4; margin-bottom:10px;">Esta semana</div>
-        <div id="currentWeekSchedule" style="display:grid; gap:8px;"></div>
-      </div>
-
-      <!-- Calendário trimestral -->
       <div style="position:relative; z-index:1;">
-        <div style="font-size:10px; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px;">Abr · Mai · Jun 2026</div>
-        <div id="quarterCalendar" style="display:flex; flex-direction:column; gap:6px;"></div>
+        <div class="card-icon icon-purple" style="margin-bottom:12px;">📅</div>
+        <div class="card-tag tag-purple">Escala</div>
+        <div class="card-title">Técnicos de Manutenção</div>
+        <div id="weekBadge" style="display:inline-block; font-size:11px; font-weight:700; padding:4px 10px; border-radius:20px; background:rgba(110,105,173,0.15); color:#9B97D4; border:1px solid rgba(110,105,173,0.25); margin-bottom:14px;"></div>
+      </div>
+
+      <!-- Esta semana compacta -->
+      <div style="position:relative; z-index:1; background:rgba(110,105,173,0.08); border:1px solid rgba(110,105,173,0.20); border-radius:10px; padding:12px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:#9B97D4; margin-bottom:8px;">Esta semana</div>
+        <div id="currentWeekSchedule"></div>
+      </div>
+
+      <!-- Calendário compacto -->
+      <div style="position:relative; z-index:1; margin-top:4px;">
+        <div style="font-size:10px; font-weight:700; letter-spacing:0.07em; text-transform:uppercase; color:var(--text-muted); margin-bottom:6px;">Abr · Mai · Jun 2026</div>
+        <div id="quarterCalendar" style="display:flex; flex-direction:column; gap:2px;"></div>
+      </div>
+
+      <div class="card-footer">
+        <div class="card-users">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Romário · Roger
+        </div>
       </div>
     </div>
+    <!-- Manutenções Preventivas -->
+    <div class="card card-orange" style="cursor:default;" id="prevCard">
+      <div style="position:relative;z-index:1;">
+        <div class="card-icon icon-orange" style="margin-bottom:12px;">🔧</div>
+        <div class="card-tag tag-orange">Preventivas</div>
+        <div class="card-title">Manutenções Preventivas</div>
+        <div class="card-desc" style="margin-bottom:14px;">Status dos serviços recorrentes por unidade.</div>
+      </div>
+
+      <!-- Contadores -->
+      <div id="prevCounters" style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+        <div style="text-align:center;padding:10px 6px;background:rgba(217,79,79,0.10);border:1px solid rgba(217,79,79,0.20);border-radius:10px;">
+          <div id="cntVencido" style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#D94F4F;">–</div>
+          <div style="font-size:10px;color:#D94F4F;font-weight:600;margin-top:2px;">Vencido</div>
+        </div>
+        <div style="text-align:center;padding:10px 6px;background:rgba(232,168,74,0.10);border:1px solid rgba(232,168,74,0.20);border-radius:10px;">
+          <div id="cntAvencer" style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#E8A84A;">–</div>
+          <div style="font-size:10px;color:#E8A84A;font-weight:600;margin-top:2px;">A vencer</div>
+        </div>
+        <div style="text-align:center;padding:10px 6px;background:rgba(61,171,114,0.10);border:1px solid rgba(61,171,114,0.20);border-radius:10px;">
+          <div id="cntEmdia" style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:#3DAB72;">–</div>
+          <div style="font-size:10px;color:#3DAB72;font-weight:600;margin-top:2px;">Em dia</div>
+        </div>
+      </div>
+
+      <!-- Lista de atenção -->
+      <div style="position:relative;z-index:1;">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Requer atenção</div>
+        <div id="prevList" style="display:flex;flex-direction:column;gap:4px;">
+          <div style="font-size:12px;color:var(--text-muted);text-align:center;padding:8px;">Carregando...</div>
+        </div>
+      </div>
+
+      <div class="card-footer" style="margin-top:12px;">
+        <div class="card-users">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Somente Matheus
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" style="font-size:11px;color:var(--purple);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
+      </div>
+    </div>
+
   </div>
 
   <footer>
@@ -507,140 +552,287 @@ const SCHEDULE = {
   }
 };
 
-const DAYS = ['Seg','Ter','Qua','Qui','Sex'];
+const DAYS_SHORT = ['Seg','Ter','Qua','Qui','Sex'];
+const MONTH_NAMES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 
-const QUARTER = [
-  { label:'Abril 2026', weeks:[
-    { mon: new Date(2026,3,6),  fri: new Date(2026,3,10), type:2 },
-    { mon: new Date(2026,3,13), fri: new Date(2026,3,17), type:1 },
-    { mon: new Date(2026,3,20), fri: new Date(2026,3,24), type:2 },
-    { mon: new Date(2026,3,27), fri: new Date(2026,4,1),  type:1 },
-  ]},
-  { label:'Maio 2026', weeks:[
-    { mon: new Date(2026,4,4),  fri: new Date(2026,4,8),  type:2 },
-    { mon: new Date(2026,4,11), fri: new Date(2026,4,15), type:1 },
-    { mon: new Date(2026,4,18), fri: new Date(2026,4,22), type:2 },
-    { mon: new Date(2026,4,25), fri: new Date(2026,4,29), type:1 },
-  ]},
-  { label:'Junho 2026', weeks:[
-    { mon: new Date(2026,5,1),  fri: new Date(2026,5,5),  type:1 },
-    { mon: new Date(2026,5,8),  fri: new Date(2026,5,12), type:2 },
-    { mon: new Date(2026,5,15), fri: new Date(2026,5,19), type:1 },
-    { mon: new Date(2026,5,22), fri: new Date(2026,5,26), type:2 },
-    { mon: new Date(2026,5,29), fri: new Date(2026,6,3),  type:1 },
-  ]},
-];
+function getWeeksOfMonth(year, month) {
+  const weeks = [];
+  let d = new Date(year, month, 1);
+  while (d.getDay() !== 1) d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
+  while (d.getMonth() === month) {
+    const mon = new Date(d);
+    const fri = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 4);
+    const type = mon.getDate() % 2 !== 0 ? 1 : 2;
+    weeks.push({ mon, fri, type });
+    d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 7);
+  }
+  return weeks;
+}
 
 function getMonday(d) {
-  const day = d.getDay();
-  const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-  return new Date(d.setDate(diff));
+  const copy = new Date(d);
+  const day = copy.getDay();
+  const diff = copy.getDate() - day + (day === 0 ? -6 : 1);
+  return new Date(copy.setDate(diff));
 }
 
-function weekType(monday) {
-  return monday.getDate() % 2 !== 0 ? 1 : 2;
-}
+function weekType(monday) { return monday.getDate() % 2 !== 0 ? 1 : 2; }
+function fmt(d) { return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0'); }
 
-function fmt(d) {
-  return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0');
+function buildWeekDetail(wtype) {
+  const s = SCHEDULE[wtype];
+  const colors = { romario: '#9B97D4', roger: '#7BBFC4' };
+  const names = { romario: 'Romário', roger: 'Roger' };
+  let html = '<div style="display:grid;gap:10px;padding:10px 0 4px;">';
+  ['romario','roger'].forEach((tech, ti) => {
+    const info = s[tech];
+    if (ti > 0) html += '<div style="height:1px;background:rgba(110,105,173,0.12);margin:0;"></div>';
+    html += '<div>';
+    html += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">';
+    html += '<span style="font-size:12px;font-weight:700;color:' + colors[tech] + '">' + names[tech] + '</span>';
+    html += '<span style="font-size:10px;color:var(--text-muted)">' + info.horario + '</span>';
+    html += '</div><div style="display:grid;gap:2px;">';
+    info.dias.forEach((local, i) => {
+      const isFlex = local === 'Dia flex';
+      html += '<div style="display:flex;align-items:center;gap:8px;font-size:11px;padding:2px 4px;border-radius:4px;">';
+      html += '<span style="font-weight:700;color:var(--text-muted);min-width:26px">' + DAYS_SHORT[i] + '</span>';
+      html += '<span style="color:' + (isFlex ? '#3DAB72' : 'var(--text)') + '">' + local + '</span>';
+      html += '</div>';
+    });
+    html += '</div></div>';
+  });
+  html += '</div>';
+  return html;
 }
 
 function initSchedule() {
   const today = new Date();
   const monday = getMonday(new Date());
   const wtype = weekType(monday);
-  const todayIdx = today.getDay() - 1; // 0=seg, 4=sex
+  const todayIdx = today.getDay() - 1;
 
   // Badge
-  document.getElementById('weekBadge').textContent = 'Semana ' + wtype + ' · ' + fmt(monday) + '–' + fmt(new Date(monday.getTime() + 4*86400000));
+  document.getElementById('weekBadge').textContent =
+    'Semana ' + wtype + '  ·  ' + fmt(monday) + ' – ' + fmt(new Date(monday.getTime() + 4*86400000));
 
-  // Current week schedule
+  // Esta semana — hoje
   const sched = document.getElementById('currentWeekSchedule');
   const s = SCHEDULE[wtype];
+  const isWeekday = todayIdx >= 0 && todayIdx <= 4;
 
-  ['romario','roger'].forEach(tech => {
-    const name = tech === 'romario' ? 'Romário' : 'Roger';
-    const color = tech === 'romario' ? '#9B97D4' : '#7BBFC4';
-    const info = s[tech];
-
-    const row = document.createElement('div');
-    row.style.cssText = 'display:grid; grid-template-columns:80px 1fr; gap:8px; align-items:start;';
-
-    const nameEl = document.createElement('div');
-    nameEl.innerHTML = '<div style="font-size:12px;font-weight:700;color:' + color + '">' + name + '</div><div style="font-size:10px;color:var(--text-muted)">' + info.horario + '</div>';
-
-    const daysEl = document.createElement('div');
-    daysEl.style.cssText = 'display:flex; flex-direction:column; gap:3px;';
-
-    info.dias.forEach((local, i) => {
-      const isToday = i === todayIdx && today.getDay() >= 1 && today.getDay() <= 5;
+  if (isWeekday) {
+    ['romario','roger'].forEach((tech, ti) => {
+      const color = tech === 'romario' ? '#9B97D4' : '#7BBFC4';
+      const name = tech === 'romario' ? 'Romário' : 'Roger';
+      const local = s[tech].dias[todayIdx];
       const isFlex = local === 'Dia flex';
-      const d = document.createElement('div');
-      d.style.cssText = 'display:flex; align-items:center; gap:6px; font-size:11px; padding:3px 8px; border-radius:6px;' +
-        (isToday ? 'background:rgba(110,105,173,0.20);' : '');
-      d.innerHTML = '<span style="font-weight:700; color:var(--text-muted); min-width:24px">' + DAYS[i] + '</span>' +
-        '<span style="color:' + (isFlex ? '#3DAB72' : isToday ? '#C8C3E8' : 'var(--text)') + ';font-weight:' + (isToday?'600':'400') + '">' + local + '</span>' +
-        (isToday ? '<span style="font-size:9px;background:#6E69AD;color:white;padding:1px 5px;border-radius:4px;font-weight:700">HOJE</span>' : '');
-      daysEl.appendChild(d);
-    });
-
-    row.appendChild(nameEl);
-    row.appendChild(daysEl);
-    sched.appendChild(row);
-
-    if (tech === 'romario') {
-      const sep = document.createElement('div');
-      sep.style.cssText = 'height:1px; background:rgba(110,105,173,0.15); margin:4px 0;';
-      sched.appendChild(sep);
-    }
-  });
-
-  // Quarter calendar
-  const cal = document.getElementById('quarterCalendar');
-  QUARTER.forEach(month => {
-    const monthLabel = document.createElement('div');
-    monthLabel.style.cssText = 'font-size:11px; font-weight:700; color:var(--text-muted); margin-top:4px; margin-bottom:2px;';
-    monthLabel.textContent = month.label;
-    cal.appendChild(monthLabel);
-
-    month.weeks.forEach(week => {
-      const isCurrentWeek = week.mon.toDateString() === monday.toDateString();
-      const isPast = week.fri < today && !isCurrentWeek;
-
       const row = document.createElement('div');
-      row.style.cssText = 'display:flex; align-items:center; gap:8px; padding:5px 10px; border-radius:8px; font-size:11px;' +
-        (isCurrentWeek ? 'background:rgba(110,105,173,0.18); border:1px solid rgba(110,105,173,0.35);' :
-         isPast ? 'opacity:0.35;' : 'background:rgba(255,255,255,0.03);');
-
-      const dateSpan = document.createElement('span');
-      dateSpan.style.cssText = 'color:var(--text-muted); min-width:90px; font-weight:500;';
-      dateSpan.textContent = fmt(week.mon) + ' – ' + fmt(week.fri);
-
-      const badge = document.createElement('span');
-      badge.style.cssText = 'font-weight:700; padding:2px 8px; border-radius:10px; font-size:10px;' +
-        (week.type === 1 ?
-          'background:rgba(110,105,173,0.15); color:#9B97D4;' :
-          'background:rgba(123,191,196,0.15); color:#7BBFC4;');
-      badge.textContent = 'Semana ' + week.type;
-
-      if (isCurrentWeek) {
-        const dot = document.createElement('span');
-        dot.style.cssText = 'margin-left:auto; font-size:9px; font-weight:700; color:#6E69AD; text-transform:uppercase; letter-spacing:0.05em;';
-        dot.textContent = '← agora';
-        row.appendChild(dateSpan);
-        row.appendChild(badge);
-        row.appendChild(dot);
-      } else {
-        row.appendChild(dateSpan);
-        row.appendChild(badge);
-      }
-
-      cal.appendChild(row);
+      row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;font-size:12px;' +
+        (ti > 0 ? 'margin-top:6px;padding-top:6px;border-top:1px solid rgba(110,105,173,0.12);' : '');
+      row.innerHTML = '<span style="font-weight:700;color:' + color + '">' + name + '</span>' +
+        '<span style="color:' + (isFlex ? '#3DAB72' : 'var(--text)') + ';font-weight:500">' + local + '</span>';
+      sched.appendChild(row);
     });
+    const note = document.createElement('div');
+    note.style.cssText = 'margin-top:6px;font-size:10px;color:var(--text-muted);text-align:center;';
+    note.textContent = DAYS_SHORT[todayIdx] + ' · hoje';
+    sched.appendChild(note);
+  } else {
+    sched.innerHTML = '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:4px 0">Fim de semana 🏖️</div>';
+  }
+
+  // Calendário — mês atual clicável
+  const cal = document.getElementById('quarterCalendar');
+  const weeks = getWeeksOfMonth(today.getFullYear(), today.getMonth());
+
+  const monthLabel = document.createElement('div');
+  monthLabel.style.cssText = 'font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:4px;';
+  monthLabel.textContent = MONTH_NAMES[today.getMonth()] + ' ' + today.getFullYear();
+  cal.appendChild(monthLabel);
+
+  weeks.forEach((week, idx) => {
+    const isCurrentWeek = week.mon.toDateString() === monday.toDateString();
+    const isPast = week.fri < today && !isCurrentWeek;
+
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = 'border-radius:8px;overflow:hidden;margin-bottom:2px;border:1px solid ' +
+      (isCurrentWeek ? 'rgba(110,105,173,0.35)' : 'transparent') + ';';
+
+    // Row
+    const row = document.createElement('div');
+    row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:5px 8px;font-size:11px;cursor:pointer;transition:background 0.15s;user-select:none;' +
+      (isCurrentWeek ? 'background:rgba(110,105,173,0.18);' : isPast ? 'opacity:0.35;' : 'background:rgba(255,255,255,0.02);');
+
+    // Chevron element
+    const chevron = document.createElement('span');
+    chevron.textContent = isCurrentWeek ? '▲' : '▼';
+    chevron.style.cssText = 'font-size:9px;color:var(--text-muted);transition:transform 0.2s;margin-left:4px;';
+
+    const badge = document.createElement('span');
+    badge.style.cssText = 'font-weight:700;padding:1px 7px;border-radius:8px;font-size:10px;' +
+      (week.type === 1 ? 'background:rgba(110,105,173,0.15);color:#9B97D4;' : 'background:rgba(123,191,196,0.15);color:#7BBFC4;');
+    badge.textContent = 'S' + week.type;
+
+    const dateSpan = document.createElement('span');
+    dateSpan.style.cssText = 'color:var(--text-muted);font-weight:500;flex:1;';
+    dateSpan.textContent = fmt(week.mon) + ' – ' + fmt(week.fri);
+
+    const rightSide = document.createElement('div');
+    rightSide.style.cssText = 'display:flex;align-items:center;gap:4px;';
+
+    if (isCurrentWeek) {
+      const nowTag = document.createElement('span');
+      nowTag.style.cssText = 'font-size:9px;color:#6E69AD;font-weight:700;margin-right:4px;';
+      nowTag.textContent = '← agora';
+      rightSide.appendChild(nowTag);
+    }
+    rightSide.appendChild(badge);
+    rightSide.appendChild(chevron);
+
+    row.appendChild(dateSpan);
+    row.appendChild(rightSide);
+
+    // Detail panel
+    const detail = document.createElement('div');
+    detail.style.cssText = 'overflow:hidden;transition:max-height 0.3s ease;padding:0 10px;background:rgba(110,105,173,0.06);max-height:' +
+      (isCurrentWeek ? '300px' : '0') + ';';
+    detail.innerHTML = buildWeekDetail(week.type);
+
+    // Click toggle
+    row.addEventListener('click', function() {
+      if (isPast) return;
+      const isOpen = detail.style.maxHeight !== '0px';
+      // Close all
+      cal.querySelectorAll('.week-detail').forEach(d => { d.style.maxHeight = '0px'; });
+      cal.querySelectorAll('.week-chevron').forEach(c => { c.textContent = '▼'; });
+      cal.querySelectorAll('.week-wrapper').forEach(w => { w.style.border = '1px solid transparent'; });
+      // Open if was closed
+      if (!isOpen) {
+        detail.style.maxHeight = '300px';
+        chevron.textContent = '▲';
+        wrapper.style.border = '1px solid rgba(110,105,173,0.40)';
+      } else if (isCurrentWeek) {
+        wrapper.style.border = '1px solid rgba(110,105,173,0.35)';
+      }
+    });
+
+    // Hover
+    if (!isPast) {
+      row.addEventListener('mouseenter', () => { if (detail.style.maxHeight === '0px') row.style.background = 'rgba(110,105,173,0.08)'; });
+      row.addEventListener('mouseleave', () => { if (!isCurrentWeek) row.style.background = detail.style.maxHeight !== '0px' ? 'rgba(110,105,173,0.10)' : 'rgba(255,255,255,0.02)'; });
+    }
+
+    detail.classList.add('week-detail');
+    chevron.classList.add('week-chevron');
+    wrapper.classList.add('week-wrapper');
+
+    wrapper.appendChild(row);
+    wrapper.appendChild(detail);
+    cal.appendChild(wrapper);
   });
 }
 
 initSchedule();
+
+// ── MANUTENÇÕES PREVENTIVAS ──────────────────────────────────
+function loadPreventivas() {
+  const SHEET_ID = '1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q';
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json';
+
+  fetch(url)
+    .then(r => r.text())
+    .then(text => {
+      // Google wraps response in google.visualization.Query.setResponse(...)
+      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+      const rows = json.table.rows;
+
+      let vencido = 0, avencer = 0, emdia = 0;
+      const atencao = [];
+
+      rows.forEach(row => {
+        if (!row.c || !row.c[0] || !row.c[0].v) return;
+        const cg      = row.c[0] ? (row.c[0].v || '') : '';
+        const servico = row.c[1] ? (row.c[1].v || '') : '';
+        const status  = row.c[5] ? (row.c[5].v || '') : '';
+        const proxRaw = row.c[4] ? row.c[4].v : null;
+
+        // Parse próxima execução
+        let proxDate = null;
+        if (proxRaw && typeof proxRaw === 'string' && proxRaw.startsWith('Date(')) {
+          const parts = proxRaw.replace('Date(','').replace(')','').split(',');
+          proxDate = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+        }
+
+        const statusLower = status.toLowerCase();
+        if (statusLower.includes('vencido')) {
+          vencido++;
+          atencao.push({ cg, servico, status: 'vencido', proxDate });
+        } else if (statusLower.includes('vencer')) {
+          avencer++;
+          atencao.push({ cg, servico, status: 'avencer', proxDate });
+        } else if (statusLower.includes('dia')) {
+          emdia++;
+        }
+      });
+
+      document.getElementById('cntVencido').textContent = vencido;
+      document.getElementById('cntAvencer').textContent = avencer;
+      document.getElementById('cntEmdia').textContent = emdia;
+
+      const list = document.getElementById('prevList');
+      list.innerHTML = '';
+
+      if (atencao.length === 0) {
+        list.innerHTML = '<div style="font-size:12px;color:#3DAB72;text-align:center;padding:8px;">Tudo em dia ✅</div>';
+        return;
+      }
+
+      // Sort: vencidos primeiro, depois a vencer por data
+      atencao.sort((a, b) => {
+        if (a.status !== b.status) return a.status === 'vencido' ? -1 : 1;
+        if (a.proxDate && b.proxDate) return a.proxDate - b.proxDate;
+        return 0;
+      });
+
+      // Show max 6 items
+      atencao.slice(0, 6).forEach(item => {
+        const isVencido = item.status === 'vencido';
+        const color = isVencido ? '#D94F4F' : '#E8A84A';
+        const bg = isVencido ? 'rgba(217,79,79,0.08)' : 'rgba(232,168,74,0.08)';
+        const border = isVencido ? 'rgba(217,79,79,0.20)' : 'rgba(232,168,74,0.20)';
+
+        const dateStr = item.proxDate
+          ? String(item.proxDate.getDate()).padStart(2,'0') + '/' + String(item.proxDate.getMonth()+1).padStart(2,'0')
+          : '';
+
+        const el = document.createElement('div');
+        el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:5px 8px;border-radius:7px;background:' + bg + ';border:1px solid ' + border + ';';
+        el.innerHTML =
+          '<div style="flex:1;min-width:0;">' +
+            '<div style="font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.cg + ' · ' + item.servico + '</div>' +
+          '</div>' +
+          '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:6px;">' +
+            (dateStr ? '<span style="font-size:10px;color:var(--text-muted)">' + dateStr + '</span>' : '') +
+            '<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;background:' + (isVencido ? 'rgba(217,79,79,0.15)' : 'rgba(232,168,74,0.15)') + ';color:' + color + '">' + (isVencido ? 'VENCIDO' : 'A VENCER') + '</span>' +
+          '</div>';
+        list.appendChild(el);
+      });
+
+      if (atencao.length > 6) {
+        const more = document.createElement('div');
+        more.style.cssText = 'font-size:11px;color:var(--text-muted);text-align:center;padding:4px;';
+        more.textContent = '+ ' + (atencao.length - 6) + ' mais na planilha';
+        list.appendChild(more);
+      }
+    })
+    .catch(err => {
+      document.getElementById('prevList').innerHTML =
+        '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
+    });
+}
+
+loadPreventivas();
+
 
 </script>
 </body>
