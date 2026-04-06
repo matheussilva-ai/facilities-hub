@@ -333,46 +333,31 @@ footer {
 }
 
 /* ── BORDER BEAM ── */
-.card {
-  --beam-color: rgba(110,105,173,0.8);
-}
-.card-teal   { --beam-color: rgba(123,191,196,0.8); }
-.card-green  { --beam-color: rgba(61,171,114,0.8); }
-.card-orange { --beam-color: rgba(232,168,74,0.8); }
-
 .card::after {
   content: '';
   position: absolute;
-  inset: -1px;
-  border-radius: var(--radius);
-  padding: 1px;
-  background: conic-gradient(
-    from var(--beam-angle, 0deg),
-    transparent 0deg,
-    var(--beam-color) 60deg,
-    transparent 120deg
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  top: -1px; left: -50%;
+  width: 40%; height: calc(100% + 2px);
+  background: linear-gradient(90deg, transparent, rgba(110,105,173,0.6), transparent);
+  transform: skewX(-15deg);
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  z-index: 2;
 }
+
+.card-teal::after   { background: linear-gradient(90deg, transparent, rgba(123,191,196,0.6), transparent); }
+.card-green::after  { background: linear-gradient(90deg, transparent, rgba(61,171,114,0.6), transparent); }
+.card-orange::after { background: linear-gradient(90deg, transparent, rgba(232,168,74,0.6), transparent); }
 
 .card:hover::after {
   opacity: 1;
-  animation: beam-rotate 2s linear infinite;
+  animation: beam-slide 1.5s ease-in-out infinite;
 }
 
-@keyframes beam-rotate {
-  from { --beam-angle: 0deg; }
-  to   { --beam-angle: 360deg; }
-}
-
-@property --beam-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
+@keyframes beam-slide {
+  0%   { left: -50%; }
+  100% { left: 150%; }
 }
 
 /* ── TITLE GLOW ── */
