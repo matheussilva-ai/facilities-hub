@@ -112,16 +112,13 @@ header {
 
 /* ── HERO — compact dashboard style ── */
 .hero {
-  padding: 20px 32px 16px;
-  display: flex;
-  align-items: baseline;
-  gap: 16px;
-  flex-wrap: wrap;
+  padding: 56px 32px 40px;
+  max-width: 680px;
 }
 
 .hero-title {
   font-family: 'Syne', sans-serif;
-  font-size: 26px;
+  font-size: clamp(32px, 5vw, 52px);
   font-weight: 800;
   line-height: 1.1;
   letter-spacing: -0.03em;
@@ -155,12 +152,12 @@ header {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px;
+  padding: 28px;
   text-decoration: none;
   color: var(--text);
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 20px;
   position: relative;
   overflow: hidden;
   transition: all 0.25s cubic-bezier(.4,0,.2,1);
@@ -317,7 +314,6 @@ footer {
 }
 
 /* ── HERO EYEBROW — hidden ── */
-.hero-eyebrow { display: none; }
 
 @media (max-width: 768px) {
   .grid { grid-template-columns: 1fr; }
@@ -332,44 +328,7 @@ footer {
   footer { padding: 16px; flex-direction: column; gap: 10px; text-align: center; }
 }
 
-/* ── BORDER BEAM ── */
-.card::after {
-  content: '';
-  position: absolute;
-  top: -1px; left: -50%;
-  width: 40%; height: calc(100% + 2px);
-  background: linear-gradient(90deg, transparent, rgba(110,105,173,0.6), transparent);
-  transform: skewX(-15deg);
-  opacity: 0;
-  transition: opacity 0.2s;
-  pointer-events: none;
-  z-index: 2;
-}
 
-.card-teal::after   { background: linear-gradient(90deg, transparent, rgba(123,191,196,0.6), transparent); }
-.card-green::after  { background: linear-gradient(90deg, transparent, rgba(61,171,114,0.6), transparent); }
-.card-orange::after { background: linear-gradient(90deg, transparent, rgba(232,168,74,0.6), transparent); }
-
-.card:hover::after {
-  opacity: 1;
-  animation: beam-slide 1.5s ease-in-out infinite;
-}
-
-@keyframes beam-slide {
-  0%   { left: -50%; }
-  100% { left: 150%; }
-}
-
-/* ── TITLE GLOW ── */
-.hero-title {
-  animation: title-glow 2s ease-out both;
-}
-
-@keyframes title-glow {
-  0%   { text-shadow: 0 0 40px rgba(110,105,173,0.8), 0 0 80px rgba(123,191,196,0.4); opacity: 0.4; }
-  60%  { text-shadow: 0 0 20px rgba(110,105,173,0.4), 0 0 40px rgba(123,191,196,0.2); opacity: 1; }
-  100% { text-shadow: none; opacity: 1; }
-}
 
 </style>
 </head>
@@ -388,7 +347,7 @@ footer {
 
   <div class="hero">
     <h1 class="hero-title">Suas ferramentas,<br><span>num só lugar.</span></h1>
-    <p class="hero-sub">Aplicações do time de Facilities da Genial Care.</p>
+    <p class="hero-sub">Acesse rapidamente todas as aplicações do time de Facilities da Genial Care.</p>
   </div>
 
   <div class="grid">
@@ -754,18 +713,6 @@ function initSchedule() {
 initSchedule();
 
 
-// ── ANIMATED COUNTER ──────────────────────────────────────
-function animateCounter(el, target, duration) {
-  const start = performance.now();
-  const update = (now) => {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    const ease = 1 - Math.pow(1 - progress, 3);
-    el.textContent = Math.round(ease * target);
-    if (progress < 1) requestAnimationFrame(update);
-  };
-  requestAnimationFrame(update);
-}
 
 // ── MANUTENÇÕES PREVENTIVAS ──────────────────────────────────
 function loadPreventivas() {
@@ -807,9 +754,9 @@ function loadPreventivas() {
         }
       });
 
-      animateCounter(document.getElementById('cntVencido'), vencido, 800);
-      animateCounter(document.getElementById('cntAvencer'), avencer, 1000);
-      animateCounter(document.getElementById('cntEmdia'), emdia, 1200);
+      document.getElementById('cntVencido').textContent = vencido;
+      document.getElementById('cntAvencer').textContent = avencer;
+      document.getElementById('cntEmdia').textContent = emdia;
 
       const list = document.getElementById('prevList');
       list.innerHTML = '';
