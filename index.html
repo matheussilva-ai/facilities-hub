@@ -114,7 +114,7 @@ header {
 
 /* ── HERO ── */
 .hero {
-  padding: 56px 32px 40px;
+  padding: 24px 32px 20px;
   max-width: 680px;
 }
 
@@ -136,7 +136,7 @@ header {
 
 .hero-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(32px, 5vw, 52px);
+  font-size: clamp(22px, 3vw, 32px);
   font-weight: 800;
   line-height: 1.05;
   letter-spacing: -0.03em;
@@ -152,9 +152,9 @@ header {
 }
 
 .hero-sub {
-  font-size: 15px;
+  font-size: 13px;
   color: var(--text-muted);
-  line-height: 1.7;
+  line-height: 1.6;
   max-width: 480px;
 }
 
@@ -172,12 +172,12 @@ header {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 28px;
+  padding: 20px;
   text-decoration: none;
   color: var(--text);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 14px;
   position: relative;
   overflow: hidden;
   transition: all 0.3s cubic-bezier(.4,0,.2,1);
@@ -262,10 +262,10 @@ header {
 
 .card-title {
   font-family: 'Syne', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: -0.02em;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   line-height: 1.2;
 }
 
@@ -342,11 +342,24 @@ footer {
   50%       { opacity: 0.6; transform: scale(0.8); }
 }
 
+@media (max-width: 768px) {
+  .grid { grid-template-columns: 1fr; }
+}
 @media (max-width: 600px) {
-  header { padding: 20px 20px 0; }
-  .hero  { padding: 40px 20px 28px; }
-  .grid  { padding: 0 20px 48px; grid-template-columns: 1fr; }
-  footer { padding: 20px; flex-direction: column; gap: 12px; text-align: center; }
+  header { padding: 16px 16px 0; }
+  .hero  { padding: 24px 16px 16px; }
+  .hero-title { font-size: 22px; }
+  .grid  { padding: 0 16px 48px; gap: 14px; }
+  .card  { padding: 22px 18px; }
+  footer { padding: 20px 16px; flex-direction: column; gap: 12px; text-align: center; }
+}
+  .hero  { padding: 28px 16px 20px; }
+  .hero-title { font-size: 28px; }
+  .grid  { padding: 0 16px 48px; grid-template-columns: 1fr; gap: 14px; }
+  .card  { padding: 22px 18px; }
+  footer { padding: 20px 16px; flex-direction: column; gap: 12px; text-align: center; }
+  .header-badge { display: none; }
+  .fields-row { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -364,12 +377,8 @@ footer {
   </header>
 
   <div class="hero">
-    <div class="hero-eyebrow">
-      <svg width="10" height="10" viewBox="0 0 10 10" fill="currentColor"><circle cx="5" cy="5" r="5"/></svg>
-      Painel principal
-    </div>
     <h1 class="hero-title">Suas ferramentas,<br><span>num só lugar.</span></h1>
-    <p class="hero-sub">Acesse rapidamente todas as aplicações do time de Facilities da Genial Care.</p>
+    <p class="hero-sub">Aplicações do time de Facilities da Genial Care.</p>
   </div>
 
   <div class="grid">
@@ -756,7 +765,6 @@ function loadPreventivas() {
         const status  = row.c[5] ? (row.c[5].v || '') : '';
         const proxRaw = row.c[4] ? row.c[4].v : null;
 
-        // Parse próxima execução
         let proxDate = null;
         if (proxRaw && typeof proxRaw === 'string' && proxRaw.startsWith('Date(')) {
           const parts = proxRaw.replace('Date(','').replace(')','').split(',');
@@ -787,14 +795,12 @@ function loadPreventivas() {
         return;
       }
 
-      // Sort: vencidos primeiro, depois a vencer por data
       atencao.sort((a, b) => {
         if (a.status !== b.status) return a.status === 'vencido' ? -1 : 1;
         if (a.proxDate && b.proxDate) return a.proxDate - b.proxDate;
         return 0;
       });
 
-      // Show max 6 items
       atencao.slice(0, 6).forEach(item => {
         const isVencido = item.status === 'vencido';
         const color = isVencido ? '#D94F4F' : '#E8A84A';
@@ -825,15 +831,10 @@ function loadPreventivas() {
         list.appendChild(more);
       }
     })
-    .catch(err => {
+    .catch(() => {
       document.getElementById('prevList').innerHTML =
         '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
     });
 }
 
 loadPreventivas();
-
-
-</script>
-</body>
-</html>
