@@ -558,7 +558,7 @@ function getWeeksOfMonth(year, month) {
   while (d.getMonth() === month) {
     const mon = new Date(d);
     const fri = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 4);
-    const type = mon.getDate() % 2 !== 0 ? 1 : 2;
+    const type = weekType(mon);
     weeks.push({ mon, fri, type });
     d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 7);
   }
@@ -572,7 +572,13 @@ function getMonday(d) {
   return new Date(copy.setDate(diff));
 }
 
-function weekType(monday) { return monday.getDate() % 2 !== 0 ? 1 : 2; }
+function weekType(monday) {
+  const MUDANCA = new Date(2026, 3, 6); // 06/04/2026 — semanas invertidas a partir daqui
+  if (monday >= MUDANCA) {
+    return monday.getDate() % 2 === 0 ? 1 : 2; // PAR = S1, ÍMPAR = S2
+  }
+  return monday.getDate() % 2 !== 0 ? 1 : 2;
+}
 function fmt(d) { return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0'); }
 
 function buildWeekDetail(wtype) {
@@ -639,6 +645,15 @@ function initSchedule() {
 
   // Calendário — mês atual clicável
   const cal = document.getElementById('quarterCalendar');
+
+  // Banner de mudança (exibe em Abril 2026)
+  if (today.getFullYear() === 2026 && today.getMonth() === 3) {
+    const banner = document.createElement('div');
+    banner.style.cssText = 'font-size:10px;font-weight:600;color:#E8A84A;background:rgba(232,168,74,0.10);border:1px solid rgba(232,168,74,0.25);border-radius:7px;padding:5px 8px;margin-bottom:6px;line-height:1.5;';
+    banner.innerHTML = '⚠️ <b>Mudança a partir de 06/04:</b> Seg PAR → S1 · Seg ÍMPAR → S2';
+    cal.appendChild(banner);
+  }
+
   const weeks = getWeeksOfMonth(today.getFullYear(), today.getMonth());
 
   const monthLabel = document.createElement('div');
