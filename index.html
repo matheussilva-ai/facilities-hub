@@ -342,6 +342,11 @@ footer {
   50%       { opacity: 0.6; transform: scale(0.8); }
 }
 
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 @media (max-width: 600px) {
   header { padding: 20px 20px 0; }
   .hero  { padding: 40px 20px 28px; }
@@ -531,9 +536,6 @@ footer {
         <div style="font-size:12px;color:var(--text-muted);text-align:center;padding:8px;">Carregando...</div>
       </div>
 
-      <!-- Painel de detalhes (expandido ao clicar) -->
-      <div id="cgDetail" style="display:none;position:relative;z-index:1;margin-top:8px;background:rgba(123,191,196,0.06);border:1px solid rgba(123,191,196,0.20);border-radius:10px;padding:14px;"></div>
-
       <div class="card-footer" style="margin-top:12px;">
         <div class="card-users">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -549,6 +551,25 @@ footer {
     <div class="footer-text">Genial Care Facilities © 2026 — Hub interno</div>
     <div class="footer-dot"></div>
   </footer>
+
+  <!-- Modal Casas Geniais -->
+  <div id="cgModal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;">
+    <!-- Backdrop -->
+    <div onclick="fecharCGModal()" style="position:absolute;inset:0;background:rgba(0,0,0,0.70);backdrop-filter:blur(4px);"></div>
+    <!-- Sheet -->
+    <div style="position:relative;z-index:1;background:#16152A;border:1px solid rgba(123,191,196,0.25);border-radius:20px;width:90%;max-width:480px;max-height:82vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.60);animation:modalIn .22s cubic-bezier(.4,0,.2,1);">
+      <!-- Header do modal -->
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:20px 24px 16px;border-bottom:1px solid rgba(123,191,196,0.15);flex-shrink:0;">
+        <div>
+          <div id="cgModalNome" style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#F0EFF8;"></div>
+          <div id="cgModalSub" style="font-size:12px;color:#7874A0;margin-top:2px;"></div>
+        </div>
+        <button onclick="fecharCGModal()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:50%;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#F0EFF8;font-size:16px;transition:all .15s;">✕</button>
+      </div>
+      <!-- Conteúdo scrollável -->
+      <div id="cgModalBody" style="overflow-y:auto;padding:20px 24px 24px;flex:1;"></div>
+    </div>
+  </div>
 
 </div>
 
@@ -872,7 +893,6 @@ function loadPreventivas() {
 const CG_INFO_URL = 'https://script.google.com/macros/s/AKfycbyypUjU49FXATep7p3cmJFmZQI2Cgg8M8ioZmk36GCI4sWXq2ZS_o0mt9KCt7J1RbWf/exec';
 
 let cgInfoData = [];
-let cgSelecionada = null;
 
 function loadCGInfo() {
   if (!CG_INFO_URL) {
@@ -898,89 +918,50 @@ function renderCGList() {
   const list = document.getElementById('cgList');
   list.innerHTML = '';
   cgInfoData.forEach((cg, idx) => {
-    const nome = cg.cg.replace('CG-', 'CG ');
+    const nome = cg.cg.replace('NOVA-CG-', 'CG ').replace('CG-', 'CG ').replace('WL- ', '');
     const salas = cg.totalSalas ? cg.totalSalas + ' salas' : '';
     const zona  = cg.zona || '';
-    const isSelected = cgSelecionada === idx;
 
     const el = document.createElement('div');
-    el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:8px;cursor:pointer;transition:background 0.15s;' +
-      (isSelected ? 'background:rgba(123,191,196,0.18);border:1px solid rgba(123,191,196,0.35);' : 'background:rgba(255,255,255,0.03);border:1px solid transparent;');
-
+    el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;cursor:pointer;transition:background 0.15s;background:rgba(255,255,255,0.03);border:1px solid rgba(123,191,196,0.08);';
     el.innerHTML =
       '<div style="flex:1;min-width:0;">' +
         '<div style="font-size:12px;font-weight:600;color:var(--text);">' + nome + '</div>' +
         '<div style="font-size:10px;color:var(--text-muted);margin-top:1px;">' + [zona, salas].filter(Boolean).join(' · ') + '</div>' +
       '</div>' +
-      '<span style="font-size:10px;color:var(--teal);font-weight:700;margin-left:8px;">' + (isSelected ? '▲' : '▼') + '</span>';
+      '<span style="font-size:11px;color:var(--teal);font-weight:700;margin-left:8px;opacity:0.7;">→</span>';
 
-    el.addEventListener('mouseenter', () => { if (cgSelecionada !== idx) el.style.background = 'rgba(123,191,196,0.08)'; });
-    el.addEventListener('mouseleave', () => { if (cgSelecionada !== idx) el.style.background = 'rgba(255,255,255,0.03)'; });
-    el.addEventListener('click', () => toggleCGDetail(idx));
+    el.addEventListener('mouseenter', () => { el.style.background = 'rgba(123,191,196,0.10)'; el.style.borderColor = 'rgba(123,191,196,0.25)'; });
+    el.addEventListener('mouseleave', () => { el.style.background = 'rgba(255,255,255,0.03)'; el.style.borderColor = 'rgba(123,191,196,0.08)'; });
+    el.addEventListener('click', () => abrirCGModal(idx));
 
     list.appendChild(el);
   });
 }
 
-function toggleCGDetail(idx) {
-  const detail = document.getElementById('cgDetail');
-  if (cgSelecionada === idx) {
-    cgSelecionada = null;
-    detail.style.display = 'none';
-    renderCGList();
-    return;
-  }
-  cgSelecionada = idx;
-  renderCGList();
-
+function abrirCGModal(idx) {
   const cg = cgInfoData[idx];
+  const nome = cg.cg.replace('NOVA-CG-', 'CG ').replace('CG-', 'CG ').replace('WL- ', '');
+  const sub = [cg.zona, cg.totalSalas ? cg.totalSalas + ' salas' : ''].filter(Boolean).join(' · ');
+
+  document.getElementById('cgModalNome').textContent = nome;
+  document.getElementById('cgModalSub').textContent = sub;
+
   let html = '';
-
-  // Endereço
-  if (cg.endereco) {
-    html += secao('📍 Endereço', cg.endereco + (cg.zona ? ' <span style="color:var(--text-muted);">· ' + cg.zona + '</span>' : ''));
-  }
-
-  // Horário
-  if (cg.horario) {
-    html += secao('🕐 Horário', cg.horario);
-  }
-
-  // Total de salas
-  if (cg.totalSalas) {
-    html += secao('🚪 Salas de atendimento', cg.totalSalas + ' salas no total');
-  }
-
-  // Andares
-  if (cg.andares && cg.andares.length > 1) {
-    html += secao('🏗️ Andares', cg.andares.join(', '));
-  }
-
-  // Metragem
-  if (cg.metragem) {
-    html += secao('📐 Metragem', cg.metragem);
-  }
-
-  // Internet
+  if (cg.endereco)          html += secao('📍 Endereço', cg.endereco);
+  if (cg.horario)           html += secao('🕐 Horário', cg.horario);
+  if (cg.totalSalas)        html += secao('🚪 Salas de atendimento', cg.totalSalas + ' salas no total');
+  if (cg.andares && cg.andares.length > 1) html += secao('🏗️ Andares', cg.andares.join('<br>'));
+  if (cg.metragem)          html += secao('📐 Metragem', cg.metragem);
   if (cg.internetInterna || cg.internetVisitantes) {
     const inet = [
-      cg.internetInterna   ? '🔒 Interna: ' + cg.internetInterna : '',
+      cg.internetInterna    ? '🔒 Interna: ' + cg.internetInterna : '',
       cg.internetVisitantes ? '📶 Visitantes: ' + cg.internetVisitantes : ''
     ].filter(Boolean).join('<br>');
     html += secao('🌐 Internet', inet);
   }
-
-  // Estacionamento
-  if (cg.estacionamento) {
-    html += secao('🚗 Estacionamento', cg.estacionamento);
-  }
-
-  // Responsável técnico
-  if (cg.responsavelTec) {
-    html += secao('🔧 Responsável Técnico', cg.responsavelTec);
-  }
-
-  // Matheus / Eliza
+  if (cg.estacionamento)    html += secao('🚗 Estacionamento', cg.estacionamento);
+  if (cg.responsavelTec)    html += secao('🔧 Responsável Técnico', cg.responsavelTec);
   if (cg.contatoMatheus || cg.contatoEliza) {
     const contatos = [
       cg.contatoMatheus ? 'Matheus (Manutenção): ' + cg.contatoMatheus : '',
@@ -988,20 +969,24 @@ function toggleCGDetail(idx) {
     ].filter(Boolean).join('<br>');
     html += secao('📞 Facilities', contatos);
   }
+  if (cg.gerentePredial)    html += secao('🏠 Gerente Predial', cg.gerentePredial.replace(/\n/g, '<br>'));
+  if (cg.chaveiro)          html += secao('🔑 Chaveiro', cg.chaveiro);
 
-  // Gerente predial
-  if (cg.gerentePredial) {
-    html += secao('🏠 Gerente Predial', cg.gerentePredial.replace(/\n/g, '<br>'));
-  }
+  document.getElementById('cgModalBody').innerHTML = html ||
+    '<div style="font-size:12px;color:var(--text-muted);padding:4px;">Sem detalhes disponíveis.</div>';
 
-  // Chaveiro
-  if (cg.chaveiro) {
-    html += secao('🔑 Chaveiro', cg.chaveiro);
-  }
-
-  detail.innerHTML = html || '<div style="font-size:12px;color:var(--text-muted);padding:4px;">Sem detalhes disponíveis.</div>';
-  detail.style.display = 'block';
+  const modal = document.getElementById('cgModal');
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
 }
+
+function fecharCGModal() {
+  document.getElementById('cgModal').style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+// Fecha com ESC
+document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharCGModal(); });
 
 function secao(label, valor) {
   return '<div style="margin-bottom:10px;">' +
