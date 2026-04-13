@@ -13,15 +13,13 @@
   --purple:      #6E69AD;
   --purple-dark: #3D3A7A;
   --teal:        #7BBFC4;
-  --teal-light:  #B0E0E4;
   --bg:          #0E0D1A;
-  --surface:     #16152A;
-  --surface2:    #1E1C35;
-  --border:      rgba(110,105,173,0.20);
-  --text:        #F0EFF8;
-  --text-muted:  #7874A0;
-  --radius:      16px;
-  --radius-sm:   10px;
+  --surface:     #131224;
+  --surface2:    #1A1930;
+  --border:      rgba(110,105,173,0.18);
+  --text:        #ECEAF6;
+  --text-muted:  #6B678F;
+  --radius:      14px;
 }
 
 html, body {
@@ -34,411 +32,235 @@ html, body {
 
 body::before {
   content: '';
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background:
-    radial-gradient(ellipse 60% 50% at 10% 0%, rgba(110,105,173,0.22) 0%, transparent 55%),
-    radial-gradient(ellipse 40% 40% at 90% 100%, rgba(123,191,196,0.14) 0%, transparent 55%);
-  pointer-events: none;
-  z-index: 0;
+    radial-gradient(ellipse 55% 45% at 8% 0%, rgba(110,105,173,0.20) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 35% at 92% 95%, rgba(123,191,196,0.12) 0%, transparent 55%);
+  pointer-events: none; z-index: 0;
 }
-
 body::after {
   content: '';
-  position: fixed;
-  inset: 0;
+  position: fixed; inset: 0;
   background-image:
-    linear-gradient(rgba(110,105,173,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(110,105,173,0.035) 1px, transparent 1px);
-  background-size: 48px 48px;
-  pointer-events: none;
-  z-index: 0;
+    linear-gradient(rgba(110,105,173,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(110,105,173,0.03) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none; z-index: 0;
 }
 
 .app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 1;
-  max-width: 1400px;
+  position: relative; z-index: 1;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 48px;
+  padding: 0 40px 60px;
 }
 
 /* ── HEADER ── */
 header {
-  padding: 32px 0 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 28px 0 24px;
   border-bottom: 1px solid var(--border);
-  padding-bottom: 24px;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
 }
-
-.brand { display: flex; align-items: center; gap: 16px; }
-
-.brand-sub {
-  font-size: 12px;
-  color: var(--text-muted);
-  letter-spacing: 0.02em;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
+.brand { display: flex; align-items: center; gap: 14px; }
+.brand-sub { font-size: 12px; color: var(--text-muted); }
+.header-right { display: flex; align-items: center; gap: 12px; }
 .header-time {
-  font-size: 13px;
-  color: var(--text-muted);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 7px 16px;
-  letter-spacing: 0.05em;
+  font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums;
+  letter-spacing: 0.05em; color: var(--text-muted);
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 20px; padding: 6px 14px;
 }
-
-.header-badge {
-  font-size: 11px;
-  font-weight: 700;
-  color: #3DAB72;
-  background: rgba(61,171,114,0.10);
-  border: 1px solid rgba(61,171,114,0.25);
-  border-radius: 20px;
-  padding: 5px 12px;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+.live-badge {
+  font-size: 11px; font-weight: 700; color: #3DAB72;
+  background: rgba(61,171,114,0.10); border: 1px solid rgba(61,171,114,0.22);
+  border-radius: 20px; padding: 5px 11px;
+  display: flex; align-items: center; gap: 5px;
 }
+.dot { width: 6px; height: 6px; background: #3DAB72; border-radius: 50%; box-shadow: 0 0 6px #3DAB72; animation: pulse 2s ease-in-out infinite; }
 
-.status-dot {
-  width: 6px; height: 6px;
-  background: #3DAB72;
-  border-radius: 50%;
-  box-shadow: 0 0 6px #3DAB72;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-/* ── PAGE TITLE ── */
-.page-title {
+/* ── HERO ROW ── */
+.hero-row {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 32px;
+  align-items: start;
   margin-bottom: 48px;
 }
 
-.page-eyebrow {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--purple);
-  margin-bottom: 12px;
-  opacity: 0.8;
+.hero-left {}
+.eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--purple); opacity: 0.75;
+  margin-bottom: 10px;
 }
-
-.page-heading {
+.hero-title {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(36px, 4vw, 56px);
-  font-weight: 800;
-  line-height: 1.0;
-  letter-spacing: -0.03em;
-  color: var(--text);
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: -0.03em; color: var(--text);
+  margin-bottom: 10px;
 }
-
-.page-heading span {
+.hero-title span {
   background: linear-gradient(120deg, var(--purple) 0%, var(--teal) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
+.hero-sub { font-size: 13px; color: var(--text-muted); line-height: 1.6; max-width: 420px; }
+
+/* CG Widget on right */
+.cg-widget {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  animation: fadeUp 0.4s cubic-bezier(.4,0,.2,1) both;
+}
+.cg-widget-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 14px;
+}
+.cg-widget-title {
+  font-size: 12px; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal);
+  display: flex; align-items: center; gap: 6px;
+}
+.cg-widget-link {
+  font-size: 11px; color: var(--text-muted); text-decoration: none;
+  font-weight: 600; opacity: 0.7; transition: opacity .15s;
+}
+.cg-widget-link:hover { opacity: 1; color: var(--teal); }
 
 /* ── SECTION ── */
-.section {
-  margin-bottom: 52px;
+.section { margin-bottom: 44px; }
+.section-hdr {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
 }
-
-.section-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
+.section-lbl {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
 }
+.section-line { flex: 1; height: 1px; background: var(--border); }
 
-.section-label {
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.10em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
+/* ── GRIDS ── */
+.tool-grid    { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.widget-grid  { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
 
-.section-line {
-  flex: 1;
-  height: 1px;
-  background: var(--border);
-}
-
-/* ── TOOL GRID (3 col) ── */
-.tool-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-/* ── WIDGET GRID (2 col) ── */
-.widget-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-}
-
-/* ── INFO GRID (3 col) ── */
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-/* ── BASE CARD ── */
+/* ── CARD BASE ── */
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 32px;
-  text-decoration: none;
-  color: var(--text);
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.25s cubic-bezier(.4,0,.2,1);
-  animation: fadeUp 0.5s cubic-bezier(.4,0,.2,1) both;
+  position: relative; overflow: hidden;
+  transition: all 0.22s cubic-bezier(.4,0,.2,1);
+  animation: fadeUp 0.45s cubic-bezier(.4,0,.2,1) both;
 }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.card:nth-child(1) { animation-delay: 0.04s; }
-.card:nth-child(2) { animation-delay: 0.08s; }
-.card:nth-child(3) { animation-delay: 0.12s; }
-.card:nth-child(4) { animation-delay: 0.16s; }
-.card:nth-child(5) { animation-delay: 0.20s; }
-.card:nth-child(6) { animation-delay: 0.24s; }
-
 .card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.25s;
-  border-radius: var(--radius);
+  content: ''; position: absolute; inset: 0;
+  opacity: 0; transition: opacity 0.22s; border-radius: var(--radius);
 }
-
-.card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(110,105,173,0.38);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.35);
-}
+.card:hover { transform: translateY(-2px); border-color: rgba(110,105,173,0.32); box-shadow: 0 12px 40px rgba(0,0,0,0.30); }
 .card:hover::before { opacity: 1; }
+.card:nth-child(1){animation-delay:.03s} .card:nth-child(2){animation-delay:.06s}
+.card:nth-child(3){animation-delay:.09s} .card:nth-child(4){animation-delay:.12s}
 
-/* Tool card — clickable link */
+.glow-purple::before { background: linear-gradient(135deg, rgba(110,105,173,0.07) 0%, transparent 60%); }
+.glow-teal::before   { background: linear-gradient(135deg, rgba(123,191,196,0.07) 0%, transparent 60%); }
+.glow-green::before  { background: linear-gradient(135deg, rgba(61,171,114,0.07) 0%, transparent 60%); }
+.glow-orange::before { background: linear-gradient(135deg, rgba(232,168,74,0.07) 0%, transparent 60%); }
+
+/* ── TOOL CARD ── */
 .card-tool {
-  gap: 0;
-  min-height: 200px;
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 12px;
+  text-decoration: none; color: var(--text);
 }
-
-.card-tool:hover .tool-arrow {
-  background: var(--purple);
-  border-color: var(--purple);
-  color: white;
-  transform: translateX(3px);
+.card-tool:hover .arr {
+  background: var(--purple); border-color: var(--purple); color: #fff; transform: translateX(2px);
 }
+.card-disabled { opacity: 0.40; pointer-events: none; cursor: not-allowed; }
 
-.card-disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-/* Card glows */
-.glow-purple::before { background: linear-gradient(135deg, rgba(110,105,173,0.08) 0%, transparent 60%); }
-.glow-teal::before   { background: linear-gradient(135deg, rgba(123,191,196,0.08) 0%, transparent 60%); }
-.glow-green::before  { background: linear-gradient(135deg, rgba(61,171,114,0.08) 0%, transparent 60%); }
-.glow-orange::before { background: linear-gradient(135deg, rgba(232,168,74,0.08) 0%, transparent 60%); }
-
-/* ── TOOL CARD INTERNALS ── */
-.tool-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
+.tool-top { display: flex; align-items: flex-start; justify-content: space-between; }
 .tool-icon {
-  width: 48px; height: 48px;
-  border-radius: 12px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px;
-  flex-shrink: 0;
+  width: 42px; height: 42px; border-radius: 11px;
+  display: flex; align-items: center; justify-content: center; font-size: 20px;
 }
-
-.tool-arrow {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--surface2);
-  border: 1px solid var(--border);
+.arr {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: var(--surface2); border: 1px solid var(--border);
   display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-  color: var(--text-muted);
-  flex-shrink: 0;
+  color: var(--text-muted); transition: all .2s; flex-shrink: 0;
 }
-
 .tool-tag {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border-radius: 20px;
-  padding: 3px 10px;
-  margin-bottom: 8px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
+  text-transform: uppercase; border-radius: 20px; padding: 2px 9px;
   display: inline-block;
 }
-
-.tool-name {
-  font-family: 'Syne', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  margin-bottom: 8px;
+.tool-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; }
+.tool-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; flex: 1; }
+.tool-foot {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--text-muted);
+  padding-top: 12px; border-top: 1px solid var(--border);
 }
 
-.tool-desc {
-  font-size: 13px;
-  color: var(--text-muted);
-  line-height: 1.6;
-  flex: 1;
-}
-
-.tool-footer {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding-top: 20px;
-  margin-top: auto;
-  border-top: 1px solid var(--border);
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-
-/* ── COLOR TOKENS ── */
 .icon-purple { background: rgba(110,105,173,0.15); }
 .icon-teal   { background: rgba(123,191,196,0.15); }
 .icon-green  { background: rgba(61,171,114,0.15);  }
 .icon-orange { background: rgba(232,168,74,0.15);  }
-
-.tag-purple { color: #9B97D4; background: rgba(110,105,173,0.12); }
-.tag-teal   { color: #7BBFC4; background: rgba(123,191,196,0.12); }
-.tag-green  { color: #3DAB72; background: rgba(61,171,114,0.12);  }
-.tag-orange { color: #E8A84A; background: rgba(232,168,74,0.12);  }
+.tag-purple  { color: #9B97D4; background: rgba(110,105,173,0.12); }
+.tag-teal    { color: #7BBFC4; background: rgba(123,191,196,0.12); }
+.tag-green   { color: #3DAB72; background: rgba(61,171,114,0.12);  }
+.tag-orange  { color: #E8A84A; background: rgba(232,168,74,0.12);  }
 
 /* ── WIDGET CARD ── */
 .card-widget {
+  padding: 24px;
+  display: flex; flex-direction: column; gap: 16px;
   cursor: default;
-  gap: 20px;
 }
-
-.widget-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 14px;
-  position: relative;
-  z-index: 1;
-}
-
-.widget-icon {
-  width: 44px; height: 44px;
-  border-radius: 11px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 20px;
-  flex-shrink: 0;
-}
-
-.widget-title {
-  font-family: 'Syne', sans-serif;
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
-
-.widget-sub {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-
-.widget-body {
-  position: relative;
-  z-index: 1;
-  flex: 1;
-}
-
-.widget-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 500;
-  position: relative;
-  z-index: 1;
+.w-hdr { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
+.w-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.w-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
+.w-sub   { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.w-body  { position: relative; z-index: 1; flex: 1; }
+.w-foot  {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 14px; border-top: 1px solid var(--border);
+  font-size: 11px; color: var(--text-muted);
+  position: relative; z-index: 1;
 }
 
 /* ── FOOTER ── */
 footer {
-  margin-top: auto;
-  padding: 28px 0;
+  padding: 22px 0 0;
   border-top: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 16px;
+  display: flex; align-items: center; justify-content: space-between;
 }
-
-.footer-text {
-  font-size: 12px;
-  color: var(--text-muted);
-}
+.footer-text { font-size: 11px; color: var(--text-muted); }
 
 /* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.6; transform: scale(0.8); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
 }
-
 @keyframes modalIn {
-  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
 @media (max-width: 1100px) {
+  .hero-row   { grid-template-columns: 1fr; }
   .tool-grid  { grid-template-columns: repeat(2, 1fr); }
-  .info-grid  { grid-template-columns: repeat(2, 1fr); }
 }
-
-@media (max-width: 720px) {
-  .app        { padding: 0 20px; }
-  .tool-grid, .widget-grid, .info-grid { grid-template-columns: 1fr; }
-  .page-heading { font-size: 32px; }
+@media (max-width: 680px) {
+  .app { padding: 0 20px 48px; }
+  .tool-grid, .widget-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -447,95 +269,95 @@ footer {
 
   <header>
     <div class="brand">
-      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI3NyAyOTAgMTQyMCA1MzAiPgogIDxzdHlsZT4uc3Qwe2ZpbGw6IzZFNjlBRDt9LnN0MntmaWxsOiNCMEUwRTQ7fTwvc3R5bGU+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTU0Ny4yLDM1MC4wNmMtMzAuNTYsMC01OC4yNywxMi4yMS03OC41MywzMi4wMWw0MC4wNiw0MC4wNmMxMC4wOS05LjM3LDIzLjYxLTE1LjEsMzguNDYtMTUuMWMzMS4yNCwwLDU2LjU3LDI1LjMzLDU2LjU3LDU2LjU3cy0yNS4zMyw1Ni41Ny01Ni41Nyw1Ni41N2MtMTQuOTIsMC0yOC40OS01Ljc5LTM4LjYtMTUuMjNsLTAuMDEsMC4wMWwtMC4yMS0wLjIxYy0wLjE2LTAuMTUtMC4zMS0wLjMxLTAuNDYtMC40NmMtMC41My0wLjUxLTEuMDUtMS4wMy0xLjU2LTEuNTZjLTAuNTItMC41NC0xLjA0LTEuMDktMS41NC0xLjY2bC03Ny4wNi03OS41bDAsMGMtMTAuMDQtOS4wOC0yMy4zNy0xNC41OS0zOC4wMy0xNC41NGMtMzEuMjQsMC4xMS01Ni41NywyNS4zMy01Ni41Nyw1Ni41N2MwLDMxLjI0LDI1LjMzLDU2LjU3LDU2LjU3LDU2LjU3YzE1LjY0LDAsMjkuNzctNi4zNCwzOS45OS0xNi42bDMzLjU4LDMzLjU4YzIwLjU4LDIzLjA4LDUwLjUzLDM3LjYyLDgzLjg5LDM3LjYyYzYyLjA1LDAsMTEyLjM2LTUwLjMsMTEyLjM2LTExMi4zNlM2MDkuMjUsMzUwLjA2LDU0Ny4yLDM1MC4wNnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTQ3LjIsNDA3LjAzYy0xNC44NiwwLTI4LjM3LDUuNzMtMzguNDYsMTUuMWwtMzguMDItMzguMDJjLTIwLjQ2LTIxLjQ3LTQ5LjM0LTM0Ljg2LTgxLjM1LTM0Ljg2Yy02Mi4wNSwwLTExMi4zNiw1MC4zLTExMi4zNiwxMTIuMzZzNTAuMywxMTIuMzYsMTEyLjM2LDExMi4zNmMzMC42MiwwLDU4LjM3LTEyLjI1LDc4LjY0LTMyLjEybC0zOC4yOC0zOC4yOGMtMTAuMjMsMTAuMjUtMjQuMzYsMTYuNi0zOS45OSwxNi42Yy0zMS4yNCwwLTU2LjU3LTI1LjMzLTU2LjU3LTU2LjU3YzAtMzEuMjQsMjUuMzMtNTYuNDYsNTYuNTctNTYuNTdjMTQuNjUtMC4wNSwyNy45OSw1LjQ2LDM4LjAzLDE0LjU0bDAsMGw3Ny4wNiw3OS41YzEuMTMsMS4yOCwyLjMyLDIuNSwzLjU2LDMuNjdsMC4yMSwwLjIxbDAuMDEtMC4wMWMxMC4xMSw5LjQ0LDIzLjY3LDE1LjIzLDM4LjYsMTUuMjNjMzEuMjQsMCw1Ni41Ny0yNS4zMyw1Ni41Ny01Ni41N1M1NzguNDQsNDA3LjAzLDU0Ny4yLDQwNy4wM3oiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNODk0LjE4LDQ3Mi4yNWMwLTQ5LjkyLTQwLjQ3LTkwLjM5LTkwLjM5LTkwLjM5Yy00OS44OCwwLTkwLjM5LDQwLjUxLTkwLjM5LDkwLjM5YzAsNDkuOTIsNDAuNDcsOTAuMzksOTAuMzksOTAuMzljMTQuOTcsMCwyOS4wOS0zLjY0LDQxLjUzLTEwLjA5bDAsMGMtOC43NCwzMy42OS01MS42MywzMC41NC02NC4wNywyOC44OGMtMS44LTAuMjQtMy4zOSwxLjE2LTMuMzksMi45N3YzOS45M2MwLDEuNjcsMS4zNiwzLjAyLDMuMDMsM2wzMS4xLTAuMzZjODAuNTktMTEuOTMsODIuMTgtODMuNDUsODIuMTgtODMuNDV2LTY2LjgxbC0wLjEyLDAuMThDODk0LjE0LDQ3NS4zNyw4OTQuMTgsNDczLjgxLDg5NC4xOCw0NzIuMjV6IE04MDQuMTcsNTE3LjI1Yy0yNC44OSwwLTQ1LjA3LTIwLjE4LTQ1LjA3LTQ1LjA3YzAtMjQuODksMjAuMTgtNDUuMDcsNDUuMDctNDUuMDdjMjQuODksMCw0NS4wNywyMC4xOCw0NS4wNyw0NS4wN0M4NDkuMjQsNDk3LjA3LDgyOS4wNiw1MTcuMjUsODA0LjE3LDUxNy4yNXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTA2Ni4xNCw0OTMuMjJIOTU5LjUzYzUuMDMsMTkuNzQsMjAuODIsMzAuMTYsNDUuMjMsMzAuMTZjMTEuNDksMCwyMS41NC0yLjUxLDM0LjEtMTAuNDFjMy4yMy0yLjE1LDUuMzgtMS43OSw3LjksMC43MmwxOC42NywxNy45NWMyLjE1LDIuNTIsMi4xNSw1LjAzLTAuNzIsNy45Yy0xNi44NywxNi44Ny0zOS44NSwyNi45Mi02NS4zMywyNi45MmMtNTUuMjgsMC05My4zMy00MC41Ni05My4zMy05Mi4yNXMzOC4wNS05Mi4yNSw4OS4zOC05Mi4yNWM1MC45OCwwLDgzLjY0LDQwLjU2LDgzLjY0LDg5LjAyQzEwNzkuMDYsNDg1LjY4LDEwNzcuMjcsNDkzLjIyLDEwNjYuMTQsNDkzLjIyeiBNOTU4LjgxLDQ1OS4xMmg3Mi41MWMtMy4yMy0yMS41NC0xNy45NS0zMS45NS0zNS41NC0zMS45NUM5NzcuODMsNDI3LjE3LDk2Mi43Niw0MzcuNTgsOTU4LjgxLDQ1OS4xMnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTI2Ny4yMSw0NTcuNjh2OTguNzJjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOHYtODcuOTVjMC0yOC4zNi0xNS43OS0zNi42Mi0zMC4xNS0zNi42MmMtMjQuMDUsMC0zNC4xLDIzLjY5LTM0LjEsMzIuMzF2OTIuMjVjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdjMC0zLjIzLDIuMTUtNS4zOCw1LjM4LTUuMzhoNDEuNjRjMy4yMywwLDUuMDMsMi4xNSw1LjM4LDUuMzhsMS40MywyMi4yNWMxMS4xMy0xOC4zLDI5LjA4LTMxLjU5LDU0LjItMzEuNTlDMTIzOC44NSwzODEuOTQsMTI2Ny4yMSw0MTAuNjYsMTI2Ny4yMSw0NTcuNjh6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyOTcuMzYsMzI2LjNjMC0xNi4xNSwxMi45Mi0yOS4wOCwyOS4wOC0yOS4wOGMxNS43OSwwLDI4LjcyLDEyLjkyLDI4LjcyLDI5LjA4YzAsMTUuNzktMTIuOTIsMjguNzItMjguNzIsMjguNzJDMTMxMC4yOCwzNTUuMDIsMTI5Ny4zNiwzNDIuMDksMTI5Ny4zNiwzMjYuM3ogTTEzMDQuOSwzODUuODloNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdDMTI5OS41MSwzODguMDQsMTMwMS42NywzODUuODksMTMwNC45LDM4NS44OXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTU2Ni4yMiwzOTEuMjdWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTM5LjEzYy0zLjIzLDAtNS4wMy0yLjE1LTUuMzgtNS4zOGwtMS4wOC0xMi45MmMtMTIuMjEsMTMuNjQtMjguNzIsMjIuOTctNTAuMjYsMjIuOTdjLTQ4LjgyLDAtODQuNzItNDAuOTItODQuNzItOTIuMjVzMzUuOS05Mi4yNSw4NC43Mi05Mi4yNWMyMC44MiwwLDM3LjY5LDkuNjksNTAuMjYsMjQuMDVsMS4wOC0xNC43MmMwLjM2LTMuMjMsMi4xNS01LjM4LDUuMzgtNS4zOGgzOS4xM0MxNTY0LjA3LDM4NS44OSwxNTY2LjIyLDM4OC4wNCwxNTY2LjIyLDM5MS4yN3ogTTE1MTEuMyw0NzMuODRjMC0yMy4zNC0xNi44Ny00My4wOC0zOS40OS00My4wOGMtMjIuOTcsMC0zOS44NCwxOC42Ny0zOS44NCw0My4wOGMwLDI0Ljc3LDE2Ljg3LDQzLjQzLDM5Ljg0LDQzLjQzQzE0OTQuNDMsNTE3LjI3LDE1MTEuMyw0OTcuMTcsMTUxMS4zLDQ3My44NHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTYwMy4xOSwyOTkuNzNoNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzMDUuMTJDMTU5Ny44MSwzMDEuODksMTU5OS45NiwyOTkuNzMsMTYwMy4xOSwyOTkuNzN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTExNjMuMzQsNzQ3LjM0YzIuNzktMi43OSw1LjIzLTIuNDQsNy42OCwwbDUuNTgsNC44OWMyLjA5LDIuMDksMi40NCw0Ljg4LDAuMzUsNy4zM2MtMTYuMDYsMTguNS0zOC4zOSwzMC4zNy02Ni4zMiwzMC4zN2MtNDkuMjEsMC04NS41Mi0zOS40NC04NS41Mi04OS43czM2LjMtODkuNyw4NS41Mi04OS43YzI3LjIzLDAsNDkuMjIsMTEuODcsNjUuMjcsMzAuMzdjMi4wOSwyLjQ0LDEuNzQsNS4yNC0wLjM1LDcuMzNsLTUuNTgsNC41NGMtMi40NCwyLjQ1LTQuODksMi43OS03LjY4LDAuMzVjLTEwLjEyLTkuNDItMjEuOTktMjMuNzQtNTEuNjYtMjMuNzRjLTM4LjM5LDAtNjUuMjcsMzAuMzctNjUuMjcsNzAuODZjMCw0MC40OSwyNi44OCw3MC44Niw2NS4yNyw3MC44NkMxMTQxLDc3MS4wNywxMTUzLjU3LDc1Ny40NiwxMTYzLjM0LDc0Ny4zNHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTM2NC43NCw2MTkuNTh2MTYwLjU2YzAsMy4xNC0yLjA5LDUuMjQtNS4yNCw1LjI0aC05LjQyYy0zLjE0LDAtNC44OS0yLjA5LTUuMjMtNS4yNGwtMS43NS0yMi42OWMtMTMuMjYsMTkuNTUtMzQuOSwzMi4xMS02Mi40OCwzMi4xMWMtNDkuMjIsMC04NC4xMi0zOS40NC04NC4xMi04OS4zNnMzNC45LTg5LjM2LDg0LjEyLTg5LjM2YzI3LjkyLDAsNDkuNTYsMTIuNTcsNjIuODMsMzIuNDZsMS40LTIzLjczYzAuMzUtMy4xNCwyLjA5LTUuMjQsNS4yMy01LjI0aDkuNDJDMTM2Mi42NCw2MTQuMzUsMTM2NC43NCw2MTYuNDQsMTM2NC43NCw2MTkuNTh6IE0xMzQ1LjE5LDcxNC44OGwwLjctMTQuNjZsLTAuNy0xNS4wMWMtNS45My0zMS40Mi0zMC43Mi01NS41LTYzLjE4LTU1LjVjLTM3LjcsMC02NS4yNywzMC4wMi02NS4yNyw3MC4xNmMwLDQwLjQ5LDI3LjU3LDcwLjUxLDY1LjI3LDcwLjUxQzEzMTQuNDcsNzcwLjM3LDEzMzkuMjYsNzQ2LjI5LDEzNDUuMTksNzE0Ljg4eiIvPgogIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDg0LjExLDYyMC42M2wtNC4xOSw4LjczYy0xLjQsMi40NS0zLjE0LDIuNzktNS45MywyLjA5Yy0zLjE0LTAuNy02LjI4LTEuNzQtMTMuNjEtMS43NGMtMjAuOTQsMC0zOC43NCwxNi4wNi0zOC43NCwzOC4zOXYxMTIuMDRjMCwzLjE0LTIuMDksNS4yNC01LjI0LDUuMjRoLTEwLjQ3Yy0zLjE0LDAtNS4yNC0yLjA5LTUuMjQtNS4yNFY2MTkuNThjMC0zLjE0LDIuMDktNS4yNCw1LjI0LTUuMjRoOC43M2MzLjE0LDAsNC44OSwyLjA5LDUuMjQsNS4yNGwxLjQsMTQuMzFjOS43Ny0xMy45NywyMy43NC0yMy4zOSw0MS44OS0yMy4zOWM4LjAzLDAsMTUuMzYsMS43NCwyMC4yNCw0Ljg4QzE0ODUuMTUsNjE2LjQ0LDE0ODUuNSw2MTcuODQsMTQ4NC4xMSw2MjAuNjN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE2NTEuNjUsNjkyLjg4YzAsMTEuMTctMS40LDE2LjQtOS43NywxNi40aC0xMzIuOTljMy44NCwzNC41NiwyOC45Nyw2MS43OCw2Ny43Miw2MS43OGMyMy4wNCwwLDM4LjM5LTguNzMsNDkuMjEtMTguNWMyLjQ0LTIuMDksNC41NC0zLjQ5LDcuMzMtMS4wNWw0LjU0LDQuMTljMi43OSwyLjc5LDMuMTQsNS4yNCwwLjM1LDguMDNjLTE2LjA2LDE2Ljc1LTM4LjM5LDI2LjE4LTYzLjg4LDI2LjE4Yy01MC4yNiwwLTg1Ljg2LTM5LjQ0LTg1Ljg2LTg5LjdzMzQuMjEtODkuNyw4My40Mi04OS43QzE2MjAuNTksNjEwLjUxLDE2NTEuNjUsNjQ5Ljk1LDE2NTEuNjUsNjkyLjg4eiBNMTUwOC44OSw2OTEuODRoMTI0LjI2Yy0wLjctMzMuODYtMjUuODMtNjIuNDgtNjEuNzgtNjIuNDhDMTUzNi4xMiw2MjkuMzYsMTUxMi4wMyw2NTYuNTgsMTUwOC44OSw2OTEuODR6Ii8+Cjwvc3ZnPg==" alt="Genial Care" style="height:40px;width:auto;display:block;" />
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI3NyAyOTAgMTQyMCA1MzAiPgogIDxzdHlsZT4uc3Qwe2ZpbGw6IzZFNjlBRDt9LnN0MntmaWxsOiNCMEUwRTQ7fTwvc3R5bGU+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTU0Ny4yLDM1MC4wNmMtMzAuNTYsMC01OC4yNywxMi4yMS03OC41MywzMi4wMWw0MC4wNiw0MC4wNmMxMC4wOS05LjM3LDIzLjYxLTE1LjEsMzguNDYtMTUuMWMzMS4yNCwwLDU2LjU3LDI1LjMzLDU2LjU3LDU2LjU3cy0yNS4zMyw1Ni41Ny01Ni41Nyw1Ni41N2MtMTQuOTIsMC0yOC40OS01Ljc5LTM4LjYtMTUuMjNsLTAuMDEsMC4wMWwtMC4yMS0wLjIxYy0wLjE2LTAuMTUtMC4zMS0wLjMxLTAuNDYtMC40NmMtMC41My0wLjUxLTEuMDUtMS4wMy0xLjU2LTEuNTZjLTAuNTItMC41NC0xLjA0LTEuMDktMS41NC0xLjY2bC03Ny4wNi03OS41bDAsMGMtMTAuMDQtOS4wOC0yMy4zNy0xNC41OS0zOC4wMy0xNC41NGMtMzEuMjQsMC4xMS01Ni41NywyNS4zMy01Ni41Nyw1Ni41N2MwLDMxLjI0LDI1LjMzLDU2LjU3LDU2LjU3LDU2LjU3YzE1LjY0LDAsMjkuNzctNi4zNCwzOS45OS0xNi42bDMzLjU4LDMzLjU4YzIwLjU4LDIzLjA4LDUwLjUzLDM3LjYyLDgzLjg5LDM3LjYyYzYyLjA1LDAsMTEyLjM2LTUwLjMsMTEyLjM2LTExMi4zNlM2MDkuMjUsMzUwLjA2LDU0Ny4yLDM1MC4wNnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTQ3LjIsNDA3LjAzYy0xNC44NiwwLTI4LjM3LDUuNzMtMzguNDYsMTUuMWwtMzguMDItMzguMDJjLTIwLjQ2LTIxLjQ3LTQ5LjM0LTM0Ljg2LTgxLjM1LTM0Ljg2Yy02Mi4wNSwwLTExMi4zNiw1MC4zLTExMi4zNiwxMTIuMzZzNTAuMywxMTIuMzYsMTEyLjM2LDExMi4zNmMzMC42MiwwLDU4LjM3LTEyLjI1LDc4LjY0LTMyLjEybC0zOC4yOC0zOC4yOGMtMTAuMjMsMTAuMjUtMjQuMzYsMTYuNi0zOS45OSwxNi42Yy0zMS4yNCwwLTU2LjU3LTI1LjMzLTU2LjU3LTU2LjU3YzAtMzEuMjQsMjUuMzMtNTYuNDYsNTYuNTctNTYuNTdjMTQuNjUtMC4wNSwyNy45OSw1LjQ2LDM4LjAzLDE0LjU0bDAsMGw3Ny4wNiw3OS41YzEuMTMsMS4yOCwyLjMyLDIuNSwzLjU2LDMuNjdsMC4yMSwwLjIxbDAuMDEtMC4wMWMxMC4xMSw5LjQ0LDIzLjY3LDE1LjIzLDM4LjYsMTUuMjNjMzEuMjQsMCw1Ni41Ny0yNS4zMyw1Ni41Ny01Ni41N1M1NzguNDQsNDA3LjAzLDU0Ny4yLDQwNy4wM3oiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNODk0LjE4LDQ3Mi4yNWMwLTQ5LjkyLTQwLjQ3LTkwLjM5LTkwLjM5LTkwLjM5Yy00OS44OCwwLTkwLjM5LDQwLjUxLTkwLjM5LDkwLjM5YzAsNDkuOTIsNDAuNDcsOTAuMzksOTAuMzksOTAuMzljMTQuOTcsMCwyOS4wOS0zLjY0LDQxLjUzLTEwLjA5bDAsMGMtOC43NCwzMy42OS01MS42MywzMC41NC02NC4wNywyOC44OGMtMS44LTAuMjQtMy4zOSwxLjE2LTMuMzksMi45N3YzOS45M2MwLDEuNjcsMS4zNiwzLjAyLDMuMDMsM2wzMS4xLTAuMzZjODAuNTktMTEuOTMsODIuMTgtODMuNDUsODIuMTgtODMuNDV2LTY2LjgxbC0wLjEyLDAuMThDODk0LjE0LDQ3NS4zNyw4OTQuMTgsNDczLjgxLDg5NC4xOCw0NzIuMjV6IE04MDQuMTcsNTE3LjI1Yy0yNC44OSwwLTQ1LjA3LTIwLjE4LTQ1LjA3LTQ1LjA3YzAtMjQuODksMjAuMTgtNDUuMDcsNDUuMDctNDUuMDdjMjQuODksMCw0NS4wNywyMC4xOCw0NS4wNyw0NS4wN0M4NDkuMjQsNDk3LjA3LDgyOS4wNiw1MTcuMjUsODA0LjE3LDUxNy4yNXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTA2Ni4xNCw0OTMuMjJIOTU5LjUzYzUuMDMsMTkuNzQsMjAuODIsMzAuMTYsNDUuMjMsMzAuMTZjMTEuNDksMCwyMS41NC0yLjUxLDM0LjEtMTAuNDFjMy4yMy0yLjE1LDUuMzgtMS43OSw3LjksMC43MmwxOC42NywxNy45NWMyLjE1LDIuNTIsMi4xNSw1LjAzLTAuNzIsNy45Yy0xNi44NywxNi44Ny0zOS44NSwyNi45Mi02NS4zMywyNi45MmMtNTUuMjgsMC05My4zMy00MC41Ni05My4zMy05Mi4yNXMzOC4wNS05Mi4yNSw4OS4zOC05Mi4yNWM1MC45OCwwLDgzLjY0LDQwLjU2LDgzLjY0LDg5LjAyQzEwNzkuMDYsNDg1LjY4LDEwNzcuMjcsNDkzLjIyLDEwNjYuMTQsNDkzLjIyeiBNOTU4LjgxLDQ1OS4xMmg3Mi41MWMtMy4yMy0yMS41NC0xNy45NS0zMS45NS0zNS41NC0zMS45NUM5NzcuODMsNDI3LjE3LDk2Mi43Niw0MzcuNTgsOTU4LjgxLDQ1OS4xMnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTI2Ny4yMSw0NTcuNjh2OTguNzJjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOHYtODcuOTVjMC0yOC4zNi0xNS43OS0zNi42Mi0zMC4xNS0zNi42MmMtMjQuMDUsMC0zNC4xLDIzLjY5LTM0LjEsMzIuMzF2OTIuMjVjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdjMC0zLjIzLDIuMTUtNS4zOCw1LjM4LTUuMzhoNDEuNjRjMy4yMywwLDUuMDMsMi4xNSw1LjM4LDUuMzhsMS40MywyMi4yNWMxMS4xMy0xOC4zLDI5LjA4LTMxLjU5LDU0LjItMzEuNTlDMTIzOC44NSwzODEuOTQsMTI2Ny4yMSw0MTAuNjYsMTI2Ny4yMSw0NTcuNjh6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyOTcuMzYsMzI2LjNjMC0xNi4xNSwxMi45Mi0yOS4wOCwyOS4wOC0yOS4wOGMxNS43OSwwLDI4LjcyLDEyLjkyLDI4LjcyLDI5LjA4YzAsMTUuNzktMTIuOTIsMjguNzItMjguNzIsMjguNzJDMTMxMC4yOCwzNTUuMDIsMTI5Ny4zNiwzNDIuMDksMTI5Ny4zNiwzMjYuM3ogTTEzMDQuOSwzODUuODloNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdDMTI5OS41MSwzODguMDQsMTMwMS42NywzODUuODksMTMwNC45LDM4NS44OXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTU2Ni4yMiwzOTEuMjdWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTM5LjEzYy0zLjIzLDAtNS4wMy0yLjE1LTUuMzgtNS4zOGwtMS4wOC0xMi45MmMtMTIuMjEsMTMuNjQtMjguNzIsMjIuOTctNTAuMjYsMjIuOTdjLTQ4LjgyLDAtODQuNzItNDAuOTItODQuNzItOTIuMjVzMzUuOS05Mi4yNSw4NC43Mi05Mi4yNWMyMC44MiwwLDM3LjY5LDkuNjksNTAuMjYsMjQuMDVsMS4wOC0xNC43MmMwLjM2LTMuMjMsMi4xNS01LjM4LDUuMzgtNS4zOGgzOS4xM0MxNTY0LjA3LDM4NS44OSwxNTY2LjIyLDM4OC4wNCwxNTY2LjIyLDM5MS4yN3ogTTE1MTEuMyw0NzMuODRjMC0yMy4zNC0xNi44Ny00My4wOC0zOS40OS00My4wOGMtMjIuOTcsMC0zOS44NCwxOC42Ny0zOS44NCw0My4wOGMwLDI0Ljc3LDE2Ljg3LDQzLjQzLDM5Ljg0LDQzLjQzQzE0OTQuNDMsNTE3LjI3LDE1MTEuMyw0OTcuMTcsMTUxMS4zLDQ3My44NHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTYwMy4xOSwyOTkuNzNoNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzMDUuMTJDMTU5Ny44MSwzMDEuODksMTU5OS45NiwyOTkuNzMsMTYwMy4xOSwyOTkuNzN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTExNjMuMzQsNzQ3LjM0YzIuNzktMi43OSw1LjIzLTIuNDQsNy42OCwwbDUuNTgsNC44OWMyLjA5LDIuMDksMi40NCw0Ljg4LDAuMzUsNy4zM2MtMTYuMDYsMTguNS0zOC4zOSwzMC4zNy02Ni4zMiwzMC4zN2MtNDkuMjEsMC04NS41Mi0zOS40NC04NS41Mi04OS43czM2LjMtODkuNyw4NS41Mi04OS43YzI3LjIzLDAsNDkuMjIsMTEuODcsNjUuMjcsMzAuMzdjMi4wOSwyLjQ0LDEuNzQsNS4yNC0wLjM1LDcuMzNsLTUuNTgsNC41NGMtMi40NCwyLjQ1LTQuODksMi43OS03LjY4LDAuMzVjLTEwLjEyLTkuNDItMjEuOTktMjMuNzQtNTEuNjYtMjMuNzRjLTM4LjM5LDAtNjUuMjcsMzAuMzctNjUuMjcsNzAuODZjMCw0MC40OSwyNi44OCw3MC44Niw2NS4yNyw3MC44NkMxMTQxLDc3MS4wNywxMTUzLjU3LDc1Ny40NiwxMTYzLjM0LDc0Ny4zNHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTM2NC43NCw2MTkuNTh2MTYwLjU2YzAsMy4xNC0yLjA5LDUuMjQtNS4yNCw1LjI0aC05LjQyYy0zLjE0LDAtNC44OS0yLjA5LTUuMjMtNS4yNGwtMS43NS0yMi42OWMtMTMuMjYsMTkuNTUtMzQuOSwzMi4xMS02Mi40OCwzMi4xMWMtNDkuMjIsMC04NC4xMi0zOS40NC04NC4xMi04OS4zNnMzNC45LTg5LjM2LDg0LjEyLTg5LjM2YzI3LjkyLDAsNDkuNTYsMTIuNTcsNjIuODMsMzIuNDZsMS40LTIzLjczYzAuMzUtMy4xNCwyLjA5LTUuMjQsNS4yMy01LjI0aDkuNDJDMTM2Mi42NCw2MTQuMzUsMTM2NC43NCw2MTYuNDQsMTM2NC43NCw2MTkuNTh6IE0xMzQ1LjE5LDcxNC44OGwwLjctMTQuNjZsLTAuNy0xNS4wMWMtNS45My0zMS40Mi0zMC43Mi01NS41LTYzLjE4LTU1LjVjLTM3LjcsMC02NS4yNywzMC4wMi02NS4yNyw3MC4xNmMwLDQwLjQ5LDI3LjU3LDcwLjUxLDY1LjI3LDcwLjUxQzEzMTQuNDcsNzcwLjM3LDEzMzkuMjYsNzQ2LjI5LDEzNDUuMTksNzE0Ljg4eiIvPgogIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDg0LjExLDYyMC42M2wtNC4xOSw4LjczYy0xLjQsMi40NS0zLjE0LDIuNzktNS45MywyLjA5Yy0zLjE0LTAuNy02LjI4LTEuNzQtMTMuNjEtMS43NGMtMjAuOTQsMC0zOC43NCwxNi4wNi0zOC43NCwzOC4zOXYxMTIuMDRjMCwzLjE0LTIuMDksNS4yNC01LjI0LDUuMjRoLTEwLjQ3Yy0zLjE0LDAtNS4yNC0yLjA5LTUuMjQtNS4yNFY2MTkuNThjMC0zLjE0LDIuMDktNS4yNCw1LjI0LTUuMjRoOC43M2MzLjE0LDAsNC44OSwyLjA5LDUuMjQsNS4yNGwxLjQsMTQuMzFjOS43Ny0xMy45NywyMy43NC0yMy4zOSw0MS44OS0yMy4zOWM4LjAzLDAsMTUuMzYsMS43NCwyMC4yNCw0Ljg4QzE0ODUuMTUsNjE2LjQ0LDE0ODUuNSw2MTcuODQsMTQ4NC4xMSw2MjAuNjN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE2NTEuNjUsNjkyLjg4YzAsMTEuMTctMS40LDE2LjQtOS43NywxNi40aC0xMzIuOTljMy44NCwzNC41NiwyOC45Nyw2MS43OCw2Ny43Miw2MS43OGMyMy4wNCwwLDM4LjM5LTguNzMsNDkuMjEtMTguNWMyLjQ0LTIuMDksNC41NC0zLjQ5LDcuMzMtMS4wNWw0LjU0LDQuMTljMi43OSwyLjc5LDMuMTQsNS4yNCwwLjM1LDguMDNjLTE2LjA2LDE2Ljc1LTM4LjM5LDI2LjE4LTYzLjg4LDI2LjE4Yy01MC4yNiwwLTg1Ljg2LTM5LjQ0LTg1Ljg2LTg5LjdzMzQuMjEtODkuNyw4My40Mi04OS43QzE2MjAuNTksNjEwLjUxLDE2NTEuNjUsNjQ5Ljk1LDE2NTEuNjUsNjkyLjg4eiBNMTUwOC44OSw2OTEuODRoMTI0LjI2Yy0wLjctMzMuODYtMjUuODMtNjIuNDgtNjEuNzgtNjIuNDhDMTUzNi4xMiw2MjkuMzYsMTUxMi4wMyw2NTYuNTgsMTUwOC44OSw2OTEuODR6Ii8+Cjwvc3ZnPg==" alt="Genial Care" style="height:38px;width:auto;display:block;" />
       <div class="brand-sub">Facilities &nbsp;·&nbsp; Hub de ferramentas</div>
     </div>
     <div class="header-right">
-      <div class="header-badge">
-        <div class="status-dot"></div>
-        Todos os sistemas ativos
-      </div>
+      <div class="live-badge"><div class="dot"></div>Sistemas ativos</div>
       <div class="header-time" id="clock">--:--</div>
     </div>
   </header>
 
-  <div class="page-title">
-    <div class="page-eyebrow">Genial Care Facilities</div>
-    <h1 class="page-heading">Suas ferramentas,<br><span>num só lugar.</span></h1>
+  <!-- ── HERO ROW ── -->
+  <div class="hero-row">
+    <div class="hero-left">
+      <div class="eyebrow">Genial Care Facilities</div>
+      <h1 class="hero-title">Suas ferramentas,<br><span>num só lugar.</span></h1>
+      <p class="hero-sub">Acesse rapidamente todas as aplicações do time de Facilities da Genial Care.</p>
+    </div>
+
+    <!-- Casas Geniais — widget compacto à direita -->
+    <div class="cg-widget" id="cgInfoCard">
+      <div class="cg-widget-header">
+        <div class="cg-widget-title">🏢 Casas Geniais</div>
+        <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" class="cg-widget-link">Ver planilha →</a>
+      </div>
+      <div id="cgList" style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
+        <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div>
+      </div>
+    </div>
   </div>
 
-  <!-- ── SEÇÃO: FERRAMENTAS ── -->
+  <!-- ── FERRAMENTAS ── -->
   <div class="section">
-    <div class="section-header">
-      <span class="section-label">Ferramentas</span>
+    <div class="section-hdr">
+      <span class="section-lbl">Ferramentas</span>
       <div class="section-line"></div>
     </div>
     <div class="tool-grid">
 
-      <!-- Checklist -->
       <a href="https://checklist-genial.vercel.app/" target="_blank" class="card card-tool glow-teal">
         <div class="tool-top">
           <div class="tool-icon icon-teal">✅</div>
-          <div class="tool-arrow">
-            <svg class="tool-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         </div>
-        <div class="tool-tag tag-teal">Inspeção</div>
+        <div><div class="tool-tag tag-teal">Inspeção</div></div>
         <div class="tool-name">Checklist de Unidades</div>
-        <div class="tool-desc">Realize inspeções nas Casas Geniais com registro de fotos e acompanhamento por unidade.</div>
-        <div class="tool-footer">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="tool-desc">Inspeções nas Casas Geniais com fotos e acompanhamento por unidade.</div>
+        <div class="tool-foot">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           Matheus + Técnicos
         </div>
       </a>
 
-      <!-- Estoque -->
       <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card card-tool glow-green">
         <div class="tool-top">
           <div class="tool-icon icon-green">📦</div>
-          <div class="tool-arrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         </div>
-        <div class="tool-tag tag-green">Almoxarifado</div>
+        <div><div class="tool-tag tag-green">Almoxarifado</div></div>
         <div class="tool-name">Controle de Estoque</div>
-        <div class="tool-desc">Gerencie materiais de manutenção, solicitações de compra e movimentações por unidade.</div>
-        <div class="tool-footer">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div class="tool-desc">Materiais de manutenção, solicitações de compra e movimentações por unidade.</div>
+        <div class="tool-foot">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
           Matheus + Técnicos
         </div>
       </a>
 
-      <!-- NF Cartão -->
       <a href="https://nf-cartao-corporativo.vercel.app/" target="_blank" class="card card-tool glow-purple">
         <div class="tool-top">
           <div class="tool-icon icon-purple">🧾</div>
-          <div class="tool-arrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         </div>
-        <div class="tool-tag tag-purple">Financeiro</div>
+        <div><div class="tool-tag tag-purple">Financeiro</div></div>
         <div class="tool-name">NF Cartão Corporativo</div>
-        <div class="tool-desc">Registre notas fiscais do Cartão Corporativo Facilities (0852) com extração automática via IA.</div>
-        <div class="tool-footer">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="tool-desc">Notas fiscais do Cartão Facilities (0852) com extração automática via IA.</div>
+        <div class="tool-foot">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Somente Matheus
         </div>
       </a>
 
-      <!-- Portal NFs (em breve) -->
       <div class="card card-tool glow-orange card-disabled">
         <div class="tool-top">
           <div class="tool-icon icon-orange">📄</div>
-          <div class="tool-arrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         </div>
-        <div class="tool-tag tag-orange">Em breve</div>
+        <div><div class="tool-tag tag-orange">Em breve</div></div>
         <div class="tool-name">Portal de NFs</div>
-        <div class="tool-desc">Upload em lote de notas fiscais de fornecedores com organização automática no Drive via IA.</div>
-        <div class="tool-footer">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <div class="tool-desc">Upload em lote de NFs de fornecedores com organização automática no Drive via IA.</div>
+        <div class="tool-foot">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           Somente Matheus
         </div>
       </div>
@@ -543,73 +365,71 @@ footer {
     </div>
   </div>
 
-  <!-- ── SEÇÃO: GESTÃO ── -->
+  <!-- ── GESTÃO ── -->
   <div class="section">
-    <div class="section-header">
-      <span class="section-label">Gestão</span>
+    <div class="section-hdr">
+      <span class="section-lbl">Gestão</span>
       <div class="section-line"></div>
     </div>
     <div class="widget-grid">
 
-      <!-- Escala Técnicos -->
+      <!-- Escala -->
       <div class="card card-widget glow-purple" id="escalaCard">
-        <div class="widget-header">
-          <div class="widget-icon icon-purple">📅</div>
+        <div class="w-hdr">
+          <div class="w-icon icon-purple">📅</div>
           <div>
-            <div class="widget-title">Escala de Técnicos</div>
-            <div class="widget-sub" id="weekBadge"></div>
+            <div class="w-title">Escala de Técnicos</div>
+            <div class="w-sub" id="weekBadge"></div>
           </div>
         </div>
-        <div class="widget-body">
-          <div style="background:rgba(110,105,173,0.08);border:1px solid rgba(110,105,173,0.18);border-radius:10px;padding:14px;margin-bottom:12px;">
-            <div style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#9B97D4;margin-bottom:10px;">Esta semana</div>
+        <div class="w-body">
+          <div style="background:rgba(110,105,173,0.08);border:1px solid rgba(110,105,173,0.16);border-radius:10px;padding:12px;margin-bottom:10px;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9B97D4;margin-bottom:8px;">Esta semana</div>
             <div id="currentWeekSchedule"></div>
           </div>
-          <div>
-            <div style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">Calendário</div>
-            <div id="quarterCalendar" style="display:flex;flex-direction:column;gap:2px;"></div>
-          </div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Calendário</div>
+          <div id="quarterCalendar" style="display:flex;flex-direction:column;gap:2px;"></div>
         </div>
-        <div class="widget-footer">
+        <div class="w-foot">
           <div style="display:flex;align-items:center;gap:5px;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             Romário · Roger
           </div>
         </div>
       </div>
 
-      <!-- Manutenções Preventivas -->
+      <!-- Preventivas -->
       <div class="card card-widget glow-orange" id="prevCard">
-        <div class="widget-header">
-          <div class="widget-icon icon-orange">🔧</div>
+        <div class="w-hdr">
+          <div class="w-icon icon-orange">🔧</div>
           <div>
-            <div class="widget-title">Manutenções Preventivas</div>
-            <div class="widget-sub">Status dos serviços recorrentes por unidade</div>
+            <div class="w-title">Manutenções Preventivas</div>
+            <div class="w-sub">Status dos serviços recorrentes por unidade</div>
           </div>
         </div>
-        <div class="widget-body">
-          <div id="prevCounters" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px;">
-            <div style="text-align:center;padding:14px 8px;background:rgba(217,79,79,0.08);border:1px solid rgba(217,79,79,0.18);border-radius:10px;">
-              <div id="cntVencido" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#D94F4F;">–</div>
-              <div style="font-size:10px;color:#D94F4F;font-weight:700;margin-top:3px;letter-spacing:0.05em;text-transform:uppercase;">Vencido</div>
+        <div class="w-body">
+          <div id="prevCounters" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
+            <div style="text-align:center;padding:12px 6px;background:rgba(217,79,79,0.08);border:1px solid rgba(217,79,79,0.16);border-radius:9px;">
+              <div id="cntVencido" style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#D94F4F;">–</div>
+              <div style="font-size:9px;color:#D94F4F;font-weight:700;margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;">Vencido</div>
             </div>
-            <div style="text-align:center;padding:14px 8px;background:rgba(232,168,74,0.08);border:1px solid rgba(232,168,74,0.18);border-radius:10px;">
-              <div id="cntAvencer" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#E8A84A;">–</div>
-              <div style="font-size:10px;color:#E8A84A;font-weight:700;margin-top:3px;letter-spacing:0.05em;text-transform:uppercase;">A vencer</div>
+            <div style="text-align:center;padding:12px 6px;background:rgba(232,168,74,0.08);border:1px solid rgba(232,168,74,0.16);border-radius:9px;">
+              <div id="cntAvencer" style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#E8A84A;">–</div>
+              <div style="font-size:9px;color:#E8A84A;font-weight:700;margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;">A vencer</div>
             </div>
-            <div style="text-align:center;padding:14px 8px;background:rgba(61,171,114,0.08);border:1px solid rgba(61,171,114,0.18);border-radius:10px;">
-              <div id="cntEmdia" style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:#3DAB72;">–</div>
-              <div style="font-size:10px;color:#3DAB72;font-weight:700;margin-top:3px;letter-spacing:0.05em;text-transform:uppercase;">Em dia</div>
+            <div style="text-align:center;padding:12px 6px;background:rgba(61,171,114,0.08);border:1px solid rgba(61,171,114,0.16);border-radius:9px;">
+              <div id="cntEmdia" style="font-family:'Syne',sans-serif;font-size:26px;font-weight:800;color:#3DAB72;">–</div>
+              <div style="font-size:9px;color:#3DAB72;font-weight:700;margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;">Em dia</div>
             </div>
           </div>
-          <div style="font-size:10px;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">Requer atenção</div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Requer atenção</div>
           <div id="prevList" style="display:flex;flex-direction:column;gap:4px;">
-            <div style="font-size:12px;color:var(--text-muted);text-align:center;padding:8px;">Carregando...</div>
+            <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Carregando...</div>
           </div>
         </div>
-        <div class="widget-footer">
+        <div class="w-foot">
           <div style="display:flex;align-items:center;gap:5px;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             Somente Matheus
           </div>
           <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" style="font-size:11px;color:var(--purple);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
@@ -619,57 +439,23 @@ footer {
     </div>
   </div>
 
-  <!-- ── SEÇÃO: INFORMAÇÕES ── -->
-  <div class="section">
-    <div class="section-header">
-      <span class="section-label">Informações</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="info-grid">
-
-      <!-- Casas Geniais -->
-      <div class="card card-widget glow-teal" id="cgInfoCard" style="grid-column: 1 / -1;">
-        <div class="widget-header">
-          <div class="widget-icon icon-teal">🏢</div>
-          <div>
-            <div class="widget-title">Casas Geniais</div>
-            <div class="widget-sub">Clique em uma unidade para ver endereço, contatos e infraestrutura</div>
-          </div>
-        </div>
-        <div class="widget-body">
-          <div id="cgList" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
-            <div style="font-size:12px;color:var(--text-muted);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div>
-          </div>
-        </div>
-        <div class="widget-footer">
-          <div style="display:flex;align-items:center;gap:5px;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Matheus + Técnicos
-          </div>
-          <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
   <footer>
     <div class="footer-text">Genial Care Facilities © 2026 — Hub interno</div>
-    <div class="status-dot"></div>
+    <div class="dot"></div>
   </footer>
 
-  <!-- Modal Casas Geniais -->
+  <!-- Modal CG -->
   <div id="cgModal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;">
-    <div onclick="fecharCGModal()" style="position:absolute;inset:0;background:rgba(0,0,0,0.70);backdrop-filter:blur(4px);"></div>
-    <div style="position:relative;z-index:1;background:#16152A;border:1px solid rgba(123,191,196,0.25);border-radius:20px;width:90%;max-width:520px;max-height:84vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,0.60);animation:modalIn .22s cubic-bezier(.4,0,.2,1);">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:24px 28px 18px;border-bottom:1px solid rgba(123,191,196,0.15);flex-shrink:0;">
+    <div onclick="fecharCGModal()" style="position:absolute;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);"></div>
+    <div style="position:relative;z-index:1;background:#13122A;border:1px solid rgba(123,191,196,0.22);border-radius:18px;width:90%;max-width:500px;max-height:84vh;display:flex;flex-direction:column;box-shadow:0 20px 70px rgba(0,0,0,0.55);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 26px 16px;border-bottom:1px solid rgba(123,191,196,0.12);flex-shrink:0;">
         <div>
-          <div id="cgModalNome" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#F0EFF8;"></div>
-          <div id="cgModalSub" style="font-size:12px;color:#7874A0;margin-top:3px;"></div>
+          <div id="cgModalNome" style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#ECEAF6;"></div>
+          <div id="cgModalSub" style="font-size:11px;color:#6B678F;margin-top:2px;"></div>
         </div>
-        <button onclick="fecharCGModal()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.10);border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#F0EFF8;font-size:16px;transition:all .15s;flex-shrink:0;">✕</button>
+        <button onclick="fecharCGModal()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#ECEAF6;font-size:14px;flex-shrink:0;">✕</button>
       </div>
-      <div id="cgModalBody" style="overflow-y:auto;padding:24px 28px 28px;flex:1;"></div>
+      <div id="cgModalBody" style="overflow-y:auto;padding:20px 26px 26px;flex:1;"></div>
     </div>
   </div>
 
@@ -1021,6 +807,9 @@ function renderCGList() {
   list.style.display = 'grid';
   list.style.gridTemplateColumns = 'repeat(4,1fr)';
   list.style.gap = '8px';
+  list.style.display = 'grid';
+  list.style.gridTemplateColumns = 'repeat(2,1fr)';
+  list.style.gap = '6px';
   list.innerHTML = '';
   cgInfoData.forEach((cg, idx) => {
     const nome = cg.cg.replace('NOVA-CG-', 'CG ').replace('CG-', 'CG ').replace('WL- ', '');
@@ -1028,7 +817,7 @@ function renderCGList() {
     const zona  = cg.zona || '';
 
     const el = document.createElement('div');
-    el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:8px;cursor:pointer;transition:background 0.15s;background:rgba(255,255,255,0.03);border:1px solid rgba(123,191,196,0.08);';
+    el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:8px;cursor:pointer;transition:background 0.15s;background:rgba(255,255,255,0.03);border:1px solid rgba(110,105,173,0.10);';
     el.innerHTML =
       '<div style="flex:1;min-width:0;">' +
         '<div style="font-size:12px;font-weight:600;color:var(--text);">' + nome + '</div>' +
