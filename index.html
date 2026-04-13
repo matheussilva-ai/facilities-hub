@@ -97,14 +97,6 @@ header {
 .dot { width: 6px; height: 6px; background: #3DAB72; border-radius: 50%; box-shadow: 0 0 6px #3DAB72; animation: pulse 2s ease-in-out infinite; }
 
 /* ── HERO ROW ── */
-.hero-row {
-  display: grid;
-  grid-template-columns: 1fr 420px;
-  gap: 32px;
-  align-items: start;
-  margin-bottom: 48px;
-}
-
 .hero-left {}
 .eyebrow {
   font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
@@ -124,28 +116,7 @@ header {
 }
 .hero-sub { font-size: 13px; color: var(--text-muted); line-height: 1.6; max-width: 420px; }
 
-/* CG Widget on right */
-.cg-widget {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 20px 22px;
-  animation: fadeUp 0.4s cubic-bezier(.4,0,.2,1) both;
-}
-.cg-widget-header {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-bottom: 14px;
-}
-.cg-widget-title {
-  font-size: 12px; font-weight: 700;
-  letter-spacing: 0.06em; text-transform: uppercase; color: var(--teal);
-  display: flex; align-items: center; gap: 6px;
-}
-.cg-widget-link {
-  font-size: 11px; color: var(--text-muted); text-decoration: none;
-  font-weight: 600; opacity: 0.7; transition: opacity .15s;
-}
-.cg-widget-link:hover { opacity: 1; color: var(--teal); }
+
 
 /* ── SECTION ── */
 .section { margin-bottom: 44px; }
@@ -159,8 +130,8 @@ header {
 .section-line { flex: 1; height: 1px; background: var(--border); }
 
 /* ── GRIDS ── */
-.tool-grid    { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-.widget-grid  { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.tool-grid    { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.widget-grid  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 
 /* ── CARD BASE ── */
 .card {
@@ -291,8 +262,8 @@ footer {
 .shortcut-link span:first-child { font-size: 14px; flex-shrink:0; }
 
 @media (max-width: 1100px) {
-  .hero-row   { grid-template-columns: 1fr; }
-  .tool-grid  { grid-template-columns: repeat(2, 1fr); }
+  .tool-grid   { grid-template-columns: repeat(2, 1fr); }
+  .widget-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 680px) {
   .app { padding: 0 20px 48px; }
@@ -318,22 +289,38 @@ footer {
     </div>
   </header>
 
-  <!-- ── HERO ROW ── -->
-  <div class="hero-row">
-    <div class="hero-left">
-      <div class="eyebrow">Genial Care Facilities</div>
-      <h1 class="hero-title">Suas ferramentas,<br><span>num só lugar.</span></h1>
-      <p class="hero-sub">Acesse rapidamente todas as aplicações do time de Facilities da Genial Care.</p>
-    </div>
+  <!-- ── HERO ── -->
+  <div style="margin-bottom:48px;">
+    <div class="eyebrow">Genial Care Facilities</div>
+    <h1 class="hero-title">Suas ferramentas,<br><span>num só lugar.</span></h1>
+    <p class="hero-sub">Acesse rapidamente todas as aplicações do time de Facilities da Genial Care.</p>
+  </div>
 
-    <!-- Casas Geniais — widget compacto à direita -->
-    <div class="cg-widget" id="cgInfoCard">
-      <div class="cg-widget-header">
-        <div class="cg-widget-title">🏢 Casas Geniais</div>
-        <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" class="cg-widget-link">Ver planilha →</a>
+  <!-- ── UNIDADES ── -->
+  <div class="section">
+    <div class="section-hdr">
+      <span class="section-lbl">Unidades</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="card card-widget glow-teal" id="cgInfoCard" style="cursor:default;">
+      <div class="w-hdr">
+        <div class="w-icon icon-teal">🏢</div>
+        <div>
+          <div class="w-title">Casas Geniais</div>
+          <div class="w-sub">Clique em uma unidade para ver endereço, contatos e infraestrutura</div>
+        </div>
       </div>
-      <div id="cgList" style="display:grid;grid-template-columns:repeat(2,1fr);gap:6px;">
-        <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div>
+      <div class="w-body">
+        <div id="cgList" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;">
+          <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div>
+        </div>
+      </div>
+      <div class="w-foot">
+        <div style="display:flex;align-items:center;gap:5px;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Matheus + Técnicos
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
       </div>
     </div>
   </div>
@@ -896,8 +883,8 @@ function renderCGList() {
   list.style.gridTemplateColumns = 'repeat(4,1fr)';
   list.style.gap = '8px';
   list.style.display = 'grid';
-  list.style.gridTemplateColumns = 'repeat(2,1fr)';
-  list.style.gap = '6px';
+  list.style.gridTemplateColumns = 'repeat(4,1fr)';
+  list.style.gap = '8px';
   list.innerHTML = '';
   cgInfoData.forEach((cg, idx) => {
     const nome = cg.cg.replace('NOVA-CG-', 'CG ').replace('CG-', 'CG ').replace('WL- ', '');
