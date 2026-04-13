@@ -517,6 +517,32 @@ footer {
       </div>
     </div>
 
+    <!-- Casas Geniais -->
+    <div class="card card-teal" style="cursor:default;" id="cgInfoCard">
+      <div style="position:relative;z-index:1;">
+        <div class="card-icon icon-teal" style="margin-bottom:12px;">🏢</div>
+        <div class="card-tag tag-teal">Unidades</div>
+        <div class="card-title">Casas Geniais</div>
+        <div class="card-desc" style="margin-bottom:14px;">Informações de infraestrutura, contatos e endereços por unidade.</div>
+      </div>
+
+      <!-- Lista de CGs -->
+      <div id="cgList" style="position:relative;z-index:1;display:flex;flex-direction:column;gap:4px;">
+        <div style="font-size:12px;color:var(--text-muted);text-align:center;padding:8px;">Carregando...</div>
+      </div>
+
+      <!-- Painel de detalhes (expandido ao clicar) -->
+      <div id="cgDetail" style="display:none;position:relative;z-index:1;margin-top:8px;background:rgba(123,191,196,0.06);border:1px solid rgba(123,191,196,0.20);border-radius:10px;padding:14px;"></div>
+
+      <div class="card-footer" style="margin-top:12px;">
+        <div class="card-users">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Matheus + Técnicos
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
+      </div>
+    </div>
+
   </div>
 
   <footer>
@@ -842,8 +868,149 @@ function loadPreventivas() {
     });
 }
 
-loadPreventivas();
+// ── CASAS GENIAIS INFO ──────────────────────────────────────
+const CG_INFO_URL = 'https://script.google.com/macros/s/AKfycbyypUjU49FXATep7p3cmJFmZQI2Cgg8M8ioZmk36GCI4sWXq2ZS_o0mt9KCt7J1RbWf/exec';
 
+let cgInfoData = [];
+let cgSelecionada = null;
+
+function loadCGInfo() {
+  if (!CG_INFO_URL) {
+    document.getElementById('cgList').innerHTML =
+      '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Configure a URL do script nas configurações.</div>';
+    return;
+  }
+
+  fetch(CG_INFO_URL)
+    .then(r => r.json())
+    .then(data => {
+      if (!data.ok) throw new Error(data.erro);
+      cgInfoData = data.cgs;
+      renderCGList();
+    })
+    .catch(() => {
+      document.getElementById('cgList').innerHTML =
+        '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
+    });
+}
+
+function renderCGList() {
+  const list = document.getElementById('cgList');
+  list.innerHTML = '';
+  cgInfoData.forEach((cg, idx) => {
+    const nome = cg.cg.replace('CG-', 'CG ');
+    const salas = cg.totalSalas ? cg.totalSalas + ' salas' : '';
+    const zona  = cg.zona || '';
+    const isSelected = cgSelecionada === idx;
+
+    const el = document.createElement('div');
+    el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:8px;cursor:pointer;transition:background 0.15s;' +
+      (isSelected ? 'background:rgba(123,191,196,0.18);border:1px solid rgba(123,191,196,0.35);' : 'background:rgba(255,255,255,0.03);border:1px solid transparent;');
+
+    el.innerHTML =
+      '<div style="flex:1;min-width:0;">' +
+        '<div style="font-size:12px;font-weight:600;color:var(--text);">' + nome + '</div>' +
+        '<div style="font-size:10px;color:var(--text-muted);margin-top:1px;">' + [zona, salas].filter(Boolean).join(' · ') + '</div>' +
+      '</div>' +
+      '<span style="font-size:10px;color:var(--teal);font-weight:700;margin-left:8px;">' + (isSelected ? '▲' : '▼') + '</span>';
+
+    el.addEventListener('mouseenter', () => { if (cgSelecionada !== idx) el.style.background = 'rgba(123,191,196,0.08)'; });
+    el.addEventListener('mouseleave', () => { if (cgSelecionada !== idx) el.style.background = 'rgba(255,255,255,0.03)'; });
+    el.addEventListener('click', () => toggleCGDetail(idx));
+
+    list.appendChild(el);
+  });
+}
+
+function toggleCGDetail(idx) {
+  const detail = document.getElementById('cgDetail');
+  if (cgSelecionada === idx) {
+    cgSelecionada = null;
+    detail.style.display = 'none';
+    renderCGList();
+    return;
+  }
+  cgSelecionada = idx;
+  renderCGList();
+
+  const cg = cgInfoData[idx];
+  let html = '';
+
+  // Endereço
+  if (cg.endereco) {
+    html += secao('📍 Endereço', cg.endereco + (cg.zona ? ' <span style="color:var(--text-muted);">· ' + cg.zona + '</span>' : ''));
+  }
+
+  // Horário
+  if (cg.horario) {
+    html += secao('🕐 Horário', cg.horario);
+  }
+
+  // Total de salas
+  if (cg.totalSalas) {
+    html += secao('🚪 Salas de atendimento', cg.totalSalas + ' salas no total');
+  }
+
+  // Andares
+  if (cg.andares && cg.andares.length > 1) {
+    html += secao('🏗️ Andares', cg.andares.join(', '));
+  }
+
+  // Metragem
+  if (cg.metragem) {
+    html += secao('📐 Metragem', cg.metragem);
+  }
+
+  // Internet
+  if (cg.internetInterna || cg.internetVisitantes) {
+    const inet = [
+      cg.internetInterna   ? '🔒 Interna: ' + cg.internetInterna : '',
+      cg.internetVisitantes ? '📶 Visitantes: ' + cg.internetVisitantes : ''
+    ].filter(Boolean).join('<br>');
+    html += secao('🌐 Internet', inet);
+  }
+
+  // Estacionamento
+  if (cg.estacionamento) {
+    html += secao('🚗 Estacionamento', cg.estacionamento);
+  }
+
+  // Responsável técnico
+  if (cg.responsavelTec) {
+    html += secao('🔧 Responsável Técnico', cg.responsavelTec);
+  }
+
+  // Matheus / Eliza
+  if (cg.contatoMatheus || cg.contatoEliza) {
+    const contatos = [
+      cg.contatoMatheus ? 'Matheus (Manutenção): ' + cg.contatoMatheus : '',
+      cg.contatoEliza   ? 'Eliza (Limpeza): ' + cg.contatoEliza : ''
+    ].filter(Boolean).join('<br>');
+    html += secao('📞 Facilities', contatos);
+  }
+
+  // Gerente predial
+  if (cg.gerentePredial) {
+    html += secao('🏠 Gerente Predial', cg.gerentePredial.replace(/\n/g, '<br>'));
+  }
+
+  // Chaveiro
+  if (cg.chaveiro) {
+    html += secao('🔑 Chaveiro', cg.chaveiro);
+  }
+
+  detail.innerHTML = html || '<div style="font-size:12px;color:var(--text-muted);padding:4px;">Sem detalhes disponíveis.</div>';
+  detail.style.display = 'block';
+}
+
+function secao(label, valor) {
+  return '<div style="margin-bottom:10px;">' +
+    '<div style="font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">' + label + '</div>' +
+    '<div style="font-size:12px;color:var(--text);line-height:1.5;">' + valor + '</div>' +
+    '</div>';
+}
+
+loadCGInfo();
 
 </script>
 </body>
