@@ -254,6 +254,27 @@ footer {
   to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
+.shortcut-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 12px;
+  font-weight: 500;
+  transition: all .18s;
+}
+.shortcut-link:hover {
+  background: rgba(110,105,173,0.12);
+  border-color: rgba(110,105,173,0.28);
+  color: var(--text);
+}
+.shortcut-link span:first-child { font-size: 14px; flex-shrink:0; }
+
 @media (max-width: 1100px) {
   .hero-row   { grid-template-columns: 1fr; }
   .tool-grid  { grid-template-columns: repeat(2, 1fr); }
@@ -404,7 +425,7 @@ footer {
           <div class="w-icon icon-orange">🔧</div>
           <div>
             <div class="w-title">Manutenções Preventivas</div>
-            <div class="w-sub">Status dos serviços recorrentes por unidade</div>
+            <div class="w-sub">Status dos serviços recorrentes por unidade · <span id="prevLastUpdate" style="color:var(--text-muted);"></span></div>
           </div>
         </div>
         <div class="w-body">
@@ -433,6 +454,61 @@ footer {
             Somente Matheus
           </div>
           <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" style="font-size:11px;color:var(--purple);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
+        </div>
+      </div>
+
+      <!-- Clima -->
+      <div class="card card-widget glow-teal" id="climaCard">
+        <div class="w-hdr">
+          <div class="w-icon icon-teal">🌤️</div>
+          <div>
+            <div class="w-title">Clima — São Paulo</div>
+            <div class="w-sub" id="climaSub">Carregando...</div>
+          </div>
+        </div>
+        <div class="w-body" id="climaBody">
+          <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:16px 0;">Buscando dados...</div>
+        </div>
+        <div class="w-foot">
+          <div style="display:flex;align-items:center;gap:5px;">
+            <span style="font-size:10px;color:var(--text-muted);">Open-Meteo · atualizado ao abrir</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Atalhos Rápidos -->
+      <div class="card card-widget glow-purple">
+        <div class="w-hdr">
+          <div class="w-icon icon-purple">⚡</div>
+          <div>
+            <div class="w-title">Atalhos Rápidos</div>
+            <div class="w-sub">Planilhas e portais de acesso frequente</div>
+          </div>
+        </div>
+        <div class="w-body" style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://docs.google.com/spreadsheets/d/1yhuo38_MdshcAO67chkKlWQ2wHnBCLN1acZjQQ5N-Os/edit?gid=1761395806#gid=1761395806" target="_blank" class="shortcut-link">
+            <span>🛒</span><span>Painel de Compras</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" class="shortcut-link">
+            <span>🔧</span><span>Manutenções Preventivas</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" class="shortcut-link">
+            <span>🏢</span><span>Informações das CGs</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://docs.google.com/spreadsheets/d/1Yig1gEKLJ5nP_LuU2ZHCe-wsDEYHsN0N6DCyDN7R1lI" target="_blank" class="shortcut-link">
+            <span>📦</span><span>Planilha de Estoque</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://suporte.genialcare.com.br" target="_blank" class="shortcut-link">
+            <span>🎫</span><span>Zoho Desk</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="w-foot">
+          <span style="font-size:10px;color:var(--text-muted);">Links de acesso direto</span>
         </div>
       </div>
 
@@ -729,6 +805,11 @@ function loadPreventivas() {
       document.getElementById('cntVencido').textContent = vencido;
       document.getElementById('cntAvencer').textContent = avencer;
       document.getElementById('cntEmdia').textContent = emdia;
+      // Última atualização
+      const nowUpd = new Date();
+      const updStr = String(nowUpd.getDate()).padStart(2,'0') + '/' + String(nowUpd.getMonth()+1).padStart(2,'0') + ' ' + String(nowUpd.getHours()).padStart(2,'0') + ':' + String(nowUpd.getMinutes()).padStart(2,'0');
+      const updEl = document.getElementById('prevLastUpdate');
+      if (updEl) updEl.textContent = 'atualizado ' + updStr;
 
       const list = document.getElementById('prevList');
       list.innerHTML = '';
@@ -895,6 +976,79 @@ function secao(label, valor) {
 }
 
 loadCGInfo();
+loadClima();
+
+// ── CLIMA ────────────────────────────────────────────
+function loadClima() {
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=-23.55&longitude=-46.63&current=temperature_2m,apparent_temperature,weather_code,wind_speed_10m,relative_humidity_2m&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&timezone=America%2FSao_Paulo&forecast_days=3';
+  fetch(url)
+    .then(r => r.json())
+    .then(data => {
+      const cur   = data.current;
+      const daily = data.daily;
+      const emoji = climaEmoji(cur.weather_code);
+      const desc  = climaDesc(cur.weather_code);
+
+      const sub = document.getElementById('climaSub');
+      if (sub) sub.textContent = desc + ' · umidade ' + cur.relative_humidity_2m + '%';
+
+      const body = document.getElementById('climaBody');
+      if (!body) return;
+
+      let html = '<div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;">';
+      html += '<div style="font-size:42px;line-height:1;">' + emoji + '</div>';
+      html += '<div>';
+      html += '<div style="font-family:\'Syne\',sans-serif;font-size:30px;font-weight:700;color:var(--text);line-height:1;">' + Math.round(cur.temperature_2m) + '°C</div>';
+      html += '<div style="font-size:11px;color:var(--text-muted);margin-top:3px;">Sensação ' + Math.round(cur.apparent_temperature) + '°C · vento ' + Math.round(cur.wind_speed_10m) + ' km/h</div>';
+      html += '</div></div>';
+
+      const DIAS = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+      html += '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">';
+      for (let i = 0; i < 3; i++) {
+        const d = new Date(daily.time[i] + 'T12:00:00');
+        const lbl = i === 0 ? 'Hoje' : i === 1 ? 'Amanhã' : DIAS[d.getDay()];
+        const precip = daily.precipitation_probability_max[i];
+        html += '<div style="text-align:center;padding:9px 4px;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px;">';
+        html += '<div style="font-size:10px;font-weight:600;color:var(--text-muted);margin-bottom:4px;">' + lbl + '</div>';
+        html += '<div style="font-size:18px;margin-bottom:4px;">' + climaEmoji(daily.weather_code[i]) + '</div>';
+        html += '<div style="font-size:12px;font-weight:600;color:var(--text);">' + Math.round(daily.temperature_2m_max[i]) + '° <span style="color:var(--text-muted);font-weight:400;">' + Math.round(daily.temperature_2m_min[i]) + '°</span></div>';
+        if (precip > 20) html += '<div style="font-size:9px;color:#7BBFC4;margin-top:2px;">💧 ' + precip + '%</div>';
+        html += '</div>';
+      }
+      html += '</div>';
+      body.innerHTML = html;
+    })
+    .catch(() => {
+      const body = document.getElementById('climaBody');
+      if (body) body.innerHTML = '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:16px 0;">Não foi possível carregar o clima.</div>';
+    });
+}
+
+function climaEmoji(code) {
+  if (code === 0) return '☀️';
+  if (code <= 2)  return '⛅';
+  if (code <= 3)  return '☁️';
+  if (code <= 49) return '🌫️';
+  if (code <= 59) return '🌦️';
+  if (code <= 69) return '🌧️';
+  if (code <= 79) return '❄️';
+  if (code <= 84) return '🌦️';
+  if (code <= 99) return '⛈️';
+  return '🌤️';
+}
+
+function climaDesc(code) {
+  if (code === 0) return 'Céu limpo';
+  if (code <= 2)  return 'Parcialmente nublado';
+  if (code <= 3)  return 'Nublado';
+  if (code <= 49) return 'Névoa';
+  if (code <= 59) return 'Garoa';
+  if (code <= 69) return 'Chuva';
+  if (code <= 79) return 'Neve';
+  if (code <= 84) return 'Pancadas de chuva';
+  if (code <= 99) return 'Tempestade';
+  return 'Variável';
+}
 
 </script>
 </body>
