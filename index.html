@@ -984,23 +984,58 @@ loadClima();
 function loadClima() {
   const url = 'https://api.open-meteo.com/v1/forecast' +
     '?latitude=-23.5505&longitude=-46.6333' +
-    '&current=temperature_2m,weather_code,precipitation' +
-    '&daily=precipitation_probability_max' +
+    '&current=temperature_2m,weather_code,apparent_temperature' +
+    '&hourly=precipitation_probability,weather_code' +
+    '&daily=precipitation_probability_max,temperature_2m_max,temperature_2m_min' +
     '&timezone=America%2FSao_Paulo&forecast_days=1';
+
   fetch(url)
     .then(r => r.json())
     .then(data => {
       if (!data || !data.current) throw new Error('sem dados');
-      const temp   = Math.round(data.current.temperature_2m);
-      const code   = data.current.weather_code;
-      const precip = (data.daily && data.daily.precipitation_probability_max)
-        ? data.daily.precipitation_probability_max[0] : 0;
+      const temp    = Math.round(data.current.temperature_2m);
+      const sensac  = Math.round(data.current.apparent_temperature);
+      const code    = data.current.weather_code;
+      const maxTemp = data.daily ? Math.round(data.daily.temperature_2m_max[0]) : null;
+      const minTemp = data.daily ? Math.round(data.daily.temperature_2m_min[0]) : null;
 
-      document.getElementById('climaBadgeIcon').textContent  = climaEmoji(code);
-      document.getElementById('climaBadgeTemp').textContent  = temp + '°C';
-      document.getElementById('climaBadgeExtra').textContent = precip > 20
-        ? '💧 ' + precip + '%'
-        : climaDesc(code);
+      // Próximas 6 horas de chuva
+      const now = new Date();
+      const curHour = now.getHours();
+      let maxPrecipProx = 0;
+      let precipHoras = [];
+      if (data.hourly && data.hourly.time) {
+        data.hourly.time.forEach((t, i) => {
+          const h = new Date(t).getHours();
+          if (h >= curHour && h < curHour + 6) {
+            const p = data.hourly.precipitation_probability[i] || 0;
+            if (p > maxPrecipProx) maxPrecipProx = p;
+            precipHoras.push({ h, p, code: data.hourly.weather_code[i] });
+          }
+        });
+      }
+
+      // Badge compacto no header
+      document.getElementById('climaBadgeIcon').textContent = climaEmoji(code);
+      document.getElementById('climaBadgeTemp').textContent = temp + '°C';
+
+      // Extra: chuva ou descrição
+      let extra = '';
+      if (maxPrecipProx > 20) {
+        extra = '💧 ' + maxPrecipProx + '% próx. 6h';
+      } else {
+        extra = maxTemp !== null ? '↑' + maxTemp + '° ↓' + minTemp + '°' : climaDesc(code);
+      }
+      document.getElementById('climaBadgeExtra').textContent = extra;
+
+      // Tooltip com detalhes ao hover
+      const badge = document.getElementById('climaBadge');
+      if (badge) {
+        let tooltip = climaDesc(code) + ' · Sensação ' + sensac + '°C';
+        if (maxTemp !== null) tooltip += ' · Máx ' + maxTemp + '° Mín ' + minTemp + '°';
+        if (maxPrecipProx > 20) tooltip += ' · ⚠️ Chuva nas próximas horas (' + maxPrecipProx + '%)';
+        badge.title = tooltip;
+      }
     })
     .catch(err => {
       console.warn('Clima:', err);
