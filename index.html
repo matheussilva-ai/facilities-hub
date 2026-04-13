@@ -73,6 +73,21 @@ header {
   background: var(--surface2); border: 1px solid var(--border);
   border-radius: 20px; padding: 6px 14px;
 }
+.clima-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  cursor: default;
+  transition: border-color .2s;
+}
+.clima-badge:hover { border-color: rgba(123,191,196,0.35); }
+
 .live-badge {
   font-size: 11px; font-weight: 700; color: #3DAB72;
   background: rgba(61,171,114,0.10); border: 1px solid rgba(61,171,114,0.22);
@@ -294,6 +309,11 @@ footer {
       <div class="brand-sub">Facilities &nbsp;·&nbsp; Hub de ferramentas</div>
     </div>
     <div class="header-right">
+      <div class="clima-badge" id="climaBadge" title="Clima em São Paulo">
+        <span id="climaBadgeIcon">🌤️</span>
+        <span id="climaBadgeTemp" style="font-weight:700;">--°C</span>
+        <span id="climaBadgeExtra" style="color:var(--text-muted);font-size:10px;"></span>
+      </div>
       <div class="live-badge"><div class="dot"></div>Sistemas ativos</div>
       <div class="header-time" id="clock">--:--</div>
     </div>
@@ -457,24 +477,7 @@ footer {
         </div>
       </div>
 
-      <!-- Clima -->
-      <div class="card card-widget glow-teal" id="climaCard">
-        <div class="w-hdr">
-          <div class="w-icon icon-teal">🌤️</div>
-          <div>
-            <div class="w-title">Clima — São Paulo</div>
-            <div class="w-sub" id="climaSub">Carregando...</div>
-          </div>
-        </div>
-        <div class="w-body" id="climaBody">
-          <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:16px 0;">Buscando dados...</div>
-        </div>
-        <div class="w-foot">
-          <div style="display:flex;align-items:center;gap:5px;">
-            <span style="font-size:10px;color:var(--text-muted);">Open-Meteo · atualizado ao abrir</span>
-          </div>
-        </div>
-      </div>
+
 
       <!-- Atalhos Rápidos -->
       <div class="card card-widget glow-purple">
