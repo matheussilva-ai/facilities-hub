@@ -847,8 +847,12 @@ function loadPreventivas() {
       }
     })
     .catch(err => {
+      console.error('Preventivas erro:', err);
+      document.getElementById('cntVencido').textContent = '!';
+      document.getElementById('cntAvencer').textContent = '!';
+      document.getElementById('cntEmdia').textContent   = '!';
       document.getElementById('prevList').innerHTML =
-        '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
+        '<div style="font-size:11px;color:#D94F4F;text-align:center;padding:8px;">Erro ao carregar. Verifique se a planilha está pública.</div>';
     });
 }
 
