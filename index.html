@@ -4,7 +4,6 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Facilities Hub — Genial Care</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -317,26 +316,31 @@ footer {
       <span class="section-lbl">Unidades</span>
       <div class="section-line"></div>
     </div>
-    <div class="card card-widget glow-teal" id="cgInfoCard" style="cursor:default;">
-      <div class="w-hdr">
-        <div class="w-icon icon-teal">🏢</div>
-        <div>
-          <div class="w-title">Casas Geniais</div>
-          <div class="w-sub">Clique em uma unidade para ver endereço, contatos e infraestrutura</div>
+    <div>
+
+      <!-- CG Card -->
+      <div class="card card-widget glow-teal" id="cgInfoCard" style="cursor:default;">
+        <div class="w-hdr">
+          <div class="w-icon icon-teal">🏢</div>
+          <div>
+            <div class="w-title">Casas Geniais</div>
+            <div class="w-sub">Clique em uma unidade para ver endereço, contatos e infraestrutura</div>
+          </div>
+        </div>
+        <div class="w-body">
+          <div id="cgList" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+            <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div>
+          </div>
+        </div>
+        <div class="w-foot">
+          <div style="display:flex;align-items:center;gap:5px;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Matheus + Técnicos
+          </div>
+          <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
         </div>
       </div>
-      <div class="w-body">
-        <div id="cgList" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-          <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div>
-        </div>
-      </div>
-      <div class="w-foot">
-        <div style="display:flex;align-items:center;gap:5px;">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Matheus + Técnicos
-        </div>
-        <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
-      </div>
+
     </div>
   </div>
 
@@ -479,6 +483,52 @@ footer {
       </div>
 
 
+
+      <!-- Compras Pendentes -->
+      <div class="card card-widget glow-orange">
+        <div class="w-hdr">
+          <div class="w-icon icon-orange">🛒</div>
+          <div>
+            <div class="w-title">Compras Pendentes</div>
+            <div class="w-sub">Itens aguardando aprovação ou compra</div>
+          </div>
+        </div>
+        <div class="w-body">
+          <div id="comprasList" style="display:flex;flex-direction:column;gap:6px;">
+            <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:12px;">Carregando...</div>
+          </div>
+        </div>
+        <div class="w-foot">
+          <div style="display:flex;align-items:center;gap:5px;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Somente Matheus
+          </div>
+          <a href="https://docs.google.com/spreadsheets/d/1Yig1gEKLJ5nP_LuU2ZHCe-wsDEYHsN0N6DCyDN7R1lI" target="_blank" style="font-size:11px;color:var(--purple);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
+        </div>
+      </div>
+
+      <!-- Última Ronda -->
+      <div class="card card-widget glow-teal">
+        <div class="w-hdr">
+          <div class="w-icon icon-teal">🔍</div>
+          <div>
+            <div class="w-title">Última Ronda</div>
+            <div class="w-sub">Última inspeção registrada por unidade</div>
+          </div>
+        </div>
+        <div class="w-body">
+          <div id="rondaList" style="display:flex;flex-direction:column;gap:5px;">
+            <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:12px;">Carregando...</div>
+          </div>
+        </div>
+        <div class="w-foot">
+          <div style="display:flex;align-items:center;gap:5px;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Matheus + Técnicos
+          </div>
+          <a href="https://docs.google.com/spreadsheets/d/1HRSssZ68gFzuYv8vOAh5TKmTGFa2BvF1JdEvPqbqRnQ" target="_blank" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
+        </div>
+      </div>
 
       <!-- Atalhos Rápidos -->
       <div class="card card-widget glow-purple">
@@ -1007,8 +1057,137 @@ function secao(label, valor) {
     '</div>';
 }
 
+loadComprasPendentes();
+loadUltimaRonda();
 loadCGInfo();
 loadClima();
+
+// ── COMPRAS PENDENTES ────────────────────────────────
+function loadComprasPendentes() {
+  const SHEET_ID = '1Yig1gEKLJ5nP_LuU2ZHCe-wsDEYHsN0N6DCyDN7R1lI';
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json&sheet=Lista%20de%20Compras';
+  fetch(url)
+    .then(r => r.text())
+    .then(text => {
+      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+      const rows = json.table.rows || [];
+      const list = document.getElementById('comprasList');
+
+      // Filtra só Pendente e Aprovado (col I = índice 8)
+      const pendentes = rows.filter(row => {
+        if (!row.c || !row.c[8] || !row.c[8].v) return false;
+        const s = String(row.c[8].v).toLowerCase();
+        return s.includes('pendente') || s.includes('aprovado');
+      });
+
+      if (pendentes.length === 0) {
+        list.innerHTML = '<div style="font-size:12px;color:#3DAB72;text-align:center;padding:12px;">Nenhuma compra pendente ✅</div>';
+        return;
+      }
+
+      // Agrupa por CG
+      const porCG = {};
+      pendentes.forEach(row => {
+        const cg     = row.c[2] ? String(row.c[2].v || '').trim() : '—';
+        const item   = row.c[4] ? String(row.c[4].v || '').trim() : '—';
+        const status = row.c[8] ? String(row.c[8].v || '') : '';
+        const isAprov = status.toLowerCase().includes('aprovado');
+        if (!porCG[cg]) porCG[cg] = { total: 0, aprovados: 0 };
+        porCG[cg].total++;
+        if (isAprov) porCG[cg].aprovados++;
+      });
+
+      // Total badge
+      const total = pendentes.length;
+      let html = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">';
+      html += '<span style="font-family:'Syne',sans-serif;font-size:22px;font-weight:700;color:#E8A84A;">' + total + '</span>';
+      html += '<span style="font-size:11px;color:var(--text-muted);">item' + (total > 1 ? 's' : '') + ' aguardando</span>';
+      html += '</div>';
+
+      // Por CG
+      Object.entries(porCG).sort((a,b) => b[1].total - a[1].total).forEach(([cg, d]) => {
+        const cgNome = cg.replace('CG ', '').replace(' — ', ' ');
+        html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 9px;border-radius:8px;background:rgba(232,168,74,0.06);border:1px solid rgba(232,168,74,0.14);">';
+        html += '<span style="font-size:11px;font-weight:600;color:var(--text);">' + cgNome + '</span>';
+        html += '<div style="display:flex;gap:5px;">';
+        if (d.aprovados > 0) html += '<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:rgba(61,171,114,0.15);color:#3DAB72;">✓ ' + d.aprovados + ' aprov.</span>';
+        const pend = d.total - d.aprovados;
+        if (pend > 0) html += '<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:20px;background:rgba(232,168,74,0.15);color:#E8A84A;">' + pend + ' pend.</span>';
+        html += '</div></div>';
+      });
+
+      list.innerHTML = html;
+    })
+    .catch(() => {
+      document.getElementById('comprasList').innerHTML =
+        '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:12px;">Erro ao carregar.</div>';
+    });
+}
+
+// ── ÚLTIMA RONDA ──────────────────────────────────────
+function loadUltimaRonda() {
+  const SHEET_ID = '1HRSssZ68gFzuYv8vOAh5TKmTGFa2BvF1JdEvPqbqRnQ';
+  const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json';
+  fetch(url)
+    .then(r => r.text())
+    .then(text => {
+      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+      const rows = json.table.rows || [];
+      const list = document.getElementById('rondaList');
+
+      // Col B (idx 1) = Data, Col F (idx 5) = Unidade
+      const CGs_ESPERADAS = ['CG Morumbi','CG Tatuapé','CG Pinheiros','CG Alphaville','CG Anália Franco','CG Santana','CG Paraíso'];
+      const ultimaPorCG = {};
+
+      rows.forEach(row => {
+        if (!row.c || !row.c[1] || !row.c[5]) return;
+        const dataRaw = row.c[1].v;
+        const cg = String(row.c[5].v || '').trim();
+        if (!cg) return;
+
+        let data = null;
+        if (dataRaw && typeof dataRaw === 'string' && dataRaw.startsWith('Date(')) {
+          const parts = dataRaw.replace('Date(','').replace(')','').split(',');
+          data = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+        } else if (dataRaw) {
+          data = new Date(dataRaw);
+        }
+        if (!data || isNaN(data)) return;
+
+        const cgBase = CGs_ESPERADAS.find(c => cg.toLowerCase().includes(c.replace('CG ','').toLowerCase())) || cg;
+        if (!ultimaPorCG[cgBase] || data > ultimaPorCG[cgBase]) {
+          ultimaPorCG[cgBase] = data;
+        }
+      });
+
+      const hoje = new Date();
+      let html = '';
+
+      CGs_ESPERADAS.forEach(cg => {
+        const ultima = ultimaPorCG[cg];
+        let diasStr = '—', cor = '#D94F4F', bg = 'rgba(217,79,79,0.08)', border = 'rgba(217,79,79,0.18)';
+
+        if (ultima) {
+          const dias = Math.floor((hoje - ultima) / (1000*60*60*24));
+          diasStr = dias === 0 ? 'Hoje' : dias === 1 ? 'Ontem' : dias + ' dias atrás';
+          if (dias <= 7)       { cor = '#3DAB72'; bg = 'rgba(61,171,114,0.08)';  border = 'rgba(61,171,114,0.18)'; }
+          else if (dias <= 14) { cor = '#E8A84A'; bg = 'rgba(232,168,74,0.08)'; border = 'rgba(232,168,74,0.18)'; }
+        }
+
+        const cgNome = cg.replace('CG ', '');
+        html += '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 9px;border-radius:8px;background:' + bg + ';border:1px solid ' + border + ';">';
+        html += '<span style="font-size:11px;font-weight:600;color:var(--text);">' + cgNome + '</span>';
+        html += '<span style="font-size:10px;font-weight:600;color:' + cor + ';">' + diasStr + '</span>';
+        html += '</div>';
+      });
+
+      list.innerHTML = html || '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:12px;">Sem dados.</div>';
+    })
+    .catch(() => {
+      document.getElementById('rondaList').innerHTML =
+        '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:12px;">Erro ao carregar.</div>';
+    });
+}
 
 // ── CLIMA ────────────────────────────────────────────
 function loadClima() {
