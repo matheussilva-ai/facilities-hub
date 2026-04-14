@@ -779,7 +779,7 @@ function loadPreventivas() {
           proxDate = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
         }
 
-        const statusLower = status.toLowerCase().replace(/[^a-záéíóúàãõâêôçüa-z\s]/gi, '').trim();
+        const statusLower = status.replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '').trim().toLowerCase();
         if (statusLower.includes('vencido')) {
           vencido++;
           atencao.push({ cg, servico, status: 'vencido', proxDate });
