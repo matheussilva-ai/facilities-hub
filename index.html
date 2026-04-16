@@ -88,17 +88,6 @@ header {
 }
 .clima-badge:hover { border-color: rgba(123,191,196,0.35); }
 
-.tec-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--surface2);
-  border: 1px solid rgba(155,151,212,0.25);
-  border-radius: 20px;
-  padding: 6px 14px;
-  cursor: default;
-}
-
 .live-badge {
   font-size: 11px; font-weight: 700; color: #3DAB72;
   background: rgba(61,171,114,0.10); border: 1px solid rgba(61,171,114,0.22);
@@ -295,10 +284,6 @@ footer {
         <span id="climaBadgeIcon">🌤️</span>
         <span id="climaBadgeTemp" style="font-weight:700;">--°C</span>
         <span id="climaBadgeExtra" style="color:var(--text-muted);font-size:10px;"></span>
-      </div>
-      <div class="tec-badge" id="tecBadge">
-        <span style="font-size:11px;opacity:0.6;">👷</span>
-        <div id="tecBadgeContent" style="display:flex;flex-direction:column;gap:1px;"></div>
       </div>
       <div class="header-time" id="clock">--:--</div>
     </div>
@@ -632,28 +617,6 @@ function initSchedule() {
   document.getElementById('weekBadge').textContent =
     'Semana ' + wtype + '  ·  ' + fmt(monday) + ' – ' + fmt(new Date(monday.getTime() + 4*86400000));
 
-  // Badge técnicos no header
-  const tecContent = document.getElementById('tecBadgeContent');
-  if (tecContent) {
-    const DAYS_PT_HDR = ['Seg','Ter','Qua','Qui','Sex'];
-    const MONTHS_PT_HDR = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-    const isWeekend = todayIdx < 0 || todayIdx > 4;
-    const dataFmt = String(today.getDate()).padStart(2,'0') + '/' + MONTHS_PT_HDR[today.getMonth()];
-    if (isWeekend) {
-      tecContent.innerHTML = '<span style="font-size:11px;color:var(--text-muted);">Fim de semana 🏖️</span>';
-    } else {
-      const s2 = SCHEDULE[wtype];
-      const locR = s2.romario.dias[todayIdx];
-      const locG = s2.roger.dias[todayIdx];
-      tecContent.innerHTML =
-        '<div style="font-size:10px;color:var(--text-muted);font-weight:600;">' + DAYS_PT_HDR[todayIdx] + ' ' + dataFmt + '</div>' +
-        '<div style="display:flex;gap:10px;">' +
-          '<span style="font-size:11px;font-weight:600;"><span style="color:#9B97D4;">Romário</span> <span style="color:var(--text);opacity:0.85;">' + locR + '</span></span>' +
-          '<span style="font-size:11px;font-weight:600;"><span style="color:#7BBFC4;">Roger</span> <span style="color:var(--text);opacity:0.85;">' + locG + '</span></span>' +
-        '</div>';
-    }
-  }
-
   // Hoje
   const sched = document.getElementById('currentWeekSchedule');
   const s = SCHEDULE[wtype];
@@ -973,10 +936,10 @@ function abrirCGModal(idx) {
   }
   if (cg.estacionamento)    html += secao('🚗 Estacionamento', cg.estacionamento);
   if (cg.responsavelTec)    html += secao('🔧 Responsável Técnico', cg.responsavelTec);
-  if (cg.contatoMatheus || cg.contatoEliza) {
+  if (cg.contatoMatheus || cg.contatoMarina) {
     const contatos = [
       cg.contatoMatheus ? 'Matheus (Manutenção): ' + cg.contatoMatheus : '',
-      cg.contatoEliza   ? 'Eliza (Limpeza): ' + cg.contatoEliza : ''
+      cg.contatoMarina  ? 'Marina (Segurança e Limpeza): ' + cg.contatoMarina : ''
     ].filter(Boolean).join('<br>');
     html += secao('📞 Facilities', contatos);
   }
