@@ -144,9 +144,7 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <a class="ni" href="#s5" data-s="s5"><span class="ni-ico">⚡</span>Atalhos</a>
   </nav>
 
-  <div class="hero">
-    <div class="eyebrow">Genial Care Facilities</div>
-    <div class="hero-title">Facilities Hub</div>
+  <div style="padding:20px 0 4px;">
     <div class="hero-date" id="heroDate"></div>
   </div>
 
@@ -510,6 +508,16 @@ function abrirCGModal(idx) {
   document.getElementById('cgModalNome').textContent=nome;
   document.getElementById('cgModalSub').textContent=sub;
   let html='';
+  // Mapa do Google Maps (se tiver endereço)
+  if(cg.endereco){
+    const mapUrl='https://maps.google.com/maps?q='+encodeURIComponent(cg.endereco)+'&output=embed';
+    html+='<div style="border-radius:12px;overflow:hidden;margin-bottom:16px;border:1px solid rgba(176,224,228,.15);">'
+      +'<iframe src="'+mapUrl+'" width="100%" height="160" style="display:block;border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+      +'</div>';
+    // Botão abrir no Maps
+    const mapsLink='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(cg.endereco);
+    html+='<a href="'+mapsLink+'" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:9px;border-radius:10px;border:1px solid rgba(176,224,228,.18);background:rgba(176,224,228,.06);color:var(--t1);font-size:12px;font-weight:600;text-decoration:none;margin-bottom:16px;">🗺️ Abrir no Google Maps</a>';
+  }
   function sec(label,val){if(val) html+='<div style="margin-bottom:12px;"><div style="font-size:9px;font-weight:700;color:var(--t1);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">'+label+'</div><div style="font-size:12px;color:var(--tx);line-height:1.55;">'+String(val).replace(/\n/g,'<br>')+'</div></div>';}
   sec('📍 Endereço',cg.endereco);sec('🕐 Horário',cg.horario);
   sec('🚪 Salas de atendimento',cg.totalSalas?cg.totalSalas+' salas no total':'');
