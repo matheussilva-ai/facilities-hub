@@ -9,131 +9,43 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --v:  #6E69AD;
-  --v1: #9B97D4;
-  --v2: #CECBF6;
-  --v3: #EEEDFE;
-  --t:  #B0E0E4;
-  --t1: #7BBFC4;
-  --t2: #4AACB4;
-  --bg: #05050F;
-  --s0: #080818;
-  --s1: #0C0C1E;
-  --s2: #101028;
-  --s3: #161630;
-  --b0: rgba(110,105,173,0.10);
-  --b1: rgba(110,105,173,0.18);
-  --b2: rgba(110,105,173,0.32);
-  --b3: rgba(110,105,173,0.50);
-  --tx: #F0EEFF;
-  --tm: #8580B0;
-  --td: #504C72;
-  --red:    #FF6B6B;
-  --yellow: #FFB830;
-  --green:  #3BEBA8;
-  --pink:   #E06499;
-  --r: 16px;
+  --v:#6E69AD;--v1:#9B97D4;--v2:#CECBF6;
+  --t:#B0E0E4;--t1:#7BBFC4;--t2:#4AACB4;
+  --bg:#05050F;--s0:#080818;--s1:#0C0C1E;--s2:#101028;--s3:#161630;
+  --b0:rgba(110,105,173,.10);--b1:rgba(110,105,173,.18);--b2:rgba(110,105,173,.32);
+  --tx:#F0EEFF;--tm:#8580B0;--td:#504C72;
+  --red:#FF6B6B;--yellow:#FFB830;--green:#3BEBA8;--r:16px;
 }
 html,body{min-height:100%;font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;}
-
-/* ── NOISE + GLOW BG ── */
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background:
-    radial-gradient(ellipse 60% 50% at 0% 0%,   rgba(110,105,173,.18) 0%,transparent 60%),
-    radial-gradient(ellipse 40% 40% at 100% 100%,rgba(176,224,228,.10) 0%,transparent 55%),
-    radial-gradient(ellipse 30% 30% at 60% 20%,  rgba(110,105,173,.08) 0%,transparent 50%);}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-  background-image:linear-gradient(var(--b0) 1px,transparent 1px),linear-gradient(90deg,var(--b0) 1px,transparent 1px);
-  background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,black 30%,transparent 100%);}
-
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 60% 50% at 0% 0%,rgba(110,105,173,.18),transparent 60%),radial-gradient(ellipse 40% 40% at 100% 100%,rgba(176,224,228,.10),transparent 55%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(var(--b0) 1px,transparent 1px),linear-gradient(90deg,var(--b0) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,black 30%,transparent 100%);}
 .app{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:0 44px 80px;}
-
-/* ── HEADER ── */
-header{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:20px 0 18px;
-  border-bottom:1px solid var(--b1);
-  margin-bottom:0;
-}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 18px;border-bottom:1px solid var(--b1);margin-bottom:0;}
 .brand{display:flex;align-items:center;gap:14px;}
 .brand-sub{font-size:11px;color:var(--tm);letter-spacing:.04em;font-weight:500;}
 .hright{display:flex;align-items:center;gap:8px;}
-.hpill{
-  display:flex;align-items:center;gap:7px;
-  padding:7px 14px;
-  font-size:12px;font-weight:500;
-  color:var(--tm);
-  background:var(--s2);
-  border:1px solid var(--b1);
-  border-radius:999px;
-  transition:border-color .2s;
-}
+.hpill{display:flex;align-items:center;gap:7px;padding:7px 14px;font-size:12px;font-weight:500;color:var(--tm);background:var(--s2);border:1px solid var(--b1);border-radius:999px;transition:border-color .2s;}
 .hpill:hover{border-color:var(--b2);}
 .hpill b{color:var(--tx);font-weight:600;}
 .live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 #tecBadgeContent{display:flex;flex-direction:column;gap:1px;}
-
-/* ── NAV BAR ── */
-.nav{
-  position:sticky;top:0;z-index:20;
-  background:rgba(5,5,15,.88);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border-bottom:1px solid var(--b1);
-  margin:0 -44px 44px;padding:0 44px;
-  display:flex;align-items:center;gap:0;
-  overflow-x:auto;scrollbar-width:none;
-}
+.nav{position:sticky;top:0;z-index:20;background:rgba(5,5,15,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);margin:0 -44px 44px;padding:0 44px;display:flex;align-items:center;overflow-x:auto;scrollbar-width:none;}
 .nav::-webkit-scrollbar{display:none;}
-.ni{
-  display:flex;align-items:center;gap:7px;
-  padding:13px 16px;
-  font-size:12px;font-weight:600;letter-spacing:.02em;
-  color:var(--td);
-  text-decoration:none;
-  border-bottom:2px solid transparent;
-  white-space:nowrap;
-  transition:color .15s,border-color .15s;
-  cursor:pointer;background:none;
-  border-left:none;border-right:none;border-top:none;
-  font-family:'Outfit',sans-serif;
-}
+.ni{display:flex;align-items:center;gap:7px;padding:13px 16px;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--td);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;cursor:pointer;background:none;border-left:none;border-right:none;border-top:none;font-family:'Outfit',sans-serif;}
 .ni:hover{color:var(--tm);}
 .ni.on{color:var(--v1);border-bottom-color:var(--v);}
 .ni-ico{font-size:13px;}
-
-/* ── HERO ── */
 .hero{margin-bottom:8px;}
 .eyebrow{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--v);opacity:.8;margin-bottom:10px;}
-.hero-title{
-  font-size:clamp(22px,2.2vw,36px);font-weight:800;
-  line-height:1;letter-spacing:-.03em;
-  background:linear-gradient(135deg,#fff 30%,var(--v2) 70%,var(--t) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  margin-bottom:8px;
-}
+.hero-title{font-size:clamp(22px,2.2vw,36px);font-weight:800;line-height:1;letter-spacing:-.03em;background:linear-gradient(135deg,#fff 30%,var(--v2) 70%,var(--t) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
 .hero-date{font-size:13px;color:var(--tm);font-weight:400;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;}
-
-/* ── STAT STRIP ── */
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:32px 0 44px;}
-.sc{
-  background:var(--s1);
-  border:1px solid var(--b1);
-  border-radius:var(--r);
-  padding:16px 18px;
-  display:flex;align-items:center;gap:14px;
-  transition:border-color .2s,transform .18s;
-  position:relative;overflow:hidden;
-}
-.sc::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s;
-  background:linear-gradient(135deg,rgba(110,105,173,.06),transparent);}
+.sc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:16px 18px;display:flex;align-items:center;gap:14px;transition:border-color .2s,transform .18s;position:relative;overflow:hidden;}
+.sc::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s;background:linear-gradient(135deg,rgba(110,105,173,.06),transparent);}
 .sc:hover{border-color:var(--b2);transform:translateY(-2px);}
 .sc:hover::before{opacity:1;}
-.sc-ico{
-  width:38px;height:38px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:17px;flex-shrink:0;
-}
+.sc-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
 .sc-ico.p{background:rgba(110,105,173,.15);border:1px solid rgba(110,105,173,.2);}
 .sc-ico.t{background:rgba(176,224,228,.12);border:1px solid rgba(176,224,228,.18);}
 .sc-ico.o{background:rgba(255,184,48,.10);border:1px solid rgba(255,184,48,.16);}
@@ -142,61 +54,34 @@ header{
 .sc-val.r{color:var(--red);}
 .sc-val.g{color:var(--green);}
 .sc-lbl{font-size:11px;color:var(--tm);margin-top:4px;font-weight:500;}
-
-/* ── SECTION ── */
 .sec{margin-bottom:44px;}
 .sec-hdr{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-.sec-lbl{
-  font-size:10px;font-weight:700;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--td);white-space:nowrap;
-}
+.sec-lbl{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--td);white-space:nowrap;}
 .sec-line{flex:1;height:1px;background:var(--b1);}
 .ptag{font-size:10px;font-weight:600;padding:3px 10px;border-radius:999px;letter-spacing:.04em;white-space:nowrap;}
 .pt-all{background:rgba(176,224,228,.10);color:var(--t1);}
 .pt-mat{background:rgba(110,105,173,.12);color:var(--v1);}
 .pt-mar{background:rgba(224,100,153,.10);color:#E891B8;}
-
-/* ── GRIDS ── */
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
 .g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 .gw{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
-
-/* ── CARD ── */
-.card{
-  background:var(--s1);
-  border:1px solid var(--b1);
-  border-radius:var(--r);
-  position:relative;overflow:hidden;
-  transition:border-color .22s,transform .22s,box-shadow .22s;
-  animation:up .4s cubic-bezier(.4,0,.2,1) both;
-}
+.card{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);position:relative;overflow:hidden;transition:border-color .22s,transform .22s,box-shadow .22s;animation:up .4s cubic-bezier(.4,0,.2,1) both;}
 .card:hover{border-color:var(--b2);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.4);}
-.card::after{content:'';position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 60% 40% at 0% 0%,rgba(110,105,173,.06),transparent);
-  opacity:0;transition:opacity .22s;border-radius:var(--r);}
+.card::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 40% at 0% 0%,rgba(110,105,173,.06),transparent);opacity:0;transition:opacity .22s;}
 .card:hover::after{opacity:1;}
-.card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}
-.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}
-@keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
-
-/* ── TOOL CARD ── */
+@keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 .ct{padding:26px;display:flex;flex-direction:column;gap:14px;text-decoration:none;color:var(--tx);}
 .ct:hover .arr{background:var(--v);border-color:var(--v);color:#fff;transform:translateX(3px);}
 .ct-top{display:flex;align-items:flex-start;justify-content:space-between;}
 .ct-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;}
-.arr{width:34px;height:34px;border-radius:50%;background:var(--s3);border:1px solid var(--b1);
-  display:flex;align-items:center;justify-content:center;color:var(--td);
-  transition:all .2s;flex-shrink:0;}
-.ct-tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-  border-radius:999px;padding:3px 10px;display:inline-block;}
+.arr{width:34px;height:34px;border-radius:50%;background:var(--s3);border:1px solid var(--b1);display:flex;align-items:center;justify-content:center;color:var(--td);transition:all .2s;flex-shrink:0;}
+.ct-tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:3px 10px;display:inline-block;}
 .ct-name{font-size:17px;font-weight:700;letter-spacing:-.02em;line-height:1.2;}
 .ct-desc{font-size:12px;color:var(--tm);line-height:1.6;flex:1;}
-.ct-foot{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);
-  padding-top:14px;border-top:1px solid var(--b0);}
+.ct-foot{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);padding-top:14px;border-top:1px solid var(--b0);}
 .disabled{opacity:.32;pointer-events:none;}
-
-/* ICON + TAG COLORS */
 .ip{background:rgba(110,105,173,.15);border:1px solid rgba(110,105,173,.2);}
 .it{background:rgba(176,224,228,.12);border:1px solid rgba(176,224,228,.18);}
 .ig{background:rgba(59,235,168,.10);border:1px solid rgba(59,235,168,.16);}
@@ -207,60 +92,37 @@ header{
 .tg{color:var(--green);background:rgba(59,235,168,.10);}
 .to{color:var(--yellow);background:rgba(255,184,48,.10);}
 .tk{color:#E891B8;background:rgba(224,100,153,.10);}
-
-/* ── WIDGET CARD ── */
 .cw{padding:24px;display:flex;flex-direction:column;gap:18px;cursor:default;}
 .wh{display:flex;align-items:center;gap:13px;position:relative;z-index:1;}
 .wi{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
 .wt{font-size:15px;font-weight:700;letter-spacing:-.015em;}
 .ws{font-size:11px;color:var(--tm);margin-top:2px;}
 .wb{position:relative;z-index:1;flex:1;}
-.wf{display:flex;align-items:center;justify-content:space-between;
-  padding-top:16px;border-top:1px solid var(--b0);
-  font-size:11px;color:var(--td);position:relative;z-index:1;}
-
-/* ── ATALHOS ── */
-.sl{
-  display:flex;align-items:center;gap:10px;
-  padding:10px 14px;
-  background:var(--s2);border:1px solid var(--b1);border-radius:10px;
-  text-decoration:none;color:var(--tx);
-  font-size:12px;font-weight:500;
-  transition:all .18s;
-}
+.wf{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--b0);font-size:11px;color:var(--td);position:relative;z-index:1;}
+.sl{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--s2);border:1px solid var(--b1);border-radius:10px;text-decoration:none;color:var(--tx);font-size:12px;font-weight:500;transition:all .18s;}
 .sl:hover{background:rgba(110,105,173,.12);border-color:var(--b2);transform:translateX(3px);}
 .sl span:first-child{font-size:14px;flex-shrink:0;}
 .sl-arr{margin-left:auto;font-size:11px;color:var(--td);transition:transform .18s;}
 .sl:hover .sl-arr{transform:translateX(3px);color:var(--v1);}
-
-/* ── FOOTER ── */
-footer{
-  padding:24px 0 0;
-  border-top:1px solid var(--b1);
-  display:flex;align-items:center;justify-content:space-between;
-  margin-top:8px;
-}
+footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;}
 .footer-txt{font-size:11px;color:var(--td);letter-spacing:.03em;}
 .footer-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite;}
-
-/* ── RESPONSIVE ── */
 @media(max-width:1100px){.g3{grid-template-columns:repeat(2,1fr)}.gw{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:680px){.app{padding:0 20px 56px}.nav{margin:0 -20px 32px;padding:0 20px}.g2,.g3,.gw{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr);gap:8px}}
 </style>
 </head>
 <body>
 <div class="app">
-
   <header>
     <div class="brand">
       <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI3NyAyOTAgMTQyMCA1MzAiPgogIDxzdHlsZT4uc3Qwe2ZpbGw6IzZFNjlBRDt9LnN0MntmaWxsOiNCMEUwRTQ7fTwvc3R5bGU+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTU0Ny4yLDM1MC4wNmMtMzAuNTYsMC01OC4yNywxMi4yMS03OC41MywzMi4wMWw0MC4wNiw0MC4wNmMxMC4wOS05LjM3LDIzLjYxLTE1LjEsMzguNDYtMTUuMWMzMS4yNCwwLDU2LjU3LDI1LjMzLDU2LjU3LDU2LjU3cy0yNS4zMyw1Ni41Ny01Ni41Nyw1Ni41N2MtMTQuOTIsMC0yOC40OS01Ljc5LTM4LjYtMTUuMjNsLTAuMDEsMC4wMWwtMC4yMS0wLjIxYy0wLjE2LTAuMTUtMC4zMS0wLjMxLTAuNDYtMC40NmMtMC41My0wLjUxLTEuMDUtMS4wMy0xLjU2LTEuNTZjLTAuNTItMC41NC0xLjA0LTEuMDktMS41NC0xLjY2bC03Ny4wNi03OS41bDAsMGMtMTAuMDQtOS4wOC0yMy4zNy0xNC41OS0zOC4wMy0xNC41NGMtMzEuMjQsMC4xMS01Ni41NywyNS4zMy01Ni41Nyw1Ni41N2MwLDMxLjI0LDI1LjMzLDU2LjU3LDU2LjU3LDU2LjU3YzE1LjY0LDAsMjkuNzctNi4zNCwzOS45OS0xNi42bDMzLjU4LDMzLjU4YzIwLjU4LDIzLjA4LDUwLjUzLDM3LjYyLDgzLjg5LDM3LjYyYzYyLjA1LDAsMTEyLjM2LTUwLjMsMTEyLjM2LTExMi4zNlM2MDkuMjUsMzUwLjA2LDU0Ny4yLDM1MC4wNnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTQ3LjIsNDA3LjAzYy0xNC44NiwwLTI4LjM3LDUuNzMtMzguNDYsMTUuMWwtMzguMDItMzguMDJjLTIwLjQ2LTIxLjQ3LTQ5LjM0LTM0Ljg2LTgxLjM1LTM0Ljg2Yy02Mi4wNSwwLTExMi4zNiw1MC4zLTExMi4zNiwxMTIuMzZzNTAuMywxMTIuMzYsMTEyLjM2LDExMi4zNmMzMC42MiwwLDU4LjM3LTEyLjI1LDc4LjY0LTMyLjEybC0zOC4yOC0zOC4yOGMtMTAuMjMsMTAuMjUtMjQuMzYsMTYuNi0zOS45OSwxNi42Yy0zMS4yNCwwLTU2LjU3LTI1LjMzLTU2LjU3LTU2LjU3YzAtMzEuMjQsMjUuMzMtNTYuNDYsNTYuNTctNTYuNTdjMTQuNjUtMC4wNSwyNy45OSw1LjQ2LDM4LjAzLDE0LjU0bDAsMGw3Ny4wNiw3OS41YzEuMTMsMS4yOCwyLjMyLDIuNSwzLjU2LDMuNjdsMC4yMSwwLjIxbDAuMDEtMC4wMWMxMC4xMSw5LjQ0LDIzLjY3LDE1LjIzLDM4LjYsMTUuMjNjMzEuMjQsMCw1Ni41Ny0yNS4zMyw1Ni41Ny01Ni41N1M1NzguNDQsNDA3LjAzLDU0Ny4yLDQwNy4wM3oiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNODk0LjE4LDQ3Mi4yNWMwLTQ5LjkyLTQwLjQ3LTkwLjM5LTkwLjM5LTkwLjM5Yy00OS44OCwwLTkwLjM5LDQwLjUxLTkwLjM5LDkwLjM5YzAsNDkuOTIsNDAuNDcsOTAuMzksOTAuMzksOTAuMzljMTQuOTcsMCwyOS4wOS0zLjY0LDQxLjUzLTEwLjA5bDAsMGMtOC43NCwzMy42OS01MS42MywzMC41NC02NC4wNywyOC44OGMtMS44LTAuMjQtMy4zOSwxLjE2LTMuMzksMi45N3YzOS45M2MwLDEuNjcsMS4zNiwzLjAyLDMuMDMsM2wzMS4xLTAuMzZjODAuNTktMTEuOTMsODIuMTgtODMuNDUsODIuMTgtODMuNDV2LTY2LjgxbC0wLjEyLDAuMThDODk0LjE0LDQ3NS4zNyw4OTQuMTgsNDczLjgxLDg5NC4xOCw0NzIuMjV6IE04MDQuMTcsNTE3LjI1Yy0yNC44OSwwLTQ1LjA3LTIwLjE4LTQ1LjA3LTQ1LjA3YzAtMjQuODksMjAuMTgtNDUuMDcsNDUuMDctNDUuMDdjMjQuODksMCw0NS4wNywyMC4xOCw0NS4wNyw0NS4wN0M4NDkuMjQsNDk3LjA3LDgyOS4wNiw1MTcuMjUsODA0LjE3LDUxNy4yNXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTA2Ni4xNCw0OTMuMjJIOTU5LjUzYzUuMDMsMTkuNzQsMjAuODIsMzAuMTYsNDUuMjMsMzAuMTZjMTEuNDksMCwyMS41NC0yLjUxLDM0LjEtMTAuNDFjMy4yMy0yLjE1LDUuMzgtMS43OSw3LjksMC43MmwxOC42NywxNy45NWMyLjE1LDIuNTIsMi4xNSw1LjAzLTAuNzIsNy45Yy0xNi44NywxNi44Ny0zOS44NSwyNi45Mi02NS4zMywyNi45MmMtNTUuMjgsMC05My4zMy00MC41Ni05My4zMy05Mi4yNXMzOC4wNS05Mi4yNSw4OS4zOC05Mi4yNWM1MC45OCwwLDgzLjY0LDQwLjU2LDgzLjY0LDg5LjAyQzEwNzkuMDYsNDg1LjY4LDEwNzcuMjcsNDkzLjIyLDEwNjYuMTQsNDkzLjIyeiBNOTU4LjgxLDQ1OS4xMmg3Mi41MWMtMy4yMy0yMS41NC0xNy45NS0zMS45NS0zNS41NC0zMS45NUM5NzcuODMsNDI3LjE3LDk2Mi43Niw0MzcuNTgsOTU4LjgxLDQ1OS4xMnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTI2Ny4yMSw0NTcuNjh2OTguNzJjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOHYtODcuOTVjMC0yOC4zNi0xNS43OS0zNi42Mi0zMC4xNS0zNi42MmMtMjQuMDUsMC0zNC4xLDIzLjY5LTM0LjEsMzIuMzF2OTIuMjVjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdjMC0zLjIzLDIuMTUtNS4zOCw1LjM4LTUuMzhoNDEuNjRjMy4yMywwLDUuMDMsMi4xNSw1LjM4LDUuMzhsMS40MywyMi4yNWMxMS4xMy0xOC4zLDI5LjA4LTMxLjU5LDU0LjItMzEuNTlDMTIzOC44NSwzODEuOTQsMTI2Ny4yMSw0MTAuNjYsMTI2Ny4yMSw0NTcuNjh6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyOTcuMzYsMzI2LjNjMC0xNi4xNSwxMi45Mi0yOS4wOCwyOS4wOC0yOS4wOGMxNS43OSwwLDI4LjcyLDEyLjkyLDI4LjcyLDI5LjA4YzAsMTUuNzktMTIuOTIsMjguNzItMjguNzIsMjguNzJDMTMxMC4yOCwzNTUuMDIsMTI5Ny4zNiwzNDIuMDksMTI5Ny4zNiwzMjYuM3ogTTEzMDQuOSwzODUuODloNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdDMTI5OS41MSwzODguMDQsMTMwMS42NywzODUuODksMTMwNC45LDM4NS44OXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTU2Ni4yMiwzOTEuMjdWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTM5LjEzYy0zLjIzLDAtNS4wMy0yLjE1LTUuMzgtNS4zOGwtMS4wOC0xMi45MmMtMTIuMjEsMTMuNjQtMjguNzIsMjIuOTctNTAuMjYsMjIuOTdjLTQ4LjgyLDAtODQuNzItNDAuOTItODQuNzItOTIuMjVzMzUuOS05Mi4yNSw4NC43Mi05Mi4yNWMyMC44MiwwLDM3LjY5LDkuNjksNTAuMjYsMjQuMDVsMS4wOC0xNC43MmMwLjM2LTMuMjMsMi4xNS01LjM4LDUuMzgtNS4zOGgzOS4xM0MxNTY0LjA3LDM4NS44OSwxNTY2LjIyLDM4OC4wNCwxNTY2LjIyLDM5MS4yN3ogTTE1MTEuMyw0NzMuODRjMC0yMy4zNC0xNi44Ny00My4wOC0zOS40OS00My4wOGMtMjIuOTcsMC0zOS44NCwxOC42Ny0zOS44NCw0My4wOGMwLDI0Ljc3LDE2Ljg3LDQzLjQzLDM5Ljg0LDQzLjQzQzE0OTQuNDMsNTE3LjI3LDE1MTEuMyw0OTcuMTcsMTUxMS4zLDQ3My44NHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTYwMy4xOSwyOTkuNzNoNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzMDUuMTJDMTU5Ny44MSwzMDEuODksMTU5OS45NiwyOTkuNzMsMTYwMy4xOSwyOTkuNzN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTExNjMuMzQsNzQ3LjM0YzIuNzktMi43OSw1LjIzLTIuNDQsNy42OCwwbDUuNTgsNC44OWMyLjA5LDIuMDksMi40NCw0Ljg4LDAuMzUsNy4zM2MtMTYuMDYsMTguNS0zOC4zOSwzMC4zNy02Ni4zMiwzMC4zN2MtNDkuMjEsMC04NS41Mi0zOS40NC04NS41Mi04OS43czM2LjMtODkuNyw4NS41Mi04OS43YzI3LjIzLDAsNDkuMjIsMTEuODcsNjUuMjcsMzAuMzdjMi4wOSwyLjQ0LDEuNzQsNS4yNC0wLjM1LDcuMzNsLTUuNTgsNC41NGMtMi40NCwyLjQ1LTQuODksMi43OS03LjY4LDAuMzVjLTEwLjEyLTkuNDItMjEuOTktMjMuNzQtNTEuNjYtMjMuNzRjLTM4LjM5LDAtNjUuMjcsMzAuMzctNjUuMjcsNzAuODZjMCw0MC40OSwyNi44OCw3MC44Niw2NS4yNyw3MC44NkMxMTQxLDc3MS4wNywxMTUzLjU3LDc1Ny40NiwxMTYzLjM0LDc0Ny4zNHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTM2NC43NCw2MTkuNTh2MTYwLjU2YzAsMy4xNC0yLjA5LDUuMjQtNS4yNCw1LjI0aC05LjQyYy0zLjE0LDAtNC44OS0yLjA5LTUuMjMtNS4yNGwtMS43NS0yMi42OWMtMTMuMjYsMTkuNTUtMzQuOSwzMi4xMS02Mi40OCwzMi4xMWMtNDkuMjIsMC04NC4xMi0zOS40NC04NC4xMi04OS4zNnMzNC45LTg5LjM2LDg0LjEyLTg5LjM2YzI3LjkyLDAsNDkuNTYsMTIuNTcsNjIuODMsMzIuNDZsMS40LTIzLjczYzAuMzUtMy4xNCwyLjA5LTUuMjQsNS4yMy01LjI0aDkuNDJDMTM2Mi42NCw2MTQuMzUsMTM2NC43NCw2MTYuNDQsMTM2NC43NCw2MTkuNTh6IE0xMzQ1LjE5LDcxNC44OGwwLjctMTQuNjZsLTAuNy0xNS4wMWMtNS45My0zMS40Mi0zMC43Mi01NS41LTYzLjE4LTU1LjVjLTM3LjcsMC02NS4yNywzMC4wMi02NS4yNyw3MC4xNmMwLDQwLjQ5LDI3LjU3LDcwLjUxLDY1LjI3LDcwLjUxQzEzMTQuNDcsNzcwLjM3LDEzMzkuMjYsNzQ2LjI5LDEzNDUuMTksNzE0Ljg4eiIvPgogIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDg0LjExLDYyMC42M2wtNC4xOSw4LjczYy0xLjQsMi40NS0zLjE0LDIuNzktNS45MywyLjA5Yy0zLjE0LTAuNy02LjI4LTEuNzQtMTMuNjEtMS43NGMtMjAuOTQsMC0zOC43NCwxNi4wNi0zOC43NCwzOC4zOXYxMTIuMDRjMCwzLjE0LTIuMDksNS4yNC01LjI0LDUuMjRoLTEwLjQ3Yy0zLjE0LDAtNS4yNC0yLjA5LTUuMjQtNS4yNFY2MTkuNThjMC0zLjE0LDIuMDktNS4yNCw1LjI0LTUuMjRoOC43M2MzLjE0LDAsNC44OSwyLjA5LDUuMjQsNS4yNGwxLjQsMTQuMzFjOS43Ny0xMy45NywyMy43NC0yMy4zOSw0MS44OS0yMy4zOWM4LjAzLDAsMTUuMzYsMS43NCwyMC4yNCw0Ljg4QzE0ODUuMTUsNjE2LjQ0LDE0ODUuNSw2MTcuODQsMTQ4NC4xMSw2MjAuNjN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE2NTEuNjUsNjkyLjg4YzAsMTEuMTctMS40LDE2LjQtOS43NywxNi40aC0xMzIuOTljMy44NCwzNC41NiwyOC45Nyw2MS43OCw2Ny43Miw2MS43OGMyMy4wNCwwLDM4LjM5LTguNzMsNDkuMjEtMTguNWMyLjQ0LTIuMDksNC41NC0zLjQ5LDcuMzMtMS4wNWw0LjU0LDQuMTljMi43OSwyLjc5LDMuMTQsNS4yNCwwLjM1LDguMDNjLTE2LjA2LDE2Ljc1LTM4LjM5LDI2LjE4LTYzLjg4LDI2LjE4Yy01MC4yNiwwLTg1Ljg2LTM5LjQ0LTg1Ljg2LTg5LjdzMzQuMjEtODkuNyw4My40Mi04OS43QzE2MjAuNTksNjEwLjUxLDE2NTEuNjUsNjQ5Ljk1LDE2NTEuNjUsNjkyLjg4eiBNMTUwOC44OSw2OTEuODRoMTI0LjI2Yy0wLjctMzMuODYtMjUuODMtNjIuNDgtNjEuNzgtNjIuNDhDMTUzNi4xMiw2MjkuMzYsMTUxMi4wMyw2NTYuNTgsMTUwOC44OSw2OTEuODR6Ii8+Cjwvc3ZnPg==" alt="Genial Care" style="height:36px;width:auto;display:block;"/>
       <div class="brand-sub">Facilities &nbsp;·&nbsp; Hub Operacional</div>
     </div>
     <div class="hright">
-      <div class="hpill" id="climaBadge" title="Clima em São Paulo">
+      <div class="hpill" id="climaBadge">
         <span id="climaBadgeIcon">🌤</span>
         <b id="climaBadgeTemp">--°C</b>
-        <span id="climaBadgeExtra"></span>
+        <span id="climaBadgeExtra" style="color:var(--tm);font-size:11px;"></span>
       </div>
       <div class="hpill" id="tecBadge">
         <span style="font-size:11px;opacity:.6;">👷</span>
@@ -273,7 +135,6 @@ footer{
     </div>
   </header>
 
-  <!-- NAV -->
   <nav class="nav" id="navBar">
     <a class="ni on" href="#s0" data-s="s0"><span class="ni-ico">🔥</span>Prioridades</a>
     <a class="ni" href="#s1" data-s="s1"><span class="ni-ico">🏢</span>Unidades</a>
@@ -283,14 +144,12 @@ footer{
     <a class="ni" href="#s5" data-s="s5"><span class="ni-ico">⚡</span>Atalhos</a>
   </nav>
 
-  <!-- HERO -->
   <div class="hero">
     <div class="eyebrow">Genial Care Facilities</div>
     <div class="hero-title">Facilities Hub</div>
     <div class="hero-date" id="heroDate"></div>
   </div>
 
-  <!-- STATS -->
   <div class="stats">
     <div class="sc"><div class="sc-ico p">📅</div><div><div class="sc-val" id="statEscala">—</div><div class="sc-lbl">Escala hoje</div></div></div>
     <div class="sc"><div class="sc-ico o">⚠️</div><div><div class="sc-val r" id="statVencidas">—</div><div class="sc-lbl">Prev. vencidas</div></div></div>
@@ -298,256 +157,88 @@ footer{
     <div class="sc"><div class="sc-ico k">🧹</div><div><div class="sc-val">18</div><div class="sc-lbl">Time DeLuca</div></div></div>
   </div>
 
-  <!-- S0 PRIORIDADES -->
   <div class="sec" id="s0">
-    <div class="sec-hdr">
-      <span class="sec-lbl">Hoje · Prioridades</span>
-      <div class="sec-line"></div>
-      <span class="ptag pt-all">Matheus + Marina</span>
-    </div>
+    <div class="sec-hdr"><span class="sec-lbl">Hoje · Prioridades</span><div class="sec-line"></div><span class="ptag pt-all">Matheus + Marina</span></div>
     <div class="g2">
       <!-- Escala -->
-      <div class="card cw" style="cursor:default;" id="escalaCard">
-        <div class="wh">
-          <div class="wi ip">📅</div>
-          <div>
-            <div class="wt">Escala de Técnicos</div>
-            <div class="ws" id="weekBadge"></div>
-          </div>
-        </div>
+      <div class="card cw" id="escalaCard">
+        <div class="wh"><div class="wi ip">📅</div><div><div class="wt">Escala de Técnicos</div><div class="ws" id="weekBadge"></div></div></div>
         <div class="wb">
-          <div style="background:rgba(110,105,173,0.08);border:1px solid rgba(110,105,173,0.16);border-radius:10px;padding:12px;margin-bottom:10px;">
-            <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9B97D4;margin-bottom:8px;" id="hojeLabel">Hoje</div>
+          <div style="background:rgba(110,105,173,.08);border:1px solid rgba(110,105,173,.14);border-radius:10px;padding:12px;margin-bottom:10px;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--v1);margin-bottom:8px;" id="hojeLabel">Hoje</div>
             <div id="currentWeekSchedule"></div>
           </div>
-          <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Calendário</div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--td);margin-bottom:6px;">Calendário</div>
           <div id="quarterCalendar" style="display:flex;flex-direction:column;gap:2px;"></div>
         </div>
-        <div class="wf">
-          <div style="display:flex;align-items:center;gap:5px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Romário · Roger
-          </div>
-        </div>
+        <div class="wf"><div style="display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Romário · Roger</div></div>
       </div>
-
       <!-- Preventivas -->
-      <div class="card cw" style="cursor:default;" id="prevCard">
-        <div class="wh">
-          <div class="wi io">🔧</div>
-          <div>
-            <div class="wt">Manutenções Preventivas</div>
-            <div class="ws">Status dos serviços recorrentes por unidade · <span id="prevLastUpdate" style="color:var(--text-muted);"></span></div>
-          </div>
-        </div>
+      <div class="card cw" id="prevCard">
+        <div class="wh"><div class="wi io">🔧</div><div><div class="wt">Manutenções Preventivas</div><div class="ws">Serviços recorrentes · <span id="prevLastUpdate" style="color:var(--td);"></span></div></div></div>
         <div class="wb">
           <div id="prevCounters" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
-            <div style="text-align:center;padding:8px 6px;background:rgba(217,79,79,0.08);border:1px solid rgba(217,79,79,0.16);border-radius:9px;">
-              <div id="cntVencido" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#D94F4F;">–</div>
-              <div style="font-size:9px;color:#D94F4F;font-weight:700;margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;">Vencido</div>
-            </div>
-            <div style="text-align:center;padding:8px 6px;background:rgba(232,168,74,0.08);border:1px solid rgba(232,168,74,0.16);border-radius:9px;">
-              <div id="cntAvencer" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#E8A84A;">–</div>
-              <div style="font-size:9px;color:#E8A84A;font-weight:700;margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;">A vencer</div>
-            </div>
-            <div style="text-align:center;padding:8px 6px;background:rgba(61,171,114,0.08);border:1px solid rgba(61,171,114,0.16);border-radius:9px;">
-              <div id="cntEmdia" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#3DAB72;">–</div>
-              <div style="font-size:9px;color:#3DAB72;font-weight:700;margin-top:2px;letter-spacing:0.06em;text-transform:uppercase;">Em dia</div>
-            </div>
+            <div style="text-align:center;padding:8px 6px;background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.15);border-radius:9px;"><div id="cntVencido" style="font-size:20px;font-weight:800;color:var(--red);">–</div><div style="font-size:9px;color:var(--red);font-weight:700;margin-top:2px;letter-spacing:.06em;text-transform:uppercase;">Vencido</div></div>
+            <div style="text-align:center;padding:8px 6px;background:rgba(255,184,48,.08);border:1px solid rgba(255,184,48,.15);border-radius:9px;"><div id="cntAvencer" style="font-size:20px;font-weight:800;color:var(--yellow);">–</div><div style="font-size:9px;color:var(--yellow);font-weight:700;margin-top:2px;letter-spacing:.06em;text-transform:uppercase;">A vencer</div></div>
+            <div style="text-align:center;padding:8px 6px;background:rgba(59,235,168,.08);border:1px solid rgba(59,235,168,.15);border-radius:9px;"><div id="cntEmdia" style="font-size:20px;font-weight:800;color:var(--green);">–</div><div style="font-size:9px;color:var(--green);font-weight:700;margin-top:2px;letter-spacing:.06em;text-transform:uppercase;">Em dia</div></div>
           </div>
-          <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Requer atenção</div>
-          <div id="prevList" style="display:flex;flex-direction:column;gap:4px;">
-            <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Carregando...</div>
-          </div>
+          <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--td);margin-bottom:6px;">Requer atenção</div>
+          <div id="prevList" style="display:flex;flex-direction:column;gap:4px;"><div style="font-size:11px;color:var(--tm);text-align:center;padding:8px;">Carregando...</div></div>
         </div>
-        <div class="wf">
-          <div style="display:flex;align-items:center;gap:5px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Somente Matheus
-          </div>
-          <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" style="font-size:11px;color:var(--purple);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
-        </div>
+        <div class="wf"><div style="display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div><a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" style="font-size:11px;color:var(--v1);text-decoration:none;font-weight:600;opacity:.8;">Ver planilha →</a></div>
       </div>
-
     </div>
   </div>
 
-  <!-- S1 UNIDADES -->
   <div class="sec" id="s1">
-    <div class="sec-hdr">
-      <span class="sec-lbl">Unidades</span>
-      <div class="sec-line"></div>
-      <span class="ptag pt-all">Matheus + Marina</span>
-    </div>
-    <div class="card cw" style="cursor:default;" id="cgInfoCard" style="cursor:default;">
-      <div class="wh">
-        <div class="wi it">🏢</div>
-        <div>
-          <div class="wt">Casas Geniais</div>
-          <div class="ws">Clique em uma unidade para ver endereço, contatos e infraestrutura</div>
-        </div>
-      </div>
-      <div class="wb">
-        <div id="cgList" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-          <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div>
-        </div>
-      </div>
-      <div class="wf">
-        <div style="display:flex;align-items:center;gap:5px;">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Matheus + Técnicos
-        </div>
-        <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
-      </div>
+    <div class="sec-hdr"><span class="sec-lbl">Unidades</span><div class="sec-line"></div><span class="ptag pt-all">Matheus + Marina</span></div>
+    <div class="card cw" id="cgInfoCard" style="cursor:default;">
+      <div class="wh"><div class="wi it">🏢</div><div><div class="wt">Casas Geniais</div><div class="ws">Clique em uma unidade para ver endereço, contatos e infraestrutura</div></div></div>
+      <div class="wb"><div id="cgList" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;"><div style="font-size:11px;color:var(--tm);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div></div></div>
+      <div class="wf"><div style="display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Matheus + Técnicos</div><a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" style="font-size:11px;color:var(--t1);text-decoration:none;font-weight:600;opacity:.8;">Ver planilha →</a></div>
     </div>
   </div>
 
-  <!-- S2 OPERAÇÃO -->
   <div class="sec" id="s2">
-    <div class="sec-hdr">
-      <span class="sec-lbl">Operação</span>
-      <div class="sec-line"></div>
-      <span class="ptag pt-all">Matheus + Marina</span>
-    </div>
+    <div class="sec-hdr"><span class="sec-lbl">Operação</span><div class="sec-line"></div><span class="ptag pt-all">Matheus + Marina</span></div>
     <div class="g3">
-      <a href="https://checklist-genial.vercel.app/" target="_blank" class="card ct">
-        <div class="ct-top">
-          <div class="ct-ico it">✅</div>
-          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-        </div>
-        <div><div class="ct-tag tt">Inspeção</div></div>
-        <div class="ct-name">Checklist de Unidades</div>
-        <div class="ct-desc">Inspeções nas Casas Geniais com fotos e acompanhamento por unidade.</div>
-        <div class="ct-foot">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Matheus + Técnicos
-        </div>
-      </a>
-
-      <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card ct">
-        <div class="ct-top">
-          <div class="ct-ico ig">📦</div>
-          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-        </div>
-        <div><div class="ct-tag tg">Almoxarifado</div></div>
-        <div class="ct-name">Controle de Estoque</div>
-        <div class="ct-desc">Materiais de manutenção, solicitações de compra e movimentações por unidade.</div>
-        <div class="ct-foot">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Matheus + Técnicos
-        </div>
-      </a>
-
+      <a href="https://checklist-genial.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico it">✅</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tt">Inspeção</div></div><div class="ct-name">Checklist de Unidades</div><div class="ct-desc">Inspeções nas Casas Geniais com fotos e acompanhamento por unidade.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Matheus + Técnicos</div></a>
+      <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico ig">📦</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tg">Almoxarifado</div></div><div class="ct-name">Controle de Estoque</div><div class="ct-desc">Materiais de manutenção, solicitações de compra e movimentações por unidade.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Matheus + Técnicos</div></a>
     </div>
   </div>
 
-  <!-- S3 CONTROLE -->
   <div class="sec" id="s3">
-    <div class="sec-hdr">
-      <span class="sec-lbl">Controle &amp; Financeiro</span>
-      <div class="sec-line"></div>
-      <span class="ptag pt-mat">Matheus</span>
-    </div>
+    <div class="sec-hdr"><span class="sec-lbl">Controle &amp; Financeiro</span><div class="sec-line"></div><span class="ptag pt-mat">Matheus</span></div>
     <div class="g3">
-      <a href="https://nf-cartao-corporativo.vercel.app/" target="_blank" class="card ct">
-        <div class="ct-top">
-          <div class="ct-ico ip">🧾</div>
-          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-        </div>
-        <div><div class="ct-tag tp">Financeiro</div></div>
-        <div class="ct-name">NF Cartão Corporativo</div>
-        <div class="ct-desc">Notas fiscais do Cartão Facilities (0852) com extração automática via IA.</div>
-        <div class="ct-foot">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Somente Matheus
-        </div>
-      </a>
-
-      <div class="card ct disabled">
-        <div class="ct-top">
-          <div class="ct-ico io">📄</div>
-          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-        </div>
-        <div><div class="ct-tag to">Em breve</div></div>
-        <div class="ct-name">Portal de NFs</div>
-        <div class="ct-desc">Upload em lote de NFs de fornecedores com organização automática no Drive via IA.</div>
-        <div class="ct-foot">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Somente Matheus
-        </div>
-      </div>
-
+      <a href="https://nf-cartao-corporativo.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico ip">🧾</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tp">Financeiro</div></div><div class="ct-name">NF Cartão Corporativo</div><div class="ct-desc">Notas fiscais do Cartão Facilities (0852) com extração automática via IA.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></a>
+      <div class="card ct disabled"><div class="ct-top"><div class="ct-ico io">📄</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag to">Em breve</div></div><div class="ct-name">Portal de NFs</div><div class="ct-desc">Upload em lote de NFs de fornecedores com organização automática no Drive via IA.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></div>
     </div>
   </div>
 
-  <!-- S4 LIMPEZA -->
   <div class="sec" id="s4">
-    <div class="sec-hdr">
-      <span class="sec-lbl">Limpeza Operacional</span>
-      <div class="sec-line"></div>
-      <span class="ptag pt-mar">Marina</span>
-    </div>
+    <div class="sec-hdr"><span class="sec-lbl">Limpeza Operacional</span><div class="sec-line"></div><span class="ptag pt-mar">Marina</span></div>
     <div class="gw">
       <!-- Time DeLuca -->
-      <div class="card cw" onclick="abrirDeludaModal()" style="cursor:pointer;">
-        <div class="wh">
-          <div class="wi ik">🧹</div>
-          <div>
-            <div class="wt">Time DeLuca</div>
-            <div class="ws" id="deludaResumo">Limpeza por unidade e turno</div>
-          </div>
-        </div>
-        <div class="wb">
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;" id="deludaCGGrid"></div>
-        </div>
-        <div class="wf">
-          <div style="display:flex;align-items:center;gap:5px;">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            Marina
-          </div>
-          <span style="font-size:11px;color:#C4648C;font-weight:600;opacity:0.8;">Ver detalhes →</span>
-        </div>
+      <div class="card cw" style="cursor:default;">
+        <div class="wh"><div class="wi ik">🧹</div><div><div class="wt">Time DeLuca</div><div class="ws" id="deludaResumo">Limpeza por unidade e turno</div></div></div>
+        <div class="wb"><div id="deludaCGGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"></div></div>
+        <div class="wf"><div style="display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Marina</div></div>
       </div>
-
+      <!-- Accordion DeLuca -->
+      <div id="deludaAccordion" style="display:none;grid-column:1/-1;max-height:0;opacity:0;overflow:hidden;"></div>
     </div>
   </div>
 
-  <!-- S5 ATALHOS -->
   <div class="sec" id="s5">
-    <div class="sec-hdr">
-      <span class="sec-lbl">Atalhos Rápidos</span>
-      <div class="sec-line"></div>
-    </div>
-    <div class="card cw" style="cursor:default;">
-      <div class="wh">
-        <div class="wi ip">⚡</div>
-        <div><div class="wt">Atalhos Rápidos</div><div class="ws">Planilhas e portais de acesso frequente</div></div>
-      </div>
+    <div class="sec-hdr"><span class="sec-lbl">Atalhos Rápidos</span><div class="sec-line"></div></div>
+    <div class="card cw">
+      <div class="wh"><div class="wi ip">⚡</div><div><div class="wt">Atalhos Rápidos</div><div class="ws">Planilhas e portais de acesso frequente</div></div></div>
       <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
-        <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
-        <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
-        <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
-        <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
-          <a href="https://docs.google.com/spreadsheets/d/1yhuo38_MdshcAO67chkKlWQ2wHnBCLN1acZjQQ5N-Os/edit?gid=1761395806#gid=1761395806" target="_blank" class="sl">
-            <span>🛒</span><span>Painel de Compras</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" class="sl">
-            <span>🔧</span><span>Manutenções Preventivas</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" class="sl">
-            <span>🏢</span><span>Informações das CGs</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="https://docs.google.com/spreadsheets/d/1Yig1gEKLJ5nP_LuU2ZHCe-wsDEYHsN0N6DCyDN7R1lI" target="_blank" class="sl">
-            <span>📦</span><span>Planilha de Estoque</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="https://suporte.genialcare.com.br" target="_blank" class="sl">
-            <span>🎫</span><span>Zoho Desk</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+        <a href="https://docs.google.com/spreadsheets/d/1yhuo38_MdshcAO67chkKlWQ2wHnBCLN1acZjQQ5N-Os/edit?gid=1761395806#gid=1761395806" target="_blank" class="sl"><span>🛒</span><span>Painel de Compras</span><span class="sl-arr">→</span></a>
+        <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" class="sl"><span>🔧</span><span>Manutenções Preventivas</span><span class="sl-arr">→</span></a>
+        <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" class="sl"><span>🏢</span><span>Informações das CGs</span><span class="sl-arr">→</span></a>
+        <a href="https://docs.google.com/spreadsheets/d/1Yig1gEKLJ5nP_LuU2ZHCe-wsDEYHsN0N6DCyDN7R1lI" target="_blank" class="sl"><span>📦</span><span>Planilha de Estoque</span><span class="sl-arr">→</span></a>
+        <a href="https://suporte.genialcare.com.br" target="_blank" class="sl"><span>🎫</span><span>Zoho Desk</span><span class="sl-arr">→</span></a>
       </div>
       <div class="wf"><span>Links de acesso direto</span></div>
     </div>
@@ -558,887 +249,444 @@ footer{
     <div class="footer-dot"></div>
   </footer>
 
-  <!-- Modal DeLuca -->
-  <div id="deludaModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
-    <div id="deludaBackdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);"></div>
-    <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(224,100,153,.25);border-radius:20px;width:100%;max-width:760px;max-height:86vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
-      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:22px 24px 16px;border-bottom:1px solid rgba(224,100,153,.12);flex-shrink:0;">
-        <div>
-          <div style="font-family:'Outfit',sans-serif;font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--tx);">Time de Limpeza</div>
-          <div style="font-size:11px;color:var(--tm);margin-top:3px;" id="deludaModalSub"></div>
-        </div>
-        <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;">
-          <div id="deludaFiltros" style="display:flex;gap:5px;flex-wrap:wrap;"></div>
-          <button id="deludaCloseBtn" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--b1);background:var(--s3);color:var(--tx);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .18s;">✕</button>
-        </div>
-      </div>
-      <div id="deludaModalBody" style="overflow-y:auto;padding:20px 24px 24px;flex:1;"></div>
-    </div>
-  </div>
-
   <!-- Modal CG -->
   <div id="cgModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
-    <div id="cgBackdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);"></div>
+    <div id="cgBackdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);cursor:pointer;"></div>
     <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(176,224,228,.22);border-radius:20px;width:100%;max-width:520px;max-height:86vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 24px 16px;border-bottom:1px solid rgba(176,224,228,.10);flex-shrink:0;">
         <div>
           <div id="cgModalNome" style="font-family:'Outfit',sans-serif;font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--tx);"></div>
           <div id="cgModalSub" style="font-size:11px;color:var(--tm);margin-top:3px;"></div>
         </div>
-        <button id="cgCloseBtn" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--b1);background:var(--s3);color:var(--tx);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color .18s;">✕</button>
+        <button id="cgCloseBtn" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--b1);background:var(--s3);color:var(--tx);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:inherit;">✕</button>
       </div>
       <div id="cgModalBody" style="overflow-y:auto;padding:20px 24px 24px;flex:1;"></div>
     </div>
   </div>
 
+</div>
 <script>
 
-
-function updateClock() {
-  const now = new Date();
-  const h = String(now.getHours()).padStart(2, '0');
-  const m = String(now.getMinutes()).padStart(2, '0');
-  document.getElementById('clock').textContent = h + ':' + m;
+// ── RELÓGIO ──────────────────────────────────────────────────
+function updateClock(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('clock').textContent=h+':'+m;
 }
 updateClock();
-setInterval(updateClock, 1000);
+setInterval(updateClock,1000);
 
-// ── ESCALA DE TÉCNICOS ──────────────────────────────────────
-const SCHEDULE = {
-  1: {
-    romario: { horario: '07h–16h48', dias: ['CG Morumbi','CG Anália Franco / Tatuapé','CG Santana','CG Paraíso','Dia flex'] },
-    roger:   { horario: '14h–22h48', dias: ['CG Morumbi','CG Anália Franco / Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville'] }
-  },
-  2: {
-    romario: { horario: '07h–16h48', dias: ['CG Morumbi','CG Anália Franco / Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville'] },
-    roger:   { horario: '14h–22h48', dias: ['CG Morumbi','CG Anália Franco / Tatuapé','CG Santana','CG Paraíso','Dia flex'] }
-  }
+// ── ESCALA DE TÉCNICOS ───────────────────────────────────────
+const SCHEDULE={
+  1:{romario:{horario:'07h–16h48',dias:['CG Morumbi','CG Anália Franco / Tatuapé','CG Santana','CG Paraíso','Dia flex']},roger:{horario:'14h–22h48',dias:['CG Morumbi','CG Anália Franco / Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']}},
+  2:{romario:{horario:'07h–16h48',dias:['CG Morumbi','CG Anália Franco / Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']},roger:{horario:'14h–22h48',dias:['CG Morumbi','CG Anália Franco / Tatuapé','CG Santana','CG Paraíso','Dia flex']}}
 };
+const DAYS_SHORT=['Seg','Ter','Qua','Qui','Sex'];
+const MONTH_NAMES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 
-const DAYS_SHORT = ['Seg','Ter','Qua','Qui','Sex'];
-const MONTH_NAMES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-
-function getWeeksOfMonth(year, month) {
-  const weeks = [];
-  let d = new Date(year, month, 1);
-  while (d.getDay() !== 1) d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1);
-  while (d.getMonth() === month) {
-    const mon = new Date(d);
-    const fri = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 4);
-    const type = weekType(mon);
-    weeks.push({ mon, fri, type });
-    d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 7);
+function getWeeksOfMonth(year,month){
+  const weeks=[];let d=new Date(year,month,1);
+  while(d.getDay()!==1) d=new Date(d.getFullYear(),d.getMonth(),d.getDate()+1);
+  while(d.getMonth()===month){
+    const mon=new Date(d);const fri=new Date(d.getFullYear(),d.getMonth(),d.getDate()+4);
+    const type=weekType(mon);weeks.push({mon,fri,type});
+    d=new Date(d.getFullYear(),d.getMonth(),d.getDate()+7);
   }
   return weeks;
 }
-
-function getMonday(d) {
-  const copy = new Date(d);
-  const day = copy.getDay();
-  const diff = copy.getDate() - day + (day === 0 ? -6 : 1);
+function getMonday(d){
+  const copy=new Date(d);const day=copy.getDay();
+  const diff=copy.getDate()-day+(day===0?-6:1);
   return new Date(copy.setDate(diff));
 }
-
-function weekType(monday) {
-  const MUDANCA = new Date(2026, 3, 6); // 06/04/2026 — semanas invertidas a partir daqui
-  if (monday >= MUDANCA) {
-    return monday.getDate() % 2 === 0 ? 1 : 2; // PAR = S1, ÍMPAR = S2
-  }
-  return monday.getDate() % 2 !== 0 ? 1 : 2;
+function weekType(monday){
+  const MUDANCA=new Date(2026,3,6);
+  if(monday>=MUDANCA) return monday.getDate()%2===0?1:2;
+  return monday.getDate()%2!==0?1:2;
 }
-function fmt(d) { return String(d.getDate()).padStart(2,'0') + '/' + String(d.getMonth()+1).padStart(2,'0'); }
+function fmt(d){return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0');}
 
-function buildWeekDetail(wtype) {
-  const s = SCHEDULE[wtype];
-  const colors = { romario: '#9B97D4', roger: '#7BBFC4' };
-  const names = { romario: 'Romário', roger: 'Roger' };
-  let html = '<div style="display:grid;gap:10px;padding:10px 0 4px;">';
-  ['romario','roger'].forEach((tech, ti) => {
-    const info = s[tech];
-    if (ti > 0) html += '<div style="height:1px;background:rgba(110,105,173,0.12);margin:0;"></div>';
-    html += '<div>';
-    html += '<div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">';
-    html += '<span style="font-size:12px;font-weight:700;color:' + colors[tech] + '">' + names[tech] + '</span>';
-    html += '<span style="font-size:10px;color:var(--text-muted)">' + info.horario + '</span>';
-    html += '</div><div style="display:grid;gap:2px;">';
-    info.dias.forEach((local, i) => {
-      const isFlex = local === 'Dia flex';
-      html += '<div style="display:flex;align-items:center;gap:8px;font-size:11px;padding:2px 4px;border-radius:4px;">';
-      html += '<span style="font-weight:700;color:var(--text-muted);min-width:26px">' + DAYS_SHORT[i] + '</span>';
-      html += '<span style="color:' + (isFlex ? '#3DAB72' : 'var(--text)') + '">' + local + '</span>';
-      html += '</div>';
+function buildWeekDetail(wtype){
+  const s=SCHEDULE[wtype];
+  const colors={romario:'var(--v1)',roger:'var(--t1)'};
+  const names={romario:'Romário',roger:'Roger'};
+  let html='<div style="display:grid;gap:10px;padding:10px 0 4px;">';
+  ['romario','roger'].forEach((tech,ti)=>{
+    const info=s[tech];
+    if(ti>0) html+='<div style="height:1px;background:rgba(110,105,173,.12);margin:0;"></div>';
+    html+='<div><div style="display:flex;align-items:center;gap:6px;margin-bottom:5px;">';
+    html+='<span style="font-size:12px;font-weight:700;color:'+colors[tech]+'">'+names[tech]+'</span>';
+    html+='<span style="font-size:10px;color:var(--tm)">'+info.horario+'</span></div><div style="display:grid;gap:2px;">';
+    info.dias.forEach((local,i)=>{
+      const isFlex=local==='Dia flex';
+      html+='<div style="display:flex;align-items:center;gap:8px;font-size:11px;padding:2px 4px;border-radius:4px;">';
+      html+='<span style="font-weight:700;color:var(--td);min-width:26px">'+DAYS_SHORT[i]+'</span>';
+      html+='<span style="color:'+(isFlex?'var(--green)':'var(--tx)')+'">'+local+'</span></div>';
     });
-    html += '</div></div>';
+    html+='</div></div>';
   });
-  html += '</div>';
+  html+='</div>';
   return html;
 }
 
-function initSchedule() {
-  const today = new Date();
-  const monday = getMonday(new Date());
-  const wtype = weekType(monday);
-  const todayIdx = today.getDay() - 1;
-
-  // Badge
-  document.getElementById('weekBadge').textContent =
-    'Semana ' + wtype + '  ·  ' + fmt(monday) + ' – ' + fmt(new Date(monday.getTime() + 4*86400000));
-
-  // Badge técnicos no header
-  const tecContent = document.getElementById('tecBadgeContent');
-  if (tecContent) {
-    const DAYS_PT_HDR = ['Seg','Ter','Qua','Qui','Sex'];
-    const MONTHS_PT_HDR = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-    const isWeekend = todayIdx < 0 || todayIdx > 4;
-    const dataFmt = String(today.getDate()).padStart(2,'0') + '/' + MONTHS_PT_HDR[today.getMonth()];
-    if (isWeekend) {
-      tecContent.innerHTML = '<span style="font-size:11px;color:var(--text-muted);">Fim de semana 🏖️</span>';
-    } else {
-      const s2 = SCHEDULE[wtype];
-      const locR = s2.romario.dias[todayIdx];
-      const locG = s2.roger.dias[todayIdx];
-      tecContent.innerHTML =
-        '<div style="font-size:10px;color:var(--text-muted);font-weight:600;">' + DAYS_PT_HDR[todayIdx] + ' ' + dataFmt + '</div>' +
-        '<div style="display:flex;gap:10px;">' +
-          '<span style="font-size:11px;font-weight:600;"><span style="color:#9B97D4;">Romário</span> <span style="color:var(--text);opacity:0.85;">' + locR + '</span></span>' +
-          '<span style="font-size:11px;font-weight:600;"><span style="color:#7BBFC4;">Roger</span> <span style="color:var(--text);opacity:0.85;">' + locG + '</span></span>' +
+function initSchedule(){
+  const today=new Date();const monday=getMonday(new Date());const wtype=weekType(monday);const todayIdx=today.getDay()-1;
+  document.getElementById('weekBadge').textContent='Semana '+wtype+'  ·  '+fmt(monday)+' – '+fmt(new Date(monday.getTime()+4*86400000));
+  const tecContent=document.getElementById('tecBadgeContent');
+  if(tecContent){
+    const DAYS_PT=['Seg','Ter','Qua','Qui','Sex'];const MONTHS_PT=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    const isWeekend=todayIdx<0||todayIdx>4;const dataFmt=String(today.getDate()).padStart(2,'0')+'/'+MONTHS_PT[today.getMonth()];
+    if(isWeekend){tecContent.innerHTML='<span style="font-size:11px;color:var(--tm);">Fim de semana 🏖️</span>';}
+    else{
+      const s2=SCHEDULE[wtype];const locR=s2.romario.dias[todayIdx];const locG=s2.roger.dias[todayIdx];
+      tecContent.innerHTML='<div style="font-size:10px;color:var(--tm);font-weight:600;">'+DAYS_PT[todayIdx]+' '+dataFmt+'</div>'+
+        '<div style="display:flex;gap:10px;">'+
+        '<span style="font-size:11px;font-weight:600;"><span style="color:var(--v1);">Romário</span> <span style="color:var(--tx);opacity:.85;">'+locR+'</span></span>'+
+        '<span style="font-size:11px;font-weight:600;"><span style="color:var(--t1);">Roger</span> <span style="color:var(--tx);opacity:.85;">'+locG+'</span></span>'+
         '</div>';
     }
   }
-
-  // Hoje
-  const sched = document.getElementById('currentWeekSchedule');
-  const s = SCHEDULE[wtype];
-  const isWeekday = todayIdx >= 0 && todayIdx <= 4;
-  const DAYS_PT = ['Segunda','Terça','Quarta','Quinta','Sexta'];
-  const MONTHS_PT = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-  const dataHoje = (isWeekday ? DAYS_PT[todayIdx] : 'Hoje') +
-    ', ' + String(today.getDate()).padStart(2,'0') + '/' + MONTHS_PT[today.getMonth()];
-
-  // Update label with date
-  const hojeLabel = document.getElementById('hojeLabel');
-  if (hojeLabel) hojeLabel.textContent = dataHoje;
-
-  if (isWeekday) {
-    ['romario','roger'].forEach((tech, ti) => {
-      const color = tech === 'romario' ? '#9B97D4' : '#7BBFC4';
-      const name = tech === 'romario' ? 'Romário' : 'Roger';
-      const local = s[tech].dias[todayIdx];
-      const isFlex = local === 'Dia flex';
-      const row = document.createElement('div');
-      row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;font-size:12px;' +
-        (ti > 0 ? 'margin-top:7px;padding-top:7px;border-top:1px solid rgba(110,105,173,0.12);' : '');
-      row.innerHTML =
-        '<span style="font-weight:700;color:' + color + '">' + name + '</span>' +
-        '<span style="color:' + (isFlex ? '#3DAB72' : 'var(--text)') + ';font-weight:500;">' + local + '</span>';
+  const sched=document.getElementById('currentWeekSchedule');
+  const s=SCHEDULE[wtype];const isWeekday=todayIdx>=0&&todayIdx<=4;
+  const DAYS_PT=['Segunda','Terça','Quarta','Quinta','Sexta'];const MONTHS_PT=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  const dataHoje=(isWeekday?DAYS_PT[todayIdx]:'Hoje')+', '+String(today.getDate()).padStart(2,'0')+'/'+MONTHS_PT[today.getMonth()];
+  const hojeLabel=document.getElementById('hojeLabel');
+  if(hojeLabel) hojeLabel.textContent=dataHoje;
+  if(isWeekday){
+    ['romario','roger'].forEach((tech,ti)=>{
+      const color=tech==='romario'?'var(--v1)':'var(--t1)';const name=tech==='romario'?'Romário':'Roger';
+      const local=s[tech].dias[todayIdx];const isFlex=local==='Dia flex';
+      const row=document.createElement('div');
+      row.style.cssText='display:flex;align-items:center;justify-content:space-between;font-size:12px;'+(ti>0?'margin-top:7px;padding-top:7px;border-top:1px solid rgba(110,105,173,.12);':'');
+      row.innerHTML='<span style="font-weight:700;color:'+color+'">'+name+'</span><span style="color:'+(isFlex?'var(--green)':'var(--tx)')+';font-weight:500;">'+local+'</span>';
       sched.appendChild(row);
     });
   } else {
-    sched.innerHTML = '<div style="font-size:12px;color:var(--text-muted);text-align:center;padding:4px 0">Fim de semana 🏖️</div>';
+    sched.innerHTML='<div style="font-size:12px;color:var(--tm);text-align:center;padding:4px 0">Fim de semana 🏖️</div>';
   }
-
-  // Calendário — mês atual clicável
-  const cal = document.getElementById('quarterCalendar');
-
-  // Banner de mudança (exibe em Abril 2026)
-  if (today.getFullYear() === 2026 && today.getMonth() === 3) {
-    const banner = document.createElement('div');
-    banner.style.cssText = 'font-size:10px;font-weight:600;color:#E8A84A;background:rgba(232,168,74,0.10);border:1px solid rgba(232,168,74,0.25);border-radius:7px;padding:5px 8px;margin-bottom:6px;line-height:1.5;';
-    banner.innerHTML = '⚠️ <b>Mudança a partir de 06/04:</b> Seg PAR → S1 · Seg ÍMPAR → S2';
+  const cal=document.getElementById('quarterCalendar');
+  if(today.getFullYear()===2026&&today.getMonth()===3){
+    const banner=document.createElement('div');
+    banner.style.cssText='font-size:10px;font-weight:600;color:var(--yellow);background:rgba(255,184,48,.08);border:1px solid rgba(255,184,48,.2);border-radius:7px;padding:5px 8px;margin-bottom:6px;line-height:1.5;';
+    banner.innerHTML='⚠️ <b>Mudança a partir de 06/04:</b> Seg PAR → S1 · Seg ÍMPAR → S2';
     cal.appendChild(banner);
   }
-
-  const weeks = getWeeksOfMonth(today.getFullYear(), today.getMonth());
-
-  const monthLabel = document.createElement('div');
-  monthLabel.style.cssText = 'font-size:10px;font-weight:700;color:var(--text-muted);margin-bottom:4px;';
-  monthLabel.textContent = MONTH_NAMES[today.getMonth()] + ' ' + today.getFullYear();
+  const weeks=getWeeksOfMonth(today.getFullYear(),today.getMonth());
+  const monthLabel=document.createElement('div');
+  monthLabel.style.cssText='font-size:10px;font-weight:700;color:var(--td);margin-bottom:4px;';
+  monthLabel.textContent=MONTH_NAMES[today.getMonth()]+' '+today.getFullYear();
   cal.appendChild(monthLabel);
-
-  weeks.forEach((week, idx) => {
-    const isCurrentWeek = week.mon.toDateString() === monday.toDateString();
-    const isPast = week.fri < today && !isCurrentWeek;
-
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText = 'border-radius:8px;overflow:hidden;margin-bottom:2px;border:1px solid ' +
-      (isCurrentWeek ? 'rgba(110,105,173,0.35)' : 'transparent') + ';';
-
-    // Row
-    const row = document.createElement('div');
-    row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:5px 8px;font-size:11px;cursor:pointer;transition:background 0.15s;user-select:none;' +
-      (isCurrentWeek ? 'background:rgba(110,105,173,0.18);' : isPast ? 'opacity:0.35;' : 'background:rgba(255,255,255,0.02);');
-
-    // Chevron element
-    const chevron = document.createElement('span');
-    chevron.textContent = isCurrentWeek ? '▲' : '▼';
-    chevron.style.cssText = 'font-size:9px;color:var(--text-muted);transition:transform 0.2s;margin-left:4px;';
-
-    const badge = document.createElement('span');
-    badge.style.cssText = 'font-weight:700;padding:1px 7px;border-radius:8px;font-size:10px;' +
-      (week.type === 1 ? 'background:rgba(110,105,173,0.15);color:#9B97D4;' : 'background:rgba(123,191,196,0.15);color:#7BBFC4;');
-    badge.textContent = 'S' + week.type;
-
-    const dateSpan = document.createElement('span');
-    dateSpan.style.cssText = 'color:var(--text-muted);font-weight:500;flex:1;';
-    dateSpan.textContent = fmt(week.mon) + ' – ' + fmt(week.fri);
-
-    const rightSide = document.createElement('div');
-    rightSide.style.cssText = 'display:flex;align-items:center;gap:4px;';
-
-    if (isCurrentWeek) {
-      const nowTag = document.createElement('span');
-      nowTag.style.cssText = 'font-size:9px;color:#6E69AD;font-weight:700;margin-right:4px;';
-      nowTag.textContent = '← agora';
-      rightSide.appendChild(nowTag);
+  weeks.forEach((week)=>{
+    const isCurrentWeek=week.mon.toDateString()===monday.toDateString();
+    const isPast=week.fri<today&&!isCurrentWeek;
+    const wrapper=document.createElement('div');
+    wrapper.style.cssText='border-radius:8px;overflow:hidden;margin-bottom:2px;border:1px solid '+(isCurrentWeek?'rgba(110,105,173,.35)':'transparent')+';';
+    const row=document.createElement('div');
+    row.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:5px 8px;font-size:11px;cursor:pointer;transition:background .15s;user-select:none;'+(isCurrentWeek?'background:rgba(110,105,173,.18);':isPast?'opacity:.35;':'background:rgba(255,255,255,.02);');
+    const chevron=document.createElement('span');chevron.textContent=isCurrentWeek?'▲':'▼';chevron.style.cssText='font-size:9px;color:var(--td);transition:transform .2s;margin-left:4px;';chevron.classList.add('week-chevron');
+    const badge=document.createElement('span');badge.style.cssText='font-weight:700;padding:1px 7px;border-radius:8px;font-size:10px;'+(week.type===1?'background:rgba(110,105,173,.15);color:var(--v1);':'background:rgba(176,224,228,.15);color:var(--t1);');badge.textContent='S'+week.type;
+    const dateSpan=document.createElement('span');dateSpan.style.cssText='color:var(--td);font-weight:500;flex:1;';dateSpan.textContent=fmt(week.mon)+' – '+fmt(week.fri);
+    const rightSide=document.createElement('div');rightSide.style.cssText='display:flex;align-items:center;gap:4px;';
+    if(isCurrentWeek){const nowTag=document.createElement('span');nowTag.style.cssText='font-size:9px;color:var(--v1);font-weight:700;margin-right:4px;';nowTag.textContent='← agora';rightSide.appendChild(nowTag);}
+    rightSide.appendChild(badge);rightSide.appendChild(chevron);
+    row.appendChild(dateSpan);row.appendChild(rightSide);
+    const detail=document.createElement('div');
+    detail.style.cssText='overflow:hidden;transition:max-height .3s ease;padding:0 10px;background:rgba(110,105,173,.06);max-height:'+(isCurrentWeek?'300px':'0')+';';
+    detail.innerHTML=buildWeekDetail(week.type);detail.classList.add('week-detail');
+    if(!isPast){
+      row.addEventListener('click',function(){
+        const isOpen=detail.style.maxHeight!=='0px';
+        cal.querySelectorAll('.week-detail').forEach(d=>{d.style.maxHeight='0px';});
+        cal.querySelectorAll('.week-chevron').forEach(c=>{c.textContent='▼';});
+        cal.querySelectorAll('.week-wrapper').forEach(w=>{w.style.border='1px solid transparent';});
+        if(!isOpen){detail.style.maxHeight='300px';chevron.textContent='▲';wrapper.style.border='1px solid rgba(110,105,173,.35)';}
+        else if(isCurrentWeek){wrapper.style.border='1px solid rgba(110,105,173,.35)';}
+      });
     }
-    rightSide.appendChild(badge);
-    rightSide.appendChild(chevron);
-
-    row.appendChild(dateSpan);
-    row.appendChild(rightSide);
-
-    // Detail panel
-    const detail = document.createElement('div');
-    detail.style.cssText = 'overflow:hidden;transition:max-height 0.3s ease;padding:0 10px;background:rgba(110,105,173,0.06);max-height:' +
-      (isCurrentWeek ? '300px' : '0') + ';';
-    detail.innerHTML = buildWeekDetail(week.type);
-
-    // Click toggle
-    row.addEventListener('click', function() {
-      if (isPast) return;
-      const isOpen = detail.style.maxHeight !== '0px';
-      // Close all
-      cal.querySelectorAll('.week-detail').forEach(d => { d.style.maxHeight = '0px'; });
-      cal.querySelectorAll('.week-chevron').forEach(c => { c.textContent = '▼'; });
-      cal.querySelectorAll('.week-wrapper').forEach(w => { w.style.border = '1px solid transparent'; });
-      // Open if was closed
-      if (!isOpen) {
-        detail.style.maxHeight = '300px';
-        chevron.textContent = '▲';
-        wrapper.style.border = '1px solid rgba(110,105,173,0.40)';
-      } else if (isCurrentWeek) {
-        wrapper.style.border = '1px solid rgba(110,105,173,0.35)';
-      }
-    });
-
-    // Hover
-    if (!isPast) {
-      row.addEventListener('mouseenter', () => { if (detail.style.maxHeight === '0px') row.style.background = 'rgba(110,105,173,0.08)'; });
-      row.addEventListener('mouseleave', () => { if (!isCurrentWeek) row.style.background = detail.style.maxHeight !== '0px' ? 'rgba(110,105,173,0.10)' : 'rgba(255,255,255,0.02)'; });
-    }
-
-    detail.classList.add('week-detail');
-    chevron.classList.add('week-chevron');
-    wrapper.classList.add('week-wrapper');
-
-    wrapper.appendChild(row);
-    wrapper.appendChild(detail);
-    cal.appendChild(wrapper);
+    wrapper.classList.add('week-wrapper');wrapper.appendChild(row);wrapper.appendChild(detail);cal.appendChild(wrapper);
   });
 }
-
 initSchedule();
-loadPreventivas();
 
 // ── MANUTENÇÕES PREVENTIVAS ──────────────────────────────────
 function loadPreventivas() {
   const SHEET_ID = '1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q';
   const url = 'https://docs.google.com/spreadsheets/d/' + SHEET_ID + '/gviz/tq?tqx=out:json';
-
-  fetch(url)
-    .then(r => r.text())
-    .then(text => {
-      // Google wraps response in google.visualization.Query.setResponse(...)
-      const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
-      const rows = json.table.rows;
-
-      let vencido = 0, avencer = 0, emdia = 0;
-      const atencao = [];
-
-      rows.forEach(row => {
-        if (!row.c || !row.c[0] || !row.c[0].v) return;
-        const cg      = row.c[0] ? (row.c[0].v || '') : '';
-        const servico = row.c[1] ? (row.c[1].v || '') : '';
-        const status  = row.c[5] ? (row.c[5].v || '') : '';
-        const proxRaw = row.c[4] ? row.c[4].v : null;
-
-        // Parse próxima execução
-        let proxDate = null;
-        if (proxRaw && typeof proxRaw === 'string' && proxRaw.startsWith('Date(')) {
-          const parts = proxRaw.replace('Date(','').replace(')','').split(',');
-          proxDate = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
-        }
-
-        const statusLower = status.toLowerCase();
-        if (statusLower.includes('vencido')) {
-          vencido++;
-          atencao.push({ cg, servico, status: 'vencido', proxDate });
-        } else if (statusLower.includes('vencer')) {
-          avencer++;
-          atencao.push({ cg, servico, status: 'avencer', proxDate });
-        } else if (statusLower.includes('dia')) {
-          emdia++;
-        }
-      });
-
-      document.getElementById('cntVencido').textContent = vencido;
-      document.getElementById('cntAvencer').textContent = avencer;
-      document.getElementById('cntEmdia').textContent = emdia;
-      // Última atualização
-      const nowUpd = new Date();
-      const updStr = String(nowUpd.getDate()).padStart(2,'0') + '/' + String(nowUpd.getMonth()+1).padStart(2,'0') + ' ' + String(nowUpd.getHours()).padStart(2,'0') + ':' + String(nowUpd.getMinutes()).padStart(2,'0');
-      const updEl = document.getElementById('prevLastUpdate');
-      if (updEl) updEl.textContent = 'atualizado ' + updStr;
-
-      const list = document.getElementById('prevList');
-      list.innerHTML = '';
-
-      if (atencao.length === 0) {
-        list.innerHTML = '<div style="font-size:12px;color:#3DAB72;text-align:center;padding:8px;">Tudo em dia ✅</div>';
-        return;
+  fetch(url).then(r=>r.text()).then(text=>{
+    const json=JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+    const rows=json.table.rows;
+    let vencido=0,avencer=0,emdia=0; const atencao=[];
+    rows.forEach(row=>{
+      if(!row.c||!row.c[0]||!row.c[0].v) return;
+      const cg=row.c[0]?(row.c[0].v||''):'';
+      const servico=row.c[1]?(row.c[1].v||''):'';
+      const status=row.c[5]?(row.c[5].v||''):'';
+      const proxRaw=row.c[4]?row.c[4].v:null;
+      let proxDate=null;
+      if(proxRaw&&typeof proxRaw==='string'&&proxRaw.startsWith('Date(')){
+        const parts=proxRaw.replace('Date(','').replace(')','').split(',');
+        proxDate=new Date(parseInt(parts[0]),parseInt(parts[1]),parseInt(parts[2]));
       }
-
-      // Sort: vencidos primeiro, depois a vencer por data
-      atencao.sort((a, b) => {
-        if (a.status !== b.status) return a.status === 'vencido' ? -1 : 1;
-        if (a.proxDate && b.proxDate) return a.proxDate - b.proxDate;
-        return 0;
-      });
-
-      // Show max 6 items
-      atencao.slice(0, 6).forEach(item => {
-        const isVencido = item.status === 'vencido';
-        const color = isVencido ? '#D94F4F' : '#E8A84A';
-        const bg = isVencido ? 'rgba(217,79,79,0.08)' : 'rgba(232,168,74,0.08)';
-        const border = isVencido ? 'rgba(217,79,79,0.20)' : 'rgba(232,168,74,0.20)';
-
-        const dateStr = item.proxDate
-          ? String(item.proxDate.getDate()).padStart(2,'0') + '/' + String(item.proxDate.getMonth()+1).padStart(2,'0')
-          : '';
-
-        const el = document.createElement('div');
-        el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:5px 8px;border-radius:7px;background:' + bg + ';border:1px solid ' + border + ';';
-        el.innerHTML =
-          '<div style="flex:1;min-width:0;">' +
-            '<div style="font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + item.cg + ' · ' + item.servico + '</div>' +
-          '</div>' +
-          '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:6px;">' +
-            (dateStr ? '<span style="font-size:10px;color:var(--text-muted)">' + dateStr + '</span>' : '') +
-            '<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:6px;background:' + (isVencido ? 'rgba(217,79,79,0.15)' : 'rgba(232,168,74,0.15)') + ';color:' + color + '">' + (isVencido ? 'VENCIDO' : 'A VENCER') + '</span>' +
-          '</div>';
-        list.appendChild(el);
-      });
-
-      if (atencao.length > 6) {
-        const more = document.createElement('div');
-        more.style.cssText = 'font-size:11px;color:var(--text-muted);text-align:center;padding:4px;';
-        more.textContent = '+ ' + (atencao.length - 6) + ' mais na planilha';
-        list.appendChild(more);
-      }
-    })
-    .catch(err => {
-      console.error('Preventivas erro:', err);
-      document.getElementById('cntVencido').textContent = '!';
-      document.getElementById('cntAvencer').textContent = '!';
-      document.getElementById('cntEmdia').textContent   = '!';
-      document.getElementById('prevList').innerHTML =
-        '<div style="font-size:11px;color:#D94F4F;text-align:center;padding:8px;">Erro ao carregar. Verifique se a planilha está pública.</div>';
+      const sl=status.toLowerCase();
+      if(sl.includes('vencido')){vencido++;atencao.push({cg,servico,proxDate,status:'vencido'});}
+      else if(sl.includes('vencer')){avencer++;atencao.push({cg,servico,proxDate,status:'avencer'});}
+      else{emdia++;}
     });
+    document.getElementById('cntVencido').textContent=vencido;
+    document.getElementById('cntAvencer').textContent=avencer;
+    document.getElementById('cntEmdia').textContent=emdia;
+    const nowUpd=new Date();
+    const updEl=document.getElementById('prevLastUpdate');
+    if(updEl) updEl.textContent='atualizado '+String(nowUpd.getDate()).padStart(2,'0')+'/'+String(nowUpd.getMonth()+1).padStart(2,'0')+' '+String(nowUpd.getHours()).padStart(2,'0')+':'+String(nowUpd.getMinutes()).padStart(2,'0');
+    const list=document.getElementById('prevList');
+    list.innerHTML='';
+    if(atencao.length===0){list.innerHTML='<div style="font-size:12px;color:var(--green);text-align:center;padding:8px;">Tudo em dia ✅</div>';return;}
+    atencao.sort((a,b)=>{if(a.status!==b.status)return a.status==='vencido'?-1:1;if(a.proxDate&&b.proxDate)return a.proxDate-b.proxDate;return 0;});
+    atencao.slice(0,6).forEach(item=>{
+      const isV=item.status==='vencido';
+      const color=isV?'var(--red)':'var(--yellow)';
+      const bg=isV?'rgba(255,107,107,.08)':'rgba(255,184,48,.08)';
+      const border=isV?'rgba(255,107,107,.18)':'rgba(255,184,48,.18)';
+      const dateStr=item.proxDate?String(item.proxDate.getDate()).padStart(2,'0')+'/'+String(item.proxDate.getMonth()+1).padStart(2,'0'):'';
+      const el=document.createElement('div');
+      el.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:8px;background:'+bg+';border:1px solid '+border+';';
+      el.innerHTML='<div style="flex:1;min-width:0;"><div style="font-size:11px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+item.cg+' · '+item.servico+'</div></div>'+
+        '<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;margin-left:6px;">'+(dateStr?'<span style="font-size:10px;color:var(--tm)">'+dateStr+'</span>':'')+
+        '<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:'+bg+';color:'+color+'">'+( isV?'VENCIDO':'A VENCER')+'</span></div>';
+      list.appendChild(el);
+    });
+    if(atencao.length>6){const more=document.createElement('div');more.style.cssText='font-size:11px;color:var(--tm);text-align:center;padding:4px;';more.textContent='+ '+(atencao.length-6)+' mais na planilha';list.appendChild(more);}
+    // atualizar stat chip
+    const sv=document.getElementById('statVencidas');
+    if(sv){sv.textContent=vencido;sv.className='sc-val '+(vencido>0?'r':'g');}
+  }).catch(err=>{
+    console.error('Preventivas erro:',err);
+    document.getElementById('cntVencido').textContent='!';
+    document.getElementById('cntAvencer').textContent='!';
+    document.getElementById('cntEmdia').textContent='!';
+    document.getElementById('prevList').innerHTML='<div style="font-size:11px;color:var(--red);text-align:center;padding:8px;">Erro ao carregar. Verifique se a planilha está pública.</div>';
+  });
 }
 
 // ── CASAS GENIAIS INFO ──────────────────────────────────────
 const CG_INFO_URL = 'https://script.google.com/macros/s/AKfycbyypUjU49FXATep7p3cmJFmZQI2Cgg8M8ioZmk36GCI4sWXq2ZS_o0mt9KCt7J1RbWf/exec';
-
-let cgInfoData = [];
+var cgInfoData = [];
 
 function loadCGInfo() {
-  if (!CG_INFO_URL) {
-    document.getElementById('cgList').innerHTML =
-      '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Configure a URL do script nas configurações.</div>';
-    return;
-  }
-
-  fetch(CG_INFO_URL)
-    .then(r => r.json())
-    .then(data => {
-      if (!data.ok) throw new Error(data.erro);
-      cgInfoData = data.cgs;
-      renderCGList();
-    })
-    .catch(() => {
-      document.getElementById('cgList').innerHTML =
-        '<div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
-    });
+  fetch(CG_INFO_URL).then(r=>r.json()).then(data=>{
+    if(!data.ok) throw new Error(data.erro);
+    cgInfoData=data.cgs;
+    renderCGList();
+  }).catch(()=>{
+    document.getElementById('cgList').innerHTML='<div style="font-size:11px;color:var(--tm);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
+  });
 }
 
 function renderCGList() {
-  const list = document.getElementById('cgList');
-  list.style.display = 'grid';
-  list.style.gridTemplateColumns = 'repeat(4,1fr)';
-  list.style.gap = '8px';
-  list.style.display = 'grid';
-  list.style.gridTemplateColumns = 'repeat(4,1fr)';
-  list.style.gap = '8px';
-  list.innerHTML = '';
-  cgInfoData.forEach((cg, idx) => {
-    const nome = cg.cg.replace('NOVA-CG-', 'CG ').replace('CG-', 'CG ').replace('WL- ', '');
-    const salas = cg.totalSalas ? cg.totalSalas + ' salas' : '';
-    const zona  = cg.zona || '';
-
-    const el = document.createElement('div');
-    el.style.cssText = 'display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;cursor:pointer;transition:all 0.18s;background:rgba(123,191,196,0.05);border:1px solid rgba(123,191,196,0.12);';
-    el.innerHTML =
-      '<div style="flex:1;min-width:0;">' +
-        '<div style="font-size:12px;font-weight:600;color:var(--text);">' + nome + '</div>' +
-        '<div style="font-size:10px;color:var(--text-muted);margin-top:1px;">' + [zona, salas].filter(Boolean).join(' · ') + '</div>' +
-      '</div>' +
-      '<span style="font-size:12px;color:var(--teal);font-weight:700;margin-left:8px;opacity:0.5;transition:opacity .18s;">→</span>';
-
-    el.addEventListener('mouseenter', () => { el.style.background = 'rgba(123,191,196,0.15)'; el.style.borderColor = 'rgba(123,191,196,0.40)'; el.style.transform = 'translateY(-1px)'; el.style.boxShadow = '0 4px 16px rgba(123,191,196,0.12)'; });
-    el.addEventListener('mouseleave', () => { el.style.background = 'rgba(123,191,196,0.05)'; el.style.borderColor = 'rgba(123,191,196,0.12)'; el.style.transform = ''; el.style.boxShadow = ''; });
-    el.addEventListener('click', () => abrirCGModal(idx));
-
+  const list=document.getElementById('cgList');
+  list.style.display='grid';
+  list.style.gridTemplateColumns='repeat(4,1fr)';
+  list.style.gap='8px';
+  list.innerHTML='';
+  cgInfoData.forEach((cg,idx)=>{
+    const nome=cg.cg.replace('NOVA-CG-','CG ').replace('CG-','CG ').replace('WL- ','');
+    const salas=cg.totalSalas?cg.totalSalas+' salas':'';
+    const zona=cg.zona||'';
+    const el=document.createElement('div');
+    el.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-radius:10px;cursor:pointer;transition:all .18s;background:rgba(176,224,228,.05);border:1px solid rgba(176,224,228,.12);';
+    el.innerHTML='<div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:600;color:var(--tx);">'+nome+'</div><div style="font-size:10px;color:var(--tm);margin-top:1px;">'+(zona&&salas?zona+' · '+salas:zona||salas||'')+'</div></div><span style="font-size:12px;color:var(--t1);font-weight:700;margin-left:8px;opacity:.5;transition:opacity .18s;">→</span>';
+    el.addEventListener('mouseenter',()=>{el.style.background='rgba(176,224,228,.12)';el.style.borderColor='rgba(176,224,228,.35)';el.style.transform='translateY(-1px)';});
+    el.addEventListener('mouseleave',()=>{el.style.background='rgba(176,224,228,.05)';el.style.borderColor='rgba(176,224,228,.12)';el.style.transform='';});
+    el.addEventListener('click',()=>abrirCGModal(idx));
     list.appendChild(el);
   });
 }
 
 function abrirCGModal(idx) {
-  const cg = cgInfoData[idx];
-  const nome = cg.cg.replace('NOVA-CG-', 'CG ').replace('CG-', 'CG ').replace('WL- ', '');
-  const sub = [cg.zona, cg.totalSalas ? cg.totalSalas + ' salas' : ''].filter(Boolean).join(' · ');
-
-  document.getElementById('cgModalNome').textContent = nome;
-  document.getElementById('cgModalSub').textContent = sub;
-
-  let html = '';
-  if (cg.endereco)          html += secao('📍 Endereço', cg.endereco);
-  if (cg.horario)           html += secao('🕐 Horário', cg.horario);
-  if (cg.totalSalas)        html += secao('🚪 Salas de atendimento', cg.totalSalas + ' salas no total');
-  if (cg.andares && cg.andares.length > 1) html += secao('🏗️ Andares', cg.andares.join('<br>'));
-  if (cg.metragem)          html += secao('📐 Metragem', cg.metragem);
-  if (cg.internetInterna || cg.internetVisitantes) {
-    const inet = [
-      cg.internetInterna    ? '🔒 Interna: ' + cg.internetInterna : '',
-      cg.internetVisitantes ? '📶 Visitantes: ' + cg.internetVisitantes : ''
-    ].filter(Boolean).join('<br>');
-    html += secao('🌐 Internet', inet);
+  const cg=cgInfoData[idx];
+  const nome=cg.cg.replace('NOVA-CG-','CG ').replace('CG-','CG ').replace('WL- ','');
+  const sub=[cg.zona,cg.totalSalas?cg.totalSalas+' salas':''].filter(Boolean).join(' · ');
+  document.getElementById('cgModalNome').textContent=nome;
+  document.getElementById('cgModalSub').textContent=sub;
+  let html='';
+  function sec(label,val){if(val) html+='<div style="margin-bottom:12px;"><div style="font-size:9px;font-weight:700;color:var(--t1);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">'+label+'</div><div style="font-size:12px;color:var(--tx);line-height:1.55;">'+String(val).replace(/\n/g,'<br>')+'</div></div>';}
+  sec('📍 Endereço',cg.endereco);sec('🕐 Horário',cg.horario);
+  sec('🚪 Salas de atendimento',cg.totalSalas?cg.totalSalas+' salas no total':'');
+  if(cg.andares&&cg.andares.length>1) sec('🏗️ Andares',cg.andares.join('<br>'));
+  sec('📐 Metragem',cg.metragem);sec('🚗 Estacionamento',cg.estacionamento);
+  sec('🔧 Responsável Técnico',cg.responsavelTec);
+  if(cg.contatoMatheus||cg.contatoMarina){
+    const c=[cg.contatoMatheus?'Matheus: '+cg.contatoMatheus:'',cg.contatoMarina?'Marina: '+cg.contatoMarina:''].filter(Boolean).join('<br>');
+    sec('📞 Facilities',c);
   }
-  if (cg.estacionamento)    html += secao('🚗 Estacionamento', cg.estacionamento);
-  if (cg.responsavelTec)    html += secao('🔧 Responsável Técnico', cg.responsavelTec);
-  if (cg.contatoMatheus || cg.contatoMarina) {
-    const contatos = [
-      cg.contatoMatheus ? 'Matheus (Manutenção): ' + cg.contatoMatheus : '',
-      cg.contatoMarina  ? 'Marina (Segurança e Limpeza): ' + cg.contatoMarina : ''
-    ].filter(Boolean).join('<br>');
-    html += secao('📞 Facilities', contatos);
-  }
-  if (cg.gerentePredial)    html += secao('🏠 Gerente Predial', cg.gerentePredial.replace(/\n/g, '<br>'));
-  if (cg.chaveiro)          html += secao('🔑 Chaveiro', cg.chaveiro);
-
-  document.getElementById('cgModalBody').innerHTML = html ||
-    '<div style="font-size:12px;color:var(--text-muted);padding:4px;">Sem detalhes disponíveis.</div>';
-
-  const modal = document.getElementById('cgModal');
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  sec('🏠 Gerente Predial',cg.gerentePredial);sec('🔑 Chaveiro',cg.chaveiro);
+  document.getElementById('cgModalBody').innerHTML=html||'<div style="font-size:12px;color:var(--tm);padding:4px;">Sem detalhes disponíveis.</div>';
+  const modal=document.getElementById('cgModal');
+  modal.style.display='flex';
+  document.body.style.overflow='hidden';
 }
 
 function fecharCGModal() {
-  document.getElementById('cgModal').style.display = 'none';
-  document.body.style.overflow = '';
+  document.getElementById('cgModal').style.display='none';
+  document.body.style.overflow='';
 }
 
-
-
-function secao(label, valor) {
-  return '<div style="margin-bottom:12px;">' +
-    '<div style="font-size:9px;font-weight:700;color:var(--t1);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">' + label + '</div>' +
-    '<div style="font-size:12px;color:var(--tx);line-height:1.55;font-weight:400;">' + valor + '</div>' +
-    '</div>';
-}
-
-loadCGInfo();
-loadClima();
-
-// ── CLIMA ────────────────────────────────────────────
-function loadClima() {
-  const url = 'https://api.open-meteo.com/v1/forecast' +
-    '?latitude=-23.5505&longitude=-46.6333' +
-    '&current=temperature_2m,weather_code,apparent_temperature' +
-    '&hourly=precipitation_probability,weather_code' +
-    '&daily=precipitation_probability_max,temperature_2m_max,temperature_2m_min' +
-    '&timezone=America%2FSao_Paulo&forecast_days=1';
-
-  fetch(url)
-    .then(r => r.json())
-    .then(data => {
-      if (!data || !data.current) throw new Error('sem dados');
-      const temp    = Math.round(data.current.temperature_2m);
-      const sensac  = Math.round(data.current.apparent_temperature);
-      const code    = data.current.weather_code;
-      const maxTemp = data.daily ? Math.round(data.daily.temperature_2m_max[0]) : null;
-      const minTemp = data.daily ? Math.round(data.daily.temperature_2m_min[0]) : null;
-
-      // Próximas 6 horas de chuva
-      const now = new Date();
-      const curHour = now.getHours();
-      let maxPrecipProx = 0;
-      let precipHoras = [];
-      if (data.hourly && data.hourly.time) {
-        data.hourly.time.forEach((t, i) => {
-          const h = new Date(t).getHours();
-          if (h >= curHour && h < curHour + 6) {
-            const p = data.hourly.precipitation_probability[i] || 0;
-            if (p > maxPrecipProx) maxPrecipProx = p;
-            precipHoras.push({ h, p, code: data.hourly.weather_code[i] });
-          }
-        });
-      }
-
-      // Badge compacto no header
-      document.getElementById('climaBadgeIcon').textContent = climaEmoji(code);
-      document.getElementById('climaBadgeTemp').textContent = temp + '°C';
-
-      // Extra: chuva ou descrição
-      let extra = '';
-      if (maxPrecipProx > 20) {
-        extra = '💧 ' + maxPrecipProx + '% próx. 6h';
-      } else {
-        extra = maxTemp !== null ? '↑' + maxTemp + '° ↓' + minTemp + '°' : climaDesc(code);
-      }
-      document.getElementById('climaBadgeExtra').textContent = extra;
-
-      // Tooltip com detalhes ao hover
-      const badge = document.getElementById('climaBadge');
-      if (badge) {
-        let tooltip = climaDesc(code) + ' · Sensação ' + sensac + '°C';
-        if (maxTemp !== null) tooltip += ' · Máx ' + maxTemp + '° Mín ' + minTemp + '°';
-        if (maxPrecipProx > 20) tooltip += ' · ⚠️ Chuva nas próximas horas (' + maxPrecipProx + '%)';
-        badge.title = tooltip;
-      }
-    })
-    .catch(err => {
-      console.warn('Clima:', err);
-      document.getElementById('climaBadgeTemp').textContent  = '--°C';
-      document.getElementById('climaBadgeExtra').textContent = '';
-    });
-}
-
-function climaEmoji(code) {
-  if (code === 0) return '☀️';
-  if (code <= 2)  return '⛅';
-  if (code <= 3)  return '☁️';
-  if (code <= 49) return '🌫️';
-  if (code <= 59) return '🌦️';
-  if (code <= 69) return '🌧️';
-  if (code <= 79) return '❄️';
-  if (code <= 84) return '🌦️';
-  if (code <= 99) return '⛈️';
-  return '🌤️';
-}
-
-function climaDesc(code) {
-  if (code === 0) return 'Céu limpo';
-  if (code <= 2)  return 'Parcialmente nublado';
-  if (code <= 3)  return 'Nublado';
-  if (code <= 49) return 'Névoa';
-  if (code <= 59) return 'Garoa';
-  if (code <= 69) return 'Chuva';
-  if (code <= 79) return 'Neve';
-  if (code <= 84) return 'Pancadas de chuva';
-  if (code <= 99) return 'Tempestade';
-  return 'Variável';
-}
-
-
-// ── TIME DELUCA ─────────────────────────────────────────────
-const DELUCA_CG_ORDER = ["Morumbi","Tatuapé","Pinheiros","Paraíso","Alphaville","Anália Franco","Santana"];
-const DELUCA_CG_STYLE = {
-  "Morumbi":       {bg:"rgba(56,100,180,0.12)",  border:"rgba(56,100,180,0.25)",  fg:"#7BA8E8"},
-  "Tatuapé":       {bg:"rgba(196,100,140,0.12)", border:"rgba(196,100,140,0.25)", fg:"#E891B8"},
-  "Pinheiros":     {bg:"rgba(200,90,60,0.12)",   border:"rgba(200,90,60,0.25)",   fg:"#E8926F"},
-  "Paraíso":       {bg:"rgba(30,160,120,0.12)",  border:"rgba(30,160,120,0.25)",  fg:"#5ED4B0"},
-  "Alphaville":    {bg:"rgba(110,105,173,0.12)", border:"rgba(110,105,173,0.25)", fg:"#9B97D4"},
-  "Anália Franco": {bg:"rgba(80,160,60,0.12)",   border:"rgba(80,160,60,0.25)",   fg:"#82CC62"},
-  "Santana":       {bg:"rgba(200,150,40,0.12)",  border:"rgba(200,150,40,0.25)",  fg:"#E8C060"},
+// ── TIME DELUCA — ACCORDION ──────────────────────────────────
+// ── DADOS TIME DELUCA ───────────────────────────────────────
+const DELUCA_CG_ORDER=['Morumbi','Tatuapé','Pinheiros','Paraíso','Alphaville','Anália Franco','Santana'];
+const DELUCA_CG_STYLE={
+  'Morumbi':      {bg:'rgba(56,100,180,.14)',  border:'rgba(56,100,180,.3)',  fg:'#7BA8E8'},
+  'Tatuapé':      {bg:'rgba(196,100,140,.14)', border:'rgba(196,100,140,.3)', fg:'#E891B8'},
+  'Pinheiros':    {bg:'rgba(200,90,60,.14)',   border:'rgba(200,90,60,.3)',   fg:'#E8926F'},
+  'Paraíso':      {bg:'rgba(30,160,120,.14)',  border:'rgba(30,160,120,.3)',  fg:'#5ED4B0'},
+  'Alphaville':   {bg:'rgba(110,105,173,.14)', border:'rgba(110,105,173,.3)', fg:'#9B97D4'},
+  'Anália Franco':{bg:'rgba(80,160,60,.14)',   border:'rgba(80,160,60,.3)',   fg:'#82CC62'},
+  'Santana':      {bg:'rgba(200,150,40,.14)',  border:'rgba(200,150,40,.3)',  fg:'#E8C060'},
 };
-const DELUCA_DATA = [
-  {nome:"Fabricia Souza de Oliveira",       cg:"Morumbi",       turno:"Tarde", horario:"10:00–19:00", status:""},
-  {nome:"Angelica da Silva de Oliveira",    cg:"Morumbi",       turno:"Manhã", horario:"07:00–16:00", status:"cob"},
-  {nome:"Talita Cristina da Silva",         cg:"Morumbi",       turno:"Manhã", horario:"07:00–16:00", status:""},
-  {nome:"Andreia de Assis Miranda",         cg:"Morumbi",       turno:"Manhã", horario:"06:00–15:00", status:""},
-  {nome:"Adriana Alves Nascimento Gaia",    cg:"Morumbi",       turno:"Tarde", horario:"10:00–19:00", status:""},
-  {nome:"Daiana Ribeiro da Silva",          cg:"Morumbi",       turno:"Manhã", horario:"07:00–16:00", status:"lic"},
-  {nome:"Eliete Vieiras dos Santos",        cg:"Tatuapé",       turno:"Tarde", horario:"10:00–19:00", status:""},
-  {nome:"Tabata Suellen Sabino dos Santos", cg:"Tatuapé",       turno:"Manhã", horario:"07:00–16:00", status:""},
-  {nome:"Graziella Aparecida Dias",         cg:"Pinheiros",     turno:"Manhã", horario:"07:00–16:00", status:""},
-  {nome:"Liliane da Silva Cardoso",         cg:"Pinheiros",     turno:"Tarde", horario:"10:00–19:00", status:""},
-  {nome:"Adriele dos Santos Pereira",       cg:"Paraíso",       turno:"Manhã", horario:"07:00–16:00", status:""},
-  {nome:"Camila Rubia Ferreira Antunes",    cg:"Paraíso",       turno:"Tarde", horario:"10:00–19:00", status:""},
-  {nome:"Paloma Campos Filand",             cg:"Alphaville",    turno:"Tarde", horario:"10:00–19:00", status:""},
-  {nome:"Leila Silva De Lima",              cg:"Alphaville",    turno:"Manhã", horario:"06:00–15:00", status:""},
-  {nome:"Daniela Lima de Jesus Oliveira",   cg:"Anália Franco", turno:"Manhã", horario:"07:00–16:00", status:""},
-  {nome:"Emily Conceicao dos Santos Cruz",  cg:"Anália Franco", turno:"Tarde", horario:"10:00–19:00", status:""},
-  {nome:"Dilma Fernandes Silva dos Santos", cg:"Santana",       turno:"Manhã", horario:"07:00–16:00", status:""},
-  {nome:"Priscila Cardoso",                 cg:"Santana",       turno:"Tarde", horario:"10:00–19:00", status:""},
+const DELUCA_DATA=[
+  {nome:'Fabricia Souza de Oliveira',       cg:'Morumbi',       turno:'Tarde', horario:'10:00–19:00', status:''},
+  {nome:'Angelica da Silva de Oliveira',    cg:'Morumbi',       turno:'Manhã', horario:'07:00–16:00', status:'cob'},
+  {nome:'Talita Cristina da Silva',         cg:'Morumbi',       turno:'Manhã', horario:'07:00–16:00', status:''},
+  {nome:'Andreia de Assis Miranda',         cg:'Morumbi',       turno:'Manhã', horario:'06:00–15:00', status:''},
+  {nome:'Adriana Alves Nascimento Gaia',    cg:'Morumbi',       turno:'Tarde', horario:'10:00–19:00', status:''},
+  {nome:'Daiana Ribeiro da Silva',          cg:'Morumbi',       turno:'Manhã', horario:'07:00–16:00', status:'lic'},
+  {nome:'Eliete Vieiras dos Santos',        cg:'Tatuapé',       turno:'Tarde', horario:'10:00–19:00', status:''},
+  {nome:'Tabata Suellen Sabino dos Santos', cg:'Tatuapé',       turno:'Manhã', horario:'07:00–16:00', status:''},
+  {nome:'Graziella Aparecida Dias',         cg:'Pinheiros',     turno:'Manhã', horario:'07:00–16:00', status:''},
+  {nome:'Liliane da Silva Cardoso',         cg:'Pinheiros',     turno:'Tarde', horario:'10:00–19:00', status:''},
+  {nome:'Adriele dos Santos Pereira',       cg:'Paraíso',       turno:'Manhã', horario:'07:00–16:00', status:''},
+  {nome:'Camila Rubia Ferreira Antunes',    cg:'Paraíso',       turno:'Tarde', horario:'10:00–19:00', status:''},
+  {nome:'Paloma Campos Filand',             cg:'Alphaville',    turno:'Tarde', horario:'10:00–19:00', status:''},
+  {nome:'Leila Silva De Lima',              cg:'Alphaville',    turno:'Manhã', horario:'06:00–15:00', status:''},
+  {nome:'Daniela Lima de Jesus Oliveira',   cg:'Anália Franco', turno:'Manhã', horario:'07:00–16:00', status:''},
+  {nome:'Emily Conceicao dos Santos Cruz',  cg:'Anália Franco', turno:'Tarde', horario:'10:00–19:00', status:''},
+  {nome:'Dilma Fernandes Silva dos Santos', cg:'Santana',       turno:'Manhã', horario:'07:00–16:00', status:''},
+  {nome:'Priscila Cardoso',                 cg:'Santana',       turno:'Tarde', horario:'10:00–19:00', status:''},
 ];
-function deludaIni(n){const p=n.trim().split(/\s+/);return(p[0][0]+(p[1]?.[0]||'')).toUpperCase();}
+
 function initDeludaPreview(){
   const grid=document.getElementById('deludaCGGrid');
   const sub=document.getElementById('deludaResumo');
   const ativas=DELUCA_DATA.filter(p=>p.status!=='lic').length;
-  if(sub)sub.textContent=DELUCA_DATA.length+' colaboradoras · '+ativas+' ativas';
-  if(!grid)return;
-  grid.innerHTML=DELUCA_CG_ORDER.map(cg=>{
+  if(sub) sub.textContent=DELUCA_DATA.length+' colaboradoras · '+ativas+' ativas · clique para ver';
+  if(!grid) return;
+  grid.innerHTML='';
+  DELUCA_CG_ORDER.forEach(function(cg){
     const s=DELUCA_CG_STYLE[cg];
-    const count=DELUCA_DATA.filter(p=>p.cg===cg).length;
-    const temLic=DELUCA_DATA.some(p=>p.cg===cg&&p.status==='lic');
-    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 9px;border-radius:8px;background:'+s.bg+';border:1px solid '+s.border+';">'+
-      '<span style="font-size:11px;font-weight:600;color:'+s.fg+'">'+cg+'</span>'+
-      '<span style="font-size:10px;color:var(--text-muted)">'+count+(temLic?' ⚠':'')+' </span></div>';
-  }).join('');
+    const pessoas=DELUCA_DATA.filter(p=>p.cg===cg);
+    const temLic=pessoas.some(p=>p.status==='lic');
+    const btn=document.createElement('button');
+    btn.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:8px 12px;border-radius:10px;background:'+s.bg+';border:1px solid '+s.border+';cursor:pointer;width:100%;font-family:inherit;transition:opacity .15s;';
+    btn.innerHTML='<span style="font-size:12px;font-weight:600;color:'+s.fg+'">'+cg+'</span>'+'<span style="font-size:11px;color:'+s.fg+';opacity:.7;">'+pessoas.length+(temLic?' ⚠':'')+' </span>';
+    btn.addEventListener('mouseenter',function(){this.style.opacity='.7';});
+    btn.addEventListener('mouseleave',function(){this.style.opacity='1';});
+    btn.addEventListener('click',function(){toggleDeludaCG(cg);});
+    grid.appendChild(btn);
+  });
 }
-let deludaFiltroAtivo='Todos';
-function abrirDeludaModal(){
-  deludaFiltroAtivo='Todos';
-  renderDeludaModal();
-  const m=document.getElementById('deludaModal');
-  m.style.display='flex';
-  document.body.style.overflow='hidden';
-}
-function fecharDeludaModal(){
-  const m=document.getElementById('deludaModal');
-  if(m) m.style.display='none';
-  document.body.style.overflow='';
-}
-function renderDeludaModal(){
-  const lista=deludaFiltroAtivo==='Todos'?DELUCA_DATA:DELUCA_DATA.filter(p=>p.cg===deludaFiltroAtivo);
-  const ativas=lista.filter(p=>p.status!=='lic').length;
-  const lics=lista.filter(p=>p.status==='lic').length;
-  const sub=document.getElementById('deludaModalSub');
-  if(sub)sub.textContent='DeLuca · '+lista.length+' colaboradoras · '+ativas+' ativas'+(lics?' · '+lics+' em licença':'');
 
-  const filtrosEl=document.getElementById('deludaFiltros');
-  filtrosEl.innerHTML=['Todos',...DELUCA_CG_ORDER].map(cg=>
-    '<button onclick="setDeludaFiltro(\''+cg+'\''+')" style="font-size:11px;font-weight:600;padding:4px 12px;border-radius:999px;border:1px solid '+(cg===deludaFiltroAtivo?'rgba(224,100,153,.5);background:rgba(224,100,153,.15);color:#E891B8':'rgba(110,105,173,.2);background:rgba(110,105,173,.06);color:var(--tm)')+';cursor:pointer;font-family:\'Outfit\',sans-serif;transition:all .15s;">'+cg+'</button>'
-  ).join('');
+var deludaAberta=null;
 
-  const byCG={};DELUCA_CG_ORDER.forEach(cg=>{byCG[cg]=[];});
-  lista.forEach(p=>{if(byCG[p.cg])byCG[p.cg].push(p);});
-  const cgsVis=deludaFiltroAtivo==='Todos'?DELUCA_CG_ORDER:[deludaFiltroAtivo];
+function toggleDeludaCG(cg){
+  const acc=document.getElementById('deludaAccordion');
+  if(!acc) return;
+  if(deludaAberta===cg){
+    acc.style.maxHeight='0';
+    acc.style.opacity='0';
+    setTimeout(function(){acc.style.display='none';acc.innerHTML='';},250);
+    deludaAberta=null;
+    return;
+  }
+  deludaAberta=cg;
+  const s=DELUCA_CG_STYLE[cg];
+  const pessoas=DELUCA_DATA.filter(p=>p.cg===cg);
+  const manha=pessoas.filter(p=>p.turno==='Manhã');
+  const tarde=pessoas.filter(p=>p.turno==='Tarde');
 
-  document.getElementById('deludaModalBody').innerHTML=
-    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;">'+
-    cgsVis.filter(cg=>byCG[cg].length).map(cg=>{
-      const s=DELUCA_CG_STYLE[cg];
-      const manha=byCG[cg].filter(p=>p.turno==='Manhã');
-      const tarde=byCG[cg].filter(p=>p.turno==='Tarde');
+  function deludaIni(n){const p=n.trim().split(/\s+/);return(p[0][0]+(p[1]?.[0]||'')).toUpperCase();}
 
-      const renderP=arr=>arr.map(p=>{
-        const badge=p.status==='lic'
-          ?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,107,107,.12);color:#FF6B6B;margin-left:6px;border:1px solid rgba(255,107,107,.2);">licença</span>'
-          :p.status==='cob'
-          ?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,184,48,.12);color:#FFB830;margin-left:6px;border:1px solid rgba(255,184,48,.2);">cobrindo</span>'
-          :'';
-        const ini=deludaIni(p.nome);
-        return '<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(110,105,173,.08);">'+
-          '<div style="width:28px;height:28px;border-radius:50%;background:'+s.bg+';border:1px solid '+s.border+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:'+s.fg+';flex-shrink:0;">'+ini+'</div>'+
-          '<span style="font-size:12px;color:var(--tx);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;">'+p.nome+badge+'</span>'+
-          '<span style="font-size:11px;color:var(--tm);white-space:nowrap;font-family:\'JetBrains Mono\',monospace;font-size:10px;">'+p.horario+'</span>'+
-        '</div>';
-      }).join('');
-
-      const turnoBlock=(label,arr)=>!arr.length?'':
-        '<div style="padding:8px 0 2px;">'+
-        '<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--td);margin-bottom:6px;">'+label+'</div>'+
-        renderP(arr)+'</div>';
-
-      return '<div style="background:var(--s2);border:1px solid var(--b1);border-radius:14px;overflow:hidden;transition:border-color .2s;">'+
-        '<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 15px;background:'+s.bg+';border-bottom:1px solid '+s.border+';">'+
-          '<span style="font-size:13px;font-weight:700;color:'+s.fg+'">'+cg+'</span>'+
-          '<span style="font-size:10px;color:'+s.fg+';opacity:.6;font-weight:600;">'+byCG[cg].length+' colaboradora'+(byCG[cg].length>1?'s':'')+'</span>'+
-        '</div>'+
-        '<div style="padding:2px 14px 10px;">'+
-          turnoBlock('Manhã',manha)+
-          (manha.length&&tarde.length?'<div style="height:1px;background:rgba(110,105,173,.08);margin:2px 0;"></div>':'')+
-          turnoBlock('Tarde',tarde)+
-        '</div>'+
-      '</div>';
-    }).join('')+'</div>';
-}
-function setDeludaFiltro(cg){deludaFiltroAtivo=cg;renderDeludaModal();}
-
-initDeludaPreview();
-
-
-// ── NAV BAR ACTIVE STATE ────────────────────────────────────
-(function() {
-  const sections = ['sec-prioridades','sec-unidades','sec-operacao','sec-controle','sec-limpeza','sec-atalhos'];
-  const navItems = document.querySelectorAll('.nav-item');
-
-  function updateActive() {
-    let current = sections[0];
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      if (el.getBoundingClientRect().top <= 90) current = id;
-    });
-    navItems.forEach(item => {
-      item.classList.toggle('active', item.dataset.section === current);
-    });
+  function renderP(arr){
+    return arr.map(function(p){
+      const badge=p.status==='lic'
+        ?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,107,107,.15);color:#FF6B6B;margin-left:6px;border:1px solid rgba(255,107,107,.25);">licença</span>'
+        :p.status==='cob'
+        ?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,184,48,.15);color:#FFB830;margin-left:6px;border:1px solid rgba(255,184,48,.25);">cobrindo</span>'
+        :'';
+      return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(110,105,173,.07);">'
+        +'<div style="width:30px;height:30px;border-radius:50%;background:'+s.bg+';border:1px solid '+s.border+';display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:'+s.fg+';flex-shrink:0;">'+deludaIni(p.nome)+'</div>'
+        +'<span style="font-size:13px;color:var(--tx);flex:1;font-weight:500;">'+p.nome+badge+'</span>'
+        +'<span style="font-size:11px;color:var(--tm);font-family:\'JetBrains Mono\',monospace;white-space:nowrap;">'+p.horario+'</span>'
+        +'</div>';
+    }).join('');
   }
 
-  window.addEventListener('scroll', updateActive, { passive: true });
-  updateActive();
+  function turnoBlock(label,arr){
+    if(!arr.length) return '';
+    return '<div style="margin-bottom:4px;"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--td);margin:10px 0 4px;">'+label+'</div>'+renderP(arr)+'</div>';
+  }
 
-  // Scroll suave com offset para o sticky nav
-  navItems.forEach(item => {
-    item.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.getElementById(item.dataset.section);
-      if (!target) return;
-      const offset = 56;
-      const top = target.getBoundingClientRect().top + window.scrollY - offset;
-      window.scrollTo({ top, behavior: 'smooth' });
-    });
+  // Montar accordion via DOM para evitar problemas de escaping
+  const wrap=document.createElement('div');
+  wrap.style.cssText='background:var(--s2);border:1px solid '+s.border+';border-radius:14px;overflow:hidden;';
+
+  const header=document.createElement('div');
+  header.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:'+s.bg+';border-bottom:1px solid '+s.border+';';
+  header.innerHTML='<span style="font-size:14px;font-weight:700;color:'+s.fg+'">'+cg+'</span>';
+  const headerRight=document.createElement('div');
+  headerRight.style.cssText='display:flex;align-items:center;gap:10px;';
+  headerRight.innerHTML='<span style="font-size:11px;color:'+s.fg+';opacity:.65;">'+pessoas.length+' colaboradora'+(pessoas.length>1?'s':'')+'</span>';
+  const closeBtn=document.createElement('button');
+  closeBtn.style.cssText='width:26px;height:26px;border-radius:50%;border:1px solid '+s.border+';background:rgba(0,0,0,.25);color:'+s.fg+';font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;';
+  closeBtn.textContent='×';
+  closeBtn.addEventListener('click',function(){toggleDeludaCG(cg);});
+  headerRight.appendChild(closeBtn);
+  header.appendChild(headerRight);
+  wrap.appendChild(header);
+
+  const body=document.createElement('div');
+  body.style.cssText='padding:4px 16px 12px;';
+  body.innerHTML=turnoBlock('Manhã',manha)
+    +(manha.length&&tarde.length?'<div style="height:1px;background:rgba(110,105,173,.08);margin:4px 0;"></div>':'')
+    +turnoBlock('Tarde',tarde);
+  wrap.appendChild(body);
+
+  acc.innerHTML='';
+  acc.appendChild(wrap);
+  acc.style.display='block';
+  acc.style.maxHeight='0';
+  acc.style.opacity='0';
+  acc.style.overflow='hidden';
+  acc.style.transition='max-height .3s ease, opacity .25s ease';
+  requestAnimationFrame(function(){
+    acc.style.maxHeight='600px';
+    acc.style.opacity='1';
+    setTimeout(function(){acc.scrollIntoView({behavior:'smooth',block:'nearest'});},300);
   });
-})();
+}
 
+// ── CLIMA ─────────────────────────────────────────────────────
+function loadClima(){
+  const url='https://api.open-meteo.com/v1/forecast?latitude=-23.5505&longitude=-46.6333&current=temperature_2m,weather_code,apparent_temperature&hourly=precipitation_probability,weather_code&daily=precipitation_probability_max,temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo&forecast_days=1';
+  fetch(url).then(r=>r.json()).then(data=>{
+    if(!data||!data.current) throw new Error('sem dados');
+    const temp=Math.round(data.current.temperature_2m);
+    const sensac=Math.round(data.current.apparent_temperature);
+    const code=data.current.weather_code;
+    const maxTemp=data.daily?Math.round(data.daily.temperature_2m_max[0]):null;
+    const minTemp=data.daily?Math.round(data.daily.temperature_2m_min[0]):null;
+    document.getElementById('climaBadgeIcon').textContent=climaEmoji(code);
+    document.getElementById('climaBadgeTemp').textContent=temp+'°C';
+    const extra=maxTemp!==null?'↑'+maxTemp+'° ↓'+minTemp+'°':climaDesc(code);
+    document.getElementById('climaBadgeExtra').textContent=extra;
+    const badge=document.getElementById('climaBadge');
+    if(badge) badge.title=climaDesc(code)+' · Sensação '+sensac+'°C'+(maxTemp!==null?' · Máx '+maxTemp+'° Mín '+minTemp+'°':'');
+  }).catch(err=>{console.warn('Clima:',err);});
+}
+function climaEmoji(code){if(code===0)return'☀️';if(code<=2)return'⛅';if(code<=3)return'☁️';if(code<=49)return'🌫️';if(code<=59)return'🌦️';if(code<=69)return'🌧️';if(code<=79)return'❄️';if(code<=84)return'🌦️';if(code<=99)return'⛈️';return'🌤️';}
+function climaDesc(code){if(code===0)return'Céu limpo';if(code<=2)return'Parcialmente nublado';if(code<=3)return'Nublado';if(code<=49)return'Névoa';if(code<=59)return'Garoa';if(code<=69)return'Chuva';if(code<=79)return'Neve';if(code<=84)return'Pancadas de chuva';if(code<=99)return'Tempestade';return'Variável';}
 
 // ── HERO DATE ────────────────────────────────────────────────
-(function() {
-  const DAYS = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
-  const MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
-  const now = new Date();
-  const el = document.getElementById('heroDate');
-  if (el) el.textContent = DAYS[now.getDay()] + ', ' + now.getDate() + ' de ' + MONTHS[now.getMonth()];
-})();
-
-// ── STAT STRIP ───────────────────────────────────────────────
-(function() {
-  // Técnico de plantão hoje
-  function updateStatEscala() {
-    const today = new Date();
-    const dow = today.getDay(); // 0=Dom
-    const mon = (function(d){ const c=new Date(d); const day=c.getDay(); const diff=c.getDate()-day+(day===0?-6:1); return new Date(c.setDate(diff)); })(today);
-    const MUDANCA = new Date(2026,3,6);
-    const wtype = mon >= MUDANCA ? (mon.getDate()%2===0?1:2) : (mon.getDate()%2!==0?1:2);
-    const SCHED = {
-      1:{romario:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Santana','CG Paraíso','Dia flex']},
-         roger:  {dias:['CG Morumbi','CG Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']}},
-      2:{romario:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']},
-         roger:  {dias:['CG Morumbi','CG Anália/Tatuapé','CG Santana','CG Paraíso','Dia flex']}}
-    };
-    const el = document.getElementById('statEscala');
-    if (!el) return;
-    if (dow === 0 || dow === 6) { el.textContent = 'Fim de semana'; return; }
-    const idx = dow - 1;
-    const s = SCHED[wtype];
-    el.textContent = 'S' + wtype + ' · ' + s.romario.dias[idx].replace('CG ','');
-  }
-  updateStatEscala();
-
-  // Preventivas — atualizado quando loadPreventivas() terminar
-  // O listener é feito via MutationObserver no cntVencido
-  const obs = new MutationObserver(() => {
-    const v = document.getElementById('cntVencido')?.textContent;
-    const a = document.getElementById('cntAvencer')?.textContent;
-    const statEl = document.getElementById('statVencidas');
-    if (statEl && v && v !== '–') {
-      const num = parseInt(v) || 0;
-      statEl.textContent = num;
-      statEl.className = 'stat-chip-val ' + (num > 0 ? 'warn' : 'ok');
-    }
-  });
-  const target = document.getElementById('cntVencido');
-  if (target) obs.observe(target, { childList: true, subtree: true, characterData: true });
-})();
-
-// ── NAV BAR ACTIVE ───────────────────────────────────────────
-(function() {
-  const sections = ['sec-prioridades','sec-unidades','sec-operacao','sec-controle','sec-limpeza','sec-atalhos'];
-  const navItems = document.querySelectorAll('.nav-item');
-  function updateActive() {
-    let current = sections[0];
-    sections.forEach(id => {
-      const el = document.getElementById(id);
-      if (el && el.getBoundingClientRect().top <= 90) current = id;
-    });
-    navItems.forEach(item => item.classList.toggle('active', item.dataset.section === current));
-  }
-  window.addEventListener('scroll', updateActive, { passive: true });
-  updateActive();
-  navItems.forEach(item => {
-    item.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.getElementById(item.dataset.section);
-      if (!target) return;
-      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 56, behavior: 'smooth' });
-    });
-  });
-})();
-
-
-
-// ── HERO DATE ────────────────────────────────────────────────
-(function(){
-  const DIAS=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
-  const MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
-  const n=new Date();
-  const el=document.getElementById('heroDate');
-  if(el) el.textContent=DIAS[n.getDay()]+', '+n.getDate()+' de '+MESES[n.getMonth()];
-})();
-
-// ── STAT STRIP ───────────────────────────────────────────────
-(function(){
-  function updateStatEscala(){
-    const today=new Date(); const dow=today.getDay();
-    function getMonday(d){const c=new Date(d);const day=c.getDay();c.setDate(c.getDate()-day+(day===0?-6:1));return c;}
-    const mon=getMonday(today);
-    const MUDANCA=new Date(2026,3,6);
-    const wtype=mon>=MUDANCA?(mon.getDate()%2===0?1:2):(mon.getDate()%2!==0?1:2);
-    const SCHED={
-      1:{romario:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Santana','CG Paraíso','Dia flex']},roger:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']}},
-      2:{romario:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']},roger:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Santana','CG Paraíso','Dia flex']}}
-    };
-    const el=document.getElementById('statEscala');
-    if(!el) return;
-    if(dow===0||dow===6){el.textContent='Fim de semana';return;}
-    el.textContent='S'+wtype+' · '+SCHED[wtype].romario.dias[dow-1].replace('CG ','');
-  }
-  updateStatEscala();
-  const obs=new MutationObserver(()=>{
-    const v=document.getElementById('cntVencido')?.textContent;
-    const el=document.getElementById('statVencidas');
-    if(el&&v&&v!=='–'){const n=parseInt(v)||0;el.textContent=n;el.className='stat-chip-val '+(n>0?'warn':'ok');}
-  });
-  const target=document.getElementById('cntVencido');
-  if(target) obs.observe(target,{childList:true,subtree:true,characterData:true});
-})();
-
-// ── NAV BAR ACTIVE ───────────────────────────────────────────
-(function(){
-  const sections=['sec-prioridades','sec-unidades','sec-operacao','sec-controle','sec-limpeza','sec-atalhos'];
-  const navItems=document.querySelectorAll('.nav-item');
-  function updateActive(){
-    let current=sections[0];
-    sections.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=90)current=id;});
-    navItems.forEach(item=>item.classList.toggle('active',item.dataset.section===current));
-  }
-  window.addEventListener('scroll',updateActive,{passive:true});
-  updateActive();
-  navItems.forEach(item=>{
-    item.addEventListener('click',e=>{
-      e.preventDefault();
-      const target=document.getElementById(item.dataset.section);
-      if(!target) return;
-      window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-56,behavior:'smooth'});
-    });
-  });
-})();
-
-
-// ── DATA DO DIA ──────────────────────────────────────────────
 (function(){
   const D=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
   const M=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
@@ -1447,20 +695,20 @@ initDeludaPreview();
   if(el) el.textContent=D[n.getDay()]+' · '+n.getDate()+' de '+M[n.getMonth()]+' · '+n.getFullYear();
 })();
 
-// ── STAT STRIP ───────────────────────────────────────────────
+// ── STAT ESCALA ───────────────────────────────────────────────
 (function(){
-  function statEscala(){
+  function upd(){
     const d=new Date();const dow=d.getDay();
     function mon(x){const c=new Date(x);const dy=c.getDay();c.setDate(c.getDate()-dy+(dy===0?-6:1));return c;}
     const m=mon(d);const mudanca=new Date(2026,3,6);
     const wt=m>=mudanca?(m.getDate()%2===0?1:2):(m.getDate()%2!==0?1:2);
-    const S={1:{r:['CG Morumbi','CG Anália/Tat','CG Santana','CG Paraíso','Flex'],g:['CG Morumbi','CG Anália/Tat','CG Pinheiros','CG Morumbi','CG Alphaville']},
-             2:{r:['CG Morumbi','CG Anália/Tat','CG Pinheiros','CG Morumbi','CG Alphaville'],g:['CG Morumbi','CG Anália/Tat','CG Santana','CG Paraíso','Flex']}};
+    const S={1:{r:['CG Morumbi','Anália/Tatuapé','CG Santana','CG Paraíso','Flex'],g:['CG Morumbi','Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']},
+             2:{r:['CG Morumbi','Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville'],g:['CG Morumbi','Anália/Tatuapé','CG Santana','CG Paraíso','Flex']}};
     const el=document.getElementById('statEscala');if(!el)return;
     if(dow===0||dow===6){el.textContent='Fim de semana';return;}
     el.textContent='S'+wt+' · '+S[wt].r[dow-1].replace('CG ','');
   }
-  statEscala();
+  upd();
   const obs=new MutationObserver(()=>{
     const v=document.getElementById('cntVencido')?.textContent;
     const el=document.getElementById('statVencidas');
@@ -1487,27 +735,20 @@ initDeludaPreview();
   }));
 })();
 
-// ── MODAL LISTENERS (único ponto de controle) ────────────────
+// ── MODAL CG — LISTENERS ─────────────────────────────────────
 (function(){
-  // Backdrop CG
   const cgBd=document.getElementById('cgBackdrop');
-  if(cgBd) cgBd.addEventListener('click', fecharCGModal);
+  if(cgBd) cgBd.addEventListener('click',fecharCGModal);
   const cgBtn=document.getElementById('cgCloseBtn');
-  if(cgBtn) cgBtn.addEventListener('click', fecharCGModal);
-  // Backdrop DeLuca
-  const bd=document.getElementById('deludaBackdrop');
-  if(bd) bd.addEventListener('click', fecharDeludaModal);
-  // Botão fechar DeLuca
-  const btn=document.getElementById('deludaCloseBtn');
-  if(btn) btn.addEventListener('click', fecharDeludaModal);
-  // ESC global — fecha qualquer modal aberto
-  document.addEventListener('keydown', function(e){
-    if(e.key!=='Escape') return;
-    const dl=document.getElementById('deludaModal');
-    if(dl && dl.style.display==='flex'){ fecharDeludaModal(); return; }
-    fecharCGModal();
-  });
+  if(cgBtn) cgBtn.addEventListener('click',fecharCGModal);
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharCGModal();});
 })();
+
+// ── INICIALIZAR ───────────────────────────────────────────────
+loadPreventivas();
+loadCGInfo();
+loadClima();
+initDeludaPreview();
 
 </script>
 </body>
