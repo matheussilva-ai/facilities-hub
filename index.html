@@ -305,7 +305,7 @@ function weekType(monday){
 }
 function fmt(d){return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0');}
 
-function buildWeekDetail(wtype){
+function buildWeekDetail(wtype, monday){
   const s=SCHEDULE[wtype];
   const colors={romario:'var(--v1)',roger:'var(--t1)'};
   const names={romario:'Romário',roger:'Roger'};
@@ -318,9 +318,17 @@ function buildWeekDetail(wtype){
     html+='<span style="font-size:10px;color:var(--tm)">'+info.horario+'</span></div><div style="display:grid;gap:2px;">';
     info.dias.forEach((local,i)=>{
       const isFlex=local==='Dia flex';
+      // Calcular a data do dia (segunda = +0, terça = +1, ..., sexta = +4)
+      let dataStr='';
+      if(monday){
+        const d=new Date(monday.getTime()+i*86400000);
+        dataStr=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0');
+      }
       html+='<div style="display:flex;align-items:center;gap:8px;font-size:11px;padding:2px 4px;border-radius:4px;">';
       html+='<span style="font-weight:700;color:var(--td);min-width:26px">'+DAYS_SHORT[i]+'</span>';
-      html+='<span style="color:'+(isFlex?'var(--green)':'var(--tx)')+'">'+local+'</span></div>';
+      if(dataStr) html+='<span style="font-size:10px;color:var(--td);min-width:34px;font-family:\'JetBrains Mono\',monospace;">'+dataStr+'</span>';
+      html+='<span style="color:'+(isFlex?'var(--green)':'var(--tx)')+'">'+local+'</span>';
+      html+='</div>';
     });
     html+='</div></div>';
   });
@@ -391,7 +399,7 @@ function initSchedule(){
     row.appendChild(dateSpan);row.appendChild(rightSide);
     const detail=document.createElement('div');
     detail.style.cssText='overflow:hidden;transition:max-height .3s ease;padding:0 10px;background:rgba(110,105,173,.06);max-height:'+(isCurrentWeek?'300px':'0')+';';
-    detail.innerHTML=buildWeekDetail(week.type);detail.classList.add('week-detail');
+    detail.innerHTML=buildWeekDetail(week.type, week.mon);detail.classList.add('week-detail');
     if(!isPast){
       row.addEventListener('click',function(){
         const isOpen=detail.style.maxHeight!=='0px';
@@ -508,16 +516,14 @@ function abrirCGModal(idx) {
   document.getElementById('cgModalNome').textContent=nome;
   document.getElementById('cgModalSub').textContent=sub;
   let html='';
-  // Mapa do Google Maps (se tiver endereço)
-  if(cg.endereco){
-    const mapUrl='https://maps.google.com/maps?q='+encodeURIComponent(cg.endereco)+'&output=embed';
-    html+='<div style="border-radius:12px;overflow:hidden;margin-bottom:16px;border:1px solid rgba(176,224,228,.15);">'
-      +'<iframe src="'+mapUrl+'" width="100%" height="160" style="display:block;border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-      +'</div>';
-    // Botão abrir no Maps
-    const mapsLink='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(cg.endereco);
-    html+='<a href="'+mapsLink+'" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:9px;border-radius:10px;border:1px solid rgba(176,224,228,.18);background:rgba(176,224,228,.06);color:var(--t1);font-size:12px;font-weight:600;text-decoration:none;margin-bottom:16px;">🗺️ Abrir no Google Maps</a>';
-  }
+  // Mapa do Google Maps — usa endereço se disponível, senão usa nome da CG
+  const mapQuery = cg.endereco || (nome + ', São Paulo');
+  const mapUrl='https://maps.google.com/maps?q='+encodeURIComponent(mapQuery)+'&output=embed';
+  const mapsLink='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(mapQuery);
+  html+='<div style="border-radius:12px;overflow:hidden;margin-bottom:16px;border:1px solid rgba(176,224,228,.15);">'
+    +'<iframe src="'+mapUrl+'" width="100%" height="160" style="display:block;border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
+    +'</div>';
+  html+='<a href="'+mapsLink+'" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:9px;border-radius:10px;border:1px solid rgba(176,224,228,.18);background:rgba(176,224,228,.06);color:var(--t1);font-size:12px;font-weight:600;text-decoration:none;margin-bottom:16px;">🗺️ Abrir no Google Maps</a>';
   function sec(label,val){if(val) html+='<div style="margin-bottom:12px;"><div style="font-size:9px;font-weight:700;color:var(--t1);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">'+label+'</div><div style="font-size:12px;color:var(--tx);line-height:1.55;">'+String(val).replace(/\n/g,'<br>')+'</div></div>';}
   sec('📍 Endereço',cg.endereco);sec('🕐 Horário',cg.horario);
   sec('🚪 Salas de atendimento',cg.totalSalas?cg.totalSalas+' salas no total':'');
