@@ -1,285 +1,250 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Facilities Hub — Genial Care</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --purple:      #6E69AD;
-  --purple-dark: #3D3A7A;
-  --teal:        #7BBFC4;
-  --bg:          #0E0D1A;
-  --surface:     #131224;
-  --surface2:    #1A1930;
-  --border:      rgba(110,105,173,0.18);
-  --text:        #ECEAF6;
-  --text-muted:  #6B678F;
-  --radius:      14px;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --v:  #6E69AD;
+  --v1: #9B97D4;
+  --v2: #CECBF6;
+  --v3: #EEEDFE;
+  --t:  #B0E0E4;
+  --t1: #7BBFC4;
+  --t2: #4AACB4;
+  --bg: #05050F;
+  --s0: #080818;
+  --s1: #0C0C1E;
+  --s2: #101028;
+  --s3: #161630;
+  --b0: rgba(110,105,173,0.10);
+  --b1: rgba(110,105,173,0.18);
+  --b2: rgba(110,105,173,0.32);
+  --b3: rgba(110,105,173,0.50);
+  --tx: #F0EEFF;
+  --tm: #8580B0;
+  --td: #504C72;
+  --red:    #FF6B6B;
+  --yellow: #FFB830;
+  --green:  #3BEBA8;
+  --pink:   #E06499;
+  --r: 16px;
 }
+html,body{min-height:100%;font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;}
 
-html, body {
-  min-height: 100%;
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-}
-
-body::before {
-  content: '';
-  position: fixed; inset: 0;
+/* ── NOISE + GLOW BG ── */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
   background:
-    radial-gradient(ellipse 55% 45% at 8% 0%, rgba(110,105,173,0.20) 0%, transparent 55%),
-    radial-gradient(ellipse 35% 35% at 92% 95%, rgba(123,191,196,0.12) 0%, transparent 55%);
-  pointer-events: none; z-index: 0;
-}
-body::after {
-  content: '';
-  position: fixed; inset: 0;
-  background-image:
-    linear-gradient(rgba(110,105,173,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(110,105,173,0.03) 1px, transparent 1px);
-  background-size: 52px 52px;
-  pointer-events: none; z-index: 0;
-}
+    radial-gradient(ellipse 60% 50% at 0% 0%,   rgba(110,105,173,.18) 0%,transparent 60%),
+    radial-gradient(ellipse 40% 40% at 100% 100%,rgba(176,224,228,.10) 0%,transparent 55%),
+    radial-gradient(ellipse 30% 30% at 60% 20%,  rgba(110,105,173,.08) 0%,transparent 50%);}
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(var(--b0) 1px,transparent 1px),linear-gradient(90deg,var(--b0) 1px,transparent 1px);
+  background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,black 30%,transparent 100%);}
 
-.app {
-  position: relative; z-index: 1;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 40px 60px;
-}
+.app{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:0 44px 80px;}
 
 /* ── HEADER ── */
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 28px 0 24px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 40px;
+header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 0 18px;
+  border-bottom:1px solid var(--b1);
+  margin-bottom:0;
 }
-.brand { display: flex; align-items: center; gap: 14px; }
-.brand-sub { font-size: 12px; color: var(--text-muted); }
-.header-right { display: flex; align-items: center; gap: 12px; }
-.header-time {
-  font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums;
-  letter-spacing: 0.05em; color: var(--text-muted);
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 20px; padding: 6px 14px;
+.brand{display:flex;align-items:center;gap:14px;}
+.brand-sub{font-size:11px;color:var(--tm);letter-spacing:.04em;font-weight:500;}
+.hright{display:flex;align-items:center;gap:8px;}
+.hpill{
+  display:flex;align-items:center;gap:7px;
+  padding:7px 14px;
+  font-size:12px;font-weight:500;
+  color:var(--tm);
+  background:var(--s2);
+  border:1px solid var(--b1);
+  border-radius:999px;
+  transition:border-color .2s;
 }
-.clima-badge {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  color: var(--text);
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 6px 14px;
-  cursor: default;
-  transition: border-color .2s;
-}
-.clima-badge:hover { border-color: rgba(123,191,196,0.35); }
+.hpill:hover{border-color:var(--b2);}
+.hpill b{color:var(--tx);font-weight:600;}
+.live-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+#tecBadgeContent{display:flex;flex-direction:column;gap:1px;}
 
-.tec-badge {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: var(--surface2);
-  border: 1px solid rgba(155,151,212,0.25);
-  border-radius: 20px;
-  padding: 6px 14px;
-  cursor: default;
+/* ── NAV BAR ── */
+.nav{
+  position:sticky;top:0;z-index:20;
+  background:rgba(5,5,15,.88);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--b1);
+  margin:0 -44px 44px;padding:0 44px;
+  display:flex;align-items:center;gap:0;
+  overflow-x:auto;scrollbar-width:none;
 }
+.nav::-webkit-scrollbar{display:none;}
+.ni{
+  display:flex;align-items:center;gap:7px;
+  padding:13px 16px;
+  font-size:12px;font-weight:600;letter-spacing:.02em;
+  color:var(--td);
+  text-decoration:none;
+  border-bottom:2px solid transparent;
+  white-space:nowrap;
+  transition:color .15s,border-color .15s;
+  cursor:pointer;background:none;
+  border-left:none;border-right:none;border-top:none;
+  font-family:'Outfit',sans-serif;
+}
+.ni:hover{color:var(--tm);}
+.ni.on{color:var(--v1);border-bottom-color:var(--v);}
+.ni-ico{font-size:13px;}
 
-.live-badge {
-  font-size: 11px; font-weight: 700; color: #3DAB72;
-  background: rgba(61,171,114,0.10); border: 1px solid rgba(61,171,114,0.22);
-  border-radius: 20px; padding: 5px 11px;
-  display: flex; align-items: center; gap: 5px;
+/* ── HERO ── */
+.hero{margin-bottom:8px;}
+.eyebrow{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--v);opacity:.8;margin-bottom:10px;}
+.hero-title{
+  font-size:clamp(22px,2.2vw,36px);font-weight:800;
+  line-height:1;letter-spacing:-.03em;
+  background:linear-gradient(135deg,#fff 30%,var(--v2) 70%,var(--t) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:8px;
 }
-.dot { width: 6px; height: 6px; background: #3DAB72; border-radius: 50%; box-shadow: 0 0 6px #3DAB72; animation: pulse 2s ease-in-out infinite; }
+.hero-date{font-size:13px;color:var(--tm);font-weight:400;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;}
 
-/* ── HERO ROW ── */
-.hero-left {}
-.eyebrow {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.14em;
-  text-transform: uppercase; color: var(--purple); opacity: 0.75;
-  margin-bottom: 10px;
+/* ── STAT STRIP ── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:32px 0 44px;}
+.sc{
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:var(--r);
+  padding:16px 18px;
+  display:flex;align-items:center;gap:14px;
+  transition:border-color .2s,transform .18s;
+  position:relative;overflow:hidden;
 }
-.hero-title {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(18px, 1.8vw, 26px);
-  font-weight: 700; line-height: 1.1;
-  letter-spacing: -0.02em; color: var(--text);
-  margin-bottom: 10px;
+.sc::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s;
+  background:linear-gradient(135deg,rgba(110,105,173,.06),transparent);}
+.sc:hover{border-color:var(--b2);transform:translateY(-2px);}
+.sc:hover::before{opacity:1;}
+.sc-ico{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:17px;flex-shrink:0;
 }
-.hero-title span {
-  background: linear-gradient(120deg, var(--purple) 0%, var(--teal) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-}
-.hero-sub { font-size: 13px; color: var(--text-muted); line-height: 1.6; max-width: 420px; }
-
-
+.sc-ico.p{background:rgba(110,105,173,.15);border:1px solid rgba(110,105,173,.2);}
+.sc-ico.t{background:rgba(176,224,228,.12);border:1px solid rgba(176,224,228,.18);}
+.sc-ico.o{background:rgba(255,184,48,.10);border:1px solid rgba(255,184,48,.16);}
+.sc-ico.k{background:rgba(224,100,153,.10);border:1px solid rgba(224,100,153,.16);}
+.sc-val{font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--tx);}
+.sc-val.r{color:var(--red);}
+.sc-val.g{color:var(--green);}
+.sc-lbl{font-size:11px;color:var(--tm);margin-top:4px;font-weight:500;}
 
 /* ── SECTION ── */
-.section { margin-bottom: 44px; }
-.section-hdr {
-  display: flex; align-items: center; gap: 10px; margin-bottom: 16px;
+.sec{margin-bottom:44px;}
+.sec-hdr{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.sec-lbl{
+  font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--td);white-space:nowrap;
 }
-.section-lbl {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--text-muted); white-space: nowrap;
-}
-.section-line { flex: 1; height: 1px; background: var(--border); }
+.sec-line{flex:1;height:1px;background:var(--b1);}
+.ptag{font-size:10px;font-weight:600;padding:3px 10px;border-radius:999px;letter-spacing:.04em;white-space:nowrap;}
+.pt-all{background:rgba(176,224,228,.10);color:var(--t1);}
+.pt-mat{background:rgba(110,105,173,.12);color:var(--v1);}
+.pt-mar{background:rgba(224,100,153,.10);color:#E891B8;}
 
 /* ── GRIDS ── */
-.tool-grid    { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.widget-grid  { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+.gw{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
 
-/* ── CARD BASE ── */
-.card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  position: relative; overflow: hidden;
-  transition: all 0.22s cubic-bezier(.4,0,.2,1);
-  animation: fadeUp 0.45s cubic-bezier(.4,0,.2,1) both;
+/* ── CARD ── */
+.card{
+  background:var(--s1);
+  border:1px solid var(--b1);
+  border-radius:var(--r);
+  position:relative;overflow:hidden;
+  transition:border-color .22s,transform .22s,box-shadow .22s;
+  animation:up .4s cubic-bezier(.4,0,.2,1) both;
 }
-.card::before {
-  content: ''; position: absolute; inset: 0;
-  opacity: 0; transition: opacity 0.22s; border-radius: var(--radius);
-}
-.card:hover { transform: translateY(-2px); border-color: rgba(110,105,173,0.32); box-shadow: 0 12px 40px rgba(0,0,0,0.30); }
-.card:hover::before { opacity: 1; }
-.card:nth-child(1){animation-delay:.03s} .card:nth-child(2){animation-delay:.06s}
-.card:nth-child(3){animation-delay:.09s} .card:nth-child(4){animation-delay:.12s}
-
-.glow-purple::before { background: linear-gradient(135deg, rgba(110,105,173,0.07) 0%, transparent 60%); }
-.glow-teal::before   { background: linear-gradient(135deg, rgba(123,191,196,0.07) 0%, transparent 60%); }
-.glow-green::before  { background: linear-gradient(135deg, rgba(61,171,114,0.07) 0%, transparent 60%); }
-.glow-orange::before { background: linear-gradient(135deg, rgba(232,168,74,0.07) 0%, transparent 60%); }
+.card:hover{border-color:var(--b2);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.4);}
+.card::after{content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 60% 40% at 0% 0%,rgba(110,105,173,.06),transparent);
+  opacity:0;transition:opacity .22s;border-radius:var(--r);}
+.card:hover::after{opacity:1;}
+.card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}
+.card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}
+@keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── TOOL CARD ── */
-.card-tool {
-  padding: 24px;
-  display: flex; flex-direction: column; gap: 12px;
-  text-decoration: none; color: var(--text);
-}
-.card-tool:hover .arr {
-  background: var(--purple); border-color: var(--purple); color: #fff; transform: translateX(2px);
-}
-.card-disabled { opacity: 0.40; pointer-events: none; cursor: not-allowed; }
+.ct{padding:26px;display:flex;flex-direction:column;gap:14px;text-decoration:none;color:var(--tx);}
+.ct:hover .arr{background:var(--v);border-color:var(--v);color:#fff;transform:translateX(3px);}
+.ct-top{display:flex;align-items:flex-start;justify-content:space-between;}
+.ct-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:21px;}
+.arr{width:34px;height:34px;border-radius:50%;background:var(--s3);border:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:center;color:var(--td);
+  transition:all .2s;flex-shrink:0;}
+.ct-tag{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  border-radius:999px;padding:3px 10px;display:inline-block;}
+.ct-name{font-size:17px;font-weight:700;letter-spacing:-.02em;line-height:1.2;}
+.ct-desc{font-size:12px;color:var(--tm);line-height:1.6;flex:1;}
+.ct-foot{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--td);
+  padding-top:14px;border-top:1px solid var(--b0);}
+.disabled{opacity:.32;pointer-events:none;}
 
-.tool-top { display: flex; align-items: flex-start; justify-content: space-between; }
-.tool-icon {
-  width: 42px; height: 42px; border-radius: 11px;
-  display: flex; align-items: center; justify-content: center; font-size: 20px;
-}
-.arr {
-  width: 32px; height: 32px; border-radius: 50%;
-  background: var(--surface2); border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--text-muted); transition: all .2s; flex-shrink: 0;
-}
-.tool-tag {
-  font-size: 10px; font-weight: 700; letter-spacing: 0.07em;
-  text-transform: uppercase; border-radius: 20px; padding: 2px 9px;
-  display: inline-block;
-}
-.tool-name { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; }
-.tool-desc { font-size: 12px; color: var(--text-muted); line-height: 1.55; flex: 1; }
-.tool-foot {
-  display: flex; align-items: center; gap: 5px;
-  font-size: 11px; color: var(--text-muted);
-  padding-top: 12px; border-top: 1px solid var(--border);
-}
-
-.icon-purple { background: rgba(110,105,173,0.15); }
-.icon-teal   { background: rgba(123,191,196,0.15); }
-.icon-green  { background: rgba(61,171,114,0.15);  }
-.icon-orange { background: rgba(232,168,74,0.15);  }
-.tag-purple  { color: #9B97D4; background: rgba(110,105,173,0.12); }
-.tag-teal    { color: #7BBFC4; background: rgba(123,191,196,0.12); }
-.tag-green   { color: #3DAB72; background: rgba(61,171,114,0.12);  }
-.tag-orange  { color: #E8A84A; background: rgba(232,168,74,0.12);  }
+/* ICON + TAG COLORS */
+.ip{background:rgba(110,105,173,.15);border:1px solid rgba(110,105,173,.2);}
+.it{background:rgba(176,224,228,.12);border:1px solid rgba(176,224,228,.18);}
+.ig{background:rgba(59,235,168,.10);border:1px solid rgba(59,235,168,.16);}
+.io{background:rgba(255,184,48,.10);border:1px solid rgba(255,184,48,.16);}
+.ik{background:rgba(224,100,153,.10);border:1px solid rgba(224,100,153,.16);}
+.tp{color:var(--v1);background:rgba(110,105,173,.12);}
+.tt{color:var(--t1);background:rgba(176,224,228,.10);}
+.tg{color:var(--green);background:rgba(59,235,168,.10);}
+.to{color:var(--yellow);background:rgba(255,184,48,.10);}
+.tk{color:#E891B8;background:rgba(224,100,153,.10);}
 
 /* ── WIDGET CARD ── */
-.card-widget {
-  padding: 24px;
-  display: flex; flex-direction: column; gap: 16px;
-  cursor: default;
+.cw{padding:24px;display:flex;flex-direction:column;gap:18px;cursor:default;}
+.wh{display:flex;align-items:center;gap:13px;position:relative;z-index:1;}
+.wi{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;}
+.wt{font-size:15px;font-weight:700;letter-spacing:-.015em;}
+.ws{font-size:11px;color:var(--tm);margin-top:2px;}
+.wb{position:relative;z-index:1;flex:1;}
+.wf{display:flex;align-items:center;justify-content:space-between;
+  padding-top:16px;border-top:1px solid var(--b0);
+  font-size:11px;color:var(--td);position:relative;z-index:1;}
+
+/* ── ATALHOS ── */
+.sl{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 14px;
+  background:var(--s2);border:1px solid var(--b1);border-radius:10px;
+  text-decoration:none;color:var(--tx);
+  font-size:12px;font-weight:500;
+  transition:all .18s;
 }
-.w-hdr { display: flex; align-items: center; gap: 12px; position: relative; z-index: 1; }
-.w-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-.w-title { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 700; letter-spacing: -0.01em; }
-.w-sub   { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
-.w-body  { position: relative; z-index: 1; flex: 1; }
-.w-foot  {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: 14px; border-top: 1px solid var(--border);
-  font-size: 11px; color: var(--text-muted);
-  position: relative; z-index: 1;
-}
+.sl:hover{background:rgba(110,105,173,.12);border-color:var(--b2);transform:translateX(3px);}
+.sl span:first-child{font-size:14px;flex-shrink:0;}
+.sl-arr{margin-left:auto;font-size:11px;color:var(--td);transition:transform .18s;}
+.sl:hover .sl-arr{transform:translateX(3px);color:var(--v1);}
 
 /* ── FOOTER ── */
-footer {
-  padding: 22px 0 0;
-  border-top: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-between;
+footer{
+  padding:24px 0 0;
+  border-top:1px solid var(--b1);
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:8px;
 }
-.footer-text { font-size: 11px; color: var(--text-muted); }
+.footer-txt{font-size:11px;color:var(--td);letter-spacing:.03em;}
+.footer-dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:blink 2s ease-in-out infinite;}
 
-/* ── ANIMATIONS ── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.5; transform: scale(0.8); }
-}
-@keyframes modalIn {
-  from { opacity: 0; transform: translateY(14px) scale(0.98); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.shortcut-link {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding: 9px 12px;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 9px;
-  text-decoration: none;
-  color: var(--text);
-  font-size: 12px;
-  font-weight: 500;
-  transition: all .18s;
-}
-.shortcut-link:hover {
-  background: rgba(110,105,173,0.12);
-  border-color: rgba(110,105,173,0.28);
-  color: var(--text);
-}
-.shortcut-link span:first-child { font-size: 14px; flex-shrink:0; }
-
-@media (max-width: 1100px) {
-  .tool-grid   { grid-template-columns: repeat(2, 1fr); }
-  .widget-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 680px) {
-  .app { padding: 0 20px 48px; }
-  .tool-grid, .widget-grid { grid-template-columns: 1fr; }
-}
+/* ── RESPONSIVE ── */
+@media(max-width:1100px){.g3{grid-template-columns:repeat(2,1fr)}.gw{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.app{padding:0 20px 56px}.nav{margin:0 -20px 32px;padding:0 20px}.g2,.g3,.gw{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr);gap:8px}}
 </style>
 </head>
 <body>
@@ -287,144 +252,69 @@ footer {
 
   <header>
     <div class="brand">
-      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI3NyAyOTAgMTQyMCA1MzAiPgogIDxzdHlsZT4uc3Qwe2ZpbGw6IzZFNjlBRDt9LnN0MntmaWxsOiNCMEUwRTQ7fTwvc3R5bGU+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTU0Ny4yLDM1MC4wNmMtMzAuNTYsMC01OC4yNywxMi4yMS03OC41MywzMi4wMWw0MC4wNiw0MC4wNmMxMC4wOS05LjM3LDIzLjYxLTE1LjEsMzguNDYtMTUuMWMzMS4yNCwwLDU2LjU3LDI1LjMzLDU2LjU3LDU2LjU3cy0yNS4zMyw1Ni41Ny01Ni41Nyw1Ni41N2MtMTQuOTIsMC0yOC40OS01Ljc5LTM4LjYtMTUuMjNsLTAuMDEsMC4wMWwtMC4yMS0wLjIxYy0wLjE2LTAuMTUtMC4zMS0wLjMxLTAuNDYtMC40NmMtMC41My0wLjUxLTEuMDUtMS4wMy0xLjU2LTEuNTZjLTAuNTItMC41NC0xLjA0LTEuMDktMS41NC0xLjY2bC03Ny4wNi03OS41bDAsMGMtMTAuMDQtOS4wOC0yMy4zNy0xNC41OS0zOC4wMy0xNC41NGMtMzEuMjQsMC4xMS01Ni41NywyNS4zMy01Ni41Nyw1Ni41N2MwLDMxLjI0LDI1LjMzLDU2LjU3LDU2LjU3LDU2LjU3YzE1LjY0LDAsMjkuNzctNi4zNCwzOS45OS0xNi42bDMzLjU4LDMzLjU4YzIwLjU4LDIzLjA4LDUwLjUzLDM3LjYyLDgzLjg5LDM3LjYyYzYyLjA1LDAsMTEyLjM2LTUwLjMsMTEyLjM2LTExMi4zNlM2MDkuMjUsMzUwLjA2LDU0Ny4yLDM1MC4wNnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTQ3LjIsNDA3LjAzYy0xNC44NiwwLTI4LjM3LDUuNzMtMzguNDYsMTUuMWwtMzguMDItMzguMDJjLTIwLjQ2LTIxLjQ3LTQ5LjM0LTM0Ljg2LTgxLjM1LTM0Ljg2Yy02Mi4wNSwwLTExMi4zNiw1MC4zLTExMi4zNiwxMTIuMzZzNTAuMywxMTIuMzYsMTEyLjM2LDExMi4zNmMzMC42MiwwLDU4LjM3LTEyLjI1LDc4LjY0LTMyLjEybC0zOC4yOC0zOC4yOGMtMTAuMjMsMTAuMjUtMjQuMzYsMTYuNi0zOS45OSwxNi42Yy0zMS4yNCwwLTU2LjU3LTI1LjMzLTU2LjU3LTU2LjU3YzAtMzEuMjQsMjUuMzMtNTYuNDYsNTYuNTctNTYuNTdjMTQuNjUtMC4wNSwyNy45OSw1LjQ2LDM4LjAzLDE0LjU0bDAsMGw3Ny4wNiw3OS41YzEuMTMsMS4yOCwyLjMyLDIuNSwzLjU2LDMuNjdsMC4yMSwwLjIxbDAuMDEtMC4wMWMxMC4xMSw5LjQ0LDIzLjY3LDE1LjIzLDM4LjYsMTUuMjNjMzEuMjQsMCw1Ni41Ny0yNS4zMyw1Ni41Ny01Ni41N1M1NzguNDQsNDA3LjAzLDU0Ny4yLDQwNy4wM3oiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNODk0LjE4LDQ3Mi4yNWMwLTQ5LjkyLTQwLjQ3LTkwLjM5LTkwLjM5LTkwLjM5Yy00OS44OCwwLTkwLjM5LDQwLjUxLTkwLjM5LDkwLjM5YzAsNDkuOTIsNDAuNDcsOTAuMzksOTAuMzksOTAuMzljMTQuOTcsMCwyOS4wOS0zLjY0LDQxLjUzLTEwLjA5bDAsMGMtOC43NCwzMy42OS01MS42MywzMC41NC02NC4wNywyOC44OGMtMS44LTAuMjQtMy4zOSwxLjE2LTMuMzksMi45N3YzOS45M2MwLDEuNjcsMS4zNiwzLjAyLDMuMDMsM2wzMS4xLTAuMzZjODAuNTktMTEuOTMsODIuMTgtODMuNDUsODIuMTgtODMuNDV2LTY2LjgxbC0wLjEyLDAuMThDODk0LjE0LDQ3NS4zNyw4OTQuMTgsNDczLjgxLDg5NC4xOCw0NzIuMjV6IE04MDQuMTcsNTE3LjI1Yy0yNC44OSwwLTQ1LjA3LTIwLjE4LTQ1LjA3LTQ1LjA3YzAtMjQuODksMjAuMTgtNDUuMDcsNDUuMDctNDUuMDdjMjQuODksMCw0NS4wNywyMC4xOCw0NS4wNyw0NS4wN0M4NDkuMjQsNDk3LjA3LDgyOS4wNiw1MTcuMjUsODA0LjE3LDUxNy4yNXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTA2Ni4xNCw0OTMuMjJIOTU5LjUzYzUuMDMsMTkuNzQsMjAuODIsMzAuMTYsNDUuMjMsMzAuMTZjMTEuNDksMCwyMS41NC0yLjUxLDM0LjEtMTAuNDFjMy4yMy0yLjE1LDUuMzgtMS43OSw3LjksMC43MmwxOC42NywxNy45NWMyLjE1LDIuNTIsMi4xNSw1LjAzLTAuNzIsNy45Yy0xNi44NywxNi44Ny0zOS44NSwyNi45Mi02NS4zMywyNi45MmMtNTUuMjgsMC05My4zMy00MC41Ni05My4zMy05Mi4yNXMzOC4wNS05Mi4yNSw4OS4zOC05Mi4yNWM1MC45OCwwLDgzLjY0LDQwLjU2LDgzLjY0LDg5LjAyQzEwNzkuMDYsNDg1LjY4LDEwNzcuMjcsNDkzLjIyLDEwNjYuMTQsNDkzLjIyeiBNOTU4LjgxLDQ1OS4xMmg3Mi41MWMtMy4yMy0yMS41NC0xNy45NS0zMS45NS0zNS41NC0zMS45NUM5NzcuODMsNDI3LjE3LDk2Mi43Niw0MzcuNTgsOTU4LjgxLDQ1OS4xMnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTI2Ny4yMSw0NTcuNjh2OTguNzJjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOHYtODcuOTVjMC0yOC4zNi0xNS43OS0zNi42Mi0zMC4xNS0zNi42MmMtMjQuMDUsMC0zNC4xLDIzLjY5LTM0LjEsMzIuMzF2OTIuMjVjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdjMC0zLjIzLDIuMTUtNS4zOCw1LjM4LTUuMzhoNDEuNjRjMy4yMywwLDUuMDMsMi4xNSw1LjM4LDUuMzhsMS40MywyMi4yNWMxMS4xMy0xOC4zLDI5LjA4LTMxLjU5LDU0LjItMzEuNTlDMTIzOC44NSwzODEuOTQsMTI2Ny4yMSw0MTAuNjYsMTI2Ny4yMSw0NTcuNjh6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyOTcuMzYsMzI2LjNjMC0xNi4xNSwxMi45Mi0yOS4wOCwyOS4wOC0yOS4wOGMxNS43OSwwLDI4LjcyLDEyLjkyLDI4LjcyLDI5LjA4YzAsMTUuNzktMTIuOTIsMjguNzItMjguNzIsMjguNzJDMTMxMC4yOCwzNTUuMDIsMTI5Ny4zNiwzNDIuMDksMTI5Ny4zNiwzMjYuM3ogTTEzMDQuOSwzODUuODloNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdDMTI5OS41MSwzODguMDQsMTMwMS42NywzODUuODksMTMwNC45LDM4NS44OXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTU2Ni4yMiwzOTEuMjdWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTM5LjEzYy0zLjIzLDAtNS4wMy0yLjE1LTUuMzgtNS4zOGwtMS4wOC0xMi45MmMtMTIuMjEsMTMuNjQtMjguNzIsMjIuOTctNTAuMjYsMjIuOTdjLTQ4LjgyLDAtODQuNzItNDAuOTItODQuNzItOTIuMjVzMzUuOS05Mi4yNSw4NC43Mi05Mi4yNWMyMC44MiwwLDM3LjY5LDkuNjksNTAuMjYsMjQuMDVsMS4wOC0xNC43MmMwLjM2LTMuMjMsMi4xNS01LjM4LDUuMzgtNS4zOGgzOS4xM0MxNTY0LjA3LDM4NS44OSwxNTY2LjIyLDM4OC4wNCwxNTY2LjIyLDM5MS4yN3ogTTE1MTEuMyw0NzMuODRjMC0yMy4zNC0xNi44Ny00My4wOC0zOS40OS00My4wOGMtMjIuOTcsMC0zOS44NCwxOC42Ny0zOS44NCw0My4wOGMwLDI0Ljc3LDE2Ljg3LDQzLjQzLDM5Ljg0LDQzLjQzQzE0OTQuNDMsNTE3LjI3LDE1MTEuMyw0OTcuMTcsMTUxMS4zLDQ3My44NHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTYwMy4xOSwyOTkuNzNoNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzMDUuMTJDMTU5Ny44MSwzMDEuODksMTU5OS45NiwyOTkuNzMsMTYwMy4xOSwyOTkuNzN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTExNjMuMzQsNzQ3LjM0YzIuNzktMi43OSw1LjIzLTIuNDQsNy42OCwwbDUuNTgsNC44OWMyLjA5LDIuMDksMi40NCw0Ljg4LDAuMzUsNy4zM2MtMTYuMDYsMTguNS0zOC4zOSwzMC4zNy02Ni4zMiwzMC4zN2MtNDkuMjEsMC04NS41Mi0zOS40NC04NS41Mi04OS43czM2LjMtODkuNyw4NS41Mi04OS43YzI3LjIzLDAsNDkuMjIsMTEuODcsNjUuMjcsMzAuMzdjMi4wOSwyLjQ0LDEuNzQsNS4yNC0wLjM1LDcuMzNsLTUuNTgsNC41NGMtMi40NCwyLjQ1LTQuODksMi43OS03LjY4LDAuMzVjLTEwLjEyLTkuNDItMjEuOTktMjMuNzQtNTEuNjYtMjMuNzRjLTM4LjM5LDAtNjUuMjcsMzAuMzctNjUuMjcsNzAuODZjMCw0MC40OSwyNi44OCw3MC44Niw2NS4yNyw3MC44NkMxMTQxLDc3MS4wNywxMTUzLjU3LDc1Ny40NiwxMTYzLjM0LDc0Ny4zNHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTM2NC43NCw2MTkuNTh2MTYwLjU2YzAsMy4xNC0yLjA5LDUuMjQtNS4yNCw1LjI0aC05LjQyYy0zLjE0LDAtNC44OS0yLjA5LTUuMjMtNS4yNGwtMS43NS0yMi42OWMtMTMuMjYsMTkuNTUtMzQuOSwzMi4xMS02Mi40OCwzMi4xMWMtNDkuMjIsMC04NC4xMi0zOS40NC04NC4xMi04OS4zNnMzNC45LTg5LjM2LDg0LjEyLTg5LjM2YzI3LjkyLDAsNDkuNTYsMTIuNTcsNjIuODMsMzIuNDZsMS40LTIzLjczYzAuMzUtMy4xNCwyLjA5LTUuMjQsNS4yMy01LjI0aDkuNDJDMTM2Mi42NCw2MTQuMzUsMTM2NC43NCw2MTYuNDQsMTM2NC43NCw2MTkuNTh6IE0xMzQ1LjE5LDcxNC44OGwwLjctMTQuNjZsLTAuNy0xNS4wMWMtNS45My0zMS40Mi0zMC43Mi01NS41LTYzLjE4LTU1LjVjLTM3LjcsMC02NS4yNywzMC4wMi02NS4yNyw3MC4xNmMwLDQwLjQ5LDI3LjU3LDcwLjUxLDY1LjI3LDcwLjUxQzEzMTQuNDcsNzcwLjM3LDEzMzkuMjYsNzQ2LjI5LDEzNDUuMTksNzE0Ljg4eiIvPgogIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDg0LjExLDYyMC42M2wtNC4xOSw4LjczYy0xLjQsMi40NS0zLjE0LDIuNzktNS45MywyLjA5Yy0zLjE0LTAuNy02LjI4LTEuNzQtMTMuNjEtMS43NGMtMjAuOTQsMC0zOC43NCwxNi4wNi0zOC43NCwzOC4zOXYxMTIuMDRjMCwzLjE0LTIuMDksNS4yNC01LjI0LDUuMjRoLTEwLjQ3Yy0zLjE0LDAtNS4yNC0yLjA5LTUuMjQtNS4yNFY2MTkuNThjMC0zLjE0LDIuMDktNS4yNCw1LjI0LTUuMjRoOC43M2MzLjE0LDAsNC44OSwyLjA5LDUuMjQsNS4yNGwxLjQsMTQuMzFjOS43Ny0xMy45NywyMy43NC0yMy4zOSw0MS44OS0yMy4zOWM4LjAzLDAsMTUuMzYsMS43NCwyMC4yNCw0Ljg4QzE0ODUuMTUsNjE2LjQ0LDE0ODUuNSw2MTcuODQsMTQ4NC4xMSw2MjAuNjN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE2NTEuNjUsNjkyLjg4YzAsMTEuMTctMS40LDE2LjQtOS43NywxNi40aC0xMzIuOTljMy44NCwzNC41NiwyOC45Nyw2MS43OCw2Ny43Miw2MS43OGMyMy4wNCwwLDM4LjM5LTguNzMsNDkuMjEtMTguNWMyLjQ0LTIuMDksNC41NC0zLjQ5LDcuMzMtMS4wNWw0LjU0LDQuMTljMi43OSwyLjc5LDMuMTQsNS4yNCwwLjM1LDguMDNjLTE2LjA2LDE2Ljc1LTM4LjM5LDI2LjE4LTYzLjg4LDI2LjE4Yy01MC4yNiwwLTg1Ljg2LTM5LjQ0LTg1Ljg2LTg5LjdzMzQuMjEtODkuNyw4My40Mi04OS43QzE2MjAuNTksNjEwLjUxLDE2NTEuNjUsNjQ5Ljk1LDE2NTEuNjUsNjkyLjg4eiBNMTUwOC44OSw2OTEuODRoMTI0LjI2Yy0wLjctMzMuODYtMjUuODMtNjIuNDgtNjEuNzgtNjIuNDhDMTUzNi4xMiw2MjkuMzYsMTUxMi4wMyw2NTYuNTgsMTUwOC44OSw2OTEuODR6Ii8+Cjwvc3ZnPg==" alt="Genial Care" style="height:38px;width:auto;display:block;" />
-      <div class="brand-sub">Facilities &nbsp;·&nbsp; Hub de ferramentas</div>
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI3NyAyOTAgMTQyMCA1MzAiPgogIDxzdHlsZT4uc3Qwe2ZpbGw6IzZFNjlBRDt9LnN0MntmaWxsOiNCMEUwRTQ7fTwvc3R5bGU+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTU0Ny4yLDM1MC4wNmMtMzAuNTYsMC01OC4yNywxMi4yMS03OC41MywzMi4wMWw0MC4wNiw0MC4wNmMxMC4wOS05LjM3LDIzLjYxLTE1LjEsMzguNDYtMTUuMWMzMS4yNCwwLDU2LjU3LDI1LjMzLDU2LjU3LDU2LjU3cy0yNS4zMyw1Ni41Ny01Ni41Nyw1Ni41N2MtMTQuOTIsMC0yOC40OS01Ljc5LTM4LjYtMTUuMjNsLTAuMDEsMC4wMWwtMC4yMS0wLjIxYy0wLjE2LTAuMTUtMC4zMS0wLjMxLTAuNDYtMC40NmMtMC41My0wLjUxLTEuMDUtMS4wMy0xLjU2LTEuNTZjLTAuNTItMC41NC0xLjA0LTEuMDktMS41NC0xLjY2bC03Ny4wNi03OS41bDAsMGMtMTAuMDQtOS4wOC0yMy4zNy0xNC41OS0zOC4wMy0xNC41NGMtMzEuMjQsMC4xMS01Ni41NywyNS4zMy01Ni41Nyw1Ni41N2MwLDMxLjI0LDI1LjMzLDU2LjU3LDU2LjU3LDU2LjU3YzE1LjY0LDAsMjkuNzctNi4zNCwzOS45OS0xNi42bDMzLjU4LDMzLjU4YzIwLjU4LDIzLjA4LDUwLjUzLDM3LjYyLDgzLjg5LDM3LjYyYzYyLjA1LDAsMTEyLjM2LTUwLjMsMTEyLjM2LTExMi4zNlM2MDkuMjUsMzUwLjA2LDU0Ny4yLDM1MC4wNnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTQ3LjIsNDA3LjAzYy0xNC44NiwwLTI4LjM3LDUuNzMtMzguNDYsMTUuMWwtMzguMDItMzguMDJjLTIwLjQ2LTIxLjQ3LTQ5LjM0LTM0Ljg2LTgxLjM1LTM0Ljg2Yy02Mi4wNSwwLTExMi4zNiw1MC4zLTExMi4zNiwxMTIuMzZzNTAuMywxMTIuMzYsMTEyLjM2LDExMi4zNmMzMC42MiwwLDU4LjM3LTEyLjI1LDc4LjY0LTMyLjEybC0zOC4yOC0zOC4yOGMtMTAuMjMsMTAuMjUtMjQuMzYsMTYuNi0zOS45OSwxNi42Yy0zMS4yNCwwLTU2LjU3LTI1LjMzLTU2LjU3LTU2LjU3YzAtMzEuMjQsMjUuMzMtNTYuNDYsNTYuNTctNTYuNTdjMTQuNjUtMC4wNSwyNy45OSw1LjQ2LDM4LjAzLDE0LjU0bDAsMGw3Ny4wNiw3OS41YzEuMTMsMS4yOCwyLjMyLDIuNSwzLjU2LDMuNjdsMC4yMSwwLjIxbDAuMDEtMC4wMWMxMC4xMSw5LjQ0LDIzLjY3LDE1LjIzLDM4LjYsMTUuMjNjMzEuMjQsMCw1Ni41Ny0yNS4zMyw1Ni41Ny01Ni41N1M1NzguNDQsNDA3LjAzLDU0Ny4yLDQwNy4wM3oiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNODk0LjE4LDQ3Mi4yNWMwLTQ5LjkyLTQwLjQ3LTkwLjM5LTkwLjM5LTkwLjM5Yy00OS44OCwwLTkwLjM5LDQwLjUxLTkwLjM5LDkwLjM5YzAsNDkuOTIsNDAuNDcsOTAuMzksOTAuMzksOTAuMzljMTQuOTcsMCwyOS4wOS0zLjY0LDQxLjUzLTEwLjA5bDAsMGMtOC43NCwzMy42OS01MS42MywzMC41NC02NC4wNywyOC44OGMtMS44LTAuMjQtMy4zOSwxLjE2LTMuMzksMi45N3YzOS45M2MwLDEuNjcsMS4zNiwzLjAyLDMuMDMsM2wzMS4xLTAuMzZjODAuNTktMTEuOTMsODIuMTgtODMuNDUsODIuMTgtODMuNDV2LTY2LjgxbC0wLjEyLDAuMThDODk0LjE0LDQ3NS4zNyw4OTQuMTgsNDczLjgxLDg5NC4xOCw0NzIuMjV6IE04MDQuMTcsNTE3LjI1Yy0yNC44OSwwLTQ1LjA3LTIwLjE4LTQ1LjA3LTQ1LjA3YzAtMjQuODksMjAuMTgtNDUuMDcsNDUuMDctNDUuMDdjMjQuODksMCw0NS4wNywyMC4xOCw0NS4wNyw0NS4wN0M4NDkuMjQsNDk3LjA3LDgyOS4wNiw1MTcuMjUsODA0LjE3LDUxNy4yNXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTA2Ni4xNCw0OTMuMjJIOTU5LjUzYzUuMDMsMTkuNzQsMjAuODIsMzAuMTYsNDUuMjMsMzAuMTZjMTEuNDksMCwyMS41NC0yLjUxLDM0LjEtMTAuNDFjMy4yMy0yLjE1LDUuMzgtMS43OSw3LjksMC43MmwxOC42NywxNy45NWMyLjE1LDIuNTIsMi4xNSw1LjAzLTAuNzIsNy45Yy0xNi44NywxNi44Ny0zOS44NSwyNi45Mi02NS4zMywyNi45MmMtNTUuMjgsMC05My4zMy00MC41Ni05My4zMy05Mi4yNXMzOC4wNS05Mi4yNSw4OS4zOC05Mi4yNWM1MC45OCwwLDgzLjY0LDQwLjU2LDgzLjY0LDg5LjAyQzEwNzkuMDYsNDg1LjY4LDEwNzcuMjcsNDkzLjIyLDEwNjYuMTQsNDkzLjIyeiBNOTU4LjgxLDQ1OS4xMmg3Mi41MWMtMy4yMy0yMS41NC0xNy45NS0zMS45NS0zNS41NC0zMS45NUM5NzcuODMsNDI3LjE3LDk2Mi43Niw0MzcuNTgsOTU4LjgxLDQ1OS4xMnoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTI2Ny4yMSw0NTcuNjh2OTguNzJjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOHYtODcuOTVjMC0yOC4zNi0xNS43OS0zNi42Mi0zMC4xNS0zNi42MmMtMjQuMDUsMC0zNC4xLDIzLjY5LTM0LjEsMzIuMzF2OTIuMjVjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdjMC0zLjIzLDIuMTUtNS4zOCw1LjM4LTUuMzhoNDEuNjRjMy4yMywwLDUuMDMsMi4xNSw1LjM4LDUuMzhsMS40MywyMi4yNWMxMS4xMy0xOC4zLDI5LjA4LTMxLjU5LDU0LjItMzEuNTlDMTIzOC44NSwzODEuOTQsMTI2Ny4yMSw0MTAuNjYsMTI2Ny4yMSw0NTcuNjh6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTEyOTcuMzYsMzI2LjNjMC0xNi4xNSwxMi45Mi0yOS4wOCwyOS4wOC0yOS4wOGMxNS43OSwwLDI4LjcyLDEyLjkyLDI4LjcyLDI5LjA4YzAsMTUuNzktMTIuOTIsMjguNzItMjguNzIsMjguNzJDMTMxMC4yOCwzNTUuMDIsMTI5Ny4zNiwzNDIuMDksMTI5Ny4zNiwzMjYuM3ogTTEzMDQuOSwzODUuODloNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzOTEuMjdDMTI5OS41MSwzODguMDQsMTMwMS42NywzODUuODksMTMwNC45LDM4NS44OXoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTU2Ni4yMiwzOTEuMjdWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTM5LjEzYy0zLjIzLDAtNS4wMy0yLjE1LTUuMzgtNS4zOGwtMS4wOC0xMi45MmMtMTIuMjEsMTMuNjQtMjguNzIsMjIuOTctNTAuMjYsMjIuOTdjLTQ4LjgyLDAtODQuNzItNDAuOTItODQuNzItOTIuMjVzMzUuOS05Mi4yNSw4NC43Mi05Mi4yNWMyMC44MiwwLDM3LjY5LDkuNjksNTAuMjYsMjQuMDVsMS4wOC0xNC43MmMwLjM2LTMuMjMsMi4xNS01LjM4LDUuMzgtNS4zOGgzOS4xM0MxNTY0LjA3LDM4NS44OSwxNTY2LjIyLDM4OC4wNCwxNTY2LjIyLDM5MS4yN3ogTTE1MTEuMyw0NzMuODRjMC0yMy4zNC0xNi44Ny00My4wOC0zOS40OS00My4wOGMtMjIuOTcsMC0zOS44NCwxOC42Ny0zOS44NCw0My4wOGMwLDI0Ljc3LDE2Ljg3LDQzLjQzLDM5Ljg0LDQzLjQzQzE0OTQuNDMsNTE3LjI3LDE1MTEuMyw0OTcuMTcsMTUxMS4zLDQ3My44NHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTYwMy4xOSwyOTkuNzNoNDMuMDhjMy4yMywwLDUuMzgsMi4xNSw1LjM4LDUuMzhWNTU2LjRjMCwzLjIzLTIuMTUsNS4zOC01LjM4LDUuMzhoLTQzLjA4Yy0zLjIzLDAtNS4zOC0yLjE1LTUuMzgtNS4zOFYzMDUuMTJDMTU5Ny44MSwzMDEuODksMTU5OS45NiwyOTkuNzMsMTYwMy4xOSwyOTkuNzN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTExNjMuMzQsNzQ3LjM0YzIuNzktMi43OSw1LjIzLTIuNDQsNy42OCwwbDUuNTgsNC44OWMyLjA5LDIuMDksMi40NCw0Ljg4LDAuMzUsNy4zM2MtMTYuMDYsMTguNS0zOC4zOSwzMC4zNy02Ni4zMiwzMC4zN2MtNDkuMjEsMC04NS41Mi0zOS40NC04NS41Mi04OS43czM2LjMtODkuNyw4NS41Mi04OS43YzI3LjIzLDAsNDkuMjIsMTEuODcsNjUuMjcsMzAuMzdjMi4wOSwyLjQ0LDEuNzQsNS4yNC0wLjM1LDcuMzNsLTUuNTgsNC41NGMtMi40NCwyLjQ1LTQuODksMi43OS03LjY4LDAuMzVjLTEwLjEyLTkuNDItMjEuOTktMjMuNzQtNTEuNjYtMjMuNzRjLTM4LjM5LDAtNjUuMjcsMzAuMzctNjUuMjcsNzAuODZjMCw0MC40OSwyNi44OCw3MC44Niw2NS4yNyw3MC44NkMxMTQxLDc3MS4wNywxMTUzLjU3LDc1Ny40NiwxMTYzLjM0LDc0Ny4zNHoiLz4KICA8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTM2NC43NCw2MTkuNTh2MTYwLjU2YzAsMy4xNC0yLjA5LDUuMjQtNS4yNCw1LjI0aC05LjQyYy0zLjE0LDAtNC44OS0yLjA5LTUuMjMtNS4yNGwtMS43NS0yMi42OWMtMTMuMjYsMTkuNTUtMzQuOSwzMi4xMS02Mi40OCwzMi4xMWMtNDkuMjIsMC04NC4xMi0zOS40NC04NC4xMi04OS4zNnMzNC45LTg5LjM2LDg0LjEyLTg5LjM2YzI3LjkyLDAsNDkuNTYsMTIuNTcsNjIuODMsMzIuNDZsMS40LTIzLjczYzAuMzUtMy4xNCwyLjA5LTUuMjQsNS4yMy01LjI0aDkuNDJDMTM2Mi42NCw2MTQuMzUsMTM2NC43NCw2MTYuNDQsMTM2NC43NCw2MTkuNTh6IE0xMzQ1LjE5LDcxNC44OGwwLjctMTQuNjZsLTAuNy0xNS4wMWMtNS45My0zMS40Mi0zMC43Mi01NS41LTYzLjE4LTU1LjVjLTM3LjcsMC02NS4yNywzMC4wMi02NS4yNyw3MC4xNmMwLDQwLjQ5LDI3LjU3LDcwLjUxLDY1LjI3LDcwLjUxQzEzMTQuNDcsNzcwLjM3LDEzMzkuMjYsNzQ2LjI5LDEzNDUuMTksNzE0Ljg4eiIvPgogIDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xNDg0LjExLDYyMC42M2wtNC4xOSw4LjczYy0xLjQsMi40NS0zLjE0LDIuNzktNS45MywyLjA5Yy0zLjE0LTAuNy02LjI4LTEuNzQtMTMuNjEtMS43NGMtMjAuOTQsMC0zOC43NCwxNi4wNi0zOC43NCwzOC4zOXYxMTIuMDRjMCwzLjE0LTIuMDksNS4yNC01LjI0LDUuMjRoLTEwLjQ3Yy0zLjE0LDAtNS4yNC0yLjA5LTUuMjQtNS4yNFY2MTkuNThjMC0zLjE0LDIuMDktNS4yNCw1LjI0LTUuMjRoOC43M2MzLjE0LDAsNC44OSwyLjA5LDUuMjQsNS4yNGwxLjQsMTQuMzFjOS43Ny0xMy45NywyMy43NC0yMy4zOSw0MS44OS0yMy4zOWM4LjAzLDAsMTUuMzYsMS43NCwyMC4yNCw0Ljg4QzE0ODUuMTUsNjE2LjQ0LDE0ODUuNSw2MTcuODQsMTQ4NC4xMSw2MjAuNjN6Ii8+CiAgPHBhdGggY2xhc3M9InN0MCIgZD0iTTE2NTEuNjUsNjkyLjg4YzAsMTEuMTctMS40LDE2LjQtOS43NywxNi40aC0xMzIuOTljMy44NCwzNC41NiwyOC45Nyw2MS43OCw2Ny43Miw2MS43OGMyMy4wNCwwLDM4LjM5LTguNzMsNDkuMjEtMTguNWMyLjQ0LTIuMDksNC41NC0zLjQ5LDcuMzMtMS4wNWw0LjU0LDQuMTljMi43OSwyLjc5LDMuMTQsNS4yNCwwLjM1LDguMDNjLTE2LjA2LDE2Ljc1LTM4LjM5LDI2LjE4LTYzLjg4LDI2LjE4Yy01MC4yNiwwLTg1Ljg2LTM5LjQ0LTg1Ljg2LTg5LjdzMzQuMjEtODkuNyw4My40Mi04OS43QzE2MjAuNTksNjEwLjUxLDE2NTEuNjUsNjQ5Ljk1LDE2NTEuNjUsNjkyLjg4eiBNMTUwOC44OSw2OTEuODRoMTI0LjI2Yy0wLjctMzMuODYtMjUuODMtNjIuNDgtNjEuNzgtNjIuNDhDMTUzNi4xMiw2MjkuMzYsMTUxMi4wMyw2NTYuNTgsMTUwOC44OSw2OTEuODR6Ii8+Cjwvc3ZnPg==" alt="Genial Care" style="height:36px;width:auto;display:block;"/>
+      <div class="brand-sub">Facilities &nbsp;·&nbsp; Hub Operacional</div>
     </div>
-    <div class="header-right">
-      <div class="clima-badge" id="climaBadge" title="Clima em São Paulo">
-        <span id="climaBadgeIcon">🌤️</span>
-        <span id="climaBadgeTemp" style="font-weight:700;">--°C</span>
-        <span id="climaBadgeExtra" style="color:var(--text-muted);font-size:10px;"></span>
+    <div class="hright">
+      <div class="hpill" id="climaBadge" title="Clima em São Paulo">
+        <span id="climaBadgeIcon">🌤</span>
+        <b id="climaBadgeTemp">--°C</b>
+        <span id="climaBadgeExtra"></span>
       </div>
-      <div class="tec-badge" id="tecBadge">
-        <span style="font-size:11px;opacity:0.6;">👷</span>
-        <div id="tecBadgeContent" style="display:flex;flex-direction:column;gap:1px;"></div>
+      <div class="hpill" id="tecBadge">
+        <span style="font-size:11px;opacity:.6;">👷</span>
+        <div id="tecBadgeContent"></div>
       </div>
-      <div class="header-time" id="clock">--:--</div>
+      <div class="hpill" style="font-family:'JetBrains Mono',monospace;letter-spacing:.06em;">
+        <span class="live-dot"></span>
+        <b id="clock" style="color:var(--tx)">--:--</b>
+      </div>
     </div>
   </header>
 
-  <!-- ── HERO ── -->
-  <div style="margin-bottom:48px;">
+  <!-- NAV -->
+  <nav class="nav" id="navBar">
+    <a class="ni on" href="#s0" data-s="s0"><span class="ni-ico">🔥</span>Prioridades</a>
+    <a class="ni" href="#s1" data-s="s1"><span class="ni-ico">🏢</span>Unidades</a>
+    <a class="ni" href="#s2" data-s="s2"><span class="ni-ico">🔧</span>Operação</a>
+    <a class="ni" href="#s3" data-s="s3"><span class="ni-ico">🧾</span>Financeiro</a>
+    <a class="ni" href="#s4" data-s="s4"><span class="ni-ico">🧹</span>Limpeza</a>
+    <a class="ni" href="#s5" data-s="s5"><span class="ni-ico">⚡</span>Atalhos</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
     <div class="eyebrow">Genial Care Facilities</div>
-    <h1 class="hero-title">Facilities Hub<br><span>Genial Care</span></h1>
-    <p class="hero-sub">Acesse rapidamente todas as aplicações do time de Facilities da Genial Care.</p>
+    <div class="hero-title">Facilities Hub</div>
+    <div class="hero-date" id="heroDate"></div>
   </div>
 
-  <!-- ── UNIDADES ── -->
-  <div class="section">
-    <div class="section-hdr">
-      <span class="section-lbl">Unidades</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="card card-widget glow-teal" id="cgInfoCard" style="cursor:default;">
-      <div class="w-hdr">
-        <div class="w-icon icon-teal">🏢</div>
-        <div>
-          <div class="w-title">Casas Geniais</div>
-          <div class="w-sub">Clique em uma unidade para ver endereço, contatos e infraestrutura</div>
-        </div>
-      </div>
-      <div class="w-body">
-        <div id="cgList" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
-          <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div>
-        </div>
-      </div>
-      <div class="w-foot">
-        <div style="display:flex;align-items:center;gap:5px;">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Matheus + Técnicos
-        </div>
-        <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
-      </div>
-    </div>
+  <!-- STATS -->
+  <div class="stats">
+    <div class="sc"><div class="sc-ico p">📅</div><div><div class="sc-val" id="statEscala">—</div><div class="sc-lbl">Escala hoje</div></div></div>
+    <div class="sc"><div class="sc-ico o">⚠️</div><div><div class="sc-val r" id="statVencidas">—</div><div class="sc-lbl">Prev. vencidas</div></div></div>
+    <div class="sc"><div class="sc-ico t">🏢</div><div><div class="sc-val g">7</div><div class="sc-lbl">Unidades ativas</div></div></div>
+    <div class="sc"><div class="sc-ico k">🧹</div><div><div class="sc-val">18</div><div class="sc-lbl">Time DeLuca</div></div></div>
   </div>
 
-  <!-- ── FERRAMENTAS ── -->
-  <div class="section">
-    <div class="section-hdr">
-      <span class="section-lbl">Ferramentas</span>
-      <div class="section-line"></div>
+  <!-- S0 PRIORIDADES -->
+  <div class="sec" id="s0">
+    <div class="sec-hdr">
+      <span class="sec-lbl">Hoje · Prioridades</span>
+      <div class="sec-line"></div>
+      <span class="ptag pt-all">Matheus + Marina</span>
     </div>
-    <div class="tool-grid">
-
-      <a href="https://checklist-genial.vercel.app/" target="_blank" class="card card-tool glow-teal">
-        <div class="tool-top">
-          <div class="tool-icon icon-teal">✅</div>
-          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-        </div>
-        <div><div class="tool-tag tag-teal">Inspeção</div></div>
-        <div class="tool-name">Checklist de Unidades</div>
-        <div class="tool-desc">Inspeções nas Casas Geniais com fotos e acompanhamento por unidade.</div>
-        <div class="tool-foot">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Matheus + Técnicos
-        </div>
-      </a>
-
-      <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card card-tool glow-green">
-        <div class="tool-top">
-          <div class="tool-icon icon-green">📦</div>
-          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-        </div>
-        <div><div class="tool-tag tag-green">Almoxarifado</div></div>
-        <div class="tool-name">Controle de Estoque</div>
-        <div class="tool-desc">Materiais de manutenção, solicitações de compra e movimentações por unidade.</div>
-        <div class="tool-foot">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-          Matheus + Técnicos
-        </div>
-      </a>
-
-      <a href="https://nf-cartao-corporativo.vercel.app/" target="_blank" class="card card-tool glow-purple">
-        <div class="tool-top">
-          <div class="tool-icon icon-purple">🧾</div>
-          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-        </div>
-        <div><div class="tool-tag tag-purple">Financeiro</div></div>
-        <div class="tool-name">NF Cartão Corporativo</div>
-        <div class="tool-desc">Notas fiscais do Cartão Facilities (0852) com extração automática via IA.</div>
-        <div class="tool-foot">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Somente Matheus
-        </div>
-      </a>
-
-      <div class="card card-tool glow-orange card-disabled">
-        <div class="tool-top">
-          <div class="tool-icon icon-orange">📄</div>
-          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
-        </div>
-        <div><div class="tool-tag tag-orange">Em breve</div></div>
-        <div class="tool-name">Portal de NFs</div>
-        <div class="tool-desc">Upload em lote de NFs de fornecedores com organização automática no Drive via IA.</div>
-        <div class="tool-foot">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          Somente Matheus
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ── GESTÃO ── -->
-  <div class="section">
-    <div class="section-hdr">
-      <span class="section-lbl">Gestão</span>
-      <div class="section-line"></div>
-    </div>
-    <div class="widget-grid">
-
+    <div class="g2">
       <!-- Escala -->
-      <div class="card card-widget glow-purple" id="escalaCard">
-        <div class="w-hdr">
-          <div class="w-icon icon-purple">📅</div>
+      <div class="card cw" style="cursor:default;" id="escalaCard">
+        <div class="wh">
+          <div class="wi ip">📅</div>
           <div>
-            <div class="w-title">Escala de Técnicos</div>
-            <div class="w-sub" id="weekBadge"></div>
+            <div class="wt">Escala de Técnicos</div>
+            <div class="ws" id="weekBadge"></div>
           </div>
         </div>
-        <div class="w-body">
+        <div class="wb">
           <div style="background:rgba(110,105,173,0.08);border:1px solid rgba(110,105,173,0.16);border-radius:10px;padding:12px;margin-bottom:10px;">
             <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#9B97D4;margin-bottom:8px;" id="hojeLabel">Hoje</div>
             <div id="currentWeekSchedule"></div>
@@ -432,7 +322,7 @@ footer {
           <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;">Calendário</div>
           <div id="quarterCalendar" style="display:flex;flex-direction:column;gap:2px;"></div>
         </div>
-        <div class="w-foot">
+        <div class="wf">
           <div style="display:flex;align-items:center;gap:5px;">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             Romário · Roger
@@ -441,15 +331,15 @@ footer {
       </div>
 
       <!-- Preventivas -->
-      <div class="card card-widget glow-orange" id="prevCard">
-        <div class="w-hdr">
-          <div class="w-icon icon-orange">🔧</div>
+      <div class="card cw" style="cursor:default;" id="prevCard">
+        <div class="wh">
+          <div class="wi io">🔧</div>
           <div>
-            <div class="w-title">Manutenções Preventivas</div>
-            <div class="w-sub">Status dos serviços recorrentes por unidade · <span id="prevLastUpdate" style="color:var(--text-muted);"></span></div>
+            <div class="wt">Manutenções Preventivas</div>
+            <div class="ws">Status dos serviços recorrentes por unidade · <span id="prevLastUpdate" style="color:var(--text-muted);"></span></div>
           </div>
         </div>
-        <div class="w-body">
+        <div class="wb">
           <div id="prevCounters" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px;">
             <div style="text-align:center;padding:8px 6px;background:rgba(217,79,79,0.08);border:1px solid rgba(217,79,79,0.16);border-radius:9px;">
               <div id="cntVencido" style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#D94F4F;">–</div>
@@ -469,7 +359,7 @@ footer {
             <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;">Carregando...</div>
           </div>
         </div>
-        <div class="w-foot">
+        <div class="wf">
           <div style="display:flex;align-items:center;gap:5px;">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
             Somente Matheus
@@ -478,56 +368,216 @@ footer {
         </div>
       </div>
 
+    </div>
+  </div>
 
+  <!-- S1 UNIDADES -->
+  <div class="sec" id="s1">
+    <div class="sec-hdr">
+      <span class="sec-lbl">Unidades</span>
+      <div class="sec-line"></div>
+      <span class="ptag pt-all">Matheus + Marina</span>
+    </div>
+    <div class="card cw" style="cursor:default;" id="cgInfoCard" style="cursor:default;">
+      <div class="wh">
+        <div class="wi it">🏢</div>
+        <div>
+          <div class="wt">Casas Geniais</div>
+          <div class="ws">Clique em uma unidade para ver endereço, contatos e infraestrutura</div>
+        </div>
+      </div>
+      <div class="wb">
+        <div id="cgList" style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;">
+          <div style="font-size:11px;color:var(--text-muted);text-align:center;padding:8px;grid-column:1/-1;">Carregando...</div>
+        </div>
+      </div>
+      <div class="wf">
+        <div style="display:flex;align-items:center;gap:5px;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Matheus + Técnicos
+        </div>
+        <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" style="font-size:11px;color:var(--teal);text-decoration:none;font-weight:600;opacity:0.8;">Ver planilha →</a>
+      </div>
+    </div>
+  </div>
 
-      <!-- Atalhos Rápidos -->
-      <div class="card card-widget glow-purple">
-        <div class="w-hdr">
-          <div class="w-icon icon-purple">⚡</div>
-          <div>
-            <div class="w-title">Atalhos Rápidos</div>
-            <div class="w-sub">Planilhas e portais de acesso frequente</div>
-          </div>
+  <!-- S2 OPERAÇÃO -->
+  <div class="sec" id="s2">
+    <div class="sec-hdr">
+      <span class="sec-lbl">Operação</span>
+      <div class="sec-line"></div>
+      <span class="ptag pt-all">Matheus + Marina</span>
+    </div>
+    <div class="g3">
+      <a href="https://checklist-genial.vercel.app/" target="_blank" class="card ct">
+        <div class="ct-top">
+          <div class="ct-ico it">✅</div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
         </div>
-        <div class="w-body" style="display:flex;flex-direction:column;gap:8px;">
-          <a href="https://docs.google.com/spreadsheets/d/1yhuo38_MdshcAO67chkKlWQ2wHnBCLN1acZjQQ5N-Os/edit?gid=1761395806#gid=1761395806" target="_blank" class="shortcut-link">
-            <span>🛒</span><span>Painel de Compras</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" class="shortcut-link">
-            <span>🔧</span><span>Manutenções Preventivas</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" class="shortcut-link">
-            <span>🏢</span><span>Informações das CGs</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="https://docs.google.com/spreadsheets/d/1Yig1gEKLJ5nP_LuU2ZHCe-wsDEYHsN0N6DCyDN7R1lI" target="_blank" class="shortcut-link">
-            <span>📦</span><span>Planilha de Estoque</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
-          <a href="https://suporte.genialcare.com.br" target="_blank" class="shortcut-link">
-            <span>🎫</span><span>Zoho Desk</span>
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </a>
+        <div><div class="ct-tag tt">Inspeção</div></div>
+        <div class="ct-name">Checklist de Unidades</div>
+        <div class="ct-desc">Inspeções nas Casas Geniais com fotos e acompanhamento por unidade.</div>
+        <div class="ct-foot">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Matheus + Técnicos
         </div>
-        <div class="w-foot">
-          <span style="font-size:10px;color:var(--text-muted);">Links de acesso direto</span>
+      </a>
+
+      <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card ct">
+        <div class="ct-top">
+          <div class="ct-ico ig">📦</div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+        <div><div class="ct-tag tg">Almoxarifado</div></div>
+        <div class="ct-name">Controle de Estoque</div>
+        <div class="ct-desc">Materiais de manutenção, solicitações de compra e movimentações por unidade.</div>
+        <div class="ct-foot">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Matheus + Técnicos
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <!-- S3 CONTROLE -->
+  <div class="sec" id="s3">
+    <div class="sec-hdr">
+      <span class="sec-lbl">Controle &amp; Financeiro</span>
+      <div class="sec-line"></div>
+      <span class="ptag pt-mat">Matheus</span>
+    </div>
+    <div class="g3">
+      <a href="https://nf-cartao-corporativo.vercel.app/" target="_blank" class="card ct">
+        <div class="ct-top">
+          <div class="ct-ico ip">🧾</div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+        <div><div class="ct-tag tp">Financeiro</div></div>
+        <div class="ct-name">NF Cartão Corporativo</div>
+        <div class="ct-desc">Notas fiscais do Cartão Facilities (0852) com extração automática via IA.</div>
+        <div class="ct-foot">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Somente Matheus
+        </div>
+      </a>
+
+      <div class="card ct disabled">
+        <div class="ct-top">
+          <div class="ct-ico io">📄</div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+        <div><div class="ct-tag to">Em breve</div></div>
+        <div class="ct-name">Portal de NFs</div>
+        <div class="ct-desc">Upload em lote de NFs de fornecedores com organização automática no Drive via IA.</div>
+        <div class="ct-foot">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Somente Matheus
         </div>
       </div>
 
     </div>
   </div>
 
+  <!-- S4 LIMPEZA -->
+  <div class="sec" id="s4">
+    <div class="sec-hdr">
+      <span class="sec-lbl">Limpeza Operacional</span>
+      <div class="sec-line"></div>
+      <span class="ptag pt-mar">Marina</span>
+    </div>
+    <div class="gw">
+      <!-- Time DeLuca -->
+      <div class="card cw" onclick="abrirDeludaModal()" style="cursor:pointer;">
+        <div class="wh">
+          <div class="wi ik">🧹</div>
+          <div>
+            <div class="wt">Time DeLuca</div>
+            <div class="ws" id="deludaResumo">Limpeza por unidade e turno</div>
+          </div>
+        </div>
+        <div class="wb">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;" id="deludaCGGrid"></div>
+        </div>
+        <div class="wf">
+          <div style="display:flex;align-items:center;gap:5px;">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Marina
+          </div>
+          <span style="font-size:11px;color:#C4648C;font-weight:600;opacity:0.8;">Ver detalhes →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- S5 ATALHOS -->
+  <div class="sec" id="s5">
+    <div class="sec-hdr">
+      <span class="sec-lbl">Atalhos Rápidos</span>
+      <div class="sec-line"></div>
+    </div>
+    <div class="card cw" style="cursor:default;">
+      <div class="wh">
+        <div class="wi ip">⚡</div>
+        <div><div class="wt">Atalhos Rápidos</div><div class="ws">Planilhas e portais de acesso frequente</div></div>
+      </div>
+      <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
+        <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
+        <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
+        <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
+        <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
+          <a href="https://docs.google.com/spreadsheets/d/1yhuo38_MdshcAO67chkKlWQ2wHnBCLN1acZjQQ5N-Os/edit?gid=1761395806#gid=1761395806" target="_blank" class="sl">
+            <span>🛒</span><span>Painel de Compras</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" class="sl">
+            <span>🔧</span><span>Manutenções Preventivas</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" class="sl">
+            <span>🏢</span><span>Informações das CGs</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://docs.google.com/spreadsheets/d/1Yig1gEKLJ5nP_LuU2ZHCe-wsDEYHsN0N6DCyDN7R1lI" target="_blank" class="sl">
+            <span>📦</span><span>Planilha de Estoque</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="https://suporte.genialcare.com.br" target="_blank" class="sl">
+            <span>🎫</span><span>Zoho Desk</span>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-left:auto;opacity:0.4;flex-shrink:0;"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+      </div>
+      <div class="wf"><span>Links de acesso direto</span></div>
+    </div>
+  </div>
+
   <footer>
-    <div class="footer-text">Genial Care Facilities © 2026 — Hub interno</div>
-    <div class="dot"></div>
+    <div class="footer-txt">Genial Care Facilities &nbsp;©&nbsp; 2026</div>
+    <div class="footer-dot"></div>
   </footer>
 
+  <!-- Modal DeLuca -->
+  <div id="deludaModal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;">
+    <div onclick="fecharDeludaModal()" style="position:absolute;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);"></div>
+    <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(224,100,153,.22);border-radius:18px;width:94%;max-width:720px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 20px 70px rgba(0,0,0,0.55);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 26px 16px;border-bottom:1px solid rgba(196,100,140,0.12);flex-shrink:0;">
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#ECEAF6;">Time de Limpeza</div>
+          <div style="font-size:11px;color:#6B678F;margin-top:2px;" id="deludaModalSub">DeLuca</div>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+          <div id="deludaFiltros" style="display:flex;gap:5px;flex-wrap:wrap;"></div>
+          <button onclick="fecharDeludaModal()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#ECEAF6;font-size:14px;flex-shrink:0;">✕</button>
+        </div>
+      </div>
+      <div id="deludaModalBody" style="overflow-y:auto;padding:20px 26px 26px;flex:1;"></div>
+    </div>
+  </div>
   <!-- Modal CG -->
   <div id="cgModal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;">
     <div onclick="fecharCGModal()" style="position:absolute;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);"></div>
-    <div style="position:relative;z-index:1;background:#13122A;border:1px solid rgba(123,191,196,0.22);border-radius:18px;width:90%;max-width:500px;max-height:84vh;display:flex;flex-direction:column;box-shadow:0 20px 70px rgba(0,0,0,0.55);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
+    <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(176,224,228,.22);border-radius:18px;width:90%;max-width:500px;max-height:84vh;display:flex;flex-direction:column;box-shadow:0 20px 70px rgba(0,0,0,0.55);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 26px 16px;border-bottom:1px solid rgba(123,191,196,0.12);flex-shrink:0;">
         <div>
           <div id="cgModalNome" style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#ECEAF6;"></div>
@@ -542,6 +592,8 @@ footer {
 </div>
 
 <script>
+
+
 function updateClock() {
   const now = new Date();
   const h = String(now.getHours()).padStart(2, '0');
@@ -1099,6 +1151,317 @@ function climaDesc(code) {
   return 'Variável';
 }
 
+
+// ── TIME DELUCA ─────────────────────────────────────────────
+const DELUCA_CG_ORDER = ["Morumbi","Tatuapé","Pinheiros","Paraíso","Alphaville","Anália Franco","Santana"];
+const DELUCA_CG_STYLE = {
+  "Morumbi":       {bg:"rgba(56,100,180,0.12)",  border:"rgba(56,100,180,0.25)",  fg:"#7BA8E8"},
+  "Tatuapé":       {bg:"rgba(196,100,140,0.12)", border:"rgba(196,100,140,0.25)", fg:"#E891B8"},
+  "Pinheiros":     {bg:"rgba(200,90,60,0.12)",   border:"rgba(200,90,60,0.25)",   fg:"#E8926F"},
+  "Paraíso":       {bg:"rgba(30,160,120,0.12)",  border:"rgba(30,160,120,0.25)",  fg:"#5ED4B0"},
+  "Alphaville":    {bg:"rgba(110,105,173,0.12)", border:"rgba(110,105,173,0.25)", fg:"#9B97D4"},
+  "Anália Franco": {bg:"rgba(80,160,60,0.12)",   border:"rgba(80,160,60,0.25)",   fg:"#82CC62"},
+  "Santana":       {bg:"rgba(200,150,40,0.12)",  border:"rgba(200,150,40,0.25)",  fg:"#E8C060"},
+};
+const DELUCA_DATA = [
+  {nome:"Fabricia Souza de Oliveira",       cg:"Morumbi",       turno:"Tarde", horario:"10:00–19:00", status:""},
+  {nome:"Angelica da Silva de Oliveira",    cg:"Morumbi",       turno:"Manhã", horario:"07:00–16:00", status:"cob"},
+  {nome:"Talita Cristina da Silva",         cg:"Morumbi",       turno:"Manhã", horario:"07:00–16:00", status:""},
+  {nome:"Andreia de Assis Miranda",         cg:"Morumbi",       turno:"Manhã", horario:"06:00–15:00", status:""},
+  {nome:"Adriana Alves Nascimento Gaia",    cg:"Morumbi",       turno:"Tarde", horario:"10:00–19:00", status:""},
+  {nome:"Daiana Ribeiro da Silva",          cg:"Morumbi",       turno:"Manhã", horario:"07:00–16:00", status:"lic"},
+  {nome:"Eliete Vieiras dos Santos",        cg:"Tatuapé",       turno:"Tarde", horario:"10:00–19:00", status:""},
+  {nome:"Tabata Suellen Sabino dos Santos", cg:"Tatuapé",       turno:"Manhã", horario:"07:00–16:00", status:""},
+  {nome:"Graziella Aparecida Dias",         cg:"Pinheiros",     turno:"Manhã", horario:"07:00–16:00", status:""},
+  {nome:"Liliane da Silva Cardoso",         cg:"Pinheiros",     turno:"Tarde", horario:"10:00–19:00", status:""},
+  {nome:"Adriele dos Santos Pereira",       cg:"Paraíso",       turno:"Manhã", horario:"07:00–16:00", status:""},
+  {nome:"Camila Rubia Ferreira Antunes",    cg:"Paraíso",       turno:"Tarde", horario:"10:00–19:00", status:""},
+  {nome:"Paloma Campos Filand",             cg:"Alphaville",    turno:"Tarde", horario:"10:00–19:00", status:""},
+  {nome:"Leila Silva De Lima",              cg:"Alphaville",    turno:"Manhã", horario:"06:00–15:00", status:""},
+  {nome:"Daniela Lima de Jesus Oliveira",   cg:"Anália Franco", turno:"Manhã", horario:"07:00–16:00", status:""},
+  {nome:"Emily Conceicao dos Santos Cruz",  cg:"Anália Franco", turno:"Tarde", horario:"10:00–19:00", status:""},
+  {nome:"Dilma Fernandes Silva dos Santos", cg:"Santana",       turno:"Manhã", horario:"07:00–16:00", status:""},
+  {nome:"Priscila Cardoso",                 cg:"Santana",       turno:"Tarde", horario:"10:00–19:00", status:""},
+];
+function deludaIni(n){const p=n.trim().split(/\s+/);return(p[0][0]+(p[1]?.[0]||'')).toUpperCase();}
+function initDeludaPreview(){
+  const grid=document.getElementById('deludaCGGrid');
+  const sub=document.getElementById('deludaResumo');
+  const ativas=DELUCA_DATA.filter(p=>p.status!=='lic').length;
+  if(sub)sub.textContent=DELUCA_DATA.length+' colaboradoras · '+ativas+' ativas';
+  if(!grid)return;
+  grid.innerHTML=DELUCA_CG_ORDER.map(cg=>{
+    const s=DELUCA_CG_STYLE[cg];
+    const count=DELUCA_DATA.filter(p=>p.cg===cg).length;
+    const temLic=DELUCA_DATA.some(p=>p.cg===cg&&p.status==='lic');
+    return '<div style="display:flex;align-items:center;justify-content:space-between;padding:5px 9px;border-radius:8px;background:'+s.bg+';border:1px solid '+s.border+';">'+
+      '<span style="font-size:11px;font-weight:600;color:'+s.fg+'">'+cg+'</span>'+
+      '<span style="font-size:10px;color:var(--text-muted)">'+count+(temLic?' ⚠':'')+' </span></div>';
+  }).join('');
+}
+let deludaFiltroAtivo='Todos';
+function abrirDeludaModal(){
+  deludaFiltroAtivo='Todos';renderDeludaModal();
+  document.getElementById('deludaModal').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function fecharDeludaModal(){
+  document.getElementById('deludaModal').style.display='none';
+  document.body.style.overflow='';
+}
+function renderDeludaModal(){
+  const lista=deludaFiltroAtivo==='Todos'?DELUCA_DATA:DELUCA_DATA.filter(p=>p.cg===deludaFiltroAtivo);
+  const ativas=lista.filter(p=>p.status!=='lic').length;
+  const lics=lista.filter(p=>p.status==='lic').length;
+  const sub=document.getElementById('deludaModalSub');
+  if(sub)sub.textContent='DeLuca · '+lista.length+' colaboradoras · '+ativas+' ativas'+(lics?' · '+lics+' em licença':'');
+  const filtrosEl=document.getElementById('deludaFiltros');
+  filtrosEl.innerHTML=['Todos',...DELUCA_CG_ORDER].map(cg=>
+    '<button onclick="setDeludaFiltro(\''+cg+'\''+')" style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid '+(cg===deludaFiltroAtivo?'rgba(196,100,140,0.5);background:rgba(196,100,140,0.15);color:#E891B8':'rgba(110,105,173,0.2);background:transparent;color:#6B678F')+';cursor:pointer;font-family:\'DM Sans\',sans-serif;">'+cg+'</button>'
+  ).join('');
+  const byCG={};DELUCA_CG_ORDER.forEach(cg=>{byCG[cg]=[];});
+  lista.forEach(p=>{if(byCG[p.cg])byCG[p.cg].push(p);});
+  const cgsVis=deludaFiltroAtivo==='Todos'?DELUCA_CG_ORDER:[deludaFiltroAtivo];
+  document.getElementById('deludaModalBody').innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">'+
+    cgsVis.filter(cg=>byCG[cg].length).map(cg=>{
+      const s=DELUCA_CG_STYLE[cg];
+      const manha=byCG[cg].filter(p=>p.turno==='Manhã');
+      const tarde=byCG[cg].filter(p=>p.turno==='Tarde');
+      const renderP=arr=>arr.map(p=>{
+        const badge=p.status==='lic'?'<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(200,90,60,0.15);color:#E8926F;margin-left:4px;">licença</span>':p.status==='cob'?'<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(200,150,40,0.15);color:#E8C060;margin-left:4px;">cobrindo</span>':'';
+        return '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(110,105,173,0.08);">'+
+          '<div style="width:26px;height:26px;border-radius:50%;background:'+s.bg+';border:1px solid '+s.border+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:'+s.fg+';flex-shrink:0;">'+deludaIni(p.nome)+'</div>'+
+          '<span style="font-size:12px;color:#ECEAF6;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+p.nome+badge+'</span>'+
+          '<span style="font-size:11px;color:#6B678F;white-space:nowrap;">'+p.horario+'</span></div>';
+      }).join('');
+      const turnoBlock=(label,arr)=>!arr.length?'':'<div style="padding:8px 0 4px;"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#6B678F;margin-bottom:4px;">'+label+'</div>'+renderP(arr)+'</div>';
+      return '<div style="background:#1A1930;border:1px solid rgba(110,105,173,0.15);border-radius:12px;overflow:hidden;">'+
+        '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:'+s.bg+';border-bottom:1px solid '+s.border+';">'+
+          '<span style="font-size:13px;font-weight:700;color:'+s.fg+'">'+cg+'</span>'+
+          '<span style="font-size:10px;color:'+s.fg+';opacity:.65">'+byCG[cg].length+' colaboradora'+(byCG[cg].length>1?'s':'')+'</span></div>'+
+        '<div style="padding:0 14px 8px;">'+turnoBlock('Manhã',manha)+(manha.length&&tarde.length?'<div style="height:1px;background:rgba(110,105,173,0.1);"></div>':'')+turnoBlock('Tarde',tarde)+'</div></div>';
+    }).join('')+'</div>';
+}
+function setDeludaFiltro(cg){deludaFiltroAtivo=cg;renderDeludaModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')fecharDeludaModal();});
+initDeludaPreview();
+
+
+// ── NAV BAR ACTIVE STATE ────────────────────────────────────
+(function() {
+  const sections = ['sec-prioridades','sec-unidades','sec-operacao','sec-controle','sec-limpeza','sec-atalhos'];
+  const navItems = document.querySelectorAll('.nav-item');
+
+  function updateActive() {
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      if (el.getBoundingClientRect().top <= 90) current = id;
+    });
+    navItems.forEach(item => {
+      item.classList.toggle('active', item.dataset.section === current);
+    });
+  }
+
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+
+  // Scroll suave com offset para o sticky nav
+  navItems.forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.getElementById(item.dataset.section);
+      if (!target) return;
+      const offset = 56;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+})();
+
+
+// ── HERO DATE ────────────────────────────────────────────────
+(function() {
+  const DAYS = ['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+  const MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  const now = new Date();
+  const el = document.getElementById('heroDate');
+  if (el) el.textContent = DAYS[now.getDay()] + ', ' + now.getDate() + ' de ' + MONTHS[now.getMonth()];
+})();
+
+// ── STAT STRIP ───────────────────────────────────────────────
+(function() {
+  // Técnico de plantão hoje
+  function updateStatEscala() {
+    const today = new Date();
+    const dow = today.getDay(); // 0=Dom
+    const mon = (function(d){ const c=new Date(d); const day=c.getDay(); const diff=c.getDate()-day+(day===0?-6:1); return new Date(c.setDate(diff)); })(today);
+    const MUDANCA = new Date(2026,3,6);
+    const wtype = mon >= MUDANCA ? (mon.getDate()%2===0?1:2) : (mon.getDate()%2!==0?1:2);
+    const SCHED = {
+      1:{romario:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Santana','CG Paraíso','Dia flex']},
+         roger:  {dias:['CG Morumbi','CG Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']}},
+      2:{romario:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']},
+         roger:  {dias:['CG Morumbi','CG Anália/Tatuapé','CG Santana','CG Paraíso','Dia flex']}}
+    };
+    const el = document.getElementById('statEscala');
+    if (!el) return;
+    if (dow === 0 || dow === 6) { el.textContent = 'Fim de semana'; return; }
+    const idx = dow - 1;
+    const s = SCHED[wtype];
+    el.textContent = 'S' + wtype + ' · ' + s.romario.dias[idx].replace('CG ','');
+  }
+  updateStatEscala();
+
+  // Preventivas — atualizado quando loadPreventivas() terminar
+  // O listener é feito via MutationObserver no cntVencido
+  const obs = new MutationObserver(() => {
+    const v = document.getElementById('cntVencido')?.textContent;
+    const a = document.getElementById('cntAvencer')?.textContent;
+    const statEl = document.getElementById('statVencidas');
+    if (statEl && v && v !== '–') {
+      const num = parseInt(v) || 0;
+      statEl.textContent = num;
+      statEl.className = 'stat-chip-val ' + (num > 0 ? 'warn' : 'ok');
+    }
+  });
+  const target = document.getElementById('cntVencido');
+  if (target) obs.observe(target, { childList: true, subtree: true, characterData: true });
+})();
+
+// ── NAV BAR ACTIVE ───────────────────────────────────────────
+(function() {
+  const sections = ['sec-prioridades','sec-unidades','sec-operacao','sec-controle','sec-limpeza','sec-atalhos'];
+  const navItems = document.querySelectorAll('.nav-item');
+  function updateActive() {
+    let current = sections[0];
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.getBoundingClientRect().top <= 90) current = id;
+    });
+    navItems.forEach(item => item.classList.toggle('active', item.dataset.section === current));
+  }
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
+  navItems.forEach(item => {
+    item.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.getElementById(item.dataset.section);
+      if (!target) return;
+      window.scrollTo({ top: target.getBoundingClientRect().top + window.scrollY - 56, behavior: 'smooth' });
+    });
+  });
+})();
+
+
+
+// ── HERO DATE ────────────────────────────────────────────────
+(function(){
+  const DIAS=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+  const MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  const n=new Date();
+  const el=document.getElementById('heroDate');
+  if(el) el.textContent=DIAS[n.getDay()]+', '+n.getDate()+' de '+MESES[n.getMonth()];
+})();
+
+// ── STAT STRIP ───────────────────────────────────────────────
+(function(){
+  function updateStatEscala(){
+    const today=new Date(); const dow=today.getDay();
+    function getMonday(d){const c=new Date(d);const day=c.getDay();c.setDate(c.getDate()-day+(day===0?-6:1));return c;}
+    const mon=getMonday(today);
+    const MUDANCA=new Date(2026,3,6);
+    const wtype=mon>=MUDANCA?(mon.getDate()%2===0?1:2):(mon.getDate()%2!==0?1:2);
+    const SCHED={
+      1:{romario:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Santana','CG Paraíso','Dia flex']},roger:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']}},
+      2:{romario:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']},roger:{dias:['CG Morumbi','CG Anália/Tatuapé','CG Santana','CG Paraíso','Dia flex']}}
+    };
+    const el=document.getElementById('statEscala');
+    if(!el) return;
+    if(dow===0||dow===6){el.textContent='Fim de semana';return;}
+    el.textContent='S'+wtype+' · '+SCHED[wtype].romario.dias[dow-1].replace('CG ','');
+  }
+  updateStatEscala();
+  const obs=new MutationObserver(()=>{
+    const v=document.getElementById('cntVencido')?.textContent;
+    const el=document.getElementById('statVencidas');
+    if(el&&v&&v!=='–'){const n=parseInt(v)||0;el.textContent=n;el.className='stat-chip-val '+(n>0?'warn':'ok');}
+  });
+  const target=document.getElementById('cntVencido');
+  if(target) obs.observe(target,{childList:true,subtree:true,characterData:true});
+})();
+
+// ── NAV BAR ACTIVE ───────────────────────────────────────────
+(function(){
+  const sections=['sec-prioridades','sec-unidades','sec-operacao','sec-controle','sec-limpeza','sec-atalhos'];
+  const navItems=document.querySelectorAll('.nav-item');
+  function updateActive(){
+    let current=sections[0];
+    sections.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=90)current=id;});
+    navItems.forEach(item=>item.classList.toggle('active',item.dataset.section===current));
+  }
+  window.addEventListener('scroll',updateActive,{passive:true});
+  updateActive();
+  navItems.forEach(item=>{
+    item.addEventListener('click',e=>{
+      e.preventDefault();
+      const target=document.getElementById(item.dataset.section);
+      if(!target) return;
+      window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-56,behavior:'smooth'});
+    });
+  });
+})();
+
+
+// ── DATA DO DIA ──────────────────────────────────────────────
+(function(){
+  const D=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+  const M=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+  const n=new Date();
+  const el=document.getElementById('heroDate');
+  if(el) el.textContent=D[n.getDay()]+' · '+n.getDate()+' de '+M[n.getMonth()]+' · '+n.getFullYear();
+})();
+
+// ── STAT STRIP ───────────────────────────────────────────────
+(function(){
+  function statEscala(){
+    const d=new Date();const dow=d.getDay();
+    function mon(x){const c=new Date(x);const dy=c.getDay();c.setDate(c.getDate()-dy+(dy===0?-6:1));return c;}
+    const m=mon(d);const mudanca=new Date(2026,3,6);
+    const wt=m>=mudanca?(m.getDate()%2===0?1:2):(m.getDate()%2!==0?1:2);
+    const S={1:{r:['CG Morumbi','CG Anália/Tat','CG Santana','CG Paraíso','Flex'],g:['CG Morumbi','CG Anália/Tat','CG Pinheiros','CG Morumbi','CG Alphaville']},
+             2:{r:['CG Morumbi','CG Anália/Tat','CG Pinheiros','CG Morumbi','CG Alphaville'],g:['CG Morumbi','CG Anália/Tat','CG Santana','CG Paraíso','Flex']}};
+    const el=document.getElementById('statEscala');if(!el)return;
+    if(dow===0||dow===6){el.textContent='Fim de semana';return;}
+    el.textContent='S'+wt+' · '+S[wt].r[dow-1].replace('CG ','');
+  }
+  statEscala();
+  const obs=new MutationObserver(()=>{
+    const v=document.getElementById('cntVencido')?.textContent;
+    const el=document.getElementById('statVencidas');
+    if(el&&v&&v!=='–'){const n=parseInt(v)||0;el.textContent=n;el.className='sc-val '+(n>0?'r':'g');}
+  });
+  const t=document.getElementById('cntVencido');
+  if(t) obs.observe(t,{childList:true,subtree:true,characterData:true});
+})();
+
+// ── NAV ACTIVE ───────────────────────────────────────────────
+(function(){
+  const secs=['s0','s1','s2','s3','s4','s5'];
+  const items=document.querySelectorAll('.ni');
+  function upd(){
+    let cur=secs[0];
+    secs.forEach(id=>{const el=document.getElementById(id);if(el&&el.getBoundingClientRect().top<=100)cur=id;});
+    items.forEach(it=>it.classList.toggle('on',it.dataset.s===cur));
+  }
+  window.addEventListener('scroll',upd,{passive:true});upd();
+  items.forEach(it=>it.addEventListener('click',e=>{
+    e.preventDefault();
+    const tg=document.getElementById(it.dataset.s);
+    if(tg) window.scrollTo({top:tg.getBoundingClientRect().top+window.scrollY-60,behavior:'smooth'});
+  }));
+})();
 </script>
 </body>
 </html>
