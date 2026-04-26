@@ -177,6 +177,7 @@ header{
 .card:hover::after{opacity:1;}
 .card:nth-child(1){animation-delay:.04s}.card:nth-child(2){animation-delay:.08s}
 .card:nth-child(3){animation-delay:.12s}.card:nth-child(4){animation-delay:.16s}
+@keyframes modalIn{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
 
 /* ── TOOL CARD ── */
@@ -561,31 +562,31 @@ footer{
   <div id="deludaModal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;">
     <div onclick="fecharDeludaModal()" style="position:absolute;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);"></div>
     <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(224,100,153,.22);border-radius:18px;width:94%;max-width:720px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 20px 70px rgba(0,0,0,0.55);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 26px 16px;border-bottom:1px solid rgba(196,100,140,0.12);flex-shrink:0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 26px 16px;border-bottom:1px solid rgba(224,100,153,.12);flex-shrink:0;">
         <div>
-          <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#ECEAF6;">Time de Limpeza</div>
-          <div style="font-size:11px;color:#6B678F;margin-top:2px;" id="deludaModalSub">DeLuca</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:var(--tx);">Time de Limpeza</div>
+          <div style="font-size:11px;color:var(--tm);margin-top:2px;" id="deludaModalSub">DeLuca</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
           <div id="deludaFiltros" style="display:flex;gap:5px;flex-wrap:wrap;"></div>
-          <button onclick="fecharDeludaModal()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#ECEAF6;font-size:14px;flex-shrink:0;">✕</button>
+          <button onclick="fecharDeludaModal()" style="background:var(--s3);border:1px solid var(--b1);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx);font-size:14px;flex-shrink:0;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--b2)'" onmouseout="this.style.borderColor='var(--b1)'">✕</button>
         </div>
       </div>
-      <div id="deludaModalBody" style="overflow-y:auto;padding:20px 26px 26px;flex:1;"></div>
+      <div id="deludaModalBody" style="overflow-y:auto;padding:20px 26px 26px;flex:1;background:var(--s1);"></div>
     </div>
   </div>
   <!-- Modal CG -->
   <div id="cgModal" style="display:none;position:fixed;inset:0;z-index:1000;align-items:center;justify-content:center;">
     <div onclick="fecharCGModal()" style="position:absolute;inset:0;background:rgba(0,0,0,0.65);backdrop-filter:blur(4px);"></div>
     <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(176,224,228,.22);border-radius:18px;width:90%;max-width:500px;max-height:84vh;display:flex;flex-direction:column;box-shadow:0 20px 70px rgba(0,0,0,0.55);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
-      <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 26px 16px;border-bottom:1px solid rgba(123,191,196,0.12);flex-shrink:0;">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 26px 16px;border-bottom:1px solid rgba(176,224,228,.12);flex-shrink:0;">
         <div>
-          <div id="cgModalNome" style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#ECEAF6;"></div>
-          <div id="cgModalSub" style="font-size:11px;color:#6B678F;margin-top:2px;"></div>
+          <div id="cgModalNome" style="font-family:'Outfit',sans-serif;font-size:18px;font-weight:700;color:var(--tx);"></div>
+          <div id="cgModalSub" style="font-size:11px;color:var(--tm);margin-top:2px;"></div>
         </div>
-        <button onclick="fecharCGModal()" style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:#ECEAF6;font-size:14px;flex-shrink:0;">✕</button>
+        <button onclick="fecharCGModal()" style="background:var(--s3);border:1px solid var(--b1);border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--tx);font-size:14px;flex-shrink:0;transition:border-color .2s;" onmouseover="this.style.borderColor='var(--b2)'" onmouseout="this.style.borderColor='var(--b1)'">✕</button>
       </div>
-      <div id="cgModalBody" style="overflow-y:auto;padding:20px 26px 26px;flex:1;"></div>
+      <div id="cgModalBody" style="overflow-y:auto;padding:20px 26px 26px;flex:1;background:var(--s1);"></div>
     </div>
   </div>
 
@@ -1052,9 +1053,9 @@ function fecharCGModal() {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharCGModal(); });
 
 function secao(label, valor) {
-  return '<div style="margin-bottom:10px;">' +
-    '<div style="font-size:10px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">' + label + '</div>' +
-    '<div style="font-size:12px;color:var(--text);line-height:1.5;">' + valor + '</div>' +
+  return '<div style="margin-bottom:12px;">' +
+    '<div style="font-size:9px;font-weight:700;color:var(--t1);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">' + label + '</div>' +
+    '<div style="font-size:12px;color:var(--tx);line-height:1.55;font-weight:400;">' + valor + '</div>' +
     '</div>';
 }
 
@@ -1215,31 +1216,53 @@ function renderDeludaModal(){
   const lics=lista.filter(p=>p.status==='lic').length;
   const sub=document.getElementById('deludaModalSub');
   if(sub)sub.textContent='DeLuca · '+lista.length+' colaboradoras · '+ativas+' ativas'+(lics?' · '+lics+' em licença':'');
+
   const filtrosEl=document.getElementById('deludaFiltros');
   filtrosEl.innerHTML=['Todos',...DELUCA_CG_ORDER].map(cg=>
-    '<button onclick="setDeludaFiltro(\''+cg+'\''+')" style="font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid '+(cg===deludaFiltroAtivo?'rgba(196,100,140,0.5);background:rgba(196,100,140,0.15);color:#E891B8':'rgba(110,105,173,0.2);background:transparent;color:#6B678F')+';cursor:pointer;font-family:\'DM Sans\',sans-serif;">'+cg+'</button>'
+    '<button onclick="setDeludaFiltro(\''+cg+'\''+')" style="font-size:11px;font-weight:600;padding:4px 12px;border-radius:999px;border:1px solid '+(cg===deludaFiltroAtivo?'rgba(224,100,153,.5);background:rgba(224,100,153,.15);color:#E891B8':'rgba(110,105,173,.2);background:rgba(110,105,173,.06);color:var(--tm)')+';cursor:pointer;font-family:\'Outfit\',sans-serif;transition:all .15s;">'+cg+'</button>'
   ).join('');
+
   const byCG={};DELUCA_CG_ORDER.forEach(cg=>{byCG[cg]=[];});
   lista.forEach(p=>{if(byCG[p.cg])byCG[p.cg].push(p);});
   const cgsVis=deludaFiltroAtivo==='Todos'?DELUCA_CG_ORDER:[deludaFiltroAtivo];
-  document.getElementById('deludaModalBody').innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;">'+
+
+  document.getElementById('deludaModalBody').innerHTML=
+    '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:14px;">'+
     cgsVis.filter(cg=>byCG[cg].length).map(cg=>{
       const s=DELUCA_CG_STYLE[cg];
       const manha=byCG[cg].filter(p=>p.turno==='Manhã');
       const tarde=byCG[cg].filter(p=>p.turno==='Tarde');
+
       const renderP=arr=>arr.map(p=>{
-        const badge=p.status==='lic'?'<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(200,90,60,0.15);color:#E8926F;margin-left:4px;">licença</span>':p.status==='cob'?'<span style="font-size:9px;font-weight:700;padding:2px 6px;border-radius:999px;background:rgba(200,150,40,0.15);color:#E8C060;margin-left:4px;">cobrindo</span>':'';
-        return '<div style="display:flex;align-items:center;gap:8px;padding:5px 0;border-bottom:1px solid rgba(110,105,173,0.08);">'+
-          '<div style="width:26px;height:26px;border-radius:50%;background:'+s.bg+';border:1px solid '+s.border+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:'+s.fg+';flex-shrink:0;">'+deludaIni(p.nome)+'</div>'+
-          '<span style="font-size:12px;color:#ECEAF6;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+p.nome+badge+'</span>'+
-          '<span style="font-size:11px;color:#6B678F;white-space:nowrap;">'+p.horario+'</span></div>';
+        const badge=p.status==='lic'
+          ?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,107,107,.12);color:#FF6B6B;margin-left:6px;border:1px solid rgba(255,107,107,.2);">licença</span>'
+          :p.status==='cob'
+          ?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,184,48,.12);color:#FFB830;margin-left:6px;border:1px solid rgba(255,184,48,.2);">cobrindo</span>'
+          :'';
+        const ini=deludaIni(p.nome);
+        return '<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(110,105,173,.08);">'+
+          '<div style="width:28px;height:28px;border-radius:50%;background:'+s.bg+';border:1px solid '+s.border+';display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:'+s.fg+';flex-shrink:0;">'+ini+'</div>'+
+          '<span style="font-size:12px;color:var(--tx);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500;">'+p.nome+badge+'</span>'+
+          '<span style="font-size:11px;color:var(--tm);white-space:nowrap;font-family:\'JetBrains Mono\',monospace;font-size:10px;">'+p.horario+'</span>'+
+        '</div>';
       }).join('');
-      const turnoBlock=(label,arr)=>!arr.length?'':'<div style="padding:8px 0 4px;"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#6B678F;margin-bottom:4px;">'+label+'</div>'+renderP(arr)+'</div>';
-      return '<div style="background:#1A1930;border:1px solid rgba(110,105,173,0.15);border-radius:12px;overflow:hidden;">'+
-        '<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:'+s.bg+';border-bottom:1px solid '+s.border+';">'+
+
+      const turnoBlock=(label,arr)=>!arr.length?'':
+        '<div style="padding:8px 0 2px;">'+
+        '<div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--td);margin-bottom:6px;">'+label+'</div>'+
+        renderP(arr)+'</div>';
+
+      return '<div style="background:var(--s2);border:1px solid var(--b1);border-radius:14px;overflow:hidden;transition:border-color .2s;">'+
+        '<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 15px;background:'+s.bg+';border-bottom:1px solid '+s.border+';">'+
           '<span style="font-size:13px;font-weight:700;color:'+s.fg+'">'+cg+'</span>'+
-          '<span style="font-size:10px;color:'+s.fg+';opacity:.65">'+byCG[cg].length+' colaboradora'+(byCG[cg].length>1?'s':'')+'</span></div>'+
-        '<div style="padding:0 14px 8px;">'+turnoBlock('Manhã',manha)+(manha.length&&tarde.length?'<div style="height:1px;background:rgba(110,105,173,0.1);"></div>':'')+turnoBlock('Tarde',tarde)+'</div></div>';
+          '<span style="font-size:10px;color:'+s.fg+';opacity:.6;font-weight:600;">'+byCG[cg].length+' colaboradora'+(byCG[cg].length>1?'s':'')+'</span>'+
+        '</div>'+
+        '<div style="padding:2px 14px 10px;">'+
+          turnoBlock('Manhã',manha)+
+          (manha.length&&tarde.length?'<div style="height:1px;background:rgba(110,105,173,.08);margin:2px 0;"></div>':'')+
+          turnoBlock('Tarde',tarde)+
+        '</div>'+
+      '</div>';
     }).join('')+'</div>';
 }
 function setDeludaFiltro(cg){deludaFiltroAtivo=cg;renderDeludaModal();}
