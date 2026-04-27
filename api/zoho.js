@@ -1,10 +1,16 @@
 // api/zoho.js — Facilities Hub
 // Busca tickets abertos no Zoho Desk e retorna contagem por status
+// Cache de 5 minutos para evitar rate limit
 
 const CLIENT_ID     = '1000.KWHETKXOEH2HKNKU5GLA6VBF9F7RED';
 const CLIENT_SECRET = '63530435d52fe0df1ca3b81b466df13d04bf5874a4';
 const REFRESH_TOKEN = '1000.8fd74150f8ca25a5723a780ed25684e6.57f11dd2d0363e433028a63502953cfc';
 const ORG_ID        = '860600477';
+
+// Cache em memória (5 minutos)
+let _cache = null;
+let _cacheTime = 0;
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutos
 
 async function getAccessToken() {
   const url = 'https://accounts.zoho.com/oauth/v2/token' +
@@ -23,6 +29,11 @@ export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
   if (req.method === 'OPTIONS') return res.status(200).end();
+
+  // Retornar cache se ainda válido
+  if (_cache && (Date.now() - _cacheTime) < CACHE_TTL) {
+    return res.status(200).json({ ..._cache, cached: true });
+  }
 
   try {
     const token = await getAccessToken();
@@ -67,12 +78,11 @@ export default async function handler(req, res) {
       criado:     t.createdTime,
     }));
 
-    return res.status(200).json({
-      ok: true,
-      total,
-      porPrioridade,
-      preview,
-    });
+    const result = { ok: true, total, porPrioridade, preview };
+    _cache = result;
+    _cacheTime = Date.now();
+
+    return res.status(200).json(result);
 
   } catch (err) {
     return res.status(500).json({ ok: false, erro: err.message });
