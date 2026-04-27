@@ -70,7 +70,8 @@ export default async function handler(req, res) {
     });
 
     // 3 tickets mais recentes para preview
-    const preview = tickets.slice(0, 3).map(t => ({
+    tickets.sort((a,b)=>new Date(b.createdTime)-new Date(a.createdTime));
+    const preview = tickets.slice(0, 5).map(t => ({
       id:         t.ticketNumber,
       assunto:    t.subject,
       status:     t.status,
