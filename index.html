@@ -149,10 +149,10 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
   </div>
 
   <div class="stats">
-    <div class="sc"><div class="sc-ico p">📅</div><div><div class="sc-val" id="statEscala">—</div><div class="sc-lbl">Escala hoje</div></div></div>
+    <div class="sc"><div class="sc-ico p">📅</div><div><div class="sc-val" id="statEscala">—</div><div class="sc-lbl">Semana atual</div></div></div>
     <div class="sc"><div class="sc-ico o">⚠️</div><div><div class="sc-val r" id="statVencidas">—</div><div class="sc-lbl">Prev. vencidas</div></div></div>
-    <div class="sc"><div class="sc-ico t">🏢</div><div><div class="sc-val g">7</div><div class="sc-lbl">Unidades ativas</div></div></div>
-    <div class="sc"><div class="sc-ico k">🧹</div><div><div class="sc-val">18</div><div class="sc-lbl">Time DeLuca</div></div></div>
+    <div class="sc"><div class="sc-ico" style="background:rgba(255,184,48,.10);border:1px solid rgba(255,184,48,.16);">🗓</div><div><div class="sc-val" id="statFeriado" style="font-size:13px;letter-spacing:-.01em;">—</div><div class="sc-lbl" id="statFeriadoLbl">Próximo feriado</div></div></div>
+    <div class="sc"><div class="sc-ico t">🔔</div><div><div class="sc-val" id="statProxServ" style="font-size:13px;letter-spacing:-.01em;">—</div><div class="sc-lbl" id="statProxServLbl">Próxima preventiva</div></div></div>
   </div>
 
   <div class="sec" id="s0">
@@ -700,6 +700,116 @@ function loadClima(){
 function climaEmoji(code){if(code===0)return'☀️';if(code<=2)return'⛅';if(code<=3)return'☁️';if(code<=49)return'🌫️';if(code<=59)return'🌦️';if(code<=69)return'🌧️';if(code<=79)return'❄️';if(code<=84)return'🌦️';if(code<=99)return'⛈️';return'🌤️';}
 function climaDesc(code){if(code===0)return'Céu limpo';if(code<=2)return'Parcialmente nublado';if(code<=3)return'Nublado';if(code<=49)return'Névoa';if(code<=59)return'Garoa';if(code<=69)return'Chuva';if(code<=79)return'Neve';if(code<=84)return'Pancadas de chuva';if(code<=99)return'Tempestade';return'Variável';}
 
+
+// ── FERIADOS SP (Nacionais + Municipais) ────────────────────
+// Feriados municipais e estaduais de São Paulo (fixos por ano)
+function getFeriadosSP(ano){
+  return [
+    // Municipais SP
+    {nome:'Aniversário de São Paulo', data: new Date(ano+'-01-25')},
+    {nome:'Revolução Constitucionalista', data: new Date(ano+'-07-09')},
+    {nome:'Consciência Negra (SP)', data: new Date(ano+'-11-20')},
+    // Nacionais fixos (fallback)
+    {nome:'Confraternização Universal', data: new Date(ano+'-01-01')},
+    {nome:'Tiradentes', data: new Date(ano+'-04-21')},
+    {nome:'Dia do Trabalho', data: new Date(ano+'-05-01')},
+    {nome:'Independência do Brasil', data: new Date(ano+'-09-07')},
+    {nome:'Nossa Sra. Aparecida', data: new Date(ano+'-10-12')},
+    {nome:'Finados', data: new Date(ano+'-11-02')},
+    {nome:'Proclamação da República', data: new Date(ano+'-11-15')},
+    {nome:'Natal', data: new Date(ano+'-12-25')},
+  ];
+}
+
+// Páscoa e feriados móveis (calculados)
+function getFeriadosMoveis(ano){
+  // Algoritmo de Gauss para Páscoa
+  const a=ano%19, b=Math.floor(ano/100), c=ano%100;
+  const d=Math.floor(b/4), e=b%4, f=Math.floor((b+8)/25);
+  const g=Math.floor((b-f+1)/3), h=(19*a+b-d-g+15)%30;
+  const i=Math.floor(c/4), k=c%4, l=(32+2*e+2*i-h-k)%7;
+  const m=Math.floor((a+11*h+22*l)/451);
+  const mes=Math.floor((h+l-7*m+114)/31);
+  const dia=(h+l-7*m+114)%31+1;
+  const pascoa=new Date(ano, mes-1, dia);
+  // Sexta-feira Santa = Páscoa - 2
+  const sextaSanta=new Date(pascoa.getTime()-2*86400000);
+  // Corpus Christi = Páscoa + 60
+  const corpusChristi=new Date(pascoa.getTime()+60*86400000);
+  // Carnaval = Páscoa - 47 (terça)
+  const carnaval=new Date(pascoa.getTime()-47*86400000);
+  return [
+    {nome:'Carnaval', data: carnaval},
+    {nome:'Sexta-feira Santa', data: sextaSanta},
+    {nome:'Páscoa', data: pascoa},
+    {nome:'Corpus Christi', data: corpusChristi},
+  ];
+}
+
+function loadFeriados(){
+  const ano = new Date().getFullYear();
+  const hoje = new Date(); hoje.setHours(0,0,0,0);
+
+  // Combinar fixos SP + móveis
+  const feriadosSP = [...getFeriadosSP(ano), ...getFeriadosMoveis(ano)];
+  // Também pegar próximo ano se estiver no final do ano
+  if(hoje.getMonth() >= 10){
+    feriadosSP.push(...getFeriadosSP(ano+1), ...getFeriadosMoveis(ano+1));
+  }
+
+  function aplicarFeriados(todos){
+    const proximos = todos
+      .filter(f=>f.data >= hoje)
+      .sort((a,b)=>a.data-b.data);
+    if(!proximos.length) return;
+    const prox = proximos[0];
+    const diff = Math.round((prox.data - hoje)/86400000);
+    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    const dataStr = prox.data.getDate()+' de '+meses[prox.data.getMonth()];
+    const elV = document.getElementById('statFeriado');
+    const elL = document.getElementById('statFeriadoLbl');
+    if(!elV) return;
+    if(diff === 0){
+      elV.textContent = 'Hoje!';
+      elV.className = 'sc-val r';
+    } else if(diff === 1){
+      elV.textContent = 'Amanhã';
+      elV.className = 'sc-val y';
+    } else if(diff <= 7){
+      elV.textContent = 'em '+diff+' dias';
+      elV.className = 'sc-val y';
+    } else {
+      elV.textContent = dataStr;
+      elV.className = 'sc-val';
+    }
+    if(elL) elL.textContent = prox.nome;
+    // Destacar chip da escala se feriado for esta semana
+    function getMon(x){const c=new Date(x);const dy=c.getDay();c.setDate(c.getDate()-dy+(dy===0?-6:1));return c;}
+    const mon2=getMon(new Date());
+    const fri2=new Date(mon2.getTime()+4*86400000);
+    if(prox.data >= mon2 && prox.data <= fri2){
+      const escCard=document.getElementById('statEscala')?.closest('.sc');
+      if(escCard) escCard.style.borderColor='rgba(255,184,48,.4)';
+    }
+  }
+
+  // Tentar enriquecer com nacionais via API, combinar com municipais SP
+  fetch('https://date.nager.at/api/v3/PublicHolidays/'+ano+'/BR')
+    .then(r=>r.json())
+    .then(nacionais=>{
+      const deApi = nacionais.map(f=>({
+        nome: f.localName,
+        data: new Date(f.date+'T00:00:00')
+      }));
+      // Merge: municipais SP + nacionais da API (sem duplicar por data)
+      const datas = new Set(feriadosSP.map(f=>f.data.toDateString()));
+      const todos = [...feriadosSP];
+      deApi.forEach(f=>{ if(!datas.has(f.data.toDateString())) todos.push(f); });
+      aplicarFeriados(todos);
+    })
+    .catch(()=>aplicarFeriados(feriadosSP));
+}
+
 // ── HERO DATE ────────────────────────────────────────────────
 (function(){
   const D=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
@@ -716,20 +826,51 @@ function climaDesc(code){if(code===0)return'Céu limpo';if(code<=2)return'Parcia
     function mon(x){const c=new Date(x);const dy=c.getDay();c.setDate(c.getDate()-dy+(dy===0?-6:1));return c;}
     const m=mon(d);const mudanca=new Date(2026,3,6);
     const wt=m>=mudanca?(m.getDate()%2===0?1:2):(m.getDate()%2!==0?1:2);
-    const S={1:{r:['CG Morumbi','Anália/Tatuapé','CG Santana','CG Paraíso','Flex'],g:['CG Morumbi','Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville']},
-             2:{r:['CG Morumbi','Anália/Tatuapé','CG Pinheiros','CG Morumbi','CG Alphaville'],g:['CG Morumbi','Anália/Tatuapé','CG Santana','CG Paraíso','Flex']}};
     const el=document.getElementById('statEscala');if(!el)return;
-    if(dow===0||dow===6){el.textContent='Fim de semana';return;}
-    el.textContent='S'+wt+' · '+S[wt].r[dow-1].replace('CG ','');
+    const fri=new Date(m.getTime()+4*86400000);
+    const fmt=x=>String(x.getDate()).padStart(2,'0')+'/'+String(x.getMonth()+1).padStart(2,'0');
+    el.textContent='S'+wt;
+    // subtitle com intervalo
+    const lbl=document.getElementById('statEscala')?.closest('.sc')?.querySelector('.sc-lbl');
+    if(lbl) lbl.textContent=fmt(m)+' – '+fmt(fri);
   }
   upd();
   const obs=new MutationObserver(()=>{
     const v=document.getElementById('cntVencido')?.textContent;
-    const el=document.getElementById('statVencidas');
-    if(el&&v&&v!=='–'){const n=parseInt(v)||0;el.textContent=n;el.className='sc-val '+(n>0?'r':'g');}
+    const elV=document.getElementById('statVencidas');
+    if(elV&&v&&v!=='–'){const n=parseInt(v)||0;elV.textContent=n;elV.className='sc-val '+(n>0?'r':'g');}
+    // Próxima preventiva — pegar do prevList
+    updateProxPreventiva();
   });
   const t=document.getElementById('cntVencido');
   if(t) obs.observe(t,{childList:true,subtree:true,characterData:true});
+
+  function updateProxPreventiva(){
+    // Buscar data mais próxima a vencer na planilha (após carregamento)
+    const elV=document.getElementById('statProxServ');
+    const elL=document.getElementById('statProxServLbl');
+    if(!elV||!elL) return;
+    // Ler do prevList os itens "a vencer" e pegar o mais próximo
+    const items=document.querySelectorAll('#prevList > div');
+    let proxData=null; let proxNome='';
+    items.forEach(item=>{
+      const txt=item.textContent||'';
+      // Itens a vencer têm data no formato DD/MM
+      const m=txt.match(/(\d{2}\/\d{2})/);
+      if(m && txt.toLowerCase().includes('vencer')){
+        const parts=m[1].split('/');
+        const ano=new Date().getFullYear();
+        const d=new Date(ano, parseInt(parts[1])-1, parseInt(parts[0]));
+        if(!proxData||d<proxData){ proxData=d; proxNome=txt.replace(/\d{2}\/\d{2}/,'').replace('A VENCER','').replace('Atenção','').trim().slice(0,28); }
+      }
+    });
+    if(proxData){
+      const meses=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+      elV.textContent=proxData.getDate()+'/'+meses[proxData.getMonth()];
+      elV.className='sc-val y';
+      elL.textContent=proxNome||'Próxima preventiva';
+    }
+  }
 })();
 
 // ── NAV ACTIVE ───────────────────────────────────────────────
@@ -762,6 +903,7 @@ function climaDesc(code){if(code===0)return'Céu limpo';if(code<=2)return'Parcia
 loadPreventivas();
 loadCGInfo();
 loadClima();
+loadFeriados();
 initDeludaPreview();
 
 </script>
