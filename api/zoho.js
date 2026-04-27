@@ -27,32 +27,44 @@ export default async function handler(req, res) {
   try {
     const token = await getAccessToken();
 
-    // Buscar tickets abertos
-    const ticketsRes = await fetch(
-      'https://desk.zoho.com/api/v1/tickets?orgId=' + ORG_ID + '&status=open&limit=50',
-      { headers: { 'Authorization': 'Zoho-oauthtoken ' + token, 'orgId': ORG_ID } }
-    );
-    const ticketsData = await ticketsRes.json();
+    // Buscar todos os tickets abertos com paginação
+    const headers = { 'Authorization': 'Zoho-oauthtoken ' + token, 'orgId': ORG_ID };
+    let allTickets = [];
+    let from = 1;
+    let hasMore = true;
 
-    const tickets = ticketsData.data || [];
-    const total   = ticketsData.count || tickets.length;
+    while (hasMore) {
+      const ticketsRes = await fetch(
+        'https://desk.zoho.com/api/v1/tickets?orgId=' + ORG_ID + '&status=open&limit=100&from=' + from,
+        { headers }
+      );
+      const ticketsData = await ticketsRes.json();
+      const page = ticketsData.data || [];
+      allTickets = allTickets.concat(page);
+      hasMore = page.length === 100;
+      from += 100;
+      if (allTickets.length >= 500) break;
+    }
+
+    const tickets = allTickets;
+    const total   = tickets.length;
 
     // Agrupar por prioridade
     const porPrioridade = { high: 0, medium: 0, low: 0 };
     tickets.forEach(t => {
       const p = (t.priority || '').toLowerCase();
-      if (p === 'high')   porPrioridade.high++;
+      if (p === 'high')        porPrioridade.high++;
       else if (p === 'medium') porPrioridade.medium++;
-      else porPrioridade.low++;
+      else                     porPrioridade.low++;
     });
 
-    // Últimos 3 tickets para preview
+    // 3 tickets mais recentes para preview
     const preview = tickets.slice(0, 3).map(t => ({
-      id:       t.ticketNumber,
-      assunto:  t.subject,
-      status:   t.status,
+      id:         t.ticketNumber,
+      assunto:    t.subject,
+      status:     t.status,
       prioridade: t.priority,
-      criado:   t.createdTime,
+      criado:     t.createdTime,
     }));
 
     return res.status(200).json({
