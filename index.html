@@ -37,7 +37,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
 .ni.on{color:var(--v1);border-bottom-color:var(--v);}
 .ni-ico{font-size:13px;}
 .hero-date{font-size:13px;color:var(--tm);font-weight:400;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;padding:20px 0 4px;}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0 44px;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 44px;}
 .sc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:16px 18px;display:flex;align-items:center;gap:14px;transition:border-color .2s,transform .18s;position:relative;overflow:hidden;}
 .sc::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s;background:linear-gradient(135deg,rgba(110,105,173,.06),transparent);}
 .sc:hover{border-color:var(--b2);transform:translateY(-2px);}
@@ -148,6 +148,7 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <div class="sc"><div class="sc-ico p">📅</div><div><div class="sc-val" id="statEscala">—</div><div class="sc-lbl">Semana atual</div></div></div>
     <div class="sc"><div class="sc-ico o">⚠️</div><div><div class="sc-val r" id="statVencidas">—</div><div class="sc-lbl">Prev. vencidas</div></div></div>
     <div class="sc"><div class="sc-ico" style="background:rgba(255,184,48,.10);border:1px solid rgba(255,184,48,.16);">🗓</div><div><div class="sc-lbl" style="margin-bottom:3px;">Próximo feriado</div><div class="sc-val" id="statFeriado" style="font-size:14px;">—</div><div class="sc-lbl" id="statFeriadoLbl" style="margin-top:2px;"></div></div></div>
+    <div class="sc" style="cursor:pointer;" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth',block:'start'})"><div class="sc-ico" style="background:rgba(59,235,168,.10);border:1px solid rgba(59,235,168,.16);">🎫</div><div><div class="sc-lbl" style="margin-bottom:3px;">Zoho Desk</div><div class="sc-val" id="statZoho" style="font-size:14px;">—</div><div class="sc-lbl" id="statZohoLbl" style="margin-top:2px;">Tickets abertos</div></div></div>
   </div>
 
   <div class="sec" id="s0">
@@ -201,6 +202,23 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
   <div class="sec" id="s3">
     <div class="sec-hdr"><span class="sec-lbl">Controle &amp; Financeiro</span><div class="sec-line"></div><span class="ptag pt-mat">Matheus</span></div>
     <div class="g3">
+      <!-- Zoho Desk -->
+      <div class="card cw" style="cursor:default;">
+        <div class="wh"><div class="wi ig">🎫</div><div><div class="wt">Zoho Desk</div><div class="ws">Chamados abertos · <span id="zohoUpdate" style="color:var(--td);"></span></div></div></div>
+        <div class="wb">
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">
+            <div style="text-align:center;padding:8px 4px;background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.15);border-radius:9px;"><div id="zohoHigh" style="font-size:18px;font-weight:800;color:var(--red);">–</div><div style="font-size:9px;color:var(--red);font-weight:700;margin-top:2px;text-transform:uppercase;letter-spacing:.06em;">Alta</div></div>
+            <div style="text-align:center;padding:8px 4px;background:rgba(255,184,48,.08);border:1px solid rgba(255,184,48,.15);border-radius:9px;"><div id="zohoMed" style="font-size:18px;font-weight:800;color:var(--yellow);">–</div><div style="font-size:9px;color:var(--yellow);font-weight:700;margin-top:2px;text-transform:uppercase;letter-spacing:.06em;">Média</div></div>
+            <div style="text-align:center;padding:8px 4px;background:rgba(59,235,168,.08);border:1px solid rgba(59,235,168,.15);border-radius:9px;"><div id="zohoLow" style="font-size:18px;font-weight:800;color:var(--green);">–</div><div style="font-size:9px;color:var(--green);font-weight:700;margin-top:2px;text-transform:uppercase;letter-spacing:.06em;">Baixa</div></div>
+          </div>
+          <div id="zohoList" style="display:flex;flex-direction:column;gap:4px;"><div style="font-size:11px;color:var(--tm);text-align:center;padding:8px;">Carregando...</div></div>
+        </div>
+        <div class="wf">
+          <div style="display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div>
+          <a href="https://suporte.genialcare.com.br" target="_blank" style="font-size:11px;color:var(--green);text-decoration:none;font-weight:600;opacity:.8;">Abrir Zoho →</a>
+        </div>
+      </div>
+
       <a href="https://nf-cartao-corporativo.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico ip">🧾</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tp">Financeiro</div></div><div class="ct-name">NF Cartão Corporativo</div><div class="ct-desc">Notas fiscais do Cartão Facilities (0852) com extração automática via IA.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></a>
       <div class="card ct disabled"><div class="ct-top"><div class="ct-ico io">📄</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag to">Em breve</div></div><div class="ct-name">Portal de NFs</div><div class="ct-desc">Upload em lote de NFs de fornecedores com organização automática no Drive via IA.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></div>
     </div>
@@ -880,11 +898,68 @@ function loadFeriados(){
   document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharCGModal();});
 })();
 
+
+// ── ZOHO DESK ────────────────────────────────────────────────
+function loadZoho(){
+  fetch('/api/zoho')
+    .then(r=>r.json())
+    .then(data=>{
+      if(!data.ok) throw new Error(data.erro);
+      // Stat chip
+      const sv=document.getElementById('statZoho');
+      const sl=document.getElementById('statZohoLbl');
+      if(sv){ sv.textContent=data.total; sv.className='sc-val '+(data.total>0?'r':'g'); }
+      if(sl){ sl.textContent=data.total===1?'ticket aberto':'tickets abertos'; }
+      // Card contadores
+      document.getElementById('zohoHigh').textContent=data.porPrioridade.high||0;
+      document.getElementById('zohoMed').textContent=data.porPrioridade.medium||0;
+      document.getElementById('zohoLow').textContent=data.porPrioridade.low||0;
+      // Update time
+      const now=new Date();
+      const upd=document.getElementById('zohoUpdate');
+      if(upd) upd.textContent='atualizado '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+      // Preview tickets
+      const list=document.getElementById('zohoList');
+      if(!list) return;
+      list.innerHTML='';
+      if(!data.preview||!data.preview.length){
+        list.innerHTML='<div style="font-size:12px;color:var(--green);text-align:center;padding:8px;">Nenhum ticket aberto ✅</div>';
+        return;
+      }
+      data.preview.forEach(t=>{
+        const isHigh=(t.prioridade||'').toLowerCase()==='high';
+        const isMed=(t.prioridade||'').toLowerCase()==='medium';
+        const cor=isHigh?'var(--red)':isMed?'var(--yellow)':'var(--green)';
+        const bg=isHigh?'rgba(255,107,107,.08)':isMed?'rgba(255,184,48,.08)':'rgba(59,235,168,.06)';
+        const border=isHigh?'rgba(255,107,107,.18)':isMed?'rgba(255,184,48,.16)':'rgba(59,235,168,.14)';
+        const el=document.createElement('div');
+        el.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:6px 10px;border-radius:8px;background:'+bg+';border:1px solid '+border+';';
+        el.innerHTML='<div style="flex:1;min-width:0;"><div style="font-size:11px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">#'+t.id+' · '+t.assunto+'</div></div>'+
+          '<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:6px;background:'+bg+';color:'+cor+';margin-left:6px;white-space:nowrap;">'+(t.prioridade||'–')+'</span>';
+        list.appendChild(el);
+      });
+      if(data.total>3){
+        const more=document.createElement('div');
+        more.style.cssText='font-size:11px;color:var(--tm);text-align:center;padding:4px;';
+        more.textContent='+ '+(data.total-3)+' no Zoho Desk';
+        list.appendChild(more);
+      }
+    })
+    .catch(err=>{
+      console.warn('Zoho erro:',err);
+      const sv=document.getElementById('statZoho');
+      if(sv){ sv.textContent='–'; sv.className='sc-val'; }
+      const list=document.getElementById('zohoList');
+      if(list) list.innerHTML='<div style="font-size:11px;color:var(--tm);text-align:center;padding:8px;">Não foi possível carregar</div>';
+    });
+}
+
 // ── INICIALIZAR ───────────────────────────────────────────────
 loadPreventivas();
 loadCGInfo();
 loadClima();
 loadFeriados();
+loadZoho();
 initDeludaPreview();
 
 </script>
