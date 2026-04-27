@@ -463,9 +463,52 @@ function loadPreventivas() {
       list.appendChild(el);
     });
     if(atencao.length>6){const more=document.createElement('div');more.style.cssText='font-size:11px;color:var(--tm);text-align:center;padding:4px;';more.textContent='+ '+(atencao.length-6)+' mais na planilha';list.appendChild(more);}
-    // atualizar stat chip
+    // atualizar stat chip — vencidas
     const sv=document.getElementById('statVencidas');
     if(sv){sv.textContent=vencido;sv.className='sc-val '+(vencido>0?'r':'g');}
+    // atualizar stat chip — próxima preventiva
+    const proxItem=atencao.filter(i=>i.status==='avencer'&&i.proxDate).sort((a,b)=>a.proxDate-b.proxDate)[0];
+    const elPS=document.getElementById('statProxServ');
+    const elPL=document.getElementById('statProxServLbl');
+    if(elPS&&elPL){
+      if(proxItem){
+        const mesesP=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+        const dp=proxItem.proxDate;
+        const diffP=Math.round((dp.getTime()-new Date().setHours(0,0,0,0))/86400000);
+        elPS.textContent=dp.getDate()+' '+mesesP[dp.getMonth()];
+        elPS.className='sc-val '+(diffP<=7?'y':'');
+        const nome=proxItem.servico.length>22?proxItem.servico.slice(0,22)+'…':proxItem.servico;
+        elPL.textContent=nome+' · '+proxItem.cg.replace('CG ','').replace('NOVA-CG-','');
+      } else if(vencido===0&&avencer===0){
+        elPS.textContent='✓';
+        elPS.className='sc-val g';
+        elPL.textContent='Todas em dia';
+      }
+    }
+    // atualizar stat chip — próxima preventiva (a vencer mais próxima com data)
+    const proxItem = atencao
+      .filter(i=>i.status==='avencer' && i.proxDate)
+      .sort((a,b)=>a.proxDate-b.proxDate)[0];
+    const elPS = document.getElementById('statProxServ');
+    const elPL = document.getElementById('statProxServLbl');
+    if(elPS && elPL){
+      if(proxItem){
+        const meses=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+        const d = proxItem.proxDate;
+        const diff = Math.round((d - new Date().setHours(0,0,0,0)) / 86400000);
+        elPS.textContent = d.getDate()+' '+meses[d.getMonth()];
+        elPS.className = diff <= 7 ? 'sc-val y' : 'sc-val';
+        // Nome curto: pegar só o serviço sem a CG
+        const nome = proxItem.servico.length > 20
+          ? proxItem.servico.slice(0,20)+'…'
+          : proxItem.servico;
+        elPL.textContent = nome + ' · ' + proxItem.cg.replace('CG ','').replace('NOVA-CG-','');
+      } else {
+        elPS.textContent = '✓';
+        elPS.className = 'sc-val g';
+        elPL.textContent = 'Todas em dia';
+      }
+    }
   }).catch(err=>{
     console.error('Preventivas erro:',err);
     document.getElementById('cntVencido').textContent='!';
@@ -770,13 +813,13 @@ function loadFeriados(){
     const elL = document.getElementById('statFeriadoLbl');
     if(!elV) return;
     if(diff === 0){
-      elV.textContent = 'Hoje!';
+      elV.textContent = 'Hoje · '+dataStr;
       elV.className = 'sc-val r';
     } else if(diff === 1){
-      elV.textContent = 'Amanhã';
+      elV.textContent = 'Amanhã · '+dataStr;
       elV.className = 'sc-val y';
     } else if(diff <= 7){
-      elV.textContent = 'em '+diff+' dias';
+      elV.textContent = diff+'d · '+dataStr;
       elV.className = 'sc-val y';
     } else {
       elV.textContent = dataStr;
@@ -839,38 +882,11 @@ function loadFeriados(){
     const v=document.getElementById('cntVencido')?.textContent;
     const elV=document.getElementById('statVencidas');
     if(elV&&v&&v!=='–'){const n=parseInt(v)||0;elV.textContent=n;elV.className='sc-val '+(n>0?'r':'g');}
-    // Próxima preventiva — pegar do prevList
-    updateProxPreventiva();
   });
   const t=document.getElementById('cntVencido');
   if(t) obs.observe(t,{childList:true,subtree:true,characterData:true});
 
-  function updateProxPreventiva(){
-    // Buscar data mais próxima a vencer na planilha (após carregamento)
-    const elV=document.getElementById('statProxServ');
-    const elL=document.getElementById('statProxServLbl');
-    if(!elV||!elL) return;
-    // Ler do prevList os itens "a vencer" e pegar o mais próximo
-    const items=document.querySelectorAll('#prevList > div');
-    let proxData=null; let proxNome='';
-    items.forEach(item=>{
-      const txt=item.textContent||'';
-      // Itens a vencer têm data no formato DD/MM
-      const m=txt.match(/(\d{2}\/\d{2})/);
-      if(m && txt.toLowerCase().includes('vencer')){
-        const parts=m[1].split('/');
-        const ano=new Date().getFullYear();
-        const d=new Date(ano, parseInt(parts[1])-1, parseInt(parts[0]));
-        if(!proxData||d<proxData){ proxData=d; proxNome=txt.replace(/\d{2}\/\d{2}/,'').replace('A VENCER','').replace('Atenção','').trim().slice(0,28); }
-      }
-    });
-    if(proxData){
-      const meses=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-      elV.textContent=proxData.getDate()+'/'+meses[proxData.getMonth()];
-      elV.className='sc-val y';
-      elL.textContent=proxNome||'Próxima preventiva';
-    }
-  }
+
 })();
 
 // ── NAV ACTIVE ───────────────────────────────────────────────
