@@ -37,7 +37,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
 .ni.on{color:var(--v1);border-bottom-color:var(--v);}
 .ni-ico{font-size:13px;}
 .hero-date{font-size:13px;color:var(--tm);font-weight:400;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;padding:20px 0 4px;}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 44px;}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0 44px;}
 .sc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:16px 18px;display:flex;align-items:center;gap:14px;transition:border-color .2s,transform .18s;position:relative;overflow:hidden;}
 .sc::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s;background:linear-gradient(135deg,rgba(110,105,173,.06),transparent);}
 .sc:hover{border-color:var(--b2);transform:translateY(-2px);}
@@ -148,7 +148,6 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <div class="sc"><div class="sc-ico p">📅</div><div><div class="sc-val" id="statEscala">—</div><div class="sc-lbl">Semana atual</div></div></div>
     <div class="sc"><div class="sc-ico o">⚠️</div><div><div class="sc-val r" id="statVencidas">—</div><div class="sc-lbl">Prev. vencidas</div></div></div>
     <div class="sc"><div class="sc-ico" style="background:rgba(255,184,48,.10);border:1px solid rgba(255,184,48,.16);">🗓</div><div><div class="sc-val" id="statFeriado" style="font-size:14px;">—</div><div class="sc-lbl" id="statFeriadoLbl">Próximo feriado</div></div></div>
-    <div class="sc"><div class="sc-ico t">🔔</div><div><div class="sc-val" id="statProxServ" style="font-size:14px;">—</div><div class="sc-lbl" id="statProxServLbl">Próxima preventiva</div></div></div>
   </div>
 
   <div class="sec" id="s0">
@@ -716,20 +715,19 @@ function climaDesc(code){if(code===0)return'Céu limpo';if(code<=2)return'Parcia
 // ── FERIADOS SP (Nacionais + Municipais) ────────────────────
 // Feriados municipais e estaduais de São Paulo (fixos por ano)
 function getFeriadosSP(ano){
+  // Usar new Date(ano, mes-1, dia) para evitar problema de fuso UTC
   return [
-    // Municipais SP
-    {nome:'Aniversário de São Paulo', data: new Date(ano+'-01-25')},
-    {nome:'Revolução Constitucionalista', data: new Date(ano+'-07-09')},
-    {nome:'Consciência Negra (SP)', data: new Date(ano+'-11-20')},
-    // Nacionais fixos (fallback)
-    {nome:'Confraternização Universal', data: new Date(ano+'-01-01')},
-    {nome:'Tiradentes', data: new Date(ano+'-04-21')},
-    {nome:'Dia do Trabalho', data: new Date(ano+'-05-01')},
-    {nome:'Independência do Brasil', data: new Date(ano+'-09-07')},
-    {nome:'Nossa Sra. Aparecida', data: new Date(ano+'-10-12')},
-    {nome:'Finados', data: new Date(ano+'-11-02')},
-    {nome:'Proclamação da República', data: new Date(ano+'-11-15')},
-    {nome:'Natal', data: new Date(ano+'-12-25')},
+    {nome:'Confraternização Universal',    data: new Date(ano,  0,  1)},
+    {nome:'Aniversário de São Paulo',      data: new Date(ano,  0, 25)},
+    {nome:'Tiradentes',                    data: new Date(ano,  3, 21)},
+    {nome:'Dia do Trabalho',               data: new Date(ano,  4,  1)},
+    {nome:'Revolução Constitucionalista',  data: new Date(ano,  6,  9)},
+    {nome:'Independência do Brasil',       data: new Date(ano,  8,  7)},
+    {nome:'Nossa Sra. Aparecida',          data: new Date(ano,  9, 12)},
+    {nome:'Finados',                       data: new Date(ano, 10,  2)},
+    {nome:'Proclamação da República',      data: new Date(ano, 10, 15)},
+    {nome:'Consciência Negra (SP)',        data: new Date(ano, 10, 20)},
+    {nome:'Natal',                         data: new Date(ano, 11, 25)},
   ];
 }
 
@@ -811,7 +809,8 @@ function loadFeriados(){
     .then(nacionais=>{
       const deApi = nacionais.map(f=>({
         nome: f.localName,
-        data: new Date(f.date+'T00:00:00')
+        // Parsear manualmente para evitar problema de fuso UTC
+        data: (function(s){ const p=s.split('-'); return new Date(+p[0],+p[1]-1,+p[2]); })(f.date)
       }));
       // Merge: municipais SP + nacionais da API (sem duplicar por data)
       const datas = new Set(feriadosSP.map(f=>f.data.toDateString()));
