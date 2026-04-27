@@ -145,7 +145,7 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
   <div class="hero-date" id="heroDate"></div>
 
   <div class="stats">
-    <div class="sc" style="cursor:pointer;" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth',block:'start'})"><div class="sc-ico" style="background:rgba(59,235,168,.10);border:1px solid rgba(59,235,168,.16);">🎫</div><div><div class="sc-lbl" style="margin-bottom:3px;">Zoho Desk</div><div class="sc-val" id="statZoho" style="font-size:14px;">—</div><div class="sc-lbl" id="statZohoLbl" style="margin-top:2px;">Tickets abertos</div></div></div>
+    <div class="sc" style="cursor:pointer;" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth',block:'start'})"><div class="sc-ico" style="background:rgba(59,235,168,.10);border:1px solid rgba(59,235,168,.16);">🎫</div><div style="min-width:0;flex:1;"><div class="sc-lbl" style="margin-bottom:4px;">Zoho Desk</div><div style="display:flex;align-items:baseline;gap:6px;"><div class="sc-val" id="statZoho" style="font-size:26px;">—</div><div style="font-size:11px;color:var(--tm);font-weight:500;">tickets abertos</div></div><div style="font-size:11px;color:var(--td);margin-top:4px;display:flex;gap:8px;"><span id="zohoChipHigh" style="color:var(--red);">–</span><span id="zohoChipMed" style="color:var(--yellow);">–</span><span id="zohoChipLow" style="color:var(--green);">–</span></div></div></div>
     <div class="sc"><div class="sc-ico o">⚠️</div><div><div class="sc-val r" id="statVencidas">—</div><div class="sc-lbl">Prev. vencidas</div></div></div>
     <div class="sc"><div class="sc-ico" style="background:rgba(255,184,48,.10);border:1px solid rgba(255,184,48,.16);">🗓</div><div><div class="sc-lbl" style="margin-bottom:3px;">Próximo feriado</div><div class="sc-val" id="statFeriado" style="font-size:14px;">—</div><div class="sc-lbl" id="statFeriadoLbl" style="margin-top:2px;"></div></div></div>
   </div>
@@ -935,6 +935,13 @@ function loadZoho(){
       if(sv){ sv.textContent=data.total; sv.className='sc-val '+(data.total>0?'r':'g'); }
       try{ localStorage.setItem('zoho_total', data.total); } catch(e){}
       if(sl){ sl.textContent=data.total===1?'ticket aberto':'tickets abertos'; }
+      // Mini breakdown no chip
+      const ch=document.getElementById('zohoChipHigh');
+      const cm=document.getElementById('zohoChipMed');
+      const cl=document.getElementById('zohoChipLow');
+      if(ch) ch.textContent='🔴 '+(data.porPrioridade.high||0)+' alta';
+      if(cm) cm.textContent='🟡 '+(data.porPrioridade.medium||0)+' média';
+      if(cl) cl.textContent='🟢 '+(data.porPrioridade.low||0)+' baixa';
       // Contadores por prioridade
       const elH=document.getElementById('zohoHigh');
       const elM=document.getElementById('zohoMed');
@@ -1002,6 +1009,13 @@ function loadZoho(){
         else { sv.textContent='–'; sv.className='sc-val'; }
       }
       if(sl && saved) sl.textContent='tickets (cache)';
+      // Limpar breakdown no chip quando em cache
+      const ch2=document.getElementById('zohoChipHigh');
+      const cm2=document.getElementById('zohoChipMed');
+      const cl2=document.getElementById('zohoChipLow');
+      if(ch2) ch2.textContent='';
+      if(cm2) cm2.textContent='atualização pendente';
+      if(cl2) cl2.textContent='';
       const list=document.getElementById('zohoList');
       if(list) list.innerHTML='';
     });
