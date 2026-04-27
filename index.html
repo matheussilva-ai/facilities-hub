@@ -892,6 +892,7 @@ function loadZoho(){
       const sv=document.getElementById('statZoho');
       const sl=document.getElementById('statZohoLbl');
       if(sv){ sv.textContent=data.total; sv.className='sc-val '+(data.total>0?'r':'g'); }
+      try{ localStorage.setItem('zoho_total', data.total); } catch(e){}
       if(sl){ sl.textContent=data.total===1?'ticket aberto':'tickets abertos'; }
       // Card contadores
       document.getElementById('zohoHigh').textContent=data.porPrioridade.high||0;
@@ -930,10 +931,17 @@ function loadZoho(){
     })
     .catch(err=>{
       console.warn('Zoho erro:',err);
+      // Manter último valor salvo no localStorage se disponível
+      const saved = localStorage.getItem('zoho_total');
       const sv=document.getElementById('statZoho');
-      if(sv){ sv.textContent='–'; sv.className='sc-val'; }
+      const sl=document.getElementById('statZohoLbl');
+      if(sv){
+        if(saved){ sv.textContent=saved; sv.className='sc-val g'; }
+        else { sv.textContent='–'; sv.className='sc-val'; }
+      }
+      if(sl && saved) sl.textContent='tickets (cache)';
       const list=document.getElementById('zohoList');
-      if(list) list.innerHTML='<div style="font-size:11px;color:var(--tm);text-align:center;padding:8px;">Não foi possível carregar</div>';
+      if(list) list.innerHTML='';
     });
 }
 
