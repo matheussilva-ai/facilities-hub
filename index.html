@@ -36,11 +36,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
 .ni:hover{color:var(--tm);}
 .ni.on{color:var(--v1);border-bottom-color:var(--v);}
 .ni-ico{font-size:13px;}
-.hero{margin-bottom:8px;}
-.eyebrow{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--v);opacity:.8;margin-bottom:10px;}
-.hero-title{font-size:clamp(22px,2.2vw,36px);font-weight:800;line-height:1;letter-spacing:-.03em;background:linear-gradient(135deg,#fff 30%,var(--v2) 70%,var(--t) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:8px;}
-.hero-date{font-size:13px;color:var(--tm);font-weight:400;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:32px 0 44px;}
+.hero-date{font-size:13px;color:var(--tm);font-weight:400;font-family:'JetBrains Mono',monospace;letter-spacing:.02em;padding:20px 0 4px;}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:8px 0 44px;}
 .sc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:16px 18px;display:flex;align-items:center;gap:14px;transition:border-color .2s,transform .18s;position:relative;overflow:hidden;}
 .sc::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity .2s;background:linear-gradient(135deg,rgba(110,105,173,.06),transparent);}
 .sc:hover{border-color:var(--b2);transform:translateY(-2px);}
@@ -53,6 +50,7 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
 .sc-val{font-size:22px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--tx);}
 .sc-val.r{color:var(--red);}
 .sc-val.g{color:var(--green);}
+.sc-val.y{color:var(--yellow);}
 .sc-lbl{font-size:11px;color:var(--tm);margin-top:4px;font-weight:500;}
 .sec{margin-bottom:44px;}
 .sec-hdr{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
@@ -144,21 +142,18 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <a class="ni" href="#s5" data-s="s5"><span class="ni-ico">⚡</span>Atalhos</a>
   </nav>
 
-  <div style="padding:20px 0 4px;">
-    <div class="hero-date" id="heroDate"></div>
-  </div>
+  <div class="hero-date" id="heroDate"></div>
 
   <div class="stats">
     <div class="sc"><div class="sc-ico p">📅</div><div><div class="sc-val" id="statEscala">—</div><div class="sc-lbl">Semana atual</div></div></div>
     <div class="sc"><div class="sc-ico o">⚠️</div><div><div class="sc-val r" id="statVencidas">—</div><div class="sc-lbl">Prev. vencidas</div></div></div>
-    <div class="sc"><div class="sc-ico" style="background:rgba(255,184,48,.10);border:1px solid rgba(255,184,48,.16);">🗓</div><div><div class="sc-val" id="statFeriado" style="font-size:13px;letter-spacing:-.01em;">—</div><div class="sc-lbl" id="statFeriadoLbl">Próximo feriado</div></div></div>
-    <div class="sc"><div class="sc-ico t">🔔</div><div><div class="sc-val" id="statProxServ" style="font-size:13px;letter-spacing:-.01em;">—</div><div class="sc-lbl" id="statProxServLbl">Próxima preventiva</div></div></div>
+    <div class="sc"><div class="sc-ico" style="background:rgba(255,184,48,.10);border:1px solid rgba(255,184,48,.16);">🗓</div><div><div class="sc-val" id="statFeriado" style="font-size:14px;">—</div><div class="sc-lbl" id="statFeriadoLbl">Próximo feriado</div></div></div>
+    <div class="sc"><div class="sc-ico t">🔔</div><div><div class="sc-val" id="statProxServ" style="font-size:14px;">—</div><div class="sc-lbl" id="statProxServLbl">Próxima preventiva</div></div></div>
   </div>
 
   <div class="sec" id="s0">
     <div class="sec-hdr"><span class="sec-lbl">Hoje · Prioridades</span><div class="sec-line"></div><span class="ptag pt-all">Matheus + Marina</span></div>
     <div class="g2">
-      <!-- Escala -->
       <div class="card cw" id="escalaCard">
         <div class="wh"><div class="wi ip">📅</div><div><div class="wt">Escala de Técnicos</div><div class="ws" id="weekBadge"></div></div></div>
         <div class="wb">
@@ -171,7 +166,6 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
         </div>
         <div class="wf"><div style="display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Romário · Roger</div></div>
       </div>
-      <!-- Preventivas -->
       <div class="card cw" id="prevCard">
         <div class="wh"><div class="wi io">🔧</div><div><div class="wt">Manutenções Preventivas</div><div class="ws">Serviços recorrentes · <span id="prevLastUpdate" style="color:var(--td);"></span></div></div></div>
         <div class="wb">
@@ -216,13 +210,11 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
   <div class="sec" id="s4">
     <div class="sec-hdr"><span class="sec-lbl">Limpeza Operacional</span><div class="sec-line"></div><span class="ptag pt-mar">Marina</span></div>
     <div class="gw">
-      <!-- Time DeLuca -->
       <div class="card cw" style="cursor:default;">
         <div class="wh"><div class="wi ik">🧹</div><div><div class="wt">Time DeLuca</div><div class="ws" id="deludaResumo">Limpeza por unidade e turno</div></div></div>
         <div class="wb"><div id="deludaCGGrid" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"></div></div>
         <div class="wf"><div style="display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Marina</div></div>
       </div>
-      <!-- Accordion DeLuca -->
       <div id="deludaAccordion" style="display:none;grid-column:1/-1;max-height:0;opacity:0;overflow:hidden;"></div>
     </div>
   </div>
@@ -247,7 +239,6 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <div class="footer-dot"></div>
   </footer>
 
-  <!-- Modal CG -->
   <div id="cgModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
     <div id="cgBackdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);cursor:pointer;"></div>
     <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(176,224,228,.22);border-radius:20px;width:100%;max-width:520px;max-height:86vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
@@ -264,7 +255,6 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
 
 </div>
 <script>
-
 // ── RELÓGIO ──────────────────────────────────────────────────
 function updateClock(){
   const now=new Date();
@@ -466,25 +456,7 @@ function loadPreventivas() {
     // atualizar stat chip — vencidas
     const sv=document.getElementById('statVencidas');
     if(sv){sv.textContent=vencido;sv.className='sc-val '+(vencido>0?'r':'g');}
-    // atualizar stat chip — próxima preventiva
-    const proxItem=atencao.filter(i=>i.status==='avencer'&&i.proxDate).sort((a,b)=>a.proxDate-b.proxDate)[0];
-    const elPS=document.getElementById('statProxServ');
-    const elPL=document.getElementById('statProxServLbl');
-    if(elPS&&elPL){
-      if(proxItem){
-        const mesesP=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-        const dp=proxItem.proxDate;
-        const diffP=Math.round((dp.getTime()-new Date().setHours(0,0,0,0))/86400000);
-        elPS.textContent=dp.getDate()+' '+mesesP[dp.getMonth()];
-        elPS.className='sc-val '+(diffP<=7?'y':'');
-        const nome=proxItem.servico.length>22?proxItem.servico.slice(0,22)+'…':proxItem.servico;
-        elPL.textContent=nome+' · '+proxItem.cg.replace('CG ','').replace('NOVA-CG-','');
-      } else if(vencido===0&&avencer===0){
-        elPS.textContent='✓';
-        elPS.className='sc-val g';
-        elPL.textContent='Todas em dia';
-      }
-    }
+
     // atualizar stat chip — próxima preventiva (a vencer mais próxima com data)
     const proxItem = atencao
       .filter(i=>i.status==='avencer' && i.proxDate)
@@ -588,7 +560,6 @@ function fecharCGModal() {
   document.getElementById('cgModal').style.display='none';
   document.body.style.overflow='';
 }
-
 // ── TIME DELUCA — ACCORDION ──────────────────────────────────
 // ── DADOS TIME DELUCA ───────────────────────────────────────
 const DELUCA_CG_ORDER=['Morumbi','Tatuapé','Pinheiros','Paraíso','Alphaville','Anália Franco','Santana'];
@@ -721,7 +692,6 @@ function toggleDeludaCG(cg){
     setTimeout(function(){acc.scrollIntoView({behavior:'smooth',block:'nearest'});},300);
   });
 }
-
 // ── CLIMA ─────────────────────────────────────────────────────
 function loadClima(){
   const url='https://api.open-meteo.com/v1/forecast?latitude=-23.5505&longitude=-46.6333&current=temperature_2m,weather_code,apparent_temperature&hourly=precipitation_probability,weather_code&daily=precipitation_probability_max,temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo&forecast_days=1';
@@ -742,7 +712,6 @@ function loadClima(){
 }
 function climaEmoji(code){if(code===0)return'☀️';if(code<=2)return'⛅';if(code<=3)return'☁️';if(code<=49)return'🌫️';if(code<=59)return'🌦️';if(code<=69)return'🌧️';if(code<=79)return'❄️';if(code<=84)return'🌦️';if(code<=99)return'⛈️';return'🌤️';}
 function climaDesc(code){if(code===0)return'Céu limpo';if(code<=2)return'Parcialmente nublado';if(code<=3)return'Nublado';if(code<=49)return'Névoa';if(code<=59)return'Garoa';if(code<=69)return'Chuva';if(code<=79)return'Neve';if(code<=84)return'Pancadas de chuva';if(code<=99)return'Tempestade';return'Variável';}
-
 
 // ── FERIADOS SP (Nacionais + Municipais) ────────────────────
 // Feriados municipais e estaduais de São Paulo (fixos por ano)
@@ -818,8 +787,8 @@ function loadFeriados(){
     } else if(diff === 1){
       elV.textContent = 'Amanhã · '+dataStr;
       elV.className = 'sc-val y';
-    } else if(diff <= 7){
-      elV.textContent = diff+'d · '+dataStr;
+    } else if(diff <= 30){
+      elV.textContent = dataStr;
       elV.className = 'sc-val y';
     } else {
       elV.textContent = dataStr;
@@ -869,12 +838,11 @@ function loadFeriados(){
     function mon(x){const c=new Date(x);const dy=c.getDay();c.setDate(c.getDate()-dy+(dy===0?-6:1));return c;}
     const m=mon(d);const mudanca=new Date(2026,3,6);
     const wt=m>=mudanca?(m.getDate()%2===0?1:2):(m.getDate()%2!==0?1:2);
-    const el=document.getElementById('statEscala');if(!el)return;
     const fri=new Date(m.getTime()+4*86400000);
     const fmt=x=>String(x.getDate()).padStart(2,'0')+'/'+String(x.getMonth()+1).padStart(2,'0');
+    const el=document.getElementById('statEscala');if(!el)return;
     el.textContent='S'+wt;
-    // subtitle com intervalo
-    const lbl=document.getElementById('statEscala')?.closest('.sc')?.querySelector('.sc-lbl');
+    const lbl=el.closest('.sc')?.querySelector('.sc-lbl');
     if(lbl) lbl.textContent=fmt(m)+' – '+fmt(fri);
   }
   upd();
@@ -885,8 +853,6 @@ function loadFeriados(){
   });
   const t=document.getElementById('cntVencido');
   if(t) obs.observe(t,{childList:true,subtree:true,characterData:true});
-
-
 })();
 
 // ── NAV ACTIVE ───────────────────────────────────────────────
