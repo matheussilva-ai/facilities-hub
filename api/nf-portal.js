@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(200).end();
 
-  const GAS_URL = "https://script.google.com/macros/s/AKfycbxEIjDbH-Ll--prtbCmkat1rDL0r2FmXGeC2eIni-Zi1p1aydrz_rU6NAQm9MwgLKGH/exec";
+  const GAS_URL = "https://script.google.com/macros/s/AKfycbwDVQlhmJrIrlgWhS8G0BgWkdYHC-osO2r2bSnBLt9y4xuV7YoT-eYaJxdHB-HZIjhy/exec";
 
   try {
     const response = await fetch(GAS_URL, {
