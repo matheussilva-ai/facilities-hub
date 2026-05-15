@@ -1044,7 +1044,7 @@ function loadZoho(){
 }
 
 // ── PORTAL DE NFs ────────────────────────────────────────────────
-const NF_API_URL = "https://script.google.com/macros/s/AKfycbxEIjDbH-Ll--prtbCmkat1rDL0r2FmXGeC2eIni-Zi1p1aydrz_rU6NAQm9MwgLKGH/exec";
+const NF_API_URL = "/api/nf-portal";
 const NF_CHAVE = "genial-facilities-2026";
 const PLANILHA_PAGAMENTOS_ID = "19hsZK-ddKMrULQdENfhbjW9jvJuhuRXBUCUbpHMrrTA";
 const DRIVE_RAIZ_NF = "1c66s39Oo5HAx-Y1uWXjnsxzByjEnVenC";
@@ -1116,21 +1116,13 @@ function nfHandleFiles(files) {
   if(btn){ btn.disabled = arr.length === 0; btn.style.opacity = arr.length > 0 ? "1" : ".4"; }
 }
 
-function nfJsonp(payload) {
-  return new Promise((resolve, reject) => {
-    const cbName = "nf_cb_" + Date.now();
-    const script = document.createElement("script");
-    const encoded = encodeURIComponent(JSON.stringify(payload));
-    script.src = NF_API_URL + "?callback=" + cbName + "&payload=" + encoded;
-    script.onerror = () => { delete window[cbName]; document.body.removeChild(script); reject(new Error("Erro de rede")); };
-    window[cbName] = (data) => {
-      delete window[cbName];
-      document.body.removeChild(script);
-      resolve(data);
-    };
-    document.body.appendChild(script);
-    setTimeout(() => { if(window[cbName]){ delete window[cbName]; try{document.body.removeChild(script);}catch{} reject(new Error("Timeout")); } }, 60000);
+async function nfFetch(payload) {
+  const resp = await fetch(NF_API_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload)
   });
+  return await resp.json();
 }
 
 async function nfExtrair() {
@@ -1146,7 +1138,7 @@ async function nfExtrair() {
       r.readAsDataURL(nfFile);
     });
 
-    const data = await nfJsonp({ acao: "extrairNF", chave: NF_CHAVE, pdfBase64: base64, nomeArquivo: nfFile.name });
+    const data = await nfFetch({ acao: "extrairNF", chave: NF_CHAVE, pdfBase64: base64, nomeArquivo: nfFile.name });
     if (!data.sucesso) throw new Error(data.mensagem || "Erro na extração");
 
     const extraido = data.dados;
@@ -1352,7 +1344,7 @@ async function nfConfirmar() {
       arquivos: arquivosB64,
     };
 
-    const data = await nfJsonp(payload);
+    const data = await nfFetch(payload);
 
     if(data.sucesso) {
       renderNFSucesso(data);
