@@ -1116,12 +1116,28 @@ function nfHandleFiles(files) {
   if(btn){ btn.disabled = arr.length === 0; btn.style.opacity = arr.length > 0 ? "1" : ".4"; }
 }
 
+function nfJsonp(payload) {
+  return new Promise((resolve, reject) => {
+    const cbName = "nf_cb_" + Date.now();
+    const script = document.createElement("script");
+    const encoded = encodeURIComponent(JSON.stringify(payload));
+    script.src = NF_API_URL + "?callback=" + cbName + "&payload=" + encoded;
+    script.onerror = () => { delete window[cbName]; document.body.removeChild(script); reject(new Error("Erro de rede")); };
+    window[cbName] = (data) => {
+      delete window[cbName];
+      document.body.removeChild(script);
+      resolve(data);
+    };
+    document.body.appendChild(script);
+    setTimeout(() => { if(window[cbName]){ delete window[cbName]; try{document.body.removeChild(script);}catch{} reject(new Error("Timeout")); } }, 60000);
+  });
+}
+
 async function nfExtrair() {
   const btn = document.getElementById("nfBtnExtrair");
   btn.textContent = "⏳ Analisando com IA..."; btn.disabled = true; btn.style.opacity = ".6";
 
   try {
-    // Converter NF para base64
     const nfFile = _nfState.arquivos[0];
     const base64 = await new Promise((res, rej) => {
       const r = new FileReader();
@@ -1130,24 +1146,12 @@ async function nfExtrair() {
       r.readAsDataURL(nfFile);
     });
 
-    // Chamar Apps Script como proxy para extração via Gemini
-    const resp = await fetch(NF_API_URL, {
-      method: "POST",
-      body: JSON.stringify({
-        acao: "extrairNF",
-        chave: NF_CHAVE,
-        pdfBase64: base64,
-        nomeArquivo: nfFile.name,
-      })
-    });
-
-    const data = await resp.json();
+    const data = await nfJsonp({ acao: "extrairNF", chave: NF_CHAVE, pdfBase64: base64, nomeArquivo: nfFile.name });
     if (!data.sucesso) throw new Error(data.mensagem || "Erro na extração");
 
     const extraido = data.dados;
     _nfState.dadosExtraidos = extraido;
 
-    // Identificar fornecedor pelo mapeamento
     const nomeExtraido = (extraido.fornecedor || "").toUpperCase();
     let fornecedorMatch = "";
     for(const f of Object.keys(NF_MAPA)){
@@ -1156,8 +1160,8 @@ async function nfExtrair() {
       }
     }
     _nfState.fornecedor = fornecedorMatch;
-
     renderNFStep2(extraido, fornecedorMatch);
+
   } catch(e) {
     btn.textContent = "✨ Extrair dados com IA";
     btn.disabled = false; btn.style.opacity = "1";
@@ -1348,11 +1352,7 @@ async function nfConfirmar() {
       arquivos: arquivosB64,
     };
 
-    const res = await fetch(NF_API_URL, {
-      method: "POST",
-      body: JSON.stringify(payload)
-    });
-    const data = await res.json();
+    const data = await nfJsonp(payload);
 
     if(data.sucesso) {
       renderNFSucesso(data);
