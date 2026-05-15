@@ -1121,7 +1121,7 @@ async function nfExtrair() {
   btn.textContent = "⏳ Analisando com IA..."; btn.disabled = true; btn.style.opacity = ".6";
 
   try {
-    // Converter PDF para base64
+    // Converter NF para base64
     const nfFile = _nfState.arquivos[0];
     const base64 = await new Promise((res, rej) => {
       const r = new FileReader();
@@ -1130,42 +1130,28 @@ async function nfExtrair() {
       r.readAsDataURL(nfFile);
     });
 
-    // Chamar API Anthropic para extração
-    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+    // Chamar Apps Script como proxy para extração via Gemini
+    const resp = await fetch(NF_API_URL, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{
-          role: "user",
-          content: [
-            { type: "document", source: { type: "base64", media_type: "application/pdf", data: base64 } },
-            { type: "text", text: `Extraia as seguintes informações desta nota fiscal e responda SOMENTE com JSON válido, sem explicações ou markdown:
-{
-  "numero_nf": "número da nota fiscal",
-  "valor": "valor total em reais (somente números e vírgula, ex: 1500,00)",
-  "data_emissao": "data de emissão no formato DD/MM/YYYY",
-  "fornecedor": "nome do fornecedor/empresa emissora em letras maiúsculas",
-  "cnpj_fornecedor": "CNPJ do fornecedor"
-}
-Se não encontrar algum campo, use null.` }
-          ]
-        }]
+        acao: "extrairNF",
+        chave: NF_CHAVE,
+        pdfBase64: base64,
+        nomeArquivo: nfFile.name,
       })
     });
 
     const data = await resp.json();
-    const text = data.content?.[0]?.text || "";
-    const clean = text.replace(/```json|```/g, "").trim();
-    const extraido = JSON.parse(clean);
+    if (!data.sucesso) throw new Error(data.mensagem || "Erro na extração");
+
+    const extraido = data.dados;
     _nfState.dadosExtraidos = extraido;
 
-    // Tentar identificar fornecedor pelo mapeamento
+    // Identificar fornecedor pelo mapeamento
     const nomeExtraido = (extraido.fornecedor || "").toUpperCase();
     let fornecedorMatch = "";
     for(const f of Object.keys(NF_MAPA)){
-      if(nomeExtraido.includes(f) || f.includes(nomeExtraido.split(" ")[0])){
+      if(nomeExtraido.includes(f) || f.split(" ").some(p => p.length > 3 && nomeExtraido.includes(p))){
         fornecedorMatch = f; break;
       }
     }
