@@ -244,7 +244,7 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
       </div>
 
       <a href="https://nf-cartao-corporativo.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico ip">🧾</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tp">Financeiro</div></div><div class="ct-name">NF Cartão Corporativo</div><div class="ct-desc">Notas fiscais do Cartão Facilities (0852) com extração automática via IA.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></a>
-      <div class="card ct disabled"><div class="ct-top"><div class="ct-ico io">📄</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag to">Em breve</div></div><div class="ct-name">Portal de NFs</div><div class="ct-desc">Upload em lote de NFs de fornecedores com organização automática no Drive via IA.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></div>
+      <div class="card ct" onclick="abrirPortalNF()" style="cursor:pointer"><div class="ct-top"><div class="ct-ico io">📄</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tp">Financeiro</div></div><div class="ct-name">Portal de NFs</div><div class="ct-desc">Upload de NFs de fornecedores com extração automática via IA e lançamento na planilha.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></div>
     </div>
   </div>
 
@@ -280,7 +280,22 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <div class="footer-dot"></div>
   </footer>
 
-  <div id="cgModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <!-- ── MODAL PORTAL NFs ─────────────────────────────────────────── -->
+<div id="nfModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div onclick="fecharPortalNF()" style="position:absolute;inset:0;background:rgba(0,0,0,.80);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);cursor:pointer;"></div>
+  <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(176,224,228,.22);border-radius:20px;width:100%;max-width:560px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.7);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 24px 16px;border-bottom:1px solid rgba(176,224,228,.10);flex-shrink:0;">
+      <div>
+        <div style="font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--tx);">📄 Portal de NFs</div>
+        <div style="font-size:11px;color:var(--tm);margin-top:3px;">Upload de NFs de fornecedores</div>
+      </div>
+      <button onclick="fecharPortalNF()" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--b1);background:var(--s3);color:var(--tx);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;">✕</button>
+    </div>
+    <div id="nfModalBody" style="overflow-y:auto;padding:20px 24px 24px;flex:1;"></div>
+  </div>
+</div>
+
+<div id="cgModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
     <div id="cgBackdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);cursor:pointer;"></div>
     <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(176,224,228,.22);border-radius:20px;width:100%;max-width:520px;max-height:86vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 24px 16px;border-bottom:1px solid rgba(176,224,228,.10);flex-shrink:0;">
@@ -1026,6 +1041,364 @@ function loadZoho(){
       const list=document.getElementById('zohoList');
       if(list) list.innerHTML='';
     });
+}
+
+// ── PORTAL DE NFs ────────────────────────────────────────────────
+const NF_API_URL = "https://script.google.com/macros/s/AKfycbxfXHmNboIEGSvN7kmjTCowYpgD8HGEKsdpkPwOYRz_LToiMxb0kE2BMtkPG-tDo9Uq/exec";
+const NF_CHAVE = "genial-facilities-2026";
+const PLANILHA_PAGAMENTOS_ID = "19hsZK-ddKMrULQdENfhbjW9jvJuhuRXBUCUbpHMrrTA";
+const DRIVE_RAIZ_NF = "1c66s39Oo5HAx-Y1uWXjnsxzByjEnVenC";
+
+// Mapeamento fixo por fornecedor
+const NF_MAPA = {
+  "MAIS AR":          { kamino:"705 - Manutenção - Facilities", planilha:"Ar-condicionado | Manutenção Preventiva", pgto:"Nota fiscal", contrato:"Sim", comentario:"" },
+  "ATLAS":            { kamino:"705 - Manutenção - Facilities", planilha:"Elevador | Manutenção Preventiva",         pgto:"Boleto",       contrato:"Sim", comentario:"Manutenção elevador" },
+  "DE LUCA":          { kamino:"31101 - Serviços de Terceiros - Facilities", planilha:"Limpeza | Serviços de Terceiros",    pgto:"Boleto",       contrato:"Sim", comentario:"Serviço de limpeza" },
+  "PK5":              { kamino:"31101 - Serviços de Terceiros - Facilities", planilha:"Segurança | Serviços de Terceiros",  pgto:"Boleto",       contrato:"Sim", comentario:"Estacionamento GHC" },
+  "ALTUM":            { kamino:"31101 - Serviços de Terceiros - Facilities", planilha:"Segurança | Serviços de Terceiros",  pgto:"Nota fiscal",  contrato:"Sim", comentario:"Serviço de Vigilante" },
+  "FÊNIX":            { kamino:"31101 - Serviços de Terceiros - Facilities", planilha:"Segurança | Serviços de Terceiros",  pgto:"Boleto",       contrato:"Sim", comentario:"Manutenção de alarme e segurança" },
+  "GHC":              { kamino:"705 - Manutenção - Facilities", planilha:"Serviços Gerais | Manutenção Corretiva",  pgto:"Nota fiscal",  contrato:"Sim", comentario:"Manutenção predial" },
+  "PISO 10":          { kamino:"705 - Manutenção - Facilities", planilha:"Materiais/Equipamentos | Manutenção Corretiva", pgto:"Boleto", contrato:"Sim", comentario:"" },
+  "TOTAL ELEVADORES": { kamino:"705 - Manutenção - Facilities", planilha:"Serviços Gerais | Manutenção Corretiva",  pgto:"Nota fiscal",  contrato:"Não", comentario:"Manutenção Corretiva - Elevador" },
+  "VEDALUZ":          { kamino:"703 - Obras e Benfeitorias - Expansão", planilha:"Obras e Benfeitorias - Expansão",   pgto:"Boleto",       contrato:"Sim", comentario:"Instalação de Persianas" },
+  "PRIMERS":          { kamino:"706 - Licenças e Regularizações - Facilities", planilha:"Licenças e Regularizações - Facilities", pgto:"Nota fiscal", contrato:"Não", comentario:"Cadastro Junto Ao Conselho de Classe" },
+};
+
+const CGs_NF = ["CG Morumbi","CG Tatuapé","CG Pinheiros","CG Paraíso","CG Alphaville","CG Anália Franco","CG Santana","Escritório"];
+const ANDARES_NF = { "Escritório": ["11° andar","Térreo"], "CG Morumbi": ["12° andar","14° andar","16° andar"] };
+
+let _nfState = { step: 1, arquivos: [], dadosExtraidos: {}, fornecedor: "", unidade: "", andar: "", dataVenc: "", comentario: "", forma: "", contrato: "" };
+
+function abrirPortalNF() {
+  _nfState = { step: 1, arquivos: [], dadosExtraidos: {}, fornecedor: "", unidade: "", andar: "", dataVenc: "", comentario: "", forma: "", contrato: "" };
+  document.getElementById("nfModal").style.display = "flex";
+  renderNFStep1();
+}
+
+function fecharPortalNF() {
+  document.getElementById("nfModal").style.display = "none";
+}
+
+function renderNFStep1() {
+  const body = document.getElementById("nfModalBody");
+  body.innerHTML = `
+    <div style="margin-bottom:20px">
+      <div style="font-size:12px;font-weight:700;color:var(--tm);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase">1 — Upload dos arquivos</div>
+      <div id="nfDropzone" onclick="document.getElementById('nfFileInput').click()" style="border:2px dashed var(--b2);border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:border-color .2s;background:var(--s2)">
+        <div style="font-size:28px;margin-bottom:8px">📄</div>
+        <div style="font-size:14px;font-weight:600;color:var(--tx);margin-bottom:4px">Clique para selecionar PDFs</div>
+        <div style="font-size:12px;color:var(--tm)">NF obrigatória • Boleto opcional • Máx. 2 arquivos</div>
+      </div>
+      <input type="file" id="nfFileInput" accept=".pdf" multiple style="display:none" onchange="nfHandleFiles(this.files)">
+      <div id="nfFileList" style="margin-top:12px"></div>
+    </div>
+    <button id="nfBtnExtrair" onclick="nfExtrair()" disabled style="width:100%;padding:13px;border-radius:10px;background:var(--v);color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;opacity:.4;transition:opacity .2s;font-family:'Outfit',sans-serif">
+      ✨ Extrair dados com IA
+    </button>
+  `;
+}
+
+function nfHandleFiles(files) {
+  const arr = Array.from(files).slice(0, 2);
+  _nfState.arquivos = arr;
+  const list = document.getElementById("nfFileList");
+  list.innerHTML = arr.map((f,i) => `
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--s2);border:1px solid var(--b1);border-radius:8px;margin-bottom:6px">
+      <span style="font-size:16px">${i===0?'📄':'📎'}</span>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${f.name}</div>
+        <div style="font-size:11px;color:var(--tm)">${i===0?'Nota Fiscal':'Boleto'} · ${(f.size/1024).toFixed(0)}KB</div>
+      </div>
+      <span style="color:var(--green);font-size:16px">✓</span>
+    </div>
+  `).join('');
+  const btn = document.getElementById("nfBtnExtrair");
+  if(btn){ btn.disabled = arr.length === 0; btn.style.opacity = arr.length > 0 ? "1" : ".4"; }
+}
+
+async function nfExtrair() {
+  const btn = document.getElementById("nfBtnExtrair");
+  btn.textContent = "⏳ Analisando com IA..."; btn.disabled = true; btn.style.opacity = ".6";
+
+  try {
+    // Converter PDF para base64
+    const nfFile = _nfState.arquivos[0];
+    const base64 = await new Promise((res, rej) => {
+      const r = new FileReader();
+      r.onload = e => res(e.target.result.split(",")[1]);
+      r.onerror = rej;
+      r.readAsDataURL(nfFile);
+    });
+
+    // Chamar API Anthropic para extração
+    const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{
+          role: "user",
+          content: [
+            { type: "document", source: { type: "base64", media_type: "application/pdf", data: base64 } },
+            { type: "text", text: `Extraia as seguintes informações desta nota fiscal e responda SOMENTE com JSON válido, sem explicações ou markdown:
+{
+  "numero_nf": "número da nota fiscal",
+  "valor": "valor total em reais (somente números e vírgula, ex: 1500,00)",
+  "data_emissao": "data de emissão no formato DD/MM/YYYY",
+  "fornecedor": "nome do fornecedor/empresa emissora em letras maiúsculas",
+  "cnpj_fornecedor": "CNPJ do fornecedor"
+}
+Se não encontrar algum campo, use null.` }
+          ]
+        }]
+      })
+    });
+
+    const data = await resp.json();
+    const text = data.content?.[0]?.text || "";
+    const clean = text.replace(/```json|```/g, "").trim();
+    const extraido = JSON.parse(clean);
+    _nfState.dadosExtraidos = extraido;
+
+    // Tentar identificar fornecedor pelo mapeamento
+    const nomeExtraido = (extraido.fornecedor || "").toUpperCase();
+    let fornecedorMatch = "";
+    for(const f of Object.keys(NF_MAPA)){
+      if(nomeExtraido.includes(f) || f.includes(nomeExtraido.split(" ")[0])){
+        fornecedorMatch = f; break;
+      }
+    }
+    _nfState.fornecedor = fornecedorMatch;
+
+    renderNFStep2(extraido, fornecedorMatch);
+  } catch(e) {
+    btn.textContent = "✨ Extrair dados com IA";
+    btn.disabled = false; btn.style.opacity = "1";
+    const body = document.getElementById("nfModalBody");
+    const err = document.createElement("div");
+    err.style.cssText = "margin-top:12px;padding:10px 14px;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:8px;font-size:12px;color:var(--red)";
+    err.textContent = "❌ Erro ao extrair: " + e.message;
+    body.appendChild(err);
+  }
+}
+
+function renderNFStep2(extraido, fornecedorMatch) {
+  const mapa = NF_MAPA[fornecedorMatch] || {};
+  const body = document.getElementById("nfModalBody");
+
+  const andaresForn = _nfState.unidade ? (ANDARES_NF[_nfState.unidade] || []) : [];
+  const precisaComentario = fornecedorMatch === "MAIS AR" || fornecedorMatch === "PISO 10" || !fornecedorMatch;
+  const precisaAndar = ["Escritório", "CG Morumbi"].includes(_nfState.unidade);
+
+  body.innerHTML = `
+    <div style="margin-bottom:16px">
+      <div style="font-size:12px;font-weight:700;color:var(--tm);margin-bottom:12px;letter-spacing:.04em;text-transform:uppercase">2 — Confirmar dados</div>
+
+      <!-- Dados extraídos -->
+      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:14px;margin-bottom:16px">
+        <div style="font-size:11px;color:var(--tm);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">✨ Extraído pela IA</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <div>
+            <div style="font-size:10px;color:var(--td)">Fornecedor</div>
+            <div style="font-size:13px;font-weight:700;color:var(--tx)">${extraido.fornecedor || '–'}</div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--td)">N° NF</div>
+            <div style="font-size:13px;font-weight:700;color:var(--tx)">${extraido.numero_nf || '–'}</div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--td)">Valor</div>
+            <div style="font-size:13px;font-weight:700;color:var(--green)">R$ ${extraido.valor || '–'}</div>
+          </div>
+          <div>
+            <div style="font-size:10px;color:var(--td)">Data emissão</div>
+            <div style="font-size:13px;font-weight:700;color:var(--tx)">${extraido.data_emissao || '–'}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fornecedor identificado -->
+      <div style="margin-bottom:12px">
+        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Fornecedor (mapeamento)</label>
+        <select id="nfFornecedor" onchange="nfAtualizarFornecedor(this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif">
+          <option value="">Selecione...</option>
+          ${Object.keys(NF_MAPA).map(f => `<option value="${f}" ${f===fornecedorMatch?'selected':''}>${f}</option>`).join('')}
+        </select>
+      </div>
+
+      <!-- Unidade -->
+      <div style="margin-bottom:12px">
+        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Unidade *</label>
+        <select id="nfUnidade" onchange="nfAtualizarUnidade(this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif">
+          <option value="">Selecione a CG...</option>
+          ${CGs_NF.map(cg => `<option value="${cg}">${cg}</option>`).join('')}
+        </select>
+      </div>
+
+      <!-- Andar (condicional) -->
+      <div id="nfAndarWrap" style="display:none;margin-bottom:12px">
+        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Andar</label>
+        <select id="nfAndar" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif">
+          <option value="">Selecione...</option>
+        </select>
+      </div>
+
+      <!-- Data de vencimento -->
+      <div style="margin-bottom:12px">
+        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Data de vencimento</label>
+        <input type="text" id="nfDataVenc" placeholder="DD/MM/YYYY" maxlength="10" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif">
+      </div>
+
+      <!-- Comentário (Mais AR e Piso 10) -->
+      <div id="nfComentarioWrap" style="margin-bottom:12px;${!precisaComentario?'display:none':''}">
+        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Comentário *</label>
+        <input type="text" id="nfComentario" placeholder="Ex: Manutenção preventiva ar-condicionado" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif" value="${mapa.comentario||''}">
+      </div>
+
+      <!-- Info mapeamento -->
+      <div id="nfMapaInfo" style="background:rgba(110,105,173,.08);border:1px solid rgba(110,105,173,.2);border-radius:8px;padding:10px 12px;margin-bottom:16px;font-size:11px;color:var(--tm)">
+        ${fornecedorMatch ? `
+          <div style="margin-bottom:4px"><b style="color:var(--v1)">Categoria Kamino:</b> ${mapa.kamino}</div>
+          <div style="margin-bottom:4px"><b style="color:var(--v1)">Categoria Planilha:</b> ${mapa.planilha}</div>
+          <div style="margin-bottom:4px"><b style="color:var(--v1)">Forma de pagamento:</b> ${mapa.pgto}</div>
+          <div><b style="color:var(--v1)">Contrato:</b> ${mapa.contrato}</div>
+        ` : '<div style="color:var(--yellow)">⚠️ Selecione o fornecedor para ver o mapeamento</div>'}
+      </div>
+
+      <button onclick="nfConfirmar()" id="nfBtnConfirmar" style="width:100%;padding:13px;border-radius:10px;background:var(--v);color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif">
+        ✅ Confirmar e lançar
+      </button>
+      <button onclick="renderNFStep1()" style="width:100%;padding:10px;border-radius:10px;background:none;color:var(--tm);border:1px solid var(--b1);font-size:13px;cursor:pointer;margin-top:8px;font-family:'Outfit',sans-serif">
+        ← Voltar e trocar arquivos
+      </button>
+    </div>
+  `;
+
+  // Preencher campos com estado atual
+  if(_nfState.fornecedor) document.getElementById("nfFornecedor").value = _nfState.fornecedor;
+}
+
+function nfAtualizarFornecedor(forn) {
+  _nfState.fornecedor = forn;
+  const mapa = NF_MAPA[forn] || {};
+  const info = document.getElementById("nfMapaInfo");
+  if(info) info.innerHTML = forn ? `
+    <div style="margin-bottom:4px"><b style="color:var(--v1)">Categoria Kamino:</b> ${mapa.kamino}</div>
+    <div style="margin-bottom:4px"><b style="color:var(--v1)">Categoria Planilha:</b> ${mapa.planilha}</div>
+    <div style="margin-bottom:4px"><b style="color:var(--v1)">Forma de pagamento:</b> ${mapa.pgto}</div>
+    <div><b style="color:var(--v1)">Contrato:</b> ${mapa.contrato}</div>
+  ` : '<div style="color:var(--yellow)">⚠️ Selecione o fornecedor para ver o mapeamento</div>';
+
+  // Mostrar/ocultar comentário para Mais AR e Piso 10
+  const comentWrap = document.getElementById("nfComentarioWrap");
+  if(comentWrap) comentWrap.style.display = (forn === "MAIS AR" || forn === "PISO 10" || !forn) ? "block" : "none";
+  if(!forn) return;
+  const coment = document.getElementById("nfComentario");
+  if(coment && mapa.comentario) coment.value = mapa.comentario;
+}
+
+function nfAtualizarUnidade(unidade) {
+  _nfState.unidade = unidade;
+  const andares = ANDARES_NF[unidade] || [];
+  const wrap = document.getElementById("nfAndarWrap");
+  const sel = document.getElementById("nfAndar");
+  if(wrap) wrap.style.display = andares.length > 0 ? "block" : "none";
+  if(sel) {
+    sel.innerHTML = '<option value="">Selecione...</option>' + andares.map(a => `<option value="${a}">${a}</option>`).join('');
+  }
+}
+
+async function nfConfirmar() {
+  const fornecedor = document.getElementById("nfFornecedor")?.value;
+  const unidade = document.getElementById("nfUnidade")?.value;
+  const dataVenc = document.getElementById("nfDataVenc")?.value;
+  const comentario = document.getElementById("nfComentario")?.value || NF_MAPA[fornecedor]?.comentario || "";
+  const andar = document.getElementById("nfAndar")?.value || "";
+
+  if(!fornecedor){ alert("Selecione o fornecedor"); return; }
+  if(!unidade){ alert("Selecione a unidade"); return; }
+  if(!comentario && (fornecedor === "MAIS AR" || fornecedor === "PISO 10")){ alert("Preencha o comentário"); return; }
+
+  const btn = document.getElementById("nfBtnConfirmar");
+  btn.textContent = "⏳ Salvando..."; btn.disabled = true;
+
+  try {
+    const mapa = NF_MAPA[fornecedor];
+    const extraido = _nfState.dadosExtraidos;
+    const agora = new Date();
+    const mes = agora.toLocaleString('pt-BR', { month: 'long' });
+    const mesAno = String(agora.getMonth()+1).padStart(2,'0') + '/' + agora.getFullYear();
+
+    // Converter arquivos para base64
+    const arquivosB64 = await Promise.all(_nfState.arquivos.map(async f => {
+      const b64 = await new Promise((res,rej) => {
+        const r = new FileReader();
+        r.onload = e => res(e.target.result.split(",")[1]);
+        r.onerror = rej;
+        r.readAsDataURL(f);
+      });
+      return { nome: f.name, base64: b64 };
+    }));
+
+    // Chamar backend Apps Script
+    const payload = {
+      acao: "processarNF",
+      chave: NF_CHAVE,
+      fornecedor,
+      unidade,
+      andar,
+      numeroNF: extraido.numero_nf || "",
+      valor: extraido.valor || "",
+      dataEmissao: extraido.data_emissao || "",
+      dataVencimento: dataVenc || "",
+      categoriaKamino: mapa.kamino,
+      categoriaPlanilha: mapa.planilha,
+      formaPagamento: mapa.pgto,
+      contrato: mapa.contrato,
+      comentario,
+      mes,
+      mesAno,
+      arquivos: arquivosB64,
+    };
+
+    const res = await fetch(NF_API_URL, {
+      method: "POST",
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if(data.sucesso) {
+      renderNFSucesso(data);
+    } else {
+      throw new Error(data.mensagem || "Erro desconhecido");
+    }
+  } catch(e) {
+    btn.textContent = "✅ Confirmar e lançar";
+    btn.disabled = false;
+    alert("❌ Erro: " + e.message);
+  }
+}
+
+function renderNFSucesso(data) {
+  const body = document.getElementById("nfModalBody");
+  body.innerHTML = `
+    <div style="text-align:center;padding:20px 0">
+      <div style="font-size:48px;margin-bottom:16px">✅</div>
+      <div style="font-size:18px;font-weight:800;color:var(--tx);margin-bottom:8px">NF lançada com sucesso!</div>
+      <div style="font-size:13px;color:var(--tm);margin-bottom:20px">Planilha atualizada e arquivos salvos no Drive</div>
+      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:14px;text-align:left;margin-bottom:20px">
+        <div style="font-size:11px;color:var(--td);margin-bottom:4px">Pasta no Drive</div>
+        <a href="${data.linkPasta}" target="_blank" style="font-size:13px;color:var(--v1);font-weight:600;word-break:break-all">${data.nomePasta}</a>
+      </div>
+      <button onclick="abrirPortalNF()" style="width:100%;padding:12px;border-radius:10px;background:var(--v);color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;margin-bottom:8px">
+        📄 Lançar outra NF
+      </button>
+      <button onclick="fecharPortalNF()" style="width:100%;padding:10px;border-radius:10px;background:none;color:var(--tm);border:1px solid var(--b1);font-size:13px;cursor:pointer;font-family:'Outfit',sans-serif">
+        Fechar
+      </button>
+    </div>
+  `;
 }
 
 // ── INICIALIZAR ───────────────────────────────────────────────
