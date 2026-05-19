@@ -213,7 +213,6 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
           <a href="https://suporte.genialcare.com.br" target="_blank" style="font-size:11px;color:var(--green);font-weight:600;text-decoration:none;white-space:nowrap;opacity:.8;">Abrir Zoho →</a>
         </div>
         <div class="wb">
-          <!-- Contadores por prioridade -->
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px;">
             <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.15);border-radius:10px;">
               <div style="font-size:22px;font-weight:800;color:var(--red);" id="zohoHigh">–</div>
@@ -228,7 +227,6 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
               <div><div style="font-size:11px;font-weight:700;color:var(--green);">Baixa prioridade</div><div style="font-size:10px;color:var(--td);margin-top:2px;">tickets abertos</div></div>
             </div>
           </div>
-          <!-- Lista dos 5 mais recentes -->
           <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--td);margin-bottom:8px;">5 mais recentes</div>
           <div id="zohoList" style="display:flex;flex-direction:column;gap:5px;">
             <div style="font-size:11px;color:var(--tm);text-align:center;padding:8px;">Carregando...</div>
@@ -243,8 +241,12 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
         </div>
       </div>
 
+      <!-- NF Cartão Corporativo -->
       <a href="https://nf-cartao-corporativo.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico ip">🧾</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tp">Financeiro</div></div><div class="ct-name">NF Cartão Corporativo</div><div class="ct-desc">Notas fiscais do Cartão Facilities (0852) com extração automática via IA.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></a>
-      <div class="card ct" onclick="abrirPortalNF()" style="cursor:pointer"><div class="ct-top"><div class="ct-ico io">📄</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tp">Financeiro</div></div><div class="ct-name">Portal de NFs</div><div class="ct-desc">Upload de NFs de fornecedores com extração automática via IA e lançamento na planilha.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></div>
+
+      <!-- ✅ Portal NFs — URL atualizada para portal-nfs-mtnm.vercel.app -->
+      <a href="https://portal-nfs-mtnm.vercel.app" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico io">📄</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tp">Financeiro</div></div><div class="ct-name">Portal de NFs</div><div class="ct-desc">Upload de NFs de fornecedores com extração automática via IA e lançamento na planilha.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div></a>
+
     </div>
   </div>
 
@@ -265,6 +267,8 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <div class="card cw">
       <div class="wh"><div class="wi ip">⚡</div><div><div class="wt">Atalhos Rápidos</div><div class="ws">Planilhas e portais de acesso frequente</div></div></div>
       <div class="wb" style="display:flex;flex-direction:column;gap:8px;">
+        <!-- ✅ Portal NFs adicionado nos atalhos -->
+        <a href="https://portal-nfs-mtnm.vercel.app" target="_blank" class="sl"><span>📄</span><span>Portal de NFs</span><span class="sl-arr">→</span></a>
         <a href="https://docs.google.com/spreadsheets/d/1yhuo38_MdshcAO67chkKlWQ2wHnBCLN1acZjQQ5N-Os/edit?gid=1761395806#gid=1761395806" target="_blank" class="sl"><span>🛒</span><span>Painel de Compras</span><span class="sl-arr">→</span></a>
         <a href="https://docs.google.com/spreadsheets/d/1BCEO5YBi9TipF135auOtNoX2QzGk5EI5fI8KW96t38Q" target="_blank" class="sl"><span>🔧</span><span>Manutenções Preventivas</span><span class="sl-arr">→</span></a>
         <a href="https://docs.google.com/spreadsheets/d/1Wt7FBOa5nQ9T5oxThXiY3ArU_puCC6H1BYmarvs7uXI" target="_blank" class="sl"><span>🏢</span><span>Informações das CGs</span><span class="sl-arr">→</span></a>
@@ -280,22 +284,7 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <div class="footer-dot"></div>
   </footer>
 
-  <!-- ── MODAL PORTAL NFs ─────────────────────────────────────────── -->
-<div id="nfModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
-  <div onclick="fecharPortalNF()" style="position:absolute;inset:0;background:rgba(0,0,0,.80);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);cursor:pointer;"></div>
-  <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(176,224,228,.22);border-radius:20px;width:100%;max-width:560px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.7);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 24px 16px;border-bottom:1px solid rgba(176,224,228,.10);flex-shrink:0;">
-      <div>
-        <div style="font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--tx);">📄 Portal de NFs</div>
-        <div style="font-size:11px;color:var(--tm);margin-top:3px;">Upload de NFs de fornecedores</div>
-      </div>
-      <button onclick="fecharPortalNF()" style="width:32px;height:32px;border-radius:50%;border:1px solid var(--b1);background:var(--s3);color:var(--tx);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;">✕</button>
-    </div>
-    <div id="nfModalBody" style="overflow-y:auto;padding:20px 24px 24px;flex:1;"></div>
-  </div>
-</div>
-
-<div id="cgModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
+  <div id="cgModal" style="display:none;position:fixed;inset:0;z-index:9999;align-items:center;justify-content:center;padding:20px;">
     <div id="cgBackdrop" style="position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);cursor:pointer;"></div>
     <div style="position:relative;z-index:1;background:var(--s1);border:1px solid rgba(176,224,228,.22);border-radius:20px;width:100%;max-width:520px;max-height:86vh;display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(0,0,0,.6);animation:modalIn .2s cubic-bezier(.4,0,.2,1);">
       <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 24px 16px;border-bottom:1px solid rgba(176,224,228,.10);flex-shrink:0;">
@@ -364,7 +353,6 @@ function buildWeekDetail(wtype, monday){
     html+='<span style="font-size:10px;color:var(--tm)">'+info.horario+'</span></div><div style="display:grid;gap:2px;">';
     info.dias.forEach((local,i)=>{
       const isFlex=local==='Dia flex';
-      // Calcular a data do dia (segunda = +0, terça = +1, ..., sexta = +4)
       let dataStr='';
       if(monday){
         const d=new Date(monday.getTime()+i*86400000);
@@ -418,12 +406,6 @@ function initSchedule(){
     sched.innerHTML='<div style="font-size:12px;color:var(--tm);text-align:center;padding:4px 0">Fim de semana 🏖️</div>';
   }
   const cal=document.getElementById('quarterCalendar');
-  if(today.getFullYear()===2026&&today.getMonth()===3){
-    const banner=document.createElement('div');
-    banner.style.cssText='font-size:10px;font-weight:600;color:var(--yellow);background:rgba(255,184,48,.08);border:1px solid rgba(255,184,48,.2);border-radius:7px;padding:5px 8px;margin-bottom:6px;line-height:1.5;';
-    banner.innerHTML='⚠️ <b>Mudança a partir de 06/04:</b> Seg PAR → S1 · Seg ÍMPAR → S2';
-    cal.appendChild(banner);
-  }
   const weeks=getWeeksOfMonth(today.getFullYear(),today.getMonth());
   const monthLabel=document.createElement('div');
   monthLabel.style.cssText='font-size:10px;font-weight:700;color:var(--td);margin-bottom:4px;';
@@ -509,62 +491,30 @@ function loadPreventivas() {
       list.appendChild(el);
     });
     if(atencao.length>6){const more=document.createElement('div');more.style.cssText='font-size:11px;color:var(--tm);text-align:center;padding:4px;';more.textContent='+ '+(atencao.length-6)+' mais na planilha';list.appendChild(more);}
-    // atualizar stat chip — vencidas
     const sv=document.getElementById('statVencidas');
     if(sv){sv.textContent=vencido;sv.className='sc-val '+(vencido>0?'r':'g');}
-
-    // atualizar stat chip — próxima preventiva (a vencer mais próxima com data)
-    const proxItem = atencao
-      .filter(i=>i.status==='avencer' && i.proxDate)
-      .sort((a,b)=>a.proxDate-b.proxDate)[0];
-    const elPS = document.getElementById('statProxServ');
-    const elPL = document.getElementById('statProxServLbl');
-    if(elPS && elPL){
-      if(proxItem){
-        const meses=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-        const d = proxItem.proxDate;
-        const diff = Math.round((d - new Date().setHours(0,0,0,0)) / 86400000);
-        elPS.textContent = d.getDate()+' '+meses[d.getMonth()];
-        elPS.className = diff <= 7 ? 'sc-val y' : 'sc-val';
-        // Nome curto: pegar só o serviço sem a CG
-        const nome = proxItem.servico.length > 20
-          ? proxItem.servico.slice(0,20)+'…'
-          : proxItem.servico;
-        elPL.textContent = nome + ' · ' + proxItem.cg.replace('CG ','').replace('NOVA-CG-','');
-      } else {
-        elPS.textContent = '✓';
-        elPS.className = 'sc-val g';
-        elPL.textContent = 'Todas em dia';
-      }
-    }
   }).catch(err=>{
-    console.error('Preventivas erro:',err);
     document.getElementById('cntVencido').textContent='!';
     document.getElementById('cntAvencer').textContent='!';
     document.getElementById('cntEmdia').textContent='!';
-    document.getElementById('prevList').innerHTML='<div style="font-size:11px;color:var(--red);text-align:center;padding:8px;">Erro ao carregar. Verifique se a planilha está pública.</div>';
+    document.getElementById('prevList').innerHTML='<div style="font-size:11px;color:var(--red);text-align:center;padding:8px;">Erro ao carregar.</div>';
   });
 }
 
 // ── CASAS GENIAIS INFO ──────────────────────────────────────
 const CG_INFO_URL = 'https://script.google.com/macros/s/AKfycbyypUjU49FXATep7p3cmJFmZQI2Cgg8M8ioZmk36GCI4sWXq2ZS_o0mt9KCt7J1RbWf/exec';
 var cgInfoData = [];
-
 function loadCGInfo() {
   fetch(CG_INFO_URL).then(r=>r.json()).then(data=>{
     if(!data.ok) throw new Error(data.erro);
-    cgInfoData=data.cgs;
-    renderCGList();
+    cgInfoData=data.cgs;renderCGList();
   }).catch(()=>{
     document.getElementById('cgList').innerHTML='<div style="font-size:11px;color:var(--tm);text-align:center;padding:8px;">Não foi possível carregar os dados.</div>';
   });
 }
-
 function renderCGList() {
   const list=document.getElementById('cgList');
-  list.style.display='grid';
-  list.style.gridTemplateColumns='repeat(4,1fr)';
-  list.style.gap='8px';
+  list.style.cssText='display:grid;grid-template-columns:repeat(4,1fr);gap:8px;';
   list.innerHTML='';
   cgInfoData.forEach((cg,idx)=>{
     const nome=cg.cg.replace('NOVA-CG-','CG ').replace('CG-','CG ').replace('WL- ','');
@@ -579,7 +529,6 @@ function renderCGList() {
     list.appendChild(el);
   });
 }
-
 function abrirCGModal(idx) {
   const cg=cgInfoData[idx];
   const nome=cg.cg.replace('NOVA-CG-','CG ').replace('CG-','CG ').replace('WL- ','');
@@ -587,13 +536,10 @@ function abrirCGModal(idx) {
   document.getElementById('cgModalNome').textContent=nome;
   document.getElementById('cgModalSub').textContent=sub;
   let html='';
-  // Mapa do Google Maps — usa endereço se disponível, senão usa nome da CG
-  const mapQuery = cg.endereco || (nome + ', São Paulo');
+  const mapQuery=cg.endereco||(nome+', São Paulo');
   const mapUrl='https://maps.google.com/maps?q='+encodeURIComponent(mapQuery)+'&output=embed';
   const mapsLink='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(mapQuery);
-  html+='<div style="border-radius:12px;overflow:hidden;margin-bottom:16px;border:1px solid rgba(176,224,228,.15);">'
-    +'<iframe src="'+mapUrl+'" width="100%" height="160" style="display:block;border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'
-    +'</div>';
+  html+='<div style="border-radius:12px;overflow:hidden;margin-bottom:16px;border:1px solid rgba(176,224,228,.15);"><iframe src="'+mapUrl+'" width="100%" height="160" style="display:block;border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>';
   html+='<a href="'+mapsLink+'" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;padding:9px;border-radius:10px;border:1px solid rgba(176,224,228,.18);background:rgba(176,224,228,.06);color:var(--t1);font-size:12px;font-weight:600;text-decoration:none;margin-bottom:16px;">🗺️ Abrir no Google Maps</a>';
   function sec(label,val){if(val) html+='<div style="margin-bottom:12px;"><div style="font-size:9px;font-weight:700;color:var(--t1);text-transform:uppercase;letter-spacing:.1em;margin-bottom:4px;">'+label+'</div><div style="font-size:12px;color:var(--tx);line-height:1.55;">'+String(val).replace(/\n/g,'<br>')+'</div></div>';}
   sec('📍 Endereço',cg.endereco);sec('🕐 Horário',cg.horario);
@@ -607,17 +553,12 @@ function abrirCGModal(idx) {
   }
   sec('🏠 Gerente Predial',cg.gerentePredial);sec('🔑 Chaveiro',cg.chaveiro);
   document.getElementById('cgModalBody').innerHTML=html||'<div style="font-size:12px;color:var(--tm);padding:4px;">Sem detalhes disponíveis.</div>';
-  const modal=document.getElementById('cgModal');
-  modal.style.display='flex';
+  document.getElementById('cgModal').style.display='flex';
   document.body.style.overflow='hidden';
 }
+function fecharCGModal(){document.getElementById('cgModal').style.display='none';document.body.style.overflow='';}
 
-function fecharCGModal() {
-  document.getElementById('cgModal').style.display='none';
-  document.body.style.overflow='';
-}
-// ── TIME DELUCA — ACCORDION ──────────────────────────────────
-// ── DADOS TIME DELUCA ───────────────────────────────────────
+// ── TIME DELUCA ──────────────────────────────────────────────
 const DELUCA_CG_ORDER=['Morumbi','Tatuapé','Pinheiros','Paraíso','Alphaville','Anália Franco','Santana'];
 const DELUCA_CG_STYLE={
   'Morumbi':      {bg:'rgba(56,100,180,.14)',  border:'rgba(56,100,180,.3)',  fg:'#7BA8E8'},
@@ -629,26 +570,25 @@ const DELUCA_CG_STYLE={
   'Santana':      {bg:'rgba(200,150,40,.14)',  border:'rgba(200,150,40,.3)',  fg:'#E8C060'},
 };
 const DELUCA_DATA=[
-  {nome:'Fabricia Souza de Oliveira',       cg:'Morumbi',       turno:'Tarde', horario:'10:00–19:00', status:''},
-  {nome:'Angelica da Silva de Oliveira',    cg:'Morumbi',       turno:'Manhã', horario:'07:00–16:00', status:'cob'},
-  {nome:'Talita Cristina da Silva',         cg:'Morumbi',       turno:'Manhã', horario:'07:00–16:00', status:''},
-  {nome:'Andreia de Assis Miranda',         cg:'Morumbi',       turno:'Manhã', horario:'06:00–15:00', status:''},
-  {nome:'Adriana Alves Nascimento Gaia',    cg:'Morumbi',       turno:'Tarde', horario:'10:00–19:00', status:''},
-  {nome:'Daiana Ribeiro da Silva',          cg:'Morumbi',       turno:'Manhã', horario:'07:00–16:00', status:'lic'},
-  {nome:'Eliete Vieiras dos Santos',        cg:'Tatuapé',       turno:'Tarde', horario:'10:00–19:00', status:''},
-  {nome:'Tabata Suellen Sabino dos Santos', cg:'Tatuapé',       turno:'Manhã', horario:'07:00–16:00', status:''},
-  {nome:'Graziella Aparecida Dias',         cg:'Pinheiros',     turno:'Manhã', horario:'07:00–16:00', status:''},
-  {nome:'Liliane da Silva Cardoso',         cg:'Pinheiros',     turno:'Tarde', horario:'10:00–19:00', status:''},
-  {nome:'Adriele dos Santos Pereira',       cg:'Paraíso',       turno:'Manhã', horario:'07:00–16:00', status:''},
-  {nome:'Camila Rubia Ferreira Antunes',    cg:'Paraíso',       turno:'Tarde', horario:'10:00–19:00', status:''},
-  {nome:'Paloma Campos Filand',             cg:'Alphaville',    turno:'Tarde', horario:'10:00–19:00', status:''},
-  {nome:'Leila Silva De Lima',              cg:'Alphaville',    turno:'Manhã', horario:'06:00–15:00', status:''},
-  {nome:'Daniela Lima de Jesus Oliveira',   cg:'Anália Franco', turno:'Manhã', horario:'07:00–16:00', status:''},
-  {nome:'Emily Conceicao dos Santos Cruz',  cg:'Anália Franco', turno:'Tarde', horario:'10:00–19:00', status:''},
-  {nome:'Dilma Fernandes Silva dos Santos', cg:'Santana',       turno:'Manhã', horario:'07:00–16:00', status:''},
-  {nome:'Priscila Cardoso',                 cg:'Santana',       turno:'Tarde', horario:'10:00–19:00', status:''},
+  {nome:'Fabricia Souza de Oliveira',cg:'Morumbi',turno:'Tarde',horario:'10:00–19:00',status:''},
+  {nome:'Angelica da Silva de Oliveira',cg:'Morumbi',turno:'Manhã',horario:'07:00–16:00',status:'cob'},
+  {nome:'Talita Cristina da Silva',cg:'Morumbi',turno:'Manhã',horario:'07:00–16:00',status:''},
+  {nome:'Andreia de Assis Miranda',cg:'Morumbi',turno:'Manhã',horario:'06:00–15:00',status:''},
+  {nome:'Adriana Alves Nascimento Gaia',cg:'Morumbi',turno:'Tarde',horario:'10:00–19:00',status:''},
+  {nome:'Daiana Ribeiro da Silva',cg:'Morumbi',turno:'Manhã',horario:'07:00–16:00',status:'lic'},
+  {nome:'Eliete Vieiras dos Santos',cg:'Tatuapé',turno:'Tarde',horario:'10:00–19:00',status:''},
+  {nome:'Tabata Suellen Sabino dos Santos',cg:'Tatuapé',turno:'Manhã',horario:'07:00–16:00',status:''},
+  {nome:'Graziella Aparecida Dias',cg:'Pinheiros',turno:'Manhã',horario:'07:00–16:00',status:''},
+  {nome:'Liliane da Silva Cardoso',cg:'Pinheiros',turno:'Tarde',horario:'10:00–19:00',status:''},
+  {nome:'Adriele dos Santos Pereira',cg:'Paraíso',turno:'Manhã',horario:'07:00–16:00',status:''},
+  {nome:'Camila Rubia Ferreira Antunes',cg:'Paraíso',turno:'Tarde',horario:'10:00–19:00',status:''},
+  {nome:'Paloma Campos Filand',cg:'Alphaville',turno:'Tarde',horario:'10:00–19:00',status:''},
+  {nome:'Leila Silva De Lima',cg:'Alphaville',turno:'Manhã',horario:'06:00–15:00',status:''},
+  {nome:'Daniela Lima de Jesus Oliveira',cg:'Anália Franco',turno:'Manhã',horario:'07:00–16:00',status:''},
+  {nome:'Emily Conceicao dos Santos Cruz',cg:'Anália Franco',turno:'Tarde',horario:'10:00–19:00',status:''},
+  {nome:'Dilma Fernandes Silva dos Santos',cg:'Santana',turno:'Manhã',horario:'07:00–16:00',status:''},
+  {nome:'Priscila Cardoso',cg:'Santana',turno:'Tarde',horario:'10:00–19:00',status:''},
 ];
-
 function initDeludaPreview(){
   const grid=document.getElementById('deludaCGGrid');
   const sub=document.getElementById('deludaResumo');
@@ -669,216 +609,116 @@ function initDeludaPreview(){
     grid.appendChild(btn);
   });
 }
-
 var deludaAberta=null;
-
 function toggleDeludaCG(cg){
   const acc=document.getElementById('deludaAccordion');
   if(!acc) return;
-  if(deludaAberta===cg){
-    acc.style.maxHeight='0';
-    acc.style.opacity='0';
-    setTimeout(function(){acc.style.display='none';acc.innerHTML='';},250);
-    deludaAberta=null;
-    return;
-  }
+  if(deludaAberta===cg){acc.style.maxHeight='0';acc.style.opacity='0';setTimeout(function(){acc.style.display='none';acc.innerHTML='';},250);deludaAberta=null;return;}
   deludaAberta=cg;
   const s=DELUCA_CG_STYLE[cg];
   const pessoas=DELUCA_DATA.filter(p=>p.cg===cg);
   const manha=pessoas.filter(p=>p.turno==='Manhã');
   const tarde=pessoas.filter(p=>p.turno==='Tarde');
-
   function deludaIni(n){const p=n.trim().split(/\s+/);return(p[0][0]+(p[1]?.[0]||'')).toUpperCase();}
-
   function renderP(arr){
     return arr.map(function(p){
-      const badge=p.status==='lic'
-        ?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,107,107,.15);color:#FF6B6B;margin-left:6px;border:1px solid rgba(255,107,107,.25);">licença</span>'
-        :p.status==='cob'
-        ?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,184,48,.15);color:#FFB830;margin-left:6px;border:1px solid rgba(255,184,48,.25);">cobrindo</span>'
-        :'';
-      return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(110,105,173,.07);">'
-        +'<div style="width:30px;height:30px;border-radius:50%;background:'+s.bg+';border:1px solid '+s.border+';display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:'+s.fg+';flex-shrink:0;">'+deludaIni(p.nome)+'</div>'
-        +'<span style="font-size:13px;color:var(--tx);flex:1;font-weight:500;">'+p.nome+badge+'</span>'
-        +'<span style="font-size:11px;color:var(--tm);font-family:\'JetBrains Mono\',monospace;white-space:nowrap;">'+p.horario+'</span>'
-        +'</div>';
+      const badge=p.status==='lic'?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,107,107,.15);color:#FF6B6B;margin-left:6px;border:1px solid rgba(255,107,107,.25);">licença</span>':p.status==='cob'?'<span style="font-size:9px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(255,184,48,.15);color:#FFB830;margin-left:6px;border:1px solid rgba(255,184,48,.25);">cobrindo</span>':'';
+      return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid rgba(110,105,173,.07);"><div style="width:30px;height:30px;border-radius:50%;background:'+s.bg+';border:1px solid '+s.border+';display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:'+s.fg+';flex-shrink:0;">'+deludaIni(p.nome)+'</div><span style="font-size:13px;color:var(--tx);flex:1;font-weight:500;">'+p.nome+badge+'</span><span style="font-size:11px;color:var(--tm);font-family:\'JetBrains Mono\',monospace;white-space:nowrap;">'+p.horario+'</span></div>';
     }).join('');
   }
-
-  function turnoBlock(label,arr){
-    if(!arr.length) return '';
-    return '<div style="margin-bottom:4px;"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--td);margin:10px 0 4px;">'+label+'</div>'+renderP(arr)+'</div>';
-  }
-
-  // Montar accordion via DOM para evitar problemas de escaping
+  function turnoBlock(label,arr){if(!arr.length) return '';return '<div style="margin-bottom:4px;"><div style="font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--td);margin:10px 0 4px;">'+label+'</div>'+renderP(arr)+'</div>';}
   const wrap=document.createElement('div');
   wrap.style.cssText='background:var(--s2);border:1px solid '+s.border+';border-radius:14px;overflow:hidden;';
-
   const header=document.createElement('div');
   header.style.cssText='display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:'+s.bg+';border-bottom:1px solid '+s.border+';';
   header.innerHTML='<span style="font-size:14px;font-weight:700;color:'+s.fg+'">'+cg+'</span>';
-  const headerRight=document.createElement('div');
-  headerRight.style.cssText='display:flex;align-items:center;gap:10px;';
+  const headerRight=document.createElement('div');headerRight.style.cssText='display:flex;align-items:center;gap:10px;';
   headerRight.innerHTML='<span style="font-size:11px;color:'+s.fg+';opacity:.65;">'+pessoas.length+' colaboradora'+(pessoas.length>1?'s':'')+'</span>';
   const closeBtn=document.createElement('button');
   closeBtn.style.cssText='width:26px;height:26px;border-radius:50%;border:1px solid '+s.border+';background:rgba(0,0,0,.25);color:'+s.fg+';font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;';
-  closeBtn.textContent='×';
-  closeBtn.addEventListener('click',function(){toggleDeludaCG(cg);});
-  headerRight.appendChild(closeBtn);
-  header.appendChild(headerRight);
-  wrap.appendChild(header);
-
+  closeBtn.textContent='×';closeBtn.addEventListener('click',function(){toggleDeludaCG(cg);});
+  headerRight.appendChild(closeBtn);header.appendChild(headerRight);wrap.appendChild(header);
   const body=document.createElement('div');
   body.style.cssText='padding:4px 16px 12px;';
-  body.innerHTML=turnoBlock('Manhã',manha)
-    +(manha.length&&tarde.length?'<div style="height:1px;background:rgba(110,105,173,.08);margin:4px 0;"></div>':'')
-    +turnoBlock('Tarde',tarde);
+  body.innerHTML=turnoBlock('Manhã',manha)+(manha.length&&tarde.length?'<div style="height:1px;background:rgba(110,105,173,.08);margin:4px 0;"></div>':'')+turnoBlock('Tarde',tarde);
   wrap.appendChild(body);
-
-  acc.innerHTML='';
-  acc.appendChild(wrap);
-  acc.style.display='block';
-  acc.style.maxHeight='0';
-  acc.style.opacity='0';
-  acc.style.overflow='hidden';
-  acc.style.transition='max-height .3s ease, opacity .25s ease';
-  requestAnimationFrame(function(){
-    acc.style.maxHeight='600px';
-    acc.style.opacity='1';
-    setTimeout(function(){acc.scrollIntoView({behavior:'smooth',block:'nearest'});},300);
-  });
+  acc.innerHTML='';acc.appendChild(wrap);
+  acc.style.display='block';acc.style.maxHeight='0';acc.style.opacity='0';acc.style.overflow='hidden';acc.style.transition='max-height .3s ease, opacity .25s ease';
+  requestAnimationFrame(function(){acc.style.maxHeight='600px';acc.style.opacity='1';setTimeout(function(){acc.scrollIntoView({behavior:'smooth',block:'nearest'});},300);});
 }
+
 // ── CLIMA ─────────────────────────────────────────────────────
 function loadClima(){
-  const url='https://api.open-meteo.com/v1/forecast?latitude=-23.5505&longitude=-46.6333&current=temperature_2m,weather_code,apparent_temperature&hourly=precipitation_probability,weather_code&daily=precipitation_probability_max,temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo&forecast_days=1';
+  const url='https://api.open-meteo.com/v1/forecast?latitude=-23.5505&longitude=-46.6333&current=temperature_2m,weather_code,apparent_temperature&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FSao_Paulo&forecast_days=1';
   fetch(url).then(r=>r.json()).then(data=>{
     if(!data||!data.current) throw new Error('sem dados');
     const temp=Math.round(data.current.temperature_2m);
-    const sensac=Math.round(data.current.apparent_temperature);
-    const code=data.current.weather_code;
     const maxTemp=data.daily?Math.round(data.daily.temperature_2m_max[0]):null;
     const minTemp=data.daily?Math.round(data.daily.temperature_2m_min[0]):null;
+    const code=data.current.weather_code;
     document.getElementById('climaBadgeIcon').textContent=climaEmoji(code);
     document.getElementById('climaBadgeTemp').textContent=temp+'°C';
-    const extra=maxTemp!==null?'↑'+maxTemp+'° ↓'+minTemp+'°':climaDesc(code);
-    document.getElementById('climaBadgeExtra').textContent=extra;
-    const badge=document.getElementById('climaBadge');
-    if(badge) badge.title=climaDesc(code)+' · Sensação '+sensac+'°C'+(maxTemp!==null?' · Máx '+maxTemp+'° Mín '+minTemp+'°':'');
+    document.getElementById('climaBadgeExtra').textContent=maxTemp!==null?'↑'+maxTemp+'° ↓'+minTemp+'°':climaDesc(code);
   }).catch(err=>{console.warn('Clima:',err);});
 }
 function climaEmoji(code){if(code===0)return'☀️';if(code<=2)return'⛅';if(code<=3)return'☁️';if(code<=49)return'🌫️';if(code<=59)return'🌦️';if(code<=69)return'🌧️';if(code<=79)return'❄️';if(code<=84)return'🌦️';if(code<=99)return'⛈️';return'🌤️';}
 function climaDesc(code){if(code===0)return'Céu limpo';if(code<=2)return'Parcialmente nublado';if(code<=3)return'Nublado';if(code<=49)return'Névoa';if(code<=59)return'Garoa';if(code<=69)return'Chuva';if(code<=79)return'Neve';if(code<=84)return'Pancadas de chuva';if(code<=99)return'Tempestade';return'Variável';}
 
-// ── FERIADOS SP (Nacionais + Municipais) ────────────────────
-// Feriados municipais e estaduais de São Paulo (fixos por ano)
+// ── FERIADOS ─────────────────────────────────────────────────
 function getFeriadosSP(ano){
-  // Usar new Date(ano, mes-1, dia) para evitar problema de fuso UTC
   return [
-    {nome:'Confraternização Universal',    data: new Date(ano,  0,  1)},
-    {nome:'Aniversário de São Paulo',      data: new Date(ano,  0, 25)},
-    {nome:'Tiradentes',                    data: new Date(ano,  3, 21)},
-    {nome:'Dia do Trabalho',               data: new Date(ano,  4,  1)},
-    {nome:'Revolução Constitucionalista',  data: new Date(ano,  6,  9)},
-    {nome:'Independência do Brasil',       data: new Date(ano,  8,  7)},
-    {nome:'Nossa Sra. Aparecida',          data: new Date(ano,  9, 12)},
-    {nome:'Finados',                       data: new Date(ano, 10,  2)},
-    {nome:'Proclamação da República',      data: new Date(ano, 10, 15)},
-    {nome:'Consciência Negra (SP)',        data: new Date(ano, 10, 20)},
-    {nome:'Natal',                         data: new Date(ano, 11, 25)},
+    {nome:'Confraternização Universal',data:new Date(ano,0,1)},{nome:'Aniversário de São Paulo',data:new Date(ano,0,25)},
+    {nome:'Tiradentes',data:new Date(ano,3,21)},{nome:'Dia do Trabalho',data:new Date(ano,4,1)},
+    {nome:'Revolução Constitucionalista',data:new Date(ano,6,9)},{nome:'Independência do Brasil',data:new Date(ano,8,7)},
+    {nome:'Nossa Sra. Aparecida',data:new Date(ano,9,12)},{nome:'Finados',data:new Date(ano,10,2)},
+    {nome:'Proclamação da República',data:new Date(ano,10,15)},{nome:'Consciência Negra (SP)',data:new Date(ano,10,20)},
+    {nome:'Natal',data:new Date(ano,11,25)},
   ];
 }
-
-// Páscoa e feriados móveis (calculados)
 function getFeriadosMoveis(ano){
-  // Algoritmo de Gauss para Páscoa
-  const a=ano%19, b=Math.floor(ano/100), c=ano%100;
-  const d=Math.floor(b/4), e=b%4, f=Math.floor((b+8)/25);
-  const g=Math.floor((b-f+1)/3), h=(19*a+b-d-g+15)%30;
-  const i=Math.floor(c/4), k=c%4, l=(32+2*e+2*i-h-k)%7;
+  const a=ano%19,b=Math.floor(ano/100),c=ano%100;
+  const d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25);
+  const g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30;
+  const i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7;
   const m=Math.floor((a+11*h+22*l)/451);
-  const mes=Math.floor((h+l-7*m+114)/31);
-  const dia=(h+l-7*m+114)%31+1;
-  const pascoa=new Date(ano, mes-1, dia);
-  // Sexta-feira Santa = Páscoa - 2
-  const sextaSanta=new Date(pascoa.getTime()-2*86400000);
-  // Corpus Christi = Páscoa + 60
-  const corpusChristi=new Date(pascoa.getTime()+60*86400000);
-  // Carnaval = Páscoa - 47 (terça)
-  const carnaval=new Date(pascoa.getTime()-47*86400000);
+  const mes=Math.floor((h+l-7*m+114)/31),dia=(h+l-7*m+114)%31+1;
+  const pascoa=new Date(ano,mes-1,dia);
   return [
-    {nome:'Carnaval', data: carnaval},
-    {nome:'Sexta-feira Santa', data: sextaSanta},
-    {nome:'Páscoa', data: pascoa},
-    {nome:'Corpus Christi', data: corpusChristi},
+    {nome:'Carnaval',data:new Date(pascoa.getTime()-47*86400000)},
+    {nome:'Sexta-feira Santa',data:new Date(pascoa.getTime()-2*86400000)},
+    {nome:'Páscoa',data:pascoa},
+    {nome:'Corpus Christi',data:new Date(pascoa.getTime()+60*86400000)},
   ];
 }
-
 function loadFeriados(){
-  const ano = new Date().getFullYear();
-  const hoje = new Date(); hoje.setHours(0,0,0,0);
-
-  // Combinar fixos SP + móveis
-  const feriadosSP = [...getFeriadosSP(ano), ...getFeriadosMoveis(ano)];
-  // Também pegar próximo ano se estiver no final do ano
-  if(hoje.getMonth() >= 10){
-    feriadosSP.push(...getFeriadosSP(ano+1), ...getFeriadosMoveis(ano+1));
-  }
-
-  function aplicarFeriados(todos){
-    const proximos = todos
-      .filter(f=>f.data >= hoje)
-      .sort((a,b)=>a.data-b.data);
+  const ano=new Date().getFullYear();
+  const hoje=new Date();hoje.setHours(0,0,0,0);
+  const todos=[...getFeriadosSP(ano),...getFeriadosMoveis(ano)];
+  if(hoje.getMonth()>=10){todos.push(...getFeriadosSP(ano+1),...getFeriadosMoveis(ano+1));}
+  function aplicar(lista){
+    const proximos=lista.filter(f=>f.data>=hoje).sort((a,b)=>a.data-b.data);
     if(!proximos.length) return;
-    const prox = proximos[0];
-    const diff = Math.round((prox.data - hoje)/86400000);
-    const meses = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
-    const dataStr = prox.data.getDate()+' de '+meses[prox.data.getMonth()];
-    const elV = document.getElementById('statFeriado');
-    const elL = document.getElementById('statFeriadoLbl');
+    const prox=proximos[0];
+    const diff=Math.round((prox.data-hoje)/86400000);
+    const meses=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+    const dataStr=prox.data.getDate()+' de '+meses[prox.data.getMonth()];
+    const elV=document.getElementById('statFeriado');const elL=document.getElementById('statFeriadoLbl');
     if(!elV) return;
-    if(diff === 0){
-      elV.textContent = 'Hoje · '+dataStr;
-      elV.className = 'sc-val r';
-    } else if(diff === 1){
-      elV.textContent = 'Amanhã · '+dataStr;
-      elV.className = 'sc-val y';
-    } else if(diff <= 30){
-      elV.textContent = dataStr;
-      elV.className = 'sc-val y';
-    } else {
-      elV.textContent = dataStr;
-      elV.className = 'sc-val';
-    }
-    if(elL) elL.textContent = prox.nome;
-    // Destacar chip da escala se feriado for esta semana
-    function getMon(x){const c=new Date(x);const dy=c.getDay();c.setDate(c.getDate()-dy+(dy===0?-6:1));return c;}
-    const mon2=getMon(new Date());
-    const fri2=new Date(mon2.getTime()+4*86400000);
-    if(prox.data >= mon2 && prox.data <= fri2){
-      const escCard=document.getElementById('statEscala')?.closest('.sc');
-      if(escCard) escCard.style.borderColor='rgba(255,184,48,.4)';
-    }
+    elV.textContent=diff===0?'Hoje · '+dataStr:diff===1?'Amanhã · '+dataStr:dataStr;
+    elV.className='sc-val '+(diff<=1?'r':diff<=30?'y':'');
+    if(elL) elL.textContent=prox.nome;
   }
-
-  // Tentar enriquecer com nacionais via API, combinar com municipais SP
   fetch('https://date.nager.at/api/v3/PublicHolidays/'+ano+'/BR')
     .then(r=>r.json())
     .then(nacionais=>{
-      const deApi = nacionais.map(f=>({
-        nome: f.localName,
-        // Parsear manualmente para evitar problema de fuso UTC
-        data: (function(s){ const p=s.split('-'); return new Date(+p[0],+p[1]-1,+p[2]); })(f.date)
-      }));
-      // Merge: municipais SP + nacionais da API (sem duplicar por data)
-      const datas = new Set(feriadosSP.map(f=>f.data.toDateString()));
-      const todos = [...feriadosSP];
-      deApi.forEach(f=>{ if(!datas.has(f.data.toDateString())) todos.push(f); });
-      aplicarFeriados(todos);
-    })
-    .catch(()=>aplicarFeriados(feriadosSP));
+      const deApi=nacionais.map(f=>({nome:f.localName,data:(function(s){const p=s.split('-');return new Date(+p[0],+p[1]-1,+p[2]);})(f.date)}));
+      const datas=new Set(todos.map(f=>f.data.toDateString()));
+      const merge=[...todos];deApi.forEach(f=>{if(!datas.has(f.data.toDateString()))merge.push(f);});
+      aplicar(merge);
+    }).catch(()=>aplicar(todos));
 }
 
-// ── HERO DATE ────────────────────────────────────────────────
+// ── HERO DATE ─────────────────────────────────────────────────
 (function(){
   const D=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
   const M=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
@@ -889,19 +729,6 @@ function loadFeriados(){
 
 // ── STAT ESCALA ───────────────────────────────────────────────
 (function(){
-  function upd(){
-    const d=new Date();const dow=d.getDay();
-    function mon(x){const c=new Date(x);const dy=c.getDay();c.setDate(c.getDate()-dy+(dy===0?-6:1));return c;}
-    const m=mon(d);const mudanca=new Date(2026,3,6);
-    const wt=m>=mudanca?(m.getDate()%2===0?1:2):(m.getDate()%2!==0?1:2);
-    const fri=new Date(m.getTime()+4*86400000);
-    const fmt=x=>String(x.getDate()).padStart(2,'0')+'/'+String(x.getMonth()+1).padStart(2,'0');
-    const el=document.getElementById('statEscala');if(!el)return;
-    el.textContent='S'+wt;
-    const lbl=el.closest('.sc')?.querySelector('.sc-lbl');
-    if(lbl) lbl.textContent=fmt(m)+' – '+fmt(fri);
-  }
-  upd();
   const obs=new MutationObserver(()=>{
     const v=document.getElementById('cntVencido')?.textContent;
     const elV=document.getElementById('statVencidas');
@@ -937,446 +764,52 @@ function loadFeriados(){
   document.addEventListener('keydown',function(e){if(e.key==='Escape')fecharCGModal();});
 })();
 
-
 // ── ZOHO DESK ────────────────────────────────────────────────
 function loadZoho(){
-  fetch('/api/zoho')
-    .then(r=>r.json())
-    .then(data=>{
-      if(!data.ok) throw new Error(data.erro);
-      // Stat chip
-      const sv=document.getElementById('statZoho');
-      const sl=document.getElementById('statZohoLbl');
-      if(sv){ sv.textContent=data.total; sv.className='sc-val '+(data.total>0?'r':'g'); }
-      try{ localStorage.setItem('zoho_total', data.total); } catch(e){}
-      if(sl){ sl.textContent=data.total===1?'ticket aberto':'tickets abertos'; }
-      // Mini breakdown no chip
-      const ch=document.getElementById('zohoChipHigh');
-      const cm=document.getElementById('zohoChipMed');
-      const cl=document.getElementById('zohoChipLow');
-      if(ch) ch.textContent='🔴 '+(data.porPrioridade.high||0)+' alta';
-      if(cm) cm.textContent='🟡 '+(data.porPrioridade.medium||0)+' média';
-      if(cl) cl.textContent='🟢 '+(data.porPrioridade.low||0)+' baixa';
-      // Contadores por prioridade
-      const elH=document.getElementById('zohoHigh');
-      const elM=document.getElementById('zohoMed');
-      const elL=document.getElementById('zohoLow');
-      if(elH) elH.textContent=data.porPrioridade.high||0;
-      if(elM) elM.textContent=data.porPrioridade.medium||0;
-      if(elL) elL.textContent=data.porPrioridade.low||0;
-      // Total no footer do card
-      const elTotal=document.getElementById('zohoTotal');
-      if(elTotal) elTotal.textContent=data.total+' tickets abertos no total';
-      // Update time
-      const now=new Date();
-      const upd=document.getElementById('zohoUpdate');
-      if(upd) upd.textContent='atualizado '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
-      // Lista dos 5 mais recentes
-      const list=document.getElementById('zohoList');
-      if(!list) return;
-      list.innerHTML='';
-      if(!data.preview||!data.preview.length){
-        list.innerHTML='<div style="font-size:12px;color:var(--green);text-align:center;padding:8px;">Nenhum ticket aberto ✅</div>';
-        return;
-      }
-      const PRIOR_LABELS={'high':'Alta','medium':'Média','low':'Baixa'};
-      data.preview.forEach(t=>{
-        const prio=(t.prioridade||'').toLowerCase();
-        const isHigh=prio==='high';
-        const isMed=prio==='medium';
-        const cor=isHigh?'var(--red)':isMed?'var(--yellow)':'var(--green)';
-        const bg=isHigh?'rgba(255,107,107,.07)':isMed?'rgba(255,184,48,.07)':'rgba(59,235,168,.05)';
-        const border=isHigh?'rgba(255,107,107,.16)':isMed?'rgba(255,184,48,.14)':'rgba(59,235,168,.12)';
-        // Formatar data
-        let dataStr='';
-        if(t.criado){
-          const d=new Date(t.criado);
-          dataStr=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+'h';
-        }
-        const el=document.createElement('a');
-        el.href='https://suporte.genialcare.com.br/support/tickets/'+t.id;
-        el.target='_blank';
-        el.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:9px;background:'+bg+';border:1px solid '+border+';text-decoration:none;transition:opacity .15s,transform .15s;cursor:pointer;';
-        el.addEventListener('mouseenter',function(){this.style.opacity='.8';this.style.transform='translateX(2px)';});
-        el.addEventListener('mouseleave',function(){this.style.opacity='1';this.style.transform='';});
-        el.innerHTML=
-          '<div style="flex:1;min-width:0;">'
-            +'<div style="font-size:12px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'
-              +'<span style="color:var(--td);margin-right:6px;font-family:\'JetBrains Mono\',monospace;font-size:10px;">#'+t.id+'</span>'
-              +t.assunto
-            +'</div>'
-            +(dataStr?'<div style="font-size:10px;color:var(--td);margin-top:3px;">'+dataStr+'</div>':'')
-          +'</div>'
-          +'<div style="display:flex;align-items:center;gap:6px;flex-shrink:0;">'
-            +'<span style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;background:'+bg+';border:1px solid '+border+';color:'+cor+';white-space:nowrap;">'+(PRIOR_LABELS[prio]||prio||'–')+'</span>'
-            +'<span style="font-size:11px;color:var(--td);opacity:.6;">→</span>'
-          +'</div>';
-        list.appendChild(el);
-      });
-      if(data.total>5){
-        const more=document.createElement('div');
-        more.style.cssText='font-size:11px;color:var(--tm);text-align:center;padding:6px;';
-        more.textContent='+ '+(data.total-5)+' tickets no Zoho Desk';
-        list.appendChild(more);
-      }
-    })
-    .catch(err=>{
-      console.warn('Zoho erro:',err);
-      // Manter último valor salvo no localStorage se disponível
-      const saved = localStorage.getItem('zoho_total');
-      const sv=document.getElementById('statZoho');
-      const sl=document.getElementById('statZohoLbl');
-      if(sv){
-        if(saved){ sv.textContent=saved; sv.className='sc-val g'; }
-        else { sv.textContent='–'; sv.className='sc-val'; }
-      }
-      if(sl && saved) sl.textContent='tickets (cache)';
-      // Limpar breakdown no chip quando em cache
-      const ch2=document.getElementById('zohoChipHigh');
-      const cm2=document.getElementById('zohoChipMed');
-      const cl2=document.getElementById('zohoChipLow');
-      if(ch2) ch2.textContent='';
-      if(cm2) cm2.textContent='atualização pendente';
-      if(cl2) cl2.textContent='';
-      const list=document.getElementById('zohoList');
-      if(list) list.innerHTML='';
+  fetch('/api/zoho').then(r=>r.json()).then(data=>{
+    if(!data.ok) throw new Error(data.erro);
+    const sv=document.getElementById('statZoho');
+    if(sv){sv.textContent=data.total;sv.className='sc-val '+(data.total>0?'r':'g');}
+    try{localStorage.setItem('zoho_total',data.total);}catch(e){}
+    const ch=document.getElementById('zohoChipHigh');const cm=document.getElementById('zohoChipMed');const cl=document.getElementById('zohoChipLow');
+    if(ch) ch.textContent='🔴 '+(data.porPrioridade.high||0)+' alta';
+    if(cm) cm.textContent='🟡 '+(data.porPrioridade.medium||0)+' média';
+    if(cl) cl.textContent='🟢 '+(data.porPrioridade.low||0)+' baixa';
+    const elH=document.getElementById('zohoHigh');const elM=document.getElementById('zohoMed');const elL=document.getElementById('zohoLow');
+    if(elH) elH.textContent=data.porPrioridade.high||0;
+    if(elM) elM.textContent=data.porPrioridade.medium||0;
+    if(elL) elL.textContent=data.porPrioridade.low||0;
+    const elTotal=document.getElementById('zohoTotal');
+    if(elTotal) elTotal.textContent=data.total+' tickets abertos no total';
+    const now=new Date();const upd=document.getElementById('zohoUpdate');
+    if(upd) upd.textContent='atualizado '+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0');
+    const list=document.getElementById('zohoList');if(!list) return;
+    list.innerHTML='';
+    if(!data.preview||!data.preview.length){list.innerHTML='<div style="font-size:12px;color:var(--green);text-align:center;padding:8px;">Nenhum ticket aberto ✅</div>';return;}
+    const PRIOR_LABELS={'high':'Alta','medium':'Média','low':'Baixa'};
+    data.preview.forEach(t=>{
+      const prio=(t.prioridade||'').toLowerCase();
+      const isHigh=prio==='high';const isMed=prio==='medium';
+      const cor=isHigh?'var(--red)':isMed?'var(--yellow)':'var(--green)';
+      const bg=isHigh?'rgba(255,107,107,.07)':isMed?'rgba(255,184,48,.07)':'rgba(59,235,168,.05)';
+      const border=isHigh?'rgba(255,107,107,.16)':isMed?'rgba(255,184,48,.14)':'rgba(59,235,168,.12)';
+      let dataStr='';
+      if(t.criado){const d=new Date(t.criado);dataStr=String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth()+1).padStart(2,'0')+' '+String(d.getHours()).padStart(2,'0')+'h';}
+      const el=document.createElement('a');
+      el.href='https://suporte.genialcare.com.br/support/tickets/'+t.id;
+      el.target='_blank';
+      el.style.cssText='display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:9px;background:'+bg+';border:1px solid '+border+';text-decoration:none;transition:opacity .15s,transform .15s;cursor:pointer;';
+      el.addEventListener('mouseenter',function(){this.style.opacity='.8';this.style.transform='translateX(2px)';});
+      el.addEventListener('mouseleave',function(){this.style.opacity='1';this.style.transform='';});
+      el.innerHTML='<div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;"><span style="color:var(--td);margin-right:6px;font-family:\'JetBrains Mono\',monospace;font-size:10px;">#'+t.id+'</span>'+t.assunto+'</div>'+(dataStr?'<div style="font-size:10px;color:var(--td);margin-top:3px;">'+dataStr+'</div>':'')+'</div><div style="display:flex;align-items:center;gap:6px;flex-shrink:0;"><span style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;background:'+bg+';border:1px solid '+border+';color:'+cor+';white-space:nowrap;">'+(PRIOR_LABELS[prio]||prio||'–')+'</span><span style="font-size:11px;color:var(--td);opacity:.6;">→</span></div>';
+      list.appendChild(el);
     });
-}
-
-// ── PORTAL DE NFs ────────────────────────────────────────────────
-const NF_API_URL = "/api/nf-portal";
-const NF_CHAVE = "genial-facilities-2026";
-const PLANILHA_PAGAMENTOS_ID = "19hsZK-ddKMrULQdENfhbjW9jvJuhuRXBUCUbpHMrrTA";
-const DRIVE_RAIZ_NF = "1c66s39Oo5HAx-Y1uWXjnsxzByjEnVenC";
-
-// Mapeamento fixo por fornecedor
-const NF_MAPA = {
-  "MAIS AR":          { kamino:"705 - Manutenção - Facilities", planilha:"Ar-condicionado | Manutenção Preventiva", pgto:"Nota fiscal", contrato:"Sim", comentario:"" },
-  "ATLAS":            { kamino:"705 - Manutenção - Facilities", planilha:"Elevador | Manutenção Preventiva",         pgto:"Boleto",       contrato:"Sim", comentario:"Manutenção elevador" },
-  "DE LUCA":          { kamino:"31101 - Serviços de Terceiros - Facilities", planilha:"Limpeza | Serviços de Terceiros",    pgto:"Boleto",       contrato:"Sim", comentario:"Serviço de limpeza" },
-  "PK5":              { kamino:"31101 - Serviços de Terceiros - Facilities", planilha:"Segurança | Serviços de Terceiros",  pgto:"Boleto",       contrato:"Sim", comentario:"Estacionamento GHC" },
-  "ALTUM":            { kamino:"31101 - Serviços de Terceiros - Facilities", planilha:"Segurança | Serviços de Terceiros",  pgto:"Nota fiscal",  contrato:"Sim", comentario:"Serviço de Vigilante" },
-  "FÊNIX":            { kamino:"31101 - Serviços de Terceiros - Facilities", planilha:"Segurança | Serviços de Terceiros",  pgto:"Boleto",       contrato:"Sim", comentario:"Manutenção de alarme e segurança" },
-  "GHC":              { kamino:"705 - Manutenção - Facilities", planilha:"Serviços Gerais | Manutenção Corretiva",  pgto:"Nota fiscal",  contrato:"Sim", comentario:"Manutenção predial" },
-  "PISO 10":          { kamino:"705 - Manutenção - Facilities", planilha:"Materiais/Equipamentos | Manutenção Corretiva", pgto:"Boleto", contrato:"Sim", comentario:"" },
-  "TOTAL ELEVADORES": { kamino:"705 - Manutenção - Facilities", planilha:"Serviços Gerais | Manutenção Corretiva",  pgto:"Nota fiscal",  contrato:"Não", comentario:"Manutenção Corretiva - Elevador" },
-  "VEDALUZ":          { kamino:"703 - Obras e Benfeitorias - Expansão", planilha:"Obras e Benfeitorias - Expansão",   pgto:"Boleto",       contrato:"Sim", comentario:"Instalação de Persianas" },
-  "PRIMERS":          { kamino:"706 - Licenças e Regularizações - Facilities", planilha:"Licenças e Regularizações - Facilities", pgto:"Nota fiscal", contrato:"Não", comentario:"Cadastro Junto Ao Conselho de Classe" },
-};
-
-const CGs_NF = ["CG Morumbi","CG Tatuapé","CG Pinheiros","CG Paraíso","CG Alphaville","CG Anália Franco","CG Santana","Escritório"];
-const ANDARES_NF = { "Escritório": ["11° andar","Térreo"], "CG Morumbi": ["12° andar","14° andar","16° andar"] };
-
-let _nfState = { step: 1, arquivos: [], dadosExtraidos: {}, fornecedor: "", unidade: "", andar: "", dataVenc: "", comentario: "", forma: "", contrato: "" };
-
-function abrirPortalNF() {
-  _nfState = { step: 1, arquivos: [], dadosExtraidos: {}, fornecedor: "", unidade: "", andar: "", dataVenc: "", comentario: "", forma: "", contrato: "" };
-  document.getElementById("nfModal").style.display = "flex";
-  renderNFStep1();
-}
-
-function fecharPortalNF() {
-  document.getElementById("nfModal").style.display = "none";
-}
-
-function renderNFStep1() {
-  const body = document.getElementById("nfModalBody");
-  body.innerHTML = `
-    <div style="margin-bottom:20px">
-      <div style="font-size:12px;font-weight:700;color:var(--tm);margin-bottom:8px;letter-spacing:.04em;text-transform:uppercase">1 — Upload dos arquivos</div>
-      <div id="nfDropzone" onclick="document.getElementById('nfFileInput').click()" style="border:2px dashed var(--b2);border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:border-color .2s;background:var(--s2)">
-        <div style="font-size:28px;margin-bottom:8px">📄</div>
-        <div style="font-size:14px;font-weight:600;color:var(--tx);margin-bottom:4px">Clique para selecionar PDFs</div>
-        <div style="font-size:12px;color:var(--tm)">NF obrigatória • Boleto opcional • Máx. 2 arquivos</div>
-      </div>
-      <input type="file" id="nfFileInput" accept=".pdf" multiple style="display:none" onchange="nfHandleFiles(this.files)">
-      <div id="nfFileList" style="margin-top:12px"></div>
-    </div>
-    <button id="nfBtnExtrair" onclick="nfExtrair()" disabled style="width:100%;padding:13px;border-radius:10px;background:var(--v);color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;opacity:.4;transition:opacity .2s;font-family:'Outfit',sans-serif">
-      ✨ Extrair dados com IA
-    </button>
-  `;
-}
-
-function nfHandleFiles(files) {
-  const arr = Array.from(files).slice(0, 2);
-  _nfState.arquivos = arr;
-  const list = document.getElementById("nfFileList");
-  list.innerHTML = arr.map((f,i) => `
-    <div style="display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--s2);border:1px solid var(--b1);border-radius:8px;margin-bottom:6px">
-      <span style="font-size:16px">${i===0?'📄':'📎'}</span>
-      <div style="flex:1;min-width:0">
-        <div style="font-size:13px;font-weight:600;color:var(--tx);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${f.name}</div>
-        <div style="font-size:11px;color:var(--tm)">${i===0?'Nota Fiscal':'Boleto'} · ${(f.size/1024).toFixed(0)}KB</div>
-      </div>
-      <span style="color:var(--green);font-size:16px">✓</span>
-    </div>
-  `).join('');
-  const btn = document.getElementById("nfBtnExtrair");
-  if(btn){ btn.disabled = arr.length === 0; btn.style.opacity = arr.length > 0 ? "1" : ".4"; }
-}
-
-async function nfFetch(payload) {
-  const resp = await fetch(NF_API_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
+    if(data.total>5){const more=document.createElement('div');more.style.cssText='font-size:11px;color:var(--tm);text-align:center;padding:6px;';more.textContent='+ '+(data.total-5)+' tickets no Zoho Desk';list.appendChild(more);}
+  }).catch(err=>{
+    const saved=localStorage.getItem('zoho_total');
+    const sv=document.getElementById('statZoho');
+    if(sv){if(saved){sv.textContent=saved;sv.className='sc-val g';}else{sv.textContent='–';sv.className='sc-val';}}
   });
-  return await resp.json();
-}
-
-async function nfExtrair() {
-  const btn = document.getElementById("nfBtnExtrair");
-  btn.textContent = "⏳ Analisando com IA..."; btn.disabled = true; btn.style.opacity = ".6";
-
-  try {
-    const nfFile = _nfState.arquivos[0];
-    const base64 = await new Promise((res, rej) => {
-      const r = new FileReader();
-      r.onload = e => res(e.target.result.split(",")[1]);
-      r.onerror = rej;
-      r.readAsDataURL(nfFile);
-    });
-
-    const data = await nfFetch({ acao: "extrairNF", chave: NF_CHAVE, pdfBase64: base64, nomeArquivo: nfFile.name });
-    if (!data.sucesso) throw new Error(data.mensagem || "Erro na extração");
-
-    const extraido = data.dados;
-    _nfState.dadosExtraidos = extraido;
-
-    const nomeExtraido = (extraido.fornecedor || "").toUpperCase();
-    let fornecedorMatch = "";
-    for(const f of Object.keys(NF_MAPA)){
-      if(nomeExtraido.includes(f) || f.split(" ").some(p => p.length > 3 && nomeExtraido.includes(p))){
-        fornecedorMatch = f; break;
-      }
-    }
-    _nfState.fornecedor = fornecedorMatch;
-    renderNFStep2(extraido, fornecedorMatch);
-
-  } catch(e) {
-    btn.textContent = "✨ Extrair dados com IA";
-    btn.disabled = false; btn.style.opacity = "1";
-    const body = document.getElementById("nfModalBody");
-    const err = document.createElement("div");
-    err.style.cssText = "margin-top:12px;padding:10px 14px;background:rgba(255,107,107,.1);border:1px solid rgba(255,107,107,.3);border-radius:8px;font-size:12px;color:var(--red)";
-    err.textContent = "❌ Erro ao extrair: " + e.message;
-    body.appendChild(err);
-  }
-}
-
-function renderNFStep2(extraido, fornecedorMatch) {
-  const mapa = NF_MAPA[fornecedorMatch] || {};
-  const body = document.getElementById("nfModalBody");
-
-  const andaresForn = _nfState.unidade ? (ANDARES_NF[_nfState.unidade] || []) : [];
-  const precisaComentario = fornecedorMatch === "MAIS AR" || fornecedorMatch === "PISO 10" || !fornecedorMatch;
-  const precisaAndar = ["Escritório", "CG Morumbi"].includes(_nfState.unidade);
-
-  body.innerHTML = `
-    <div style="margin-bottom:16px">
-      <div style="font-size:12px;font-weight:700;color:var(--tm);margin-bottom:12px;letter-spacing:.04em;text-transform:uppercase">2 — Confirmar dados</div>
-
-      <!-- Dados extraídos -->
-      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:14px;margin-bottom:16px">
-        <div style="font-size:11px;color:var(--tm);font-weight:600;margin-bottom:8px;text-transform:uppercase;letter-spacing:.04em">✨ Extraído pela IA</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
-          <div>
-            <div style="font-size:10px;color:var(--td)">Fornecedor</div>
-            <div style="font-size:13px;font-weight:700;color:var(--tx)">${extraido.fornecedor || '–'}</div>
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--td)">N° NF</div>
-            <div style="font-size:13px;font-weight:700;color:var(--tx)">${extraido.numero_nf || '–'}</div>
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--td)">Valor</div>
-            <div style="font-size:13px;font-weight:700;color:var(--green)">R$ ${extraido.valor || '–'}</div>
-          </div>
-          <div>
-            <div style="font-size:10px;color:var(--td)">Data emissão</div>
-            <div style="font-size:13px;font-weight:700;color:var(--tx)">${extraido.data_emissao || '–'}</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Fornecedor identificado -->
-      <div style="margin-bottom:12px">
-        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Fornecedor (mapeamento)</label>
-        <select id="nfFornecedor" onchange="nfAtualizarFornecedor(this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif">
-          <option value="">Selecione...</option>
-          ${Object.keys(NF_MAPA).map(f => `<option value="${f}" ${f===fornecedorMatch?'selected':''}>${f}</option>`).join('')}
-        </select>
-      </div>
-
-      <!-- Unidade -->
-      <div style="margin-bottom:12px">
-        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Unidade *</label>
-        <select id="nfUnidade" onchange="nfAtualizarUnidade(this.value)" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif">
-          <option value="">Selecione a CG...</option>
-          ${CGs_NF.map(cg => `<option value="${cg}">${cg}</option>`).join('')}
-        </select>
-      </div>
-
-      <!-- Andar (condicional) -->
-      <div id="nfAndarWrap" style="display:none;margin-bottom:12px">
-        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Andar</label>
-        <select id="nfAndar" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif">
-          <option value="">Selecione...</option>
-        </select>
-      </div>
-
-      <!-- Data de vencimento -->
-      <div style="margin-bottom:12px">
-        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Data de vencimento</label>
-        <input type="text" id="nfDataVenc" placeholder="DD/MM/YYYY" maxlength="10" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif">
-      </div>
-
-      <!-- Comentário (Mais AR e Piso 10) -->
-      <div id="nfComentarioWrap" style="margin-bottom:12px;${!precisaComentario?'display:none':''}">
-        <label style="font-size:11px;color:var(--tm);font-weight:600;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px">Comentário *</label>
-        <input type="text" id="nfComentario" placeholder="Ex: Manutenção preventiva ar-condicionado" style="width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--b1);background:var(--s2);color:var(--tx);font-size:13px;font-family:'Outfit',sans-serif" value="${mapa.comentario||''}">
-      </div>
-
-      <!-- Info mapeamento -->
-      <div id="nfMapaInfo" style="background:rgba(110,105,173,.08);border:1px solid rgba(110,105,173,.2);border-radius:8px;padding:10px 12px;margin-bottom:16px;font-size:11px;color:var(--tm)">
-        ${fornecedorMatch ? `
-          <div style="margin-bottom:4px"><b style="color:var(--v1)">Categoria Kamino:</b> ${mapa.kamino}</div>
-          <div style="margin-bottom:4px"><b style="color:var(--v1)">Categoria Planilha:</b> ${mapa.planilha}</div>
-          <div style="margin-bottom:4px"><b style="color:var(--v1)">Forma de pagamento:</b> ${mapa.pgto}</div>
-          <div><b style="color:var(--v1)">Contrato:</b> ${mapa.contrato}</div>
-        ` : '<div style="color:var(--yellow)">⚠️ Selecione o fornecedor para ver o mapeamento</div>'}
-      </div>
-
-      <button onclick="nfConfirmar()" id="nfBtnConfirmar" style="width:100%;padding:13px;border-radius:10px;background:var(--v);color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif">
-        ✅ Confirmar e lançar
-      </button>
-      <button onclick="renderNFStep1()" style="width:100%;padding:10px;border-radius:10px;background:none;color:var(--tm);border:1px solid var(--b1);font-size:13px;cursor:pointer;margin-top:8px;font-family:'Outfit',sans-serif">
-        ← Voltar e trocar arquivos
-      </button>
-    </div>
-  `;
-
-  // Preencher campos com estado atual
-  if(_nfState.fornecedor) document.getElementById("nfFornecedor").value = _nfState.fornecedor;
-}
-
-function nfAtualizarFornecedor(forn) {
-  _nfState.fornecedor = forn;
-  const mapa = NF_MAPA[forn] || {};
-  const info = document.getElementById("nfMapaInfo");
-  if(info) info.innerHTML = forn ? `
-    <div style="margin-bottom:4px"><b style="color:var(--v1)">Categoria Kamino:</b> ${mapa.kamino}</div>
-    <div style="margin-bottom:4px"><b style="color:var(--v1)">Categoria Planilha:</b> ${mapa.planilha}</div>
-    <div style="margin-bottom:4px"><b style="color:var(--v1)">Forma de pagamento:</b> ${mapa.pgto}</div>
-    <div><b style="color:var(--v1)">Contrato:</b> ${mapa.contrato}</div>
-  ` : '<div style="color:var(--yellow)">⚠️ Selecione o fornecedor para ver o mapeamento</div>';
-
-  // Mostrar/ocultar comentário para Mais AR e Piso 10
-  const comentWrap = document.getElementById("nfComentarioWrap");
-  if(comentWrap) comentWrap.style.display = (forn === "MAIS AR" || forn === "PISO 10" || !forn) ? "block" : "none";
-  if(!forn) return;
-  const coment = document.getElementById("nfComentario");
-  if(coment && mapa.comentario) coment.value = mapa.comentario;
-}
-
-function nfAtualizarUnidade(unidade) {
-  _nfState.unidade = unidade;
-  const andares = ANDARES_NF[unidade] || [];
-  const wrap = document.getElementById("nfAndarWrap");
-  const sel = document.getElementById("nfAndar");
-  if(wrap) wrap.style.display = andares.length > 0 ? "block" : "none";
-  if(sel) {
-    sel.innerHTML = '<option value="">Selecione...</option>' + andares.map(a => `<option value="${a}">${a}</option>`).join('');
-  }
-}
-
-async function nfConfirmar() {
-  const fornecedor = document.getElementById("nfFornecedor")?.value;
-  const unidade = document.getElementById("nfUnidade")?.value;
-  const dataVenc = document.getElementById("nfDataVenc")?.value;
-  const comentario = document.getElementById("nfComentario")?.value || NF_MAPA[fornecedor]?.comentario || "";
-  const andar = document.getElementById("nfAndar")?.value || "";
-
-  if(!fornecedor){ alert("Selecione o fornecedor"); return; }
-  if(!unidade){ alert("Selecione a unidade"); return; }
-  if(!comentario && (fornecedor === "MAIS AR" || fornecedor === "PISO 10")){ alert("Preencha o comentário"); return; }
-
-  const btn = document.getElementById("nfBtnConfirmar");
-  btn.textContent = "⏳ Salvando..."; btn.disabled = true;
-
-  try {
-    const mapa = NF_MAPA[fornecedor];
-    const extraido = _nfState.dadosExtraidos;
-    const agora = new Date();
-    const mes = agora.toLocaleString('pt-BR', { month: 'long' });
-    const mesAno = String(agora.getMonth()+1).padStart(2,'0') + '/' + agora.getFullYear();
-
-    // Converter arquivos para base64
-    const arquivosB64 = await Promise.all(_nfState.arquivos.map(async f => {
-      const b64 = await new Promise((res,rej) => {
-        const r = new FileReader();
-        r.onload = e => res(e.target.result.split(",")[1]);
-        r.onerror = rej;
-        r.readAsDataURL(f);
-      });
-      return { nome: f.name, base64: b64 };
-    }));
-
-    // Chamar backend Apps Script
-    const payload = {
-      acao: "processarNF",
-      chave: NF_CHAVE,
-      fornecedor,
-      unidade,
-      andar,
-      numeroNF: extraido.numero_nf || "",
-      valor: extraido.valor || "",
-      dataEmissao: extraido.data_emissao || "",
-      dataVencimento: dataVenc || "",
-      categoriaKamino: mapa.kamino,
-      categoriaPlanilha: mapa.planilha,
-      formaPagamento: mapa.pgto,
-      contrato: mapa.contrato,
-      comentario,
-      mes,
-      mesAno,
-      arquivos: arquivosB64,
-    };
-
-    const data = await nfFetch(payload);
-
-    if(data.sucesso) {
-      renderNFSucesso(data);
-    } else {
-      throw new Error(data.mensagem || "Erro desconhecido");
-    }
-  } catch(e) {
-    btn.textContent = "✅ Confirmar e lançar";
-    btn.disabled = false;
-    alert("❌ Erro: " + e.message);
-  }
-}
-
-function renderNFSucesso(data) {
-  const body = document.getElementById("nfModalBody");
-  body.innerHTML = `
-    <div style="text-align:center;padding:20px 0">
-      <div style="font-size:48px;margin-bottom:16px">✅</div>
-      <div style="font-size:18px;font-weight:800;color:var(--tx);margin-bottom:8px">NF lançada com sucesso!</div>
-      <div style="font-size:13px;color:var(--tm);margin-bottom:20px">Planilha atualizada e arquivos salvos no Drive</div>
-      <div style="background:var(--s2);border:1px solid var(--b1);border-radius:10px;padding:14px;text-align:left;margin-bottom:20px">
-        <div style="font-size:11px;color:var(--td);margin-bottom:4px">Pasta no Drive</div>
-        <a href="${data.linkPasta}" target="_blank" style="font-size:13px;color:var(--v1);font-weight:600;word-break:break-all">${data.nomePasta}</a>
-      </div>
-      <button onclick="abrirPortalNF()" style="width:100%;padding:12px;border-radius:10px;background:var(--v);color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;font-family:'Outfit',sans-serif;margin-bottom:8px">
-        📄 Lançar outra NF
-      </button>
-      <button onclick="fecharPortalNF()" style="width:100%;padding:10px;border-radius:10px;background:none;color:var(--tm);border:1px solid var(--b1);font-size:13px;cursor:pointer;font-family:'Outfit',sans-serif">
-        Fechar
-      </button>
-    </div>
-  `;
 }
 
 // ── INICIALIZAR ───────────────────────────────────────────────
@@ -1386,7 +819,6 @@ loadClima();
 loadFeriados();
 loadZoho();
 initDeludaPreview();
-
 </script>
 </body>
 </html>
