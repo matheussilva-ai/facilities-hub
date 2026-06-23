@@ -163,7 +163,7 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
           <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--td);margin-bottom:6px;">Calendário</div>
           <div id="quarterCalendar" style="display:flex;flex-direction:column;gap:2px;"></div>
         </div>
-        <div class="wf"><div style="display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Romário · Técnico 2</div></div>
+        <div class="wf"><div style="display:flex;align-items:center;gap:5px;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Romário · Gomes</div></div>
       </div>
       <div class="card cw" id="prevCard">
         <div class="wh"><div class="wi io">🔧</div><div><div class="wt">Manutenções Preventivas</div><div class="ws">Serviços recorrentes · <span id="prevLastUpdate" style="color:var(--td);"></span></div></div></div>
@@ -339,7 +339,7 @@ function fmt(d){return String(d.getDate()).padStart(2,'0')+'/'+String(d.getMonth
 function buildWeekDetail(wtype, monday){
   const s=SCHEDULE[wtype];
   const colors={romario:'var(--v1)',roger:'var(--t1)'};
-  const names={romario:'Romário',roger:'Técnico 2'};
+  const names={romario:'Romário',roger:'Gomes'};
   let html='<div style="display:grid;gap:10px;padding:10px 0 4px;">';
   ['romario','roger'].forEach((tech,ti)=>{
     const info=s[tech];
@@ -380,7 +380,7 @@ function initSchedule(){
       tecContent.innerHTML='<div style="font-size:10px;color:var(--tm);font-weight:600;">'+DAYS_PT[todayIdx]+' '+dataFmt+'</div>'+
         '<div style="display:flex;gap:10px;">'+
         '<span style="font-size:11px;font-weight:600;"><span style="color:var(--v1);">Romário</span> <span style="color:var(--tx);opacity:.85;">'+locR+'</span></span>'+
-        '<span style="font-size:11px;font-weight:600;"><span style="color:var(--t1);">Técnico 2</span> <span style="color:var(--tx);opacity:.85;">'+locG+'</span></span>'+
+        '<span style="font-size:11px;font-weight:600;"><span style="color:var(--t1);">Gomes</span> <span style="color:var(--tx);opacity:.85;">'+locG+'</span></span>'+
         '</div>';
     }
   }
@@ -392,7 +392,7 @@ function initSchedule(){
   if(hojeLabel) hojeLabel.textContent=dataHoje;
   if(isWeekday){
     ['romario','roger'].forEach((tech,ti)=>{
-      const color=tech==='romario'?'var(--v1)':'var(--t1)';const name=tech==='romario'?'Romário':'Técnico 2';
+      const color=tech==='romario'?'var(--v1)':'var(--t1)';const name=tech==='romario'?'Romário':'Gomes';
       const local=s[tech].dias[todayIdx];const isFlex=local==='Dia flex';
       const row=document.createElement('div');
       row.style.cssText='display:flex;align-items:center;justify-content:space-between;font-size:12px;'+(ti>0?'margin-top:7px;padding-top:7px;border-top:1px solid rgba(110,105,173,.12);':'');
