@@ -8,217 +8,120 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 :root {
-  --bg: #0f0f13;
-  --surface: #18181f;
-  --surface2: #1e1e28;
-  --border: #2a2a38;
-  --text: #e8e8f0;
-  --muted: #6b6b80;
-  --accent: #7c5cfc;
-  --accent-dim: rgba(124,92,252,0.12);
-  --green: #22c55e;
-  --green-dim: rgba(34,197,94,0.12);
-  --red: #ef4444;
-  --red-dim: rgba(239,68,68,0.12);
-  --yellow: #f59e0b;
-  --yellow-dim: rgba(245,158,11,0.12);
-  --blue: #3b82f6;
-  --blue-dim: rgba(59,130,246,0.12);
-  --pink: #ec4899;
-  --pink-dim: rgba(236,72,153,0.12);
+  --bg: #0f0f13; --surface: #18181f; --surface2: #1e1e28; --border: #2a2a38;
+  --text: #e8e8f0; --muted: #6b6b80; --accent: #7c5cfc; --accent-dim: rgba(124,92,252,0.12);
+  --green: #22c55e; --green-dim: rgba(34,197,94,0.12);
+  --red: #ef4444; --red-dim: rgba(239,68,68,0.12);
+  --yellow: #f59e0b; --yellow-dim: rgba(245,158,11,0.12);
+  --blue: #3b82f6; --blue-dim: rgba(59,130,246,0.12);
+  --pink: #ec4899; --pink-dim: rgba(236,72,153,0.12);
+  --orange: #f97316; --orange-dim: rgba(249,115,22,0.12);
+  --teal: #14b8a6; --teal-dim: rgba(20,184,166,0.12);
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; padding: 28px 20px 48px; max-width: 1060px; margin: 0 auto; }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  min-height: 100vh;
-  padding: 28px 20px 48px;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
-.page-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 28px;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.header-left .eyebrow {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 4px;
-}
-
-.header-left h1 { font-size: 22px; font-weight: 700; color: #fff; }
-
+/* HEADER */
+.page-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px; gap: 16px; flex-wrap: wrap; }
+.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+h1 { font-size: 22px; font-weight: 700; color: #fff; }
 .month-selector { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-
-.month-btn {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 5px 11px;
-  font-size: 11px;
-  font-family: 'JetBrains Mono', monospace;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
-}
+.month-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 11px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--muted); cursor: pointer; transition: all 0.15s; }
 .month-btn:hover { color: var(--text); border-color: var(--accent); }
 .month-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); font-weight: 600; }
 
-.loading-overlay {
-  display: flex; flex-direction: column; align-items: center;
-  justify-content: center; padding: 80px 20px; gap: 16px; color: var(--muted);
-}
-
-.spinner {
-  width: 32px; height: 32px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
+/* LOADING */
+.loading-overlay { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; gap: 16px; color: var(--muted); }
+.spinner { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-.kpi-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 14px;
-  margin-bottom: 28px;
-}
-
-.kpi-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
-  transition: border-color 0.2s;
-}
-.kpi-card:hover { border-color: rgba(124,92,252,0.3); }
-.kpi-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  border-radius: 12px 12px 0 0;
-}
-.kpi-card.sla::before { background: var(--green); }
-.kpi-card.csat::before { background: var(--blue); }
-.kpi-card.tipo::before { background: var(--yellow); }
-.kpi-card.reabertos::before { background: var(--pink); }
-
-.kpi-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px; }
-
-.kpi-value {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 36px; font-weight: 600; line-height: 1; margin-bottom: 6px;
-}
-.kpi-card.sla .kpi-value { color: var(--green); }
-.kpi-card.csat .kpi-value { color: var(--blue); }
-.kpi-card.tipo .kpi-value { color: var(--yellow); }
-.kpi-card.reabertos .kpi-value { color: var(--pink); }
+/* TOP KPI CARDS */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; position: relative; overflow: hidden; }
+.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 12px 12px 0 0; }
+.kpi-card.c-sla::before { background: var(--green); }
+.kpi-card.c-csat::before { background: var(--blue); }
+.kpi-card.c-total::before { background: var(--accent); }
+.kpi-card.c-fora::before { background: var(--red); }
+.kpi-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+.kpi-value { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; line-height: 1; margin-bottom: 5px; }
+.kpi-card.c-sla .kpi-value { color: var(--green); }
+.kpi-card.c-csat .kpi-value { color: var(--blue); }
+.kpi-card.c-total .kpi-value { color: var(--accent); }
+.kpi-card.c-fora .kpi-value { color: var(--red); }
 .kpi-value.bad { color: var(--red) !important; }
 .kpi-value.warn { color: var(--yellow) !important; }
+.kpi-sub { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-family: 'JetBrains Mono', monospace; padding: 2px 7px; border-radius: 4px; margin-top: 7px; }
+.badge.ok { background: var(--green-dim); color: var(--green); }
+.badge.bad { background: var(--red-dim); color: var(--red); }
+.badge.warn { background: var(--yellow-dim); color: var(--yellow); }
+.badge.info { background: var(--accent-dim); color: var(--accent); }
 
-.kpi-sub { font-size: 12px; color: var(--muted); line-height: 1.4; }
+/* CATEGORIA TABS */
+.cat-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
+.cat-tab { display: flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-size: 12px; font-weight: 500; color: var(--muted); transition: all 0.15s; font-family: 'Inter', sans-serif; }
+.cat-tab:hover { border-color: var(--accent); color: var(--text); }
+.cat-tab.active { color: #fff; }
+.cat-tab .count { font-family: 'JetBrains Mono', monospace; font-size: 10px; opacity: 0.7; }
+.cat-tab.t-manut.active { background: rgba(239,68,68,0.15); border-color: var(--red); color: var(--red); }
+.cat-tab.t-limp.active  { background: rgba(20,184,166,0.15); border-color: var(--teal); color: var(--teal); }
+.cat-tab.t-comp.active  { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
+.cat-tab.t-outro.active { background: rgba(107,114,128,0.15); border-color: #6b7280; color: #9ca3af; }
+.cat-tab.t-melh.active  { background: rgba(59,130,246,0.15); border-color: var(--blue); color: var(--blue); }
+.cat-tab.t-all.active   { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
 
-.kpi-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  font-size: 10px; font-family: 'JetBrains Mono', monospace;
-  padding: 2px 7px; border-radius: 4px; margin-top: 8px;
-}
-.kpi-badge.ok { background: var(--green-dim); color: var(--green); }
-.kpi-badge.bad { background: var(--red-dim); color: var(--red); }
-.kpi-badge.warn { background: var(--yellow-dim); color: var(--yellow); }
-.kpi-badge.info { background: var(--blue-dim); color: var(--blue); }
+/* CAT KPI ROW */
+.cat-kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.cat-kpi { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.cat-kpi-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
+.cat-kpi-val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; }
+.cat-kpi-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
 
-.section {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 14px;
-}
-
-.section-title {
-  font-size: 13px; font-weight: 600; color: var(--text);
-  margin-bottom: 16px; display: flex; align-items: center; gap: 8px;
-}
+/* SECTION */
+.section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 14px; }
+.section-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
 .section-title .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 
-.month-chart {
-  display: flex; align-items: flex-end; gap: 8px;
-  height: 100px; padding: 0 4px;
-}
+/* TIPO BARS */
+.tipo-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
+.tipo-item { background: var(--surface2); border-radius: 8px; padding: 12px; text-align: center; }
+.tipo-num { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 600; margin-bottom: 3px; }
+.tipo-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.tipo-item.corr .tipo-num { color: var(--red); }
+.tipo-item.prev .tipo-num { color: var(--green); }
 
-.bar-col {
-  flex: 1; display: flex; flex-direction: column;
-  align-items: center; gap: 4px; height: 100%; justify-content: flex-end;
-}
-.bar-val { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
-.bar-fill { width: 100%; border-radius: 4px 4px 0 0; min-height: 4px; transition: height 0.5s ease; }
-.bar-fill.verde { background: var(--green); opacity: 0.85; }
-.bar-fill.verde.bad { background: var(--red); }
-.bar-fill.verde.warn { background: var(--yellow); }
+/* MONTH CHART */
+.month-chart { display: flex; align-items: flex-end; gap: 8px; height: 90px; padding: 0 2px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+.bar-val { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); }
+.bar-fill { width: 100%; border-radius: 4px 4px 0 0; min-height: 3px; transition: height 0.5s ease; }
 .bar-lbl { font-size: 9px; color: var(--muted); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
 
-.tipo-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.tipo-item { background: var(--surface2); border-radius: 8px; padding: 14px; text-align: center; }
-.tipo-num { font-family: 'JetBrains Mono', monospace; font-size: 28px; font-weight: 600; margin-bottom: 4px; }
-.tipo-lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-.tipo-item.corretiva .tipo-num { color: var(--red); }
-.tipo-item.preventiva .tipo-num { color: var(--green); }
-
+/* GRID */
 .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
 
+/* TABLE */
 .mini-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.mini-table th {
-  text-align: left; color: var(--muted); font-size: 10px;
-  text-transform: uppercase; letter-spacing: 0.08em;
-  padding: 6px 8px; border-bottom: 1px solid var(--border); font-weight: 500;
-}
+.mini-table th { text-align: left; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; padding: 6px 8px; border-bottom: 1px solid var(--border); font-weight: 500; }
 .mini-table td { padding: 8px; border-bottom: 1px solid rgba(42,42,56,0.5); vertical-align: middle; }
 .mini-table tr:last-child td { border-bottom: none; }
 .mini-table tr:hover td { background: rgba(124,92,252,0.04); }
-
-.pill {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 2px 8px; border-radius: 4px;
-  font-size: 10px; font-family: 'JetBrains Mono', monospace;
-}
+.pill { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-family: 'JetBrains Mono', monospace; }
 .pill.ok { background: var(--green-dim); color: var(--green); }
 .pill.bad { background: var(--red-dim); color: var(--red); }
-
 .tic-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
 
-.note {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: 0 8px 8px 0;
-  padding: 10px 14px;
-  font-size: 12px; color: var(--muted);
-  margin-top: 14px; line-height: 1.5;
-}
+/* NOTE */
+.note { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
+.last-update { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 24px; }
 
-.last-update {
-  text-align: center;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px; color: var(--muted); margin-top: 24px;
-}
+/* VOLUME POR CATEGORIA */
+.vol-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 12px; }
+.vol-bar-label { min-width: 90px; color: var(--text); font-weight: 500; }
+.vol-bar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+.vol-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.vol-bar-num { min-width: 30px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
 
 @media (max-width: 600px) {
   .grid2 { grid-template-columns: 1fr; }
@@ -230,7 +133,7 @@ body {
 <body>
 
 <div class="page-header">
-  <div class="header-left">
+  <div>
     <div class="eyebrow">Genial Care · Facilities</div>
     <h1>KPIs & Indicadores</h1>
   </div>
@@ -244,70 +147,78 @@ body {
 
 <div id="content" style="display:none">
 
+  <!-- TOP KPI CARDS -->
   <div class="kpi-grid">
-    <div class="kpi-card sla">
-      <div class="kpi-label">SLA — % concluídos no prazo</div>
-      <div class="kpi-value" id="slaPercent">—</div>
-      <div class="kpi-sub" id="slaSub">—</div>
-      <div id="slaBadge"></div>
+    <div class="kpi-card c-total">
+      <div class="kpi-label">Total de tickets</div>
+      <div class="kpi-value" id="topTotal">—</div>
+      <div class="kpi-sub" id="topTotalSub">no período</div>
     </div>
-    <div class="kpi-card csat">
-      <div class="kpi-label">CSAT manutenção</div>
-      <div class="kpi-value" id="csatVal">100%</div>
-      <div class="kpi-sub" id="csatSub">81 respostas · todas "Bom"</div>
-      <span class="kpi-badge ok">✓ Excelente</span>
+    <div class="kpi-card c-sla">
+      <div class="kpi-label">SLA — % no prazo</div>
+      <div class="kpi-value" id="topSla">—</div>
+      <div class="kpi-sub" id="topSlaSub">—</div>
+      <div id="topSlaBadge"></div>
     </div>
-    <div class="kpi-card tipo">
-      <div class="kpi-label">Corretivas vs. Preventivas</div>
-      <div class="kpi-value" id="tipoVal">—</div>
-      <div class="kpi-sub" id="tipoSub">—</div>
+    <div class="kpi-card c-csat">
+      <div class="kpi-label">CSAT</div>
+      <div class="kpi-value" id="topCsat">100%</div>
+      <div class="kpi-sub">81 respostas · todas "Bom"</div>
+      <span class="badge ok">✓ Excelente</span>
     </div>
-    <div class="kpi-card reabertos">
+    <div class="kpi-card c-fora">
       <div class="kpi-label">Encerrados fora do prazo</div>
-      <div class="kpi-value" id="reabVal">—</div>
-      <div class="kpi-sub" id="reabSub">—</div>
+      <div class="kpi-value" id="topFora">—</div>
+      <div class="kpi-sub" id="topForaSub">—</div>
     </div>
   </div>
 
+  <!-- VOLUME POR CATEGORIA -->
+  <div class="section" style="margin-bottom:20px;">
+    <div class="section-title">
+      <span class="dot" style="background:var(--accent)"></span>
+      Volume por categoria
+    </div>
+    <div id="volBars"></div>
+  </div>
+
+  <!-- TABS DE CATEGORIA -->
+  <div class="cat-tabs" id="catTabs"></div>
+
+  <!-- KPIs DA CATEGORIA SELECIONADA -->
+  <div class="cat-kpi-row" id="catKpiRow"></div>
+
+  <!-- GRÁFICOS -->
   <div class="grid2">
     <div class="section">
       <div class="section-title">
-        <span class="dot" style="background:var(--green)"></span>
-        SLA % por mês (tickets fechados)
+        <span class="dot" style="background:var(--green)" id="chartDot1"></span>
+        <span id="chartTitle1">SLA % por mês</span>
       </div>
       <div id="slaMonthChart" class="month-chart"></div>
     </div>
     <div class="section">
       <div class="section-title">
         <span class="dot" style="background:var(--yellow)"></span>
-        Corretiva (vermelho) vs. Preventiva (verde)
+        Corretiva (🔴) vs. Preventiva (🟢) — Manutenção
       </div>
       <div class="tipo-bars">
-        <div class="tipo-item corretiva">
-          <div class="tipo-num" id="corrNum">—</div>
-          <div class="tipo-lbl">Corretivas</div>
-        </div>
-        <div class="tipo-item preventiva">
-          <div class="tipo-num" id="prevNum">—</div>
-          <div class="tipo-lbl">Preventivas</div>
-        </div>
+        <div class="tipo-item corr"><div class="tipo-num" id="corrNum">—</div><div class="tipo-lbl">Corretivas</div></div>
+        <div class="tipo-item prev"><div class="tipo-num" id="prevNum">—</div><div class="tipo-lbl">Preventivas</div></div>
       </div>
-      <div id="tipoMonthChart" class="month-chart" style="margin-top:16px"></div>
+      <div id="tipoMonthChart" class="month-chart" style="margin-top:12px"></div>
     </div>
   </div>
 
+  <!-- TABELA SLA VIOLADO -->
   <div class="section">
     <div class="section-title">
       <span class="dot" style="background:var(--red)"></span>
-      Tickets encerrados fora do prazo (SLA violado)
+      Tickets encerrados fora do prazo — <span id="slaTableCat">todas as categorias</span>
     </div>
     <table class="mini-table">
-      <thead><tr>
-        <th>#</th><th>Assunto</th><th>Unidade</th><th>Encerrado</th><th>Prazo era</th><th>Atraso</th>
-      </tr></thead>
-      <tbody id="slaVioladoBody">
-        <tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px">Carregando…</td></tr>
-      </tbody>
+      <thead><tr><th>#</th><th>Assunto</th><th>Categoria</th><th>Encerrado</th><th>Prazo era</th><th>Atraso</th></tr></thead>
+      <tbody id="slaVioladoBody"></tbody>
     </table>
   </div>
 
@@ -316,34 +227,55 @@ body {
 </div>
 
 <script>
-// ─── CONFIG ───
-const FACILITIES_EMAILS = [
-  'marina.cesar',
-  'eliza.vernizzi',
-  'elaine.samiti',
-  'maria.luiza.biano',
-  'matheus.silva',
-  'facilities@genialcare',
-  'zoho-facilities@genialcare',
-];
+// ─── CATEGORIAS ───────────────────────────────────────────────
+const CATS = {
+  manut: {
+    label: 'Manutenção', emoji: '🔧', cls: 't-manut', color: 'var(--red)',
+    motivos: ['manutenção', 'segurança', 'estacionamento']
+  },
+  limp: {
+    label: 'Limpeza', emoji: '🧹', cls: 't-limp', color: 'var(--teal)',
+    motivos: ['limpeza']
+  },
+  comp: {
+    label: 'Compras', emoji: '🛒', cls: 't-comp', color: 'var(--orange)',
+    motivos: ['compras']
+  },
+  outro: {
+    label: 'Uniforme / Crachá', emoji: '🪪', cls: 't-outro', color: '#9ca3af',
+    motivos: ['uniforme', 'crachá genial care']
+  },
+  melh: {
+    label: 'Melhorias', emoji: '✨', cls: 't-melh', color: 'var(--blue)',
+    motivos: ['melhorias e outros assuntos']
+  },
+};
+
+// ─── EQUIPE FACILITIES (preventivas) ─────────────────────────
+const FAC_EMAILS = ['marina.cesar','eliza.vernizzi','elaine.samiti','maria.luiza.biano','matheus.silva','facilities@genialcare','zoho-facilities@genialcare'];
 
 const MONTHS = [
-  { key: '2026-01', label: 'Jan' },
-  { key: '2026-02', label: 'Fev' },
-  { key: '2026-03', label: 'Mar' },
-  { key: '2026-04', label: 'Abr' },
-  { key: '2026-05', label: 'Mai' },
-  { key: '2026-06', label: 'Jun' },
-  { key: '2026-07', label: 'Jul' },
+  {key:'2026-01',label:'Jan'},{key:'2026-02',label:'Fev'},{key:'2026-03',label:'Mar'},
+  {key:'2026-04',label:'Abr'},{key:'2026-05',label:'Mai'},{key:'2026-06',label:'Jun'},
+  {key:'2026-07',label:'Jul'},
 ];
 
 let allTickets = [];
 let selectedMonth = null;
+let selectedCat = 'all';
 
-// ─── HELPERS ───
+// ─── HELPERS ─────────────────────────────────────────────────
+function getCat(t) {
+  const motivo = (t.cf?.cf_motivo_da_solicitacao || '').toLowerCase().trim();
+  for (const [key, cat] of Object.entries(CATS)) {
+    if (cat.motivos.some(m => motivo.includes(m))) return key;
+  }
+  return 'outro';
+}
+
 function isPreventiva(t) {
-  const email = (t.contact?.email || '').toLowerCase();
-  return FACILITIES_EMAILS.some(e => email.includes(e));
+  const email = (t.contact?.email || t.email || '').toLowerCase();
+  return FAC_EMAILS.some(e => email.includes(e));
 }
 
 function monthOf(d) { return d ? d.slice(0, 7) : null; }
@@ -351,7 +283,7 @@ function monthOf(d) { return d ? d.slice(0, 7) : null; }
 function fmtDate(d) {
   if (!d) return '—';
   const dt = new Date(d);
-  return dt.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: '2-digit' });
+  return dt.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', year:'2-digit'});
 }
 
 function calcSLA(tickets) {
@@ -363,47 +295,148 @@ function calcSLA(tickets) {
   return { comSLA, noPrazo, foraP, semSLA, pct };
 }
 
-// ─── RENDER KPI CARDS ───
-function renderKPIs(tickets) {
-  // SLA
+function filterTickets() {
+  let t = allTickets;
+  if (selectedMonth) t = t.filter(x => monthOf(x.createdTime) === selectedMonth);
+  if (selectedCat !== 'all') t = t.filter(x => getCat(x) === selectedCat);
+  return t;
+}
+
+// ─── RENDER TOP KPIs ─────────────────────────────────────────
+function renderTop(tickets) {
   const { comSLA, noPrazo, foraP, semSLA, pct } = calcSLA(tickets);
-  const slaEl = document.getElementById('slaPercent');
+
+  // Total
+  document.getElementById('topTotal').textContent = tickets.length;
+  document.getElementById('topTotalSub').textContent = selectedCat === 'all'
+    ? 'todas as categorias' : CATS[selectedCat]?.label || '';
+
+  // SLA
+  const slaEl = document.getElementById('topSla');
   slaEl.textContent = pct !== null ? `${pct}%` : '—';
-  slaEl.className   = 'kpi-value' + (pct === null ? '' : pct >= 80 ? '' : pct >= 60 ? ' warn' : ' bad');
-  document.getElementById('slaSub').textContent = pct !== null
-    ? `${noPrazo.length} no prazo · ${foraP.length} atrasados · ${comSLA.length} c/ SLA`
-    : 'Nenhum ticket com SLA no período';
-  const slaBadge = document.getElementById('slaBadge');
+  slaEl.className = 'kpi-value' + (pct === null ? '' : pct >= 80 ? '' : pct >= 60 ? ' warn' : ' bad');
+  document.getElementById('topSlaSub').textContent = pct !== null
+    ? `${noPrazo.length} no prazo · ${foraP.length} atrasados de ${comSLA.length}`
+    : 'Sem SLA configurado no período';
+  const badge = document.getElementById('topSlaBadge');
   if (pct !== null) {
     const cls = pct >= 80 ? 'ok' : pct >= 60 ? 'warn' : 'bad';
     const txt = pct >= 80 ? '✓ Meta atingida' : pct >= 60 ? '⚠ Atenção' : '✗ Abaixo da meta';
-    slaBadge.innerHTML = `<span class="kpi-badge ${cls}">${txt}</span>`;
+    badge.innerHTML = `<span class="badge ${cls}">${txt}</span>`;
   } else {
-    slaBadge.innerHTML = '<span class="kpi-badge info">ℹ SLA ativo desde jun/2026</span>';
+    badge.innerHTML = '<span class="badge info">ℹ SLA ativo desde jun/2026</span>';
   }
 
-  // Tipo
-  const prev = tickets.filter(isPreventiva).length;
-  const corr = tickets.length - prev;
-  const ratioCorr = tickets.length ? Math.round((corr / tickets.length) * 100) : 0;
-  document.getElementById('tipoVal').textContent = `${ratioCorr}%`;
-  document.getElementById('tipoSub').textContent = `corretivas · ${100 - ratioCorr}% preventivas`;
-  document.getElementById('corrNum').textContent = corr;
-  document.getElementById('prevNum').textContent = prev;
-
-  // Encerrados fora do prazo
-  const foraGeral = tickets.filter(t => t.isOverDue && t.closedTime).length;
-  document.getElementById('reabVal').textContent = foraGeral;
-  document.getElementById('reabSub').textContent = foraGeral === 0
-    ? 'Todos encerrados dentro do prazo'
-    : 'tickets encerrados após vencimento';
-
-  renderSLAChart(allTickets);
-  renderTipoChart(allTickets);
-  renderSLATable(tickets);
+  // Fora do prazo
+  document.getElementById('topFora').textContent = foraP.length;
+  document.getElementById('topForaSub').textContent = foraP.length === 0
+    ? 'Todos no prazo ✓' : `tickets atrasados`;
 }
 
-// ─── GRÁFICO SLA POR MÊS ───
+// ─── VOLUME POR CATEGORIA ─────────────────────────────────────
+function renderVolume(tickets) {
+  const el = document.getElementById('volBars');
+  el.innerHTML = '';
+  const counts = {};
+  tickets.forEach(t => {
+    const c = getCat(t);
+    counts[c] = (counts[c] || 0) + 1;
+  });
+  const max = Math.max(...Object.values(counts), 1);
+  const colors = {
+    manut:'var(--red)', limp:'var(--teal)', comp:'var(--orange)',
+    outro:'#6b7280', melh:'var(--blue)'
+  };
+  Object.entries(CATS).forEach(([key, cat]) => {
+    const n = counts[key] || 0;
+    const pct = Math.round((n / tickets.length) * 100) || 0;
+    const row = document.createElement('div');
+    row.className = 'vol-bar-row';
+    row.innerHTML = `
+      <div class="vol-bar-label">${cat.emoji} ${cat.label}</div>
+      <div class="vol-bar-track">
+        <div class="vol-bar-fill" style="width:${(n/max)*100}%;background:${colors[key]};opacity:0.7;"></div>
+      </div>
+      <div class="vol-bar-num">${n} <span style="opacity:.5;font-size:9px">(${pct}%)</span></div>`;
+    el.appendChild(row);
+  });
+}
+
+// ─── TABS DE CATEGORIA ────────────────────────────────────────
+function buildCatTabs() {
+  const c = document.getElementById('catTabs');
+  c.innerHTML = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-tab t-all' + (selectedCat === 'all' ? ' active' : '');
+  allBtn.innerHTML = '📋 Todas <span class="count"></span>';
+  allBtn.onclick = () => { selectedCat = 'all'; refresh(); };
+  c.appendChild(allBtn);
+
+  Object.entries(CATS).forEach(([key, cat]) => {
+    const btn = document.createElement('button');
+    btn.className = `cat-tab ${cat.cls}` + (selectedCat === key ? ' active' : '');
+    btn.innerHTML = `${cat.emoji} ${cat.label} <span class="count" id="tabCount-${key}"></span>`;
+    btn.onclick = () => { selectedCat = key; refresh(); };
+    c.appendChild(btn);
+  });
+}
+
+function updateTabCounts(tickets) {
+  const counts = {};
+  tickets.forEach(t => { const c = getCat(t); counts[c] = (counts[c]||0)+1; });
+  document.querySelectorAll('.cat-tab').forEach(btn => {
+    if (btn.classList.contains('t-all')) {
+      btn.querySelector('.count').textContent = tickets.length;
+    }
+  });
+  Object.keys(CATS).forEach(key => {
+    const el = document.getElementById(`tabCount-${key}`);
+    if (el) el.textContent = counts[key] || 0;
+  });
+}
+
+// ─── CAT KPI ROW ─────────────────────────────────────────────
+function renderCatKpis(tickets) {
+  const el = document.getElementById('catKpiRow');
+  el.innerHTML = '';
+  const { pct, noPrazo, comSLA, foraP } = calcSLA(tickets);
+
+  if (selectedCat === 'manut') {
+    // Corretivas vs preventivas só para manutenção
+    const prev = tickets.filter(isPreventiva).length;
+    const corr = tickets.length - prev;
+    const pctCorr = tickets.length ? Math.round((corr/tickets.length)*100) : 0;
+    addCatKpi(el, 'Corretivas', corr, `${pctCorr}% do total`, 'var(--red)');
+    addCatKpi(el, 'Preventivas', prev, `${100-pctCorr}% do total`, 'var(--green)');
+  }
+
+  // SLA sempre
+  addCatKpi(el, 'SLA — no prazo',
+    pct !== null ? `${pct}%` : '—',
+    pct !== null ? `${noPrazo.length}/${comSLA.length} tickets` : 'sem SLA',
+    pct === null ? 'var(--muted)' : pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)'
+  );
+  addCatKpi(el, 'Fora do prazo', foraP.length,
+    foraP.length === 0 ? 'todos no prazo ✓' : 'tickets atrasados',
+    foraP.length === 0 ? 'var(--green)' : 'var(--red)'
+  );
+  addCatKpi(el, 'Total', tickets.length,
+    selectedCat === 'all' ? 'todas as categorias' : CATS[selectedCat]?.label || '',
+    'var(--accent)'
+  );
+}
+
+function addCatKpi(container, label, value, sub, color) {
+  const d = document.createElement('div');
+  d.className = 'cat-kpi';
+  d.innerHTML = `<div class="cat-kpi-lbl">${label}</div>
+    <div class="cat-kpi-val" style="color:${color}">${value}</div>
+    <div class="cat-kpi-sub">${sub}</div>`;
+  container.appendChild(d);
+}
+
+// ─── GRÁFICO SLA POR MÊS ─────────────────────────────────────
 function renderSLAChart(tickets) {
   const el = document.getElementById('slaMonthChart');
   el.innerHTML = '';
@@ -419,57 +452,65 @@ function renderSLAChart(tickets) {
   const maxT = Math.max(...Object.values(byM).map(v => v.total), 1);
   MONTHS.forEach(mo => {
     const d = byM[mo.key];
-    const pct = d.total ? Math.round((d.ok / d.total) * 100) : null;
-    const hPct = d.total ? (d.total / maxT) * 100 : 0;
-    const col = document.createElement('div'); col.className = 'bar-col';
-    const val = document.createElement('div'); val.className = 'bar-val';
-    val.textContent = pct !== null ? `${pct}%` : '—';
-    const fill = document.createElement('div');
-    fill.className = 'bar-fill verde' + (pct === null ? '' : pct >= 80 ? '' : pct >= 60 ? ' warn' : ' bad');
-    fill.style.height = `${Math.max(hPct, 4)}%`;
+    const pct = d.total ? Math.round((d.ok/d.total)*100) : null;
+    const hPct = d.total ? (d.total/maxT)*100 : 0;
+    const col = pct === null ? 'var(--border)' : pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)';
+    const barCol = document.createElement('div'); barCol.className = 'bar-col';
+    const val = document.createElement('div'); val.className = 'bar-val'; val.textContent = pct !== null ? `${pct}%` : '—';
+    const fill = document.createElement('div'); fill.className = 'bar-fill';
+    fill.style.cssText = `height:${Math.max(hPct,3)}%;background:${col};opacity:0.85;`;
     fill.title = `${mo.label}: ${d.ok}/${d.total} no prazo`;
     const lbl = document.createElement('div'); lbl.className = 'bar-lbl'; lbl.textContent = mo.label;
-    col.appendChild(val); col.appendChild(fill); col.appendChild(lbl);
-    el.appendChild(col);
+    barCol.appendChild(val); barCol.appendChild(fill); barCol.appendChild(lbl);
+    el.appendChild(barCol);
   });
 }
 
-// ─── GRÁFICO TIPO POR MÊS ───
-function renderTipoChart(tickets) {
-  const el = document.getElementById('tipoMonthChart');
-  el.innerHTML = '';
+// ─── GRÁFICO TIPO (só manutenção) ────────────────────────────
+function renderTipoChart(allT) {
+  // Sempre usa só manutenção para corretiva/preventiva
+  const manut = allT.filter(t => getCat(t) === 'manut');
   const byM = {};
   MONTHS.forEach(m => { byM[m.key] = { total: 0, prev: 0 }; });
-  tickets.forEach(t => {
+  manut.forEach(t => {
     const m = monthOf(t.createdTime);
     if (!byM[m]) return;
     byM[m].total++;
     if (isPreventiva(t)) byM[m].prev++;
   });
   const maxT = Math.max(...Object.values(byM).map(v => v.total), 1);
+
+  // Contadores totais
+  const totalManut = manut.length;
+  const totalPrev  = manut.filter(isPreventiva).length;
+  document.getElementById('corrNum').textContent = totalManut - totalPrev;
+  document.getElementById('prevNum').textContent = totalPrev;
+
+  const el = document.getElementById('tipoMonthChart');
+  el.innerHTML = '';
   MONTHS.forEach(mo => {
     const d = byM[mo.key];
-    const hPct = d.total ? (d.total / maxT) * 100 : 0;
-    const prevPct = d.total ? Math.round((d.prev / d.total) * 100) : 0;
-    const col = document.createElement('div'); col.className = 'bar-col';
-    const val = document.createElement('div'); val.className = 'bar-val';
-    val.textContent = d.total || '—';
+    const hPct = d.total ? (d.total/maxT)*100 : 0;
+    const prevPct = d.total ? Math.round((d.prev/d.total)*100) : 0;
+    const barCol = document.createElement('div'); barCol.className = 'bar-col';
+    const val = document.createElement('div'); val.className = 'bar-val'; val.textContent = d.total || '—';
     const fill = document.createElement('div'); fill.className = 'bar-fill';
-    fill.style.height = `${Math.max(hPct, 4)}%`;
-    fill.style.background = `linear-gradient(to top, var(--green) ${prevPct}%, var(--red) ${prevPct}%)`;
-    fill.title = `${mo.label}: ${d.total} tickets (${d.prev} preventivas, ${d.total - d.prev} corretivas)`;
+    fill.style.cssText = `height:${Math.max(hPct,3)}%;background:linear-gradient(to top, var(--green) ${prevPct}%, var(--red) ${prevPct}%);`;
+    fill.title = `${mo.label}: ${d.total} total (${d.prev} prev, ${d.total-d.prev} corr)`;
     const lbl = document.createElement('div'); lbl.className = 'bar-lbl'; lbl.textContent = mo.label;
-    col.appendChild(val); col.appendChild(fill); col.appendChild(lbl);
-    el.appendChild(col);
+    barCol.appendChild(val); barCol.appendChild(fill); barCol.appendChild(lbl);
+    el.appendChild(barCol);
   });
 }
 
-// ─── TABELA SLA VIOLADO ───
+// ─── TABELA SLA VIOLADO ───────────────────────────────────────
 function renderSLATable(tickets) {
   const body = document.getElementById('slaVioladoBody');
   const note = document.getElementById('slaNote');
-  const { foraP, semSLA } = calcSLA(tickets);
+  const catLabel = document.getElementById('slaTableCat');
+  catLabel.textContent = selectedCat === 'all' ? 'todas as categorias' : CATS[selectedCat]?.label || '';
 
+  const { foraP, semSLA } = calcSLA(tickets);
   if (foraP.length === 0) {
     body.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--green);padding:20px">✓ Todos os tickets foram encerrados dentro do prazo!</td></tr>`;
   } else {
@@ -478,27 +519,28 @@ function renderSLATable(tickets) {
       .map(t => {
         const dias = Math.round((new Date(t.closedTime) - new Date(t.dueDate)) / 86400000);
         const unidade = t.cf?.cf_unidade || '—';
-        return `
-          <tr>
-            <td class="tic-num">#${t.ticketNumber}</td>
-            <td>${(t.subject || '—').slice(0, 45)}</td>
-            <td style="font-size:11px;color:var(--muted)">${unidade}</td>
-            <td class="tic-num">${fmtDate(t.closedTime)}</td>
-            <td class="tic-num">${fmtDate(t.dueDate)}</td>
-            <td><span class="pill bad">+${dias}d</span></td>
-          </tr>`;
+        const catKey = getCat(t);
+        const catInfo = CATS[catKey] || { emoji:'?', label:'—' };
+        return `<tr>
+          <td class="tic-num">#${t.ticketNumber}</td>
+          <td>${(t.subject||'—').slice(0,40)}</td>
+          <td style="font-size:11px;color:var(--muted)">${catInfo.emoji} ${catInfo.label} · ${unidade}</td>
+          <td class="tic-num">${fmtDate(t.closedTime)}</td>
+          <td class="tic-num">${fmtDate(t.dueDate)}</td>
+          <td><span class="pill bad">+${dias}d</span></td>
+        </tr>`;
       }).join('');
   }
 
   if (semSLA.length > 0) {
     note.style.display = 'block';
-    note.textContent = `ℹ️  ${semSLA.length} ticket(s) encerrado(s) sem prazo (dueDate) — não entram no cálculo do SLA. Normal para tickets anteriores a junho/2026, quando o SLA ainda não estava configurado.`;
+    note.textContent = `ℹ️  ${semSLA.length} ticket(s) encerrado(s) sem dueDate — não entram no cálculo do SLA. Normal para tickets anteriores a junho/2026.`;
   } else {
     note.style.display = 'none';
   }
 }
 
-// ─── SELETOR DE MESES ───
+// ─── SELETOR DE MESES ────────────────────────────────────────
 function buildMonthSelector() {
   const c = document.getElementById('monthSelector');
   const allBtn = document.createElement('button');
@@ -508,10 +550,9 @@ function buildMonthSelector() {
     selectedMonth = null;
     document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
     allBtn.classList.add('active');
-    renderKPIs(allTickets);
+    refresh();
   };
   c.appendChild(allBtn);
-
   MONTHS.forEach(mo => {
     const btn = document.createElement('button');
     btn.className = 'month-btn';
@@ -520,50 +561,50 @@ function buildMonthSelector() {
       selectedMonth = mo.key;
       document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const filtered = allTickets.filter(t => monthOf(t.createdTime) === mo.key);
-      renderKPIs(filtered);
+      refresh();
     };
     c.appendChild(btn);
   });
 }
 
-// ─── INIT ───
+// ─── REFRESH (aplica filtros e rerenderiza) ───────────────────
+function refresh() {
+  buildCatTabs();
+  const baseFiltered = allTickets.filter(t => !selectedMonth || monthOf(t.createdTime) === selectedMonth);
+  updateTabCounts(baseFiltered);
+  renderVolume(baseFiltered);
+  const filtered = filterTickets();
+  renderTop(filtered);
+  renderCatKpis(filtered);
+  renderSLAChart(filtered);
+  renderTipoChart(baseFiltered); // tipo sempre usa base sem filtro de cat
+  renderSLATable(filtered);
+}
+
+// ─── INIT ─────────────────────────────────────────────────────
 async function init() {
   buildMonthSelector();
   try {
-    document.getElementById('loadingMsg').textContent = 'Buscando tickets no Zoho Desk…';
     const res = await fetch('/api/kpis');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     if (!data.ok) throw new Error(data.error || 'Erro desconhecido');
-
     allTickets = data.tickets || [];
-
     document.getElementById('loadingEl').style.display = 'none';
     document.getElementById('content').style.display = 'block';
-
-    renderKPIs(allTickets);
-
+    refresh();
     const cached = data.cached ? ' · (cache)' : '';
     document.getElementById('lastUpdate').textContent =
-      `Atualizado em ${new Date().toLocaleString('pt-BR')} · ${allTickets.length} tickets carregados${cached}`;
-
+      `Atualizado em ${new Date().toLocaleString('pt-BR')} · ${allTickets.length} tickets${cached}`;
   } catch (err) {
     document.getElementById('loadingEl').innerHTML = `
       <div style="color:var(--red);text-align:center;max-width:400px">
         <div style="font-size:24px;margin-bottom:8px">⚠</div>
         <div style="font-weight:600;margin-bottom:6px">Erro ao carregar dados</div>
-        <div style="font-size:12px;color:var(--muted);margin-bottom:12px">${err.message}</div>
-        <div style="font-size:11px;color:var(--muted)">
-          Verifique se o arquivo <code style="background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px">api/kpis.js</code>
-          foi subido corretamente no GitHub e se a variável
-          <code style="background:rgba(255,255,255,0.1);padding:1px 5px;border-radius:3px">ZOHO_REFRESH_TOKEN</code>
-          está configurada no Vercel.
-        </div>
+        <div style="font-size:12px;color:var(--muted)">${err.message}</div>
       </div>`;
   }
 }
-
 init();
 </script>
 </body>
