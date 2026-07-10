@@ -15,117 +15,110 @@
   --yellow: #f59e0b; --yellow-dim: rgba(245,158,11,0.12);
   --blue: #3b82f6; --blue-dim: rgba(59,130,246,0.12);
   --pink: #ec4899; --pink-dim: rgba(236,72,153,0.12);
-  --orange: #f97316; --orange-dim: rgba(249,115,22,0.12);
   --teal: #14b8a6; --teal-dim: rgba(20,184,166,0.12);
+  --orange: #f97316; --orange-dim: rgba(249,115,22,0.12);
 }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; font-size: 14px; min-height: 100vh; padding: 28px 20px 48px; max-width: 1060px; margin: 0 auto; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  padding: 28px 20px 48px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
 
 /* HEADER */
-.page-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 28px; gap: 16px; flex-wrap: wrap; }
-.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.page-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 24px; gap: 16px; flex-wrap: wrap; }
+.eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
 h1 { font-size: 22px; font-weight: 700; color: #fff; }
-.month-selector { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-.month-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 5px 11px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--muted); cursor: pointer; transition: all 0.15s; }
+.month-selector { display: flex; gap: 5px; flex-wrap: wrap; }
+.month-btn { background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 4px 10px; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--muted); cursor: pointer; transition: all .15s; }
 .month-btn:hover { color: var(--text); border-color: var(--accent); }
 .month-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); font-weight: 600; }
 
 /* LOADING */
 .loading-overlay { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 80px 20px; gap: 16px; color: var(--muted); }
-.spinner { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+.spinner { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* TOP KPI CARDS */
-.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 24px; }
-.kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; position: relative; overflow: hidden; }
-.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 12px 12px 0 0; }
-.kpi-card.c-sla::before { background: var(--green); }
-.kpi-card.c-csat::before { background: var(--blue); }
-.kpi-card.c-total::before { background: var(--accent); }
-.kpi-card.c-fora::before { background: var(--red); }
-.kpi-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-.kpi-value { font-family: 'JetBrains Mono', monospace; font-size: 32px; font-weight: 600; line-height: 1; margin-bottom: 5px; }
-.kpi-card.c-sla .kpi-value { color: var(--green); }
-.kpi-card.c-csat .kpi-value { color: var(--blue); }
-.kpi-card.c-total .kpi-value { color: var(--accent); }
-.kpi-card.c-fora .kpi-value { color: var(--red); }
-.kpi-value.bad { color: var(--red) !important; }
-.kpi-value.warn { color: var(--yellow) !important; }
-.kpi-sub { font-size: 11px; color: var(--muted); line-height: 1.4; }
-.badge { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-family: 'JetBrains Mono', monospace; padding: 2px 7px; border-radius: 4px; margin-top: 7px; }
-.badge.ok { background: var(--green-dim); color: var(--green); }
-.badge.bad { background: var(--red-dim); color: var(--red); }
+/* TABS */
+.cat-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.cat-tab { display: flex; align-items: center; gap: 6px; padding: 6px 13px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-size: 12px; font-weight: 500; color: var(--muted); transition: all .15s; font-family: 'Inter', sans-serif; }
+.cat-tab:hover { color: var(--text); border-color: rgba(124,92,252,.4); }
+.cat-tab .tab-count { font-family: 'JetBrains Mono', monospace; font-size: 10px; opacity: .6; }
+.cat-tab.t-all.active   { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+.cat-tab.t-manut.active { background: var(--red-dim); border-color: var(--red); color: var(--red); }
+.cat-tab.t-limp.active  { background: var(--teal-dim); border-color: var(--teal); color: var(--teal); }
+.cat-tab.t-comp.active  { background: var(--orange-dim); border-color: var(--orange); color: var(--orange); }
+.cat-tab.t-outro.active { background: rgba(107,114,128,.12); border-color: #6b7280; color: #9ca3af; }
+.cat-tab.t-melh.active  { background: var(--blue-dim); border-color: var(--blue); color: var(--blue); }
+
+/* STATUS ROW (4 cards) */
+.status-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
+.st-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.st-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 8px; }
+.st-val { font-size: 28px; font-weight: 700; font-family: 'JetBrains Mono', monospace; line-height: 1; margin-bottom: 4px; }
+.st-sub { font-size: 11px; color: var(--muted); }
+
+/* PROGRESS BAR */
+.prog-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; margin-bottom: 12px; }
+.prog-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 10px; }
+.prog-track { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin-bottom: 10px; display: flex; }
+.prog-legend { display: flex; gap: 18px; flex-wrap: wrap; }
+.prog-leg { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.leg-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+
+/* KPI ROW (SLA / Corretivas / Preventivas / Fora do prazo) */
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 12px; }
+.kpi-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; position: relative; overflow: hidden; }
+.kpi-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: 10px 10px 0 0; }
+.kpi-card.k-sla::before  { background: var(--green); }
+.kpi-card.k-corr::before { background: var(--red); }
+.kpi-card.k-prev::before { background: var(--green); }
+.kpi-card.k-fora::before { background: var(--red); }
+.kpi-card.k-csat::before { background: var(--blue); }
+.kpi-lbl { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); margin-bottom: 8px; }
+.kpi-val { font-size: 26px; font-weight: 700; font-family: 'JetBrains Mono', monospace; line-height: 1; margin-bottom: 3px; }
+.kpi-sub { font-size: 11px; color: var(--muted); }
+.badge { display: inline-block; font-size: 10px; font-family: 'JetBrains Mono', monospace; padding: 2px 7px; border-radius: 4px; margin-top: 6px; }
+.badge.ok   { background: var(--green-dim); color: var(--green); }
+.badge.bad  { background: var(--red-dim); color: var(--red); }
 .badge.warn { background: var(--yellow-dim); color: var(--yellow); }
 .badge.info { background: var(--accent-dim); color: var(--accent); }
 
-/* CATEGORIA TABS */
-.cat-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px; }
-.cat-tab { display: flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); cursor: pointer; font-size: 12px; font-weight: 500; color: var(--muted); transition: all 0.15s; font-family: 'Inter', sans-serif; }
-.cat-tab:hover { border-color: var(--accent); color: var(--text); }
-.cat-tab.active { color: #fff; }
-.cat-tab .count { font-family: 'JetBrains Mono', monospace; font-size: 10px; opacity: 0.7; }
-.cat-tab.t-manut.active { background: rgba(239,68,68,0.15); border-color: var(--red); color: var(--red); }
-.cat-tab.t-limp.active  { background: rgba(20,184,166,0.15); border-color: var(--teal); color: var(--teal); }
-.cat-tab.t-comp.active  { background: rgba(249,115,22,0.15); border-color: var(--orange); color: var(--orange); }
-.cat-tab.t-outro.active { background: rgba(107,114,128,0.15); border-color: #6b7280; color: #9ca3af; }
-.cat-tab.t-melh.active  { background: rgba(59,130,246,0.15); border-color: var(--blue); color: var(--blue); }
-.cat-tab.t-all.active   { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
-
-/* CAT KPI ROW */
-.cat-kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 20px; }
-.cat-kpi { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
-.cat-kpi-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 8px; }
-.cat-kpi-val { font-family: 'JetBrains Mono', monospace; font-size: 24px; font-weight: 700; }
-.cat-kpi-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
-
-/* SECTION */
-.section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 14px; }
-.section-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-.section-title .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-
-/* TIPO BARS */
-.tipo-bars { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 4px; }
-.tipo-item { background: var(--surface2); border-radius: 8px; padding: 12px; text-align: center; }
-.tipo-num { font-family: 'JetBrains Mono', monospace; font-size: 26px; font-weight: 600; margin-bottom: 3px; }
-.tipo-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
-.tipo-item.corr .tipo-num { color: var(--red); }
-.tipo-item.prev .tipo-num { color: var(--green); }
-
-/* MONTH CHART */
-.month-chart { display: flex; align-items: flex-end; gap: 8px; height: 90px; padding: 0 2px; }
-.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
-.bar-val { font-family: 'JetBrains Mono', monospace; font-size: 9px; color: var(--muted); }
-.bar-fill { width: 100%; border-radius: 4px 4px 0 0; min-height: 3px; transition: height 0.5s ease; }
-.bar-lbl { font-size: 9px; color: var(--muted); font-family: 'JetBrains Mono', monospace; white-space: nowrap; }
-
-/* GRID */
-.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+/* CHARTS */
+.charts-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.chart-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.chart-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 14px; display: flex; align-items: center; gap: 7px; }
+.chart-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.bar-group { display: flex; align-items: flex-end; gap: 7px; height: 80px; }
+.bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; height: 100%; justify-content: flex-end; }
+.bar-val { font-size: 9px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.bar-fill { width: 100%; border-radius: 3px 3px 0 0; min-height: 3px; transition: height .5s ease; }
+.bar-lbl { font-size: 9px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
 
 /* TABLE */
+.table-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+.table-title { font-size: 12px; font-weight: 600; color: var(--text); margin-bottom: 12px; display: flex; align-items: center; gap: 7px; }
 .mini-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-.mini-table th { text-align: left; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; padding: 6px 8px; border-bottom: 1px solid var(--border); font-weight: 500; }
-.mini-table td { padding: 8px; border-bottom: 1px solid rgba(42,42,56,0.5); vertical-align: middle; }
+.mini-table th { text-align: left; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .07em; padding: 5px 8px; border-bottom: 1px solid var(--border); font-weight: 500; }
+.mini-table td { padding: 7px 8px; border-bottom: 1px solid rgba(42,42,56,.5); vertical-align: middle; }
 .mini-table tr:last-child td { border-bottom: none; }
-.mini-table tr:hover td { background: rgba(124,92,252,0.04); }
-.pill { display: inline-flex; align-items: center; gap: 3px; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-family: 'JetBrains Mono', monospace; }
-.pill.ok { background: var(--green-dim); color: var(--green); }
-.pill.bad { background: var(--red-dim); color: var(--red); }
-.tic-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+.mini-table tr:hover td { background: rgba(124,92,252,.04); }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 10px; font-family: 'JetBrains Mono', monospace; background: var(--red-dim); color: var(--red); }
+.tic { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
 
-/* NOTE */
 .note { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
 .last-update { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 24px; }
 
-/* VOLUME POR CATEGORIA */
-.vol-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 12px; }
-.vol-bar-label { min-width: 90px; color: var(--text); font-weight: 500; }
-.vol-bar-track { flex: 1; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
-.vol-bar-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
-.vol-bar-num { min-width: 30px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
-
-@media (max-width: 600px) {
-  .grid2 { grid-template-columns: 1fr; }
-  .kpi-grid { grid-template-columns: 1fr 1fr; }
+@media (max-width: 640px) {
+  .status-row, .kpi-row { grid-template-columns: 1fr 1fr; }
+  .charts-row { grid-template-columns: 1fr; }
   .mini-table th:nth-child(4), .mini-table td:nth-child(4) { display: none; }
 }
 </style>
@@ -147,78 +140,95 @@ h1 { font-size: 22px; font-weight: 700; color: #fff; }
 
 <div id="content" style="display:none">
 
-  <!-- TOP KPI CARDS -->
-  <div class="kpi-grid">
-    <div class="kpi-card c-total">
-      <div class="kpi-label">Total de tickets</div>
-      <div class="kpi-value" id="topTotal">—</div>
-      <div class="kpi-sub" id="topTotalSub">no período</div>
+  <!-- TABS -->
+  <div class="cat-tabs" id="catTabs"></div>
+
+  <!-- STATUS ROW -->
+  <div class="status-row">
+    <div class="st-card">
+      <div class="st-label">Total</div>
+      <div class="st-val" id="stTotal" style="color:var(--accent)">—</div>
+      <div class="st-sub" id="stTotalSub">tickets</div>
     </div>
-    <div class="kpi-card c-sla">
-      <div class="kpi-label">SLA — % no prazo</div>
-      <div class="kpi-value" id="topSla">—</div>
-      <div class="kpi-sub" id="topSlaSub">—</div>
-      <div id="topSlaBadge"></div>
+    <div class="st-card">
+      <div class="st-label">Fechados</div>
+      <div class="st-val" id="stFechados" style="color:var(--green)">—</div>
+      <div class="st-sub" id="stFechadosSub">—</div>
     </div>
-    <div class="kpi-card c-csat">
-      <div class="kpi-label">CSAT</div>
-      <div class="kpi-value" id="topCsat">100%</div>
+    <div class="st-card">
+      <div class="st-label">Abertos</div>
+      <div class="st-val" id="stAbertos" style="color:var(--red)">—</div>
+      <div class="st-sub">aguardando ação</div>
+    </div>
+    <div class="st-card">
+      <div class="st-label">Pendentes</div>
+      <div class="st-val" id="stPendentes" style="color:var(--yellow)">—</div>
+      <div class="st-sub">on hold / fornecedor</div>
+    </div>
+  </div>
+
+  <!-- BARRA DE PROGRESSO -->
+  <div class="prog-wrap">
+    <div class="prog-label" id="progLabel">Resolução no período</div>
+    <div class="prog-track" id="progTrack"></div>
+    <div class="prog-legend" id="progLegend"></div>
+  </div>
+
+  <!-- KPI ROW -->
+  <div class="kpi-row">
+    <div class="kpi-card k-sla">
+      <div class="kpi-lbl">SLA — % no prazo</div>
+      <div class="kpi-val" id="kpiSla" style="color:var(--green)">—</div>
+      <div class="kpi-sub" id="kpiSlaSub">—</div>
+      <div id="kpiSlaBadge"></div>
+    </div>
+    <div class="kpi-card k-corr" id="kpiCorrCard">
+      <div class="kpi-lbl">Corretivas</div>
+      <div class="kpi-val" id="kpiCorr" style="color:var(--red)">—</div>
+      <div class="kpi-sub" id="kpiCorrSub">—</div>
+    </div>
+    <div class="kpi-card k-prev" id="kpiPrevCard">
+      <div class="kpi-lbl">Preventivas</div>
+      <div class="kpi-val" id="kpiPrev" style="color:var(--green)">—</div>
+      <div class="kpi-sub" id="kpiPrevSub">—</div>
+    </div>
+    <div class="kpi-card k-csat">
+      <div class="kpi-lbl">CSAT</div>
+      <div class="kpi-val" style="color:var(--blue)">100%</div>
       <div class="kpi-sub">81 respostas · todas "Bom"</div>
       <span class="badge ok">✓ Excelente</span>
     </div>
-    <div class="kpi-card c-fora">
-      <div class="kpi-label">Encerrados fora do prazo</div>
-      <div class="kpi-value" id="topFora">—</div>
-      <div class="kpi-sub" id="topForaSub">—</div>
-    </div>
   </div>
-
-  <!-- VOLUME POR CATEGORIA -->
-  <div class="section" style="margin-bottom:20px;">
-    <div class="section-title">
-      <span class="dot" style="background:var(--accent)"></span>
-      Volume por categoria
-    </div>
-    <div id="volBars"></div>
-  </div>
-
-  <!-- TABS DE CATEGORIA -->
-  <div class="cat-tabs" id="catTabs"></div>
-
-  <!-- KPIs DA CATEGORIA SELECIONADA -->
-  <div class="cat-kpi-row" id="catKpiRow"></div>
 
   <!-- GRÁFICOS -->
-  <div class="grid2">
-    <div class="section">
-      <div class="section-title">
-        <span class="dot" style="background:var(--green)" id="chartDot1"></span>
-        <span id="chartTitle1">SLA % por mês</span>
+  <div class="charts-row">
+    <div class="chart-card">
+      <div class="chart-title">
+        <div class="chart-dot" style="background:var(--green)"></div>
+        SLA % por mês
       </div>
-      <div id="slaMonthChart" class="month-chart"></div>
+      <div class="bar-group" id="slaChart"></div>
     </div>
-    <div class="section">
-      <div class="section-title">
-        <span class="dot" style="background:var(--yellow)"></span>
-        Corretiva (🔴) vs. Preventiva (🟢) — Manutenção
+    <div class="chart-card">
+      <div class="chart-title">
+        <div class="chart-dot" style="background:var(--yellow)"></div>
+        Corretivas (🔴) vs. Preventivas (🟢) — manutenção
       </div>
-      <div class="tipo-bars">
-        <div class="tipo-item corr"><div class="tipo-num" id="corrNum">—</div><div class="tipo-lbl">Corretivas</div></div>
-        <div class="tipo-item prev"><div class="tipo-num" id="prevNum">—</div><div class="tipo-lbl">Preventivas</div></div>
-      </div>
-      <div id="tipoMonthChart" class="month-chart" style="margin-top:12px"></div>
+      <div class="bar-group" id="tipoChart"></div>
     </div>
   </div>
 
-  <!-- TABELA SLA VIOLADO -->
-  <div class="section">
-    <div class="section-title">
-      <span class="dot" style="background:var(--red)"></span>
-      Tickets encerrados fora do prazo — <span id="slaTableCat">todas as categorias</span>
+  <!-- TABELA -->
+  <div class="table-card">
+    <div class="table-title">
+      <div class="chart-dot" style="background:var(--red)"></div>
+      Tickets fora do prazo — <span id="tableSubtitle">todas as categorias</span>
     </div>
     <table class="mini-table">
-      <thead><tr><th>#</th><th>Assunto</th><th>Categoria</th><th>Encerrado</th><th>Prazo era</th><th>Atraso</th></tr></thead>
-      <tbody id="slaVioladoBody"></tbody>
+      <thead><tr>
+        <th>#</th><th>Assunto</th><th>Unidade</th><th>Encerrado</th><th>Prazo era</th><th>Atraso</th>
+      </tr></thead>
+      <tbody id="slaTableBody"></tbody>
     </table>
   </div>
 
@@ -227,31 +237,14 @@ h1 { font-size: 22px; font-weight: 700; color: #fff; }
 </div>
 
 <script>
-// ─── CATEGORIAS ───────────────────────────────────────────────
 const CATS = {
-  manut: {
-    label: 'Manutenção', emoji: '🔧', cls: 't-manut', color: 'var(--red)',
-    motivos: ['manutenção', 'segurança', 'estacionamento']
-  },
-  limp: {
-    label: 'Limpeza', emoji: '🧹', cls: 't-limp', color: 'var(--teal)',
-    motivos: ['limpeza']
-  },
-  comp: {
-    label: 'Compras', emoji: '🛒', cls: 't-comp', color: 'var(--orange)',
-    motivos: ['compras']
-  },
-  outro: {
-    label: 'Uniforme / Crachá', emoji: '🪪', cls: 't-outro', color: '#9ca3af',
-    motivos: ['uniforme', 'crachá genial care']
-  },
-  melh: {
-    label: 'Melhorias', emoji: '✨', cls: 't-melh', color: 'var(--blue)',
-    motivos: ['melhorias e outros assuntos']
-  },
+  manut: { label:'Manutenção', emoji:'🔧', cls:'t-manut', color:'var(--red)',    motivos:['manutenção','segurança','estacionamento'] },
+  limp:  { label:'Limpeza',    emoji:'🧹', cls:'t-limp',  color:'var(--teal)',   motivos:['limpeza'] },
+  comp:  { label:'Compras',    emoji:'🛒', cls:'t-comp',  color:'var(--orange)', motivos:['compras'] },
+  outro: { label:'Uniforme / Crachá', emoji:'🪪', cls:'t-outro', color:'#9ca3af', motivos:['uniforme','crachá genial care'] },
+  melh:  { label:'Melhorias',  emoji:'✨', cls:'t-melh',  color:'var(--blue)',   motivos:['melhorias e outros assuntos'] },
 };
 
-// ─── EQUIPE FACILITIES (preventivas) ─────────────────────────
 const FAC_EMAILS = ['marina.cesar','eliza.vernizzi','elaine.samiti','maria.luiza.biano','matheus.silva','nathalia.brancalleao','facilities@genialcare','zoho-facilities@genialcare'];
 
 const MONTHS = [
@@ -260,16 +253,17 @@ const MONTHS = [
   {key:'2026-07',label:'Jul'},
 ];
 
+const STATUS_FECHADO  = ['Closed','Resolved','Cancelled'];
+const STATUS_PENDENTE = ['On Hold','Aguardando Entrega do Item','Aguardando Fornecedor','Em execução pela GHC'];
+
 let allTickets = [];
 let selectedMonth = null;
 let selectedCat = 'all';
 
-// ─── HELPERS ─────────────────────────────────────────────────
 function getCat(t) {
-  const motivo = (t.cf?.cf_motivo_da_solicitacao || '').toLowerCase().trim();
-  for (const [key, cat] of Object.entries(CATS)) {
-    if (cat.motivos.some(m => motivo.includes(m))) return key;
-  }
+  const m = (t.cf?.cf_motivo_da_solicitacao || '').toLowerCase().trim();
+  for (const [key, cat] of Object.entries(CATS))
+    if (cat.motivos.some(x => m.includes(x))) return key;
   return 'outro';
 }
 
@@ -278,12 +272,12 @@ function isPreventiva(t) {
   return FAC_EMAILS.some(e => email.includes(e));
 }
 
-function monthOf(d) { return d ? d.slice(0, 7) : null; }
+function monthOf(d) { return d ? d.slice(0,7) : null; }
 
 function fmtDate(d) {
   if (!d) return '—';
   const dt = new Date(d);
-  return dt.toLocaleDateString('pt-BR', {day:'2-digit', month:'2-digit', year:'2-digit'});
+  return dt.toLocaleDateString('pt-BR', {day:'2-digit',month:'2-digit',year:'2-digit'});
 }
 
 function calcSLA(tickets) {
@@ -291,219 +285,91 @@ function calcSLA(tickets) {
   const noPrazo = comSLA.filter(t => new Date(t.closedTime) <= new Date(t.dueDate));
   const foraP   = comSLA.filter(t => new Date(t.closedTime) >  new Date(t.dueDate));
   const semSLA  = tickets.filter(t => t.closedTime && !t.dueDate);
-  const pct     = comSLA.length ? Math.round((noPrazo.length / comSLA.length) * 100) : null;
+  const pct     = comSLA.length ? Math.round((noPrazo.length/comSLA.length)*100) : null;
   return { comSLA, noPrazo, foraP, semSLA, pct };
 }
 
-function filterTickets() {
+function getFiltered() {
   let t = allTickets;
   if (selectedMonth) t = t.filter(x => monthOf(x.createdTime) === selectedMonth);
   if (selectedCat !== 'all') t = t.filter(x => getCat(x) === selectedCat);
   return t;
 }
 
-// ─── RENDER TOP KPIs ─────────────────────────────────────────
-function renderTop(tickets) {
-  const { comSLA, noPrazo, foraP, semSLA, pct } = calcSLA(tickets);
+// ─── RENDER ──────────────────────────────────────────────────
+function render() {
+  const base     = allTickets.filter(t => !selectedMonth || monthOf(t.createdTime) === selectedMonth);
+  const filtered = getFiltered();
+  const { comSLA, noPrazo, foraP, semSLA, pct } = calcSLA(filtered);
 
-  // Total
-  document.getElementById('topTotal').textContent = tickets.length;
-  document.getElementById('topTotalSub').textContent = selectedCat === 'all'
-    ? 'todas as categorias' : CATS[selectedCat]?.label || '';
+  // Status row
+  const fechados  = filtered.filter(t => STATUS_FECHADO.includes(t.status)).length;
+  const abertos   = filtered.filter(t => t.status === 'Open').length;
+  const pendentes = filtered.filter(t => STATUS_PENDENTE.includes(t.status)).length;
+  const pctRes    = filtered.length ? Math.round((fechados/filtered.length)*100) : 0;
+  const catLabel  = selectedCat === 'all' ? 'todas as categorias' : CATS[selectedCat]?.label || '';
 
-  // SLA
-  const slaEl = document.getElementById('topSla');
+  document.getElementById('stTotal').textContent    = filtered.length;
+  document.getElementById('stTotalSub').textContent = catLabel;
+  document.getElementById('stFechados').textContent   = fechados;
+  document.getElementById('stFechadosSub').textContent = `${pctRes}% de resolução`;
+  document.getElementById('stAbertos').textContent   = abertos;
+  document.getElementById('stPendentes').textContent  = pendentes;
+
+  // Barra de progresso
+  document.getElementById('progLabel').textContent = `Resolução — ${catLabel}${selectedMonth ? ' · ' + (MONTHS.find(m=>m.key===selectedMonth)?.label||'') : ''}`;
+  const track = document.getElementById('progTrack');
+  track.innerHTML = `
+    <div style="width:${pctRes}%;background:var(--green);transition:width .6s ease;"></div>`;
+  document.getElementById('progLegend').innerHTML = `
+    <div class="prog-leg"><div class="leg-dot" style="background:var(--green)"></div><span style="color:var(--green);font-weight:600">${fechados} fechados</span></div>
+    <div class="prog-leg"><div class="leg-dot" style="background:var(--red)"></div><span style="color:var(--red);font-weight:600">${abertos} abertos</span></div>
+    <div class="prog-leg"><div class="leg-dot" style="background:var(--yellow)"></div><span style="color:var(--yellow);font-weight:600">${pendentes} pendentes</span></div>`;
+
+  // KPI row — SLA
+  const slaEl = document.getElementById('kpiSla');
   slaEl.textContent = pct !== null ? `${pct}%` : '—';
-  slaEl.className = 'kpi-value' + (pct === null ? '' : pct >= 80 ? '' : pct >= 60 ? ' warn' : ' bad');
-  document.getElementById('topSlaSub').textContent = pct !== null
-    ? `${noPrazo.length} no prazo · ${foraP.length} atrasados de ${comSLA.length}`
-    : 'Sem SLA configurado no período';
-  const badge = document.getElementById('topSlaBadge');
+  slaEl.style.color = pct === null ? 'var(--muted)' : pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)';
+  document.getElementById('kpiSlaSub').textContent = pct !== null
+    ? `${noPrazo.length}/${comSLA.length} encerrados c/ SLA` : 'sem SLA configurado';
+  const slaBadge = document.getElementById('kpiSlaBadge');
   if (pct !== null) {
     const cls = pct >= 80 ? 'ok' : pct >= 60 ? 'warn' : 'bad';
     const txt = pct >= 80 ? '✓ Meta atingida' : pct >= 60 ? '⚠ Atenção' : '✗ Abaixo da meta';
-    badge.innerHTML = `<span class="badge ${cls}">${txt}</span>`;
+    slaBadge.innerHTML = `<span class="badge ${cls}">${txt}</span>`;
   } else {
-    badge.innerHTML = '<span class="badge info">ℹ SLA ativo desde jun/2026</span>';
+    slaBadge.innerHTML = '<span class="badge info">ℹ SLA ativo desde jun/2026</span>';
   }
 
-  // Fora do prazo
-  document.getElementById('topFora').textContent = foraP.length;
-  document.getElementById('topForaSub').textContent = foraP.length === 0
-    ? 'Todos no prazo ✓' : `tickets atrasados`;
+  // KPI row — Corretivas/Preventivas (sempre com dados de manutenção, independente da tab)
+  const manut = base.filter(t => getCat(t) === 'manut');
+  const prev  = manut.filter(isPreventiva).length;
+  const corr  = manut.length - prev;
+  const pctC  = manut.length ? Math.round((corr/manut.length)*100) : 0;
+  document.getElementById('kpiCorr').textContent    = corr;
+  document.getElementById('kpiCorrSub').textContent = `${pctC}% manutenção`;
+  document.getElementById('kpiPrev').textContent    = prev;
+  document.getElementById('kpiPrevSub').textContent = `${100-pctC}% manutenção`;
+
+  // Gráficos
+  renderSLAChart(base);
+  renderTipoChart(base);
+
+  // Tabela
+  renderTable(filtered, foraP, semSLA);
+
+  // Tabs count
+  updateTabCounts(base);
 }
 
-// ─── STATUS HELPERS ───────────────────────────────────────────
-const STATUS_FECHADO  = ['Closed', 'Resolved', 'Cancelled'];
-const STATUS_PENDENTE = ['On Hold', 'Aguardando Entrega do Item', 'Aguardando Fornecedor', 'Em execução pela GHC'];
-
-// ─── VOLUME POR CATEGORIA ─────────────────────────────────────
-function renderVolume(tickets) {
-  const el = document.getElementById('volBars');
-  el.innerHTML = '';
-  const counts = {};
-  tickets.forEach(t => {
-    const c = getCat(t);
-    counts[c] = (counts[c] || 0) + 1;
-  });
-  const max = Math.max(...Object.values(counts), 1);
-  const colors = {
-    manut:'var(--red)', limp:'var(--teal)', comp:'var(--orange)',
-    outro:'#6b7280', melh:'var(--blue)'
-  };
-  // Calcular breakdown por status para cada categoria
-  const byStatus = {};
-  tickets.forEach(t => {
-    const c = getCat(t);
-    if (!byStatus[c]) byStatus[c] = { fechados: 0, abertos: 0, pendentes: 0 };
-    if (STATUS_FECHADO.includes(t.status)) byStatus[c].fechados++;
-    else if (t.status === 'Open') byStatus[c].abertos++;
-    else byStatus[c].pendentes++;
-  });
-
-  Object.entries(CATS).forEach(([key, cat]) => {
-    const n = counts[key] || 0;
-    const pct = Math.round((n / tickets.length) * 100) || 0;
-    const st = byStatus[key] || { fechados: 0, abertos: 0, pendentes: 0 };
-
-    const row = document.createElement('div');
-    row.style.cssText = 'margin-bottom:14px;cursor:pointer;';
-    row.innerHTML = `
-      <div class="vol-bar-row" style="margin-bottom:6px;">
-        <div class="vol-bar-label">${cat.emoji} ${cat.label}</div>
-        <div class="vol-bar-track">
-          <div class="vol-bar-fill" style="width:${(n/max)*100}%;background:${colors[key]};opacity:0.7;"></div>
-        </div>
-        <div class="vol-bar-num">${n} <span style="opacity:.5;font-size:9px">(${pct}%)</span></div>
-      </div>
-      <div style="padding-left:90px;display:flex;gap:14px;">
-        <span style="font-size:11px;color:var(--green);font-weight:600;">${st.fechados} fechados</span>
-        <span style="font-size:11px;color:var(--red);font-weight:600;">${st.abertos} abertos</span>
-        <span style="font-size:11px;color:var(--yellow);font-weight:600;">${st.pendentes} pendentes</span>
-      </div>`;
-    row.onclick = () => { selectedCat = key; refresh(); };
-    el.appendChild(row);
-  });
-}
-
-// ─── TABS DE CATEGORIA ────────────────────────────────────────
-function buildCatTabs() {
-  const c = document.getElementById('catTabs');
-  c.innerHTML = '';
-
-  const allBtn = document.createElement('button');
-  allBtn.className = 'cat-tab t-all' + (selectedCat === 'all' ? ' active' : '');
-  allBtn.innerHTML = '📋 Todas <span class="count"></span>';
-  allBtn.onclick = () => { selectedCat = 'all'; refresh(); };
-  c.appendChild(allBtn);
-
-  Object.entries(CATS).forEach(([key, cat]) => {
-    const btn = document.createElement('button');
-    btn.className = `cat-tab ${cat.cls}` + (selectedCat === key ? ' active' : '');
-    btn.innerHTML = `${cat.emoji} ${cat.label} <span class="count" id="tabCount-${key}"></span>`;
-    btn.onclick = () => { selectedCat = key; refresh(); };
-    c.appendChild(btn);
-  });
-}
-
-function updateTabCounts(tickets) {
-  const counts = {};
-  tickets.forEach(t => { const c = getCat(t); counts[c] = (counts[c]||0)+1; });
-  document.querySelectorAll('.cat-tab').forEach(btn => {
-    if (btn.classList.contains('t-all')) {
-      btn.querySelector('.count').textContent = tickets.length;
-    }
-  });
-  Object.keys(CATS).forEach(key => {
-    const el = document.getElementById(`tabCount-${key}`);
-    if (el) el.textContent = counts[key] || 0;
-  });
-}
-
-// ─── CAT KPI ROW ─────────────────────────────────────────────
-function renderCatKpis(tickets) {
-  const el = document.getElementById('catKpiRow');
-  el.innerHTML = '';
-  const { pct, noPrazo, comSLA, foraP } = calcSLA(tickets);
-
-  // ── Breakdown: total / fechados / abertos / pendentes ──
-  const fechados  = tickets.filter(t => STATUS_FECHADO.includes(t.status)).length;
-  const abertos   = tickets.filter(t => t.status === 'Open').length;
-  const pendentes = tickets.filter(t => STATUS_PENDENTE.includes(t.status)).length;
-  const pctRes    = tickets.length ? Math.round((fechados / tickets.length) * 100) : 0;
-
-  // Card de breakdown
-  const breakdown = document.createElement('div');
-  breakdown.className = 'cat-kpi';
-  breakdown.style.cssText = 'grid-column: 1 / -1;';
-  breakdown.innerHTML = `
-    <div class="cat-kpi-lbl">Total de tickets — ${selectedCat === 'all' ? 'todas as categorias' : CATS[selectedCat]?.label || ''}</div>
-    <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">
-      <span class="cat-kpi-val" style="color:var(--accent)">${tickets.length}</span>
-      <span style="font-size:12px;color:var(--muted)">tickets no período</span>
-    </div>
-    <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
-      <div style="flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden;display:flex;">
-        <div style="width:${pctRes}%;background:var(--green);border-radius:5px 0 0 5px;transition:width .6s ease;"></div>
-      </div>
-      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);min-width:35px">${pctRes}%</span>
-    </div>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;">
-      <div style="display:flex;align-items:center;gap:6px;font-size:12px;">
-        <span style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;"></span>
-        <span style="color:var(--green);font-weight:600;">${fechados}</span>
-        <span style="color:var(--muted)">fechados</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:12px;">
-        <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></span>
-        <span style="color:var(--red);font-weight:600;">${abertos}</span>
-        <span style="color:var(--muted)">abertos</span>
-      </div>
-      <div style="display:flex;align-items:center;gap:6px;font-size:12px;">
-        <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;"></span>
-        <span style="color:var(--yellow);font-weight:600;">${pendentes}</span>
-        <span style="color:var(--muted)">pendentes</span>
-      </div>
-    </div>`;
-  el.appendChild(breakdown);
-
-  // ── Corretivas vs preventivas (só manutenção) ──
-  if (selectedCat === 'manut') {
-    const prev = tickets.filter(isPreventiva).length;
-    const corr = tickets.length - prev;
-    const pctCorr = tickets.length ? Math.round((corr/tickets.length)*100) : 0;
-    addCatKpi(el, 'Corretivas', corr, `${pctCorr}% do total`, 'var(--red)');
-    addCatKpi(el, 'Preventivas', prev, `${100-pctCorr}% do total`, 'var(--green)');
-  }
-
-  // ── SLA sempre ──
-  addCatKpi(el, 'SLA — no prazo',
-    pct !== null ? `${pct}%` : '—',
-    pct !== null ? `${noPrazo.length}/${comSLA.length} encerrados c/ SLA` : 'sem SLA configurado',
-    pct === null ? 'var(--muted)' : pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)'
-  );
-  addCatKpi(el, 'Fora do prazo', foraP.length,
-    foraP.length === 0 ? 'todos no prazo ✓' : 'tickets atrasados',
-    foraP.length === 0 ? 'var(--green)' : 'var(--red)'
-  );
-}
-
-function addCatKpi(container, label, value, sub, color) {
-  const d = document.createElement('div');
-  d.className = 'cat-kpi';
-  d.innerHTML = `<div class="cat-kpi-lbl">${label}</div>
-    <div class="cat-kpi-val" style="color:${color}">${value}</div>
-    <div class="cat-kpi-sub">${sub}</div>`;
-  container.appendChild(d);
-}
-
-// ─── GRÁFICO SLA POR MÊS ─────────────────────────────────────
-function renderSLAChart(tickets) {
-  const el = document.getElementById('slaMonthChart');
+function renderSLAChart(base) {
+  const el = document.getElementById('slaChart');
   el.innerHTML = '';
   const byM = {};
-  MONTHS.forEach(m => { byM[m.key] = { total: 0, ok: 0 }; });
-  tickets.forEach(t => {
+  MONTHS.forEach(m => { byM[m.key] = {total:0, ok:0}; });
+  // Filtrar por categoria se selecionada
+  const src = selectedCat === 'all' ? base : base.filter(t => getCat(t) === selectedCat);
+  src.forEach(t => {
     if (!t.dueDate || !t.closedTime) return;
     const m = monthOf(t.closedTime);
     if (!byM[m]) return;
@@ -514,25 +380,23 @@ function renderSLAChart(tickets) {
   MONTHS.forEach(mo => {
     const d = byM[mo.key];
     const pct = d.total ? Math.round((d.ok/d.total)*100) : null;
-    const hPct = d.total ? (d.total/maxT)*100 : 0;
+    const h   = d.total ? (d.total/maxT)*100 : 0;
     const col = pct === null ? 'var(--border)' : pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)';
-    const barCol = document.createElement('div'); barCol.className = 'bar-col';
-    const val = document.createElement('div'); val.className = 'bar-val'; val.textContent = pct !== null ? `${pct}%` : '—';
-    const fill = document.createElement('div'); fill.className = 'bar-fill';
-    fill.style.cssText = `height:${Math.max(hPct,3)}%;background:${col};opacity:0.85;`;
-    fill.title = `${mo.label}: ${d.ok}/${d.total} no prazo`;
-    const lbl = document.createElement('div'); lbl.className = 'bar-lbl'; lbl.textContent = mo.label;
-    barCol.appendChild(val); barCol.appendChild(fill); barCol.appendChild(lbl);
-    el.appendChild(barCol);
+    const col2 = document.createElement('div'); col2.className = 'bar-col';
+    const v = document.createElement('div'); v.className = 'bar-val'; v.textContent = pct !== null ? `${pct}%` : '—';
+    const f = document.createElement('div'); f.className = 'bar-fill'; f.style.cssText = `height:${Math.max(h,3)}%;background:${col};opacity:.85;`; f.title = `${mo.label}: ${d.ok}/${d.total}`;
+    const l = document.createElement('div'); l.className = 'bar-lbl'; l.textContent = mo.label;
+    col2.appendChild(v); col2.appendChild(f); col2.appendChild(l);
+    el.appendChild(col2);
   });
 }
 
-// ─── GRÁFICO TIPO (só manutenção) ────────────────────────────
-function renderTipoChart(allT) {
-  // Sempre usa só manutenção para corretiva/preventiva
-  const manut = allT.filter(t => getCat(t) === 'manut');
+function renderTipoChart(base) {
+  const el = document.getElementById('tipoChart');
+  el.innerHTML = '';
+  const manut = base.filter(t => getCat(t) === 'manut');
   const byM = {};
-  MONTHS.forEach(m => { byM[m.key] = { total: 0, prev: 0 }; });
+  MONTHS.forEach(m => { byM[m.key] = {total:0, prev:0}; });
   manut.forEach(t => {
     const m = monthOf(t.createdTime);
     if (!byM[m]) return;
@@ -540,78 +404,94 @@ function renderTipoChart(allT) {
     if (isPreventiva(t)) byM[m].prev++;
   });
   const maxT = Math.max(...Object.values(byM).map(v => v.total), 1);
-
-  // Contadores totais
-  const totalManut = manut.length;
-  const totalPrev  = manut.filter(isPreventiva).length;
-  document.getElementById('corrNum').textContent = totalManut - totalPrev;
-  document.getElementById('prevNum').textContent = totalPrev;
-
-  const el = document.getElementById('tipoMonthChart');
-  el.innerHTML = '';
   MONTHS.forEach(mo => {
     const d = byM[mo.key];
-    const hPct = d.total ? (d.total/maxT)*100 : 0;
-    const prevPct = d.total ? Math.round((d.prev/d.total)*100) : 0;
-    const barCol = document.createElement('div'); barCol.className = 'bar-col';
-    const val = document.createElement('div'); val.className = 'bar-val'; val.textContent = d.total || '—';
-    const fill = document.createElement('div'); fill.className = 'bar-fill';
-    fill.style.cssText = `height:${Math.max(hPct,3)}%;background:linear-gradient(to top, var(--green) ${prevPct}%, var(--red) ${prevPct}%);`;
-    fill.title = `${mo.label}: ${d.total} total (${d.prev} prev, ${d.total-d.prev} corr)`;
-    const lbl = document.createElement('div'); lbl.className = 'bar-lbl'; lbl.textContent = mo.label;
-    barCol.appendChild(val); barCol.appendChild(fill); barCol.appendChild(lbl);
-    el.appendChild(barCol);
+    const h  = d.total ? (d.total/maxT)*100 : 0;
+    const pp = d.total ? Math.round((d.prev/d.total)*100) : 0;
+    const col2 = document.createElement('div'); col2.className = 'bar-col';
+    const v = document.createElement('div'); v.className = 'bar-val'; v.textContent = d.total || '—';
+    const f = document.createElement('div'); f.className = 'bar-fill';
+    f.style.cssText = `height:${Math.max(h,3)}%;background:linear-gradient(to top,var(--green) ${pp}%,var(--red) ${pp}%);`;
+    f.title = `${mo.label}: ${d.total} total (${d.prev} prev, ${d.total-d.prev} corr)`;
+    const l = document.createElement('div'); l.className = 'bar-lbl'; l.textContent = mo.label;
+    col2.appendChild(v); col2.appendChild(f); col2.appendChild(l);
+    el.appendChild(col2);
   });
 }
 
-// ─── TABELA SLA VIOLADO ───────────────────────────────────────
-function renderSLATable(tickets) {
-  const body = document.getElementById('slaVioladoBody');
+function renderTable(filtered, foraP, semSLA) {
+  const body = document.getElementById('slaTableBody');
   const note = document.getElementById('slaNote');
-  const catLabel = document.getElementById('slaTableCat');
-  catLabel.textContent = selectedCat === 'all' ? 'todas as categorias' : CATS[selectedCat]?.label || '';
+  const sub  = document.getElementById('tableSubtitle');
+  sub.textContent = selectedCat === 'all' ? 'todas as categorias' : CATS[selectedCat]?.label || '';
 
-  const { foraP, semSLA } = calcSLA(tickets);
   if (foraP.length === 0) {
     body.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--green);padding:20px">✓ Todos os tickets foram encerrados dentro do prazo!</td></tr>`;
   } else {
-    body.innerHTML = foraP
-      .sort((a, b) => new Date(b.closedTime) - new Date(a.closedTime))
-      .map(t => {
-        const dias = Math.round((new Date(t.closedTime) - new Date(t.dueDate)) / 86400000);
-        const unidade = t.cf?.cf_unidade || '—';
-        const catKey = getCat(t);
-        const catInfo = CATS[catKey] || { emoji:'?', label:'—' };
-        return `<tr>
-          <td class="tic-num">#${t.ticketNumber}</td>
-          <td>${(t.subject||'—').slice(0,40)}</td>
-          <td style="font-size:11px;color:var(--muted)">${catInfo.emoji} ${catInfo.label} · ${unidade}</td>
-          <td class="tic-num">${fmtDate(t.closedTime)}</td>
-          <td class="tic-num">${fmtDate(t.dueDate)}</td>
-          <td><span class="pill bad">+${dias}d</span></td>
-        </tr>`;
-      }).join('');
+    body.innerHTML = foraP.sort((a,b) => new Date(b.closedTime)-new Date(a.closedTime)).map(t => {
+      const dias    = Math.round((new Date(t.closedTime)-new Date(t.dueDate))/86400000);
+      const unidade = t.cf?.cf_unidade || '—';
+      const catKey  = getCat(t);
+      const catInfo = CATS[catKey] || {emoji:'?', label:'—'};
+      return `<tr>
+        <td class="tic">#${t.ticketNumber}</td>
+        <td>${(t.subject||'—').slice(0,42)}</td>
+        <td style="font-size:11px;color:var(--muted)">${catInfo.emoji} ${unidade}</td>
+        <td class="tic">${fmtDate(t.closedTime)}</td>
+        <td class="tic">${fmtDate(t.dueDate)}</td>
+        <td><span class="pill">+${dias}d</span></td>
+      </tr>`;
+    }).join('');
   }
 
   if (semSLA.length > 0) {
     note.style.display = 'block';
-    note.textContent = `ℹ️  ${semSLA.length} ticket(s) encerrado(s) sem dueDate — não entram no cálculo do SLA. Normal para tickets anteriores a junho/2026.`;
+    note.textContent = `ℹ️  ${semSLA.length} ticket(s) encerrado(s) sem prazo configurado — não entram no SLA. Normal para tickets anteriores a junho/2026.`;
   } else {
     note.style.display = 'none';
   }
 }
 
-// ─── SELETOR DE MESES ────────────────────────────────────────
-function buildMonthSelector() {
+// ─── TABS ────────────────────────────────────────────────────
+function buildTabs() {
+  const c = document.getElementById('catTabs');
+  c.innerHTML = '';
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-tab t-all' + (selectedCat==='all'?' active':'');
+  allBtn.innerHTML = '📋 Todas <span class="tab-count" id="tc-all"></span>';
+  allBtn.onclick = () => { selectedCat='all'; render(); buildTabs(); };
+  c.appendChild(allBtn);
+  Object.entries(CATS).forEach(([key,cat]) => {
+    const btn = document.createElement('button');
+    btn.className = `cat-tab ${cat.cls}` + (selectedCat===key?' active':'');
+    btn.innerHTML = `${cat.emoji} ${cat.label} <span class="tab-count" id="tc-${key}"></span>`;
+    btn.onclick = () => { selectedCat=key; render(); buildTabs(); };
+    c.appendChild(btn);
+  });
+}
+
+function updateTabCounts(base) {
+  const counts = {};
+  base.forEach(t => { const c=getCat(t); counts[c]=(counts[c]||0)+1; });
+  const allEl = document.getElementById('tc-all');
+  if (allEl) allEl.textContent = base.length;
+  Object.keys(CATS).forEach(key => {
+    const el = document.getElementById(`tc-${key}`);
+    if (el) el.textContent = counts[key]||0;
+  });
+}
+
+// ─── MONTH SELECTOR ──────────────────────────────────────────
+function buildMonths() {
   const c = document.getElementById('monthSelector');
   const allBtn = document.createElement('button');
   allBtn.className = 'month-btn active';
   allBtn.textContent = 'Todos';
   allBtn.onclick = () => {
     selectedMonth = null;
-    document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.month-btn').forEach(b=>b.classList.remove('active'));
     allBtn.classList.add('active');
-    refresh();
+    render();
   };
   c.appendChild(allBtn);
   MONTHS.forEach(mo => {
@@ -620,44 +500,30 @@ function buildMonthSelector() {
     btn.textContent = mo.label;
     btn.onclick = () => {
       selectedMonth = mo.key;
-      document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.month-btn').forEach(b=>b.classList.remove('active'));
       btn.classList.add('active');
-      refresh();
+      render();
     };
     c.appendChild(btn);
   });
 }
 
-// ─── REFRESH (aplica filtros e rerenderiza) ───────────────────
-function refresh() {
-  buildCatTabs();
-  const baseFiltered = allTickets.filter(t => !selectedMonth || monthOf(t.createdTime) === selectedMonth);
-  updateTabCounts(baseFiltered);
-  renderVolume(baseFiltered);
-  const filtered = filterTickets();
-  renderTop(filtered);
-  renderCatKpis(filtered);
-  renderSLAChart(filtered);
-  renderTipoChart(baseFiltered); // tipo sempre usa base sem filtro de cat
-  renderSLATable(filtered);
-}
-
 // ─── INIT ─────────────────────────────────────────────────────
 async function init() {
-  buildMonthSelector();
+  buildMonths();
+  buildTabs();
   try {
     const res = await fetch('/api/kpis');
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-    if (!data.ok) throw new Error(data.error || 'Erro desconhecido');
-    allTickets = data.tickets || [];
+    if (!data.ok) throw new Error(data.error||'Erro desconhecido');
+    allTickets = data.tickets||[];
     document.getElementById('loadingEl').style.display = 'none';
     document.getElementById('content').style.display = 'block';
-    refresh();
-    const cached = data.cached ? ' · (cache)' : '';
+    render();
     document.getElementById('lastUpdate').textContent =
-      `Atualizado em ${new Date().toLocaleString('pt-BR')} · ${allTickets.length} tickets${cached}`;
-  } catch (err) {
+      `Atualizado em ${new Date().toLocaleString('pt-BR')} · ${allTickets.length} tickets${data.cached?' · (cache)':''}`;
+  } catch(err) {
     document.getElementById('loadingEl').innerHTML = `
       <div style="color:var(--red);text-align:center;max-width:400px">
         <div style="font-size:24px;margin-bottom:8px">⚠</div>
