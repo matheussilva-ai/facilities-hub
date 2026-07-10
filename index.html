@@ -194,7 +194,32 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <div class="sec-hdr"><span class="sec-lbl">Operação</span><div class="sec-line"></div><span class="ptag pt-all">Matheus + Marina</span></div>
     <div class="g3">
       <a href="https://checklist-genial.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico it">✅</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tt">Inspeção</div></div><div class="ct-name">Checklist de Unidades</div><div class="ct-desc">Inspeções nas Casas Geniais com fotos e acompanhamento por unidade.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Matheus + Técnicos</div></a>
-      <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico ig">📦</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tg">Almoxarifado</div></div><div class="ct-name">Controle de Estoque</div><div class="ct-desc">Materiais de manutenção, solicitações de compra e movimentações por unidade.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Matheus + Técnicos</div></a>
+      <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico ig">📦</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tg">Almoxarifado</div></div><div class="ct-name">Controle de Estoque</div><div class="ct-desc">Materiais de manutenção, solicitações de compra e movimentações por unidade.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>      <a href="/kpis.html" target="_blank" class="card ct">
+        <div class="ct-top">
+          <div class="ct-ico ik">📊</div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+        <div><div class="ct-tag tk">Indicadores</div></div>
+        <div class="ct-name">KPIs &amp; Indicadores</div>
+        <div class="ct-desc">SLA, CSAT, corretivas vs. preventivas e chamados reabertos por mês.</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:10px;background:rgba(224,100,153,.07);border:1px solid rgba(224,100,153,.15);margin-top:2px;">
+          <div>
+            <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(224,100,153,.7);margin-bottom:3px;">SLA · mês atual</div>
+            <div style="display:flex;align-items:baseline;gap:6px;">
+              <span id="kpiSlaVal" style="font-size:22px;font-weight:800;color:#E891B8;font-family:'JetBrains Mono',monospace;">—</span>
+              <span style="font-size:11px;color:var(--tm);" id="kpiSlaSub">carregando…</span>
+            </div>
+          </div>
+          <div style="text-align:right;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--td);margin-bottom:3px;">CSAT</div>
+            <div style="font-size:16px;font-weight:800;color:#E891B8;font-family:'JetBrains Mono',monospace;" id="kpiCsatVal">—</div>
+          </div>
+        </div>
+        <div class="ct-foot">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Somente Matheus
+        </div>
+      </a>
     </div>
   </div>
 
@@ -1032,6 +1057,29 @@ function loadZoho(){
     });
 }
 
+// ── KPI PREVIEW NO HUB ───────────────────────────────────────
+function loadKPIPreview(){
+  fetch('/api/kpis').then(r=>r.json()).then(data=>{
+    if(!data.ok) return;
+    const tickets=data.tickets||[];
+    const now=new Date();
+    const mes=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+    const doMes=tickets.filter(t=>t.createdTime&&t.createdTime.slice(0,7)===mes);
+    const comSLA=doMes.filter(t=>t.dueDate&&t.closedTime);
+    const noPrazo=comSLA.filter(t=>new Date(t.closedTime)<=new Date(t.dueDate));
+    const pct=comSLA.length?Math.round((noPrazo.length/comSLA.length)*100):null;
+    const elV=document.getElementById('kpiSlaVal');
+    const elS=document.getElementById('kpiSlaSub');
+    const elC=document.getElementById('kpiCsatVal');
+    if(elV){
+      elV.textContent=pct!==null?pct+'%':'—';
+      if(pct!==null) elV.style.color=pct>=80?'var(--green)':pct>=60?'var(--yellow)':'var(--red)';
+    }
+    if(elS&&pct!==null) elS.textContent=noPrazo.length+'/'+comSLA.length+' no prazo';
+    if(elC) elC.textContent='100%';
+  }).catch(()=>{});
+}
+
 // ── INICIALIZAR ───────────────────────────────────────────────
 loadPreventivas();
 loadCGInfo();
@@ -1039,6 +1087,7 @@ loadClima();
 loadFeriados();
 loadZoho();
 initDeludaPreview();
+loadKPIPreview();
 
 </script>
 </body>
