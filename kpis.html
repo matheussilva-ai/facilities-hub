@@ -365,25 +365,21 @@ function renderVolume(tickets) {
     const n = counts[key] || 0;
     const pct = Math.round((n / tickets.length) * 100) || 0;
     const st = byStatus[key] || { fechados: 0, abertos: 0, pendentes: 0 };
-    const pctRes = n ? Math.round((st.fechados / n) * 100) : 0;
 
     const row = document.createElement('div');
-    row.style.cssText = 'margin-bottom:12px;cursor:pointer;';
+    row.style.cssText = 'margin-bottom:14px;cursor:pointer;';
     row.innerHTML = `
-      <div class="vol-bar-row" style="margin-bottom:4px;">
+      <div class="vol-bar-row" style="margin-bottom:6px;">
         <div class="vol-bar-label">${cat.emoji} ${cat.label}</div>
         <div class="vol-bar-track">
           <div class="vol-bar-fill" style="width:${(n/max)*100}%;background:${colors[key]};opacity:0.7;"></div>
         </div>
         <div class="vol-bar-num">${n} <span style="opacity:.5;font-size:9px">(${pct}%)</span></div>
       </div>
-      <div style="display:flex;align-items:center;gap:8px;padding-left:90px;">
-        <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;display:flex;">
-          <div style="width:${pctRes}%;background:var(--green);transition:width .6s;"></div>
-        </div>
-        <span style="font-size:10px;color:var(--green);font-family:'JetBrains Mono',monospace;min-width:20px">${st.fechados}✓</span>
-        <span style="font-size:10px;color:var(--red);font-family:'JetBrains Mono',monospace;min-width:20px">${st.abertos}●</span>
-        <span style="font-size:10px;color:var(--yellow);font-family:'JetBrains Mono',monospace;min-width:20px">${st.pendentes}⏳</span>
+      <div style="padding-left:90px;display:flex;gap:14px;">
+        <span style="font-size:11px;color:var(--green);font-weight:600;">${st.fechados} fechados</span>
+        <span style="font-size:11px;color:var(--red);font-weight:600;">${st.abertos} abertos</span>
+        <span style="font-size:11px;color:var(--yellow);font-weight:600;">${st.pendentes} pendentes</span>
       </div>`;
     row.onclick = () => { selectedCat = key; refresh(); };
     el.appendChild(row);
