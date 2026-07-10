@@ -289,18 +289,31 @@ function calcSLA(tickets) {
   return { comSLA, noPrazo, foraP, semSLA, pct };
 }
 
-function getFiltered() {
+// Volume: filtra por createdTime (demanda do mês)
+function getFilteredVolume() {
   let t = allTickets;
   if (selectedMonth) t = t.filter(x => monthOf(x.createdTime) === selectedMonth);
   if (selectedCat !== 'all') t = t.filter(x => getCat(x) === selectedCat);
   return t;
 }
 
+// SLA: filtra por closedTime (performance do mês — o correto)
+function getFilteredSLA() {
+  let t = allTickets.filter(x => x.closedTime);
+  if (selectedMonth) t = t.filter(x => monthOf(x.closedTime) === selectedMonth);
+  if (selectedCat !== 'all') t = t.filter(x => getCat(x) === selectedCat);
+  return t;
+}
+
 // ─── RENDER ──────────────────────────────────────────────────
 function render() {
+  // base por criação — para volume, tabs, corretivas/preventivas
   const base     = allTickets.filter(t => !selectedMonth || monthOf(t.createdTime) === selectedMonth);
-  const filtered = getFiltered();
-  const { comSLA, noPrazo, foraP, semSLA, pct } = calcSLA(filtered);
+  // filtrado por criação — para status row (total/abertos/fechados/pendentes)
+  const filtered = getFilteredVolume();
+  // filtrado por encerramento — SLA mede performance do mês (correto)
+  const filteredSLA = getFilteredSLA();
+  const { comSLA, noPrazo, foraP, semSLA, pct } = calcSLA(filteredSLA);
 
   // Status row
   const fechados  = filtered.filter(t => STATUS_FECHADO.includes(t.status)).length;
@@ -351,12 +364,13 @@ function render() {
   document.getElementById('kpiPrev').textContent    = prev;
   document.getElementById('kpiPrevSub').textContent = `${100-pctC}% manutenção`;
 
-  // Gráficos
-  renderSLAChart(base);
+  // Gráficos — SLA usa todos os tickets (sem filtro de mês) agrupando por closedTime
+  const allCatFiltered = selectedCat === 'all' ? allTickets : allTickets.filter(t => getCat(t) === selectedCat);
+  renderSLAChart(allCatFiltered);
   renderTipoChart(base);
 
-  // Tabela
-  renderTable(filtered, foraP, semSLA);
+  // Tabela — usa SLA filtrado por closedTime
+  renderTable(filteredSLA, foraP, semSLA);
 
   // Tabs count
   updateTabCounts(base);
