@@ -333,6 +333,10 @@ function renderTop(tickets) {
     ? 'Todos no prazo ✓' : `tickets atrasados`;
 }
 
+// ─── STATUS HELPERS ───────────────────────────────────────────
+const STATUS_FECHADO  = ['Closed', 'Resolved', 'Cancelled'];
+const STATUS_PENDENTE = ['On Hold', 'Aguardando Entrega do Item', 'Aguardando Fornecedor', 'Em execução pela GHC'];
+
 // ─── VOLUME POR CATEGORIA ─────────────────────────────────────
 function renderVolume(tickets) {
   const el = document.getElementById('volBars');
@@ -347,17 +351,41 @@ function renderVolume(tickets) {
     manut:'var(--red)', limp:'var(--teal)', comp:'var(--orange)',
     outro:'#6b7280', melh:'var(--blue)'
   };
+  // Calcular breakdown por status para cada categoria
+  const byStatus = {};
+  tickets.forEach(t => {
+    const c = getCat(t);
+    if (!byStatus[c]) byStatus[c] = { fechados: 0, abertos: 0, pendentes: 0 };
+    if (STATUS_FECHADO.includes(t.status)) byStatus[c].fechados++;
+    else if (t.status === 'Open') byStatus[c].abertos++;
+    else byStatus[c].pendentes++;
+  });
+
   Object.entries(CATS).forEach(([key, cat]) => {
     const n = counts[key] || 0;
     const pct = Math.round((n / tickets.length) * 100) || 0;
+    const st = byStatus[key] || { fechados: 0, abertos: 0, pendentes: 0 };
+    const pctRes = n ? Math.round((st.fechados / n) * 100) : 0;
+
     const row = document.createElement('div');
-    row.className = 'vol-bar-row';
+    row.style.cssText = 'margin-bottom:12px;cursor:pointer;';
     row.innerHTML = `
-      <div class="vol-bar-label">${cat.emoji} ${cat.label}</div>
-      <div class="vol-bar-track">
-        <div class="vol-bar-fill" style="width:${(n/max)*100}%;background:${colors[key]};opacity:0.7;"></div>
+      <div class="vol-bar-row" style="margin-bottom:4px;">
+        <div class="vol-bar-label">${cat.emoji} ${cat.label}</div>
+        <div class="vol-bar-track">
+          <div class="vol-bar-fill" style="width:${(n/max)*100}%;background:${colors[key]};opacity:0.7;"></div>
+        </div>
+        <div class="vol-bar-num">${n} <span style="opacity:.5;font-size:9px">(${pct}%)</span></div>
       </div>
-      <div class="vol-bar-num">${n} <span style="opacity:.5;font-size:9px">(${pct}%)</span></div>`;
+      <div style="display:flex;align-items:center;gap:8px;padding-left:90px;">
+        <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;display:flex;">
+          <div style="width:${pctRes}%;background:var(--green);transition:width .6s;"></div>
+        </div>
+        <span style="font-size:10px;color:var(--green);font-family:'JetBrains Mono',monospace;min-width:20px">${st.fechados}✓</span>
+        <span style="font-size:10px;color:var(--red);font-family:'JetBrains Mono',monospace;min-width:20px">${st.abertos}●</span>
+        <span style="font-size:10px;color:var(--yellow);font-family:'JetBrains Mono',monospace;min-width:20px">${st.pendentes}⏳</span>
+      </div>`;
+    row.onclick = () => { selectedCat = key; refresh(); };
     el.appendChild(row);
   });
 }
@@ -402,8 +430,49 @@ function renderCatKpis(tickets) {
   el.innerHTML = '';
   const { pct, noPrazo, comSLA, foraP } = calcSLA(tickets);
 
+  // ── Breakdown: total / fechados / abertos / pendentes ──
+  const fechados  = tickets.filter(t => STATUS_FECHADO.includes(t.status)).length;
+  const abertos   = tickets.filter(t => t.status === 'Open').length;
+  const pendentes = tickets.filter(t => STATUS_PENDENTE.includes(t.status)).length;
+  const pctRes    = tickets.length ? Math.round((fechados / tickets.length) * 100) : 0;
+
+  // Card de breakdown
+  const breakdown = document.createElement('div');
+  breakdown.className = 'cat-kpi';
+  breakdown.style.cssText = 'grid-column: 1 / -1;';
+  breakdown.innerHTML = `
+    <div class="cat-kpi-lbl">Total de tickets — ${selectedCat === 'all' ? 'todas as categorias' : CATS[selectedCat]?.label || ''}</div>
+    <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:10px;">
+      <span class="cat-kpi-val" style="color:var(--accent)">${tickets.length}</span>
+      <span style="font-size:12px;color:var(--muted)">tickets no período</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+      <div style="flex:1;height:10px;background:var(--border);border-radius:5px;overflow:hidden;display:flex;">
+        <div style="width:${pctRes}%;background:var(--green);border-radius:5px 0 0 5px;transition:width .6s ease;"></div>
+      </div>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);min-width:35px">${pctRes}%</span>
+    </div>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--green);flex-shrink:0;"></span>
+        <span style="color:var(--green);font-weight:600;">${fechados}</span>
+        <span style="color:var(--muted)">fechados</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--red);flex-shrink:0;"></span>
+        <span style="color:var(--red);font-weight:600;">${abertos}</span>
+        <span style="color:var(--muted)">abertos</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;font-size:12px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:var(--yellow);flex-shrink:0;"></span>
+        <span style="color:var(--yellow);font-weight:600;">${pendentes}</span>
+        <span style="color:var(--muted)">pendentes</span>
+      </div>
+    </div>`;
+  el.appendChild(breakdown);
+
+  // ── Corretivas vs preventivas (só manutenção) ──
   if (selectedCat === 'manut') {
-    // Corretivas vs preventivas só para manutenção
     const prev = tickets.filter(isPreventiva).length;
     const corr = tickets.length - prev;
     const pctCorr = tickets.length ? Math.round((corr/tickets.length)*100) : 0;
@@ -411,19 +480,15 @@ function renderCatKpis(tickets) {
     addCatKpi(el, 'Preventivas', prev, `${100-pctCorr}% do total`, 'var(--green)');
   }
 
-  // SLA sempre
+  // ── SLA sempre ──
   addCatKpi(el, 'SLA — no prazo',
     pct !== null ? `${pct}%` : '—',
-    pct !== null ? `${noPrazo.length}/${comSLA.length} tickets` : 'sem SLA',
+    pct !== null ? `${noPrazo.length}/${comSLA.length} encerrados c/ SLA` : 'sem SLA configurado',
     pct === null ? 'var(--muted)' : pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)'
   );
   addCatKpi(el, 'Fora do prazo', foraP.length,
     foraP.length === 0 ? 'todos no prazo ✓' : 'tickets atrasados',
     foraP.length === 0 ? 'var(--green)' : 'var(--red)'
-  );
-  addCatKpi(el, 'Total', tickets.length,
-    selectedCat === 'all' ? 'todas as categorias' : CATS[selectedCat]?.label || '',
-    'var(--accent)'
   );
 }
 
