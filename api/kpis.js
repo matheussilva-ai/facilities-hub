@@ -36,7 +36,6 @@ async function fetchPage(token, from) {
     from:              String(from),
     limit:             '100',
     sortBy:            'createdTime',
-    include:           'contacts',
   });
 
   const res = await fetch(`https://desk.zoho.com/api/v1/tickets/search?${params}`, {
