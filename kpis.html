@@ -247,11 +247,22 @@ const CATS = {
 
 const FAC_EMAILS = ['marina.cesar','eliza.vernizzi','elaine.samiti','maria.luiza.biano','matheus.silva','nathalia.brancalleao','facilities@genialcare','zoho-facilities@genialcare'];
 
-const MONTHS = [
-  {key:'2026-01',label:'Jan'},{key:'2026-02',label:'Fev'},{key:'2026-03',label:'Mar'},
-  {key:'2026-04',label:'Abr'},{key:'2026-05',label:'Mai'},{key:'2026-06',label:'Jun'},
-  {key:'2026-07',label:'Jul'},
-];
+const MONTH_LABELS = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
+let MONTHS = []; // gerado dinamicamente a partir dos dados reais
+
+function buildMonthsFromData(tickets) {
+  const keys = new Set();
+  tickets.forEach(t => {
+    const m = monthOf(t.createdTime);
+    if (m) keys.add(m);
+    const ms = monthOf(t.closedTime);
+    if (ms) keys.add(ms);
+  });
+  MONTHS = [...keys].sort().map(key => ({
+    key,
+    label: MONTH_LABELS[parseInt(key.split('-')[1]) - 1]
+  }));
+}
 
 const STATUS_FECHADO  = ['Closed','Resolved','Cancelled'];
 const STATUS_PENDENTE = ['On Hold','Aguardando Entrega do Item','Aguardando Fornecedor','Em execução pela GHC'];
@@ -442,8 +453,15 @@ function renderTable(filtered, foraP, semSLA) {
   if (foraP.length === 0) {
     body.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--green);padding:20px">✓ Todos os tickets foram encerrados dentro do prazo!</td></tr>`;
   } else {
-    body.innerHTML = foraP.sort((a,b) => new Date(b.closedTime)-new Date(a.closedTime)).map(t => {
-      const dias    = Math.round((new Date(t.closedTime)-new Date(t.dueDate))/86400000);
+    const sorted = foraP.sort((a,b) => new Date(b.closedTime)-new Date(a.closedTime));
+
+    // Calcular atrasos e média
+    const atrasos = sorted.map(t => Math.round((new Date(t.closedTime)-new Date(t.dueDate))/86400000));
+    const mediaAtraso = Math.round(atrasos.reduce((s,v) => s+v, 0) / atrasos.length);
+    const maxAtraso   = Math.max(...atrasos);
+
+    body.innerHTML = sorted.map((t, i) => {
+      const dias    = atrasos[i];
       const unidade = t.cf?.cf_unidade || '—';
       const catKey  = getCat(t);
       const catInfo = CATS[catKey] || {emoji:'?', label:'—'};
@@ -455,7 +473,17 @@ function renderTable(filtered, foraP, semSLA) {
         <td class="tic">${fmtDate(t.dueDate)}</td>
         <td><span class="pill">+${dias}d</span></td>
       </tr>`;
-    }).join('');
+    }).join('') +
+    // Rodapé com média e maior atraso
+    `<tr style="border-top:2px solid var(--border);background:var(--surface2);">
+      <td colspan="5" style="padding:10px 8px;font-size:11px;font-weight:600;color:var(--muted);text-align:right;">
+        ${foraP.length} ticket(s) fora do prazo &nbsp;·&nbsp; maior atraso: <span style="color:var(--red)">+${maxAtraso}d</span>
+      </td>
+      <td style="padding:10px 8px;">
+        <div style="font-size:9px;color:var(--muted);margin-bottom:2px;">média</div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:var(--yellow)">+${mediaAtraso}d</span>
+      </td>
+    </tr>`;
   }
 
   if (semSLA.length > 0) {
@@ -524,7 +552,6 @@ function buildMonths() {
 
 // ─── INIT ─────────────────────────────────────────────────────
 async function init() {
-  buildMonths();
   buildTabs();
   try {
     const res = await fetch('/api/kpis');
@@ -532,6 +559,8 @@ async function init() {
     const data = await res.json();
     if (!data.ok) throw new Error(data.error||'Erro desconhecido');
     allTickets = data.tickets||[];
+    buildMonthsFromData(allTickets); // meses dinâmicos a partir dos dados
+    buildMonths(); // reconstruir seletor com meses reais
     document.getElementById('loadingEl').style.display = 'none';
     document.getElementById('content').style.display = 'block';
     render();
