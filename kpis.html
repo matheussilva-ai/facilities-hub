@@ -144,6 +144,10 @@ h1 { font-size: 22px; font-weight: 700; color: #fff; }
   <div class="cat-tabs" id="catTabs"></div>
 
   <!-- STATUS ROW -->
+  <div style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
+    <span style="background:var(--accent-dim);color:var(--accent);padding:2px 8px;border-radius:4px;font-weight:600;">VOLUME</span>
+    <span>tickets <span id="volumeContextLabel">do período</span> — por data de abertura</span>
+  </div>
   <div class="status-row">
     <div class="st-card">
       <div class="st-label">Total</div>
@@ -175,12 +179,17 @@ h1 { font-size: 22px; font-weight: 700; color: #fff; }
   </div>
 
   <!-- KPI ROW -->
+  <div style="font-size:10px;color:var(--muted);font-family:'JetBrains Mono',monospace;margin-bottom:6px;display:flex;align-items:center;gap:6px;">
+    <span style="background:var(--green-dim);color:var(--green);padding:2px 8px;border-radius:4px;font-weight:600;">PERFORMANCE</span>
+    <span>SLA e indicadores <span id="slaContextLabel">do período</span> — por data de encerramento</span>
+  </div>
   <div class="kpi-row">
     <div class="kpi-card k-sla">
       <div class="kpi-lbl">SLA — % no prazo</div>
       <div class="kpi-val" id="kpiSla" style="color:var(--green)">—</div>
       <div class="kpi-sub" id="kpiSlaSub">—</div>
       <div id="kpiSlaBadge"></div>
+      <div style="font-size:10px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px solid var(--border);line-height:1.5;opacity:.8;" id="kpiSlaCtx"></div>
     </div>
     <div class="kpi-card k-corr" id="kpiCorrCard">
       <div class="kpi-lbl">Corretivas</div>
@@ -337,6 +346,15 @@ function render() {
 
   document.getElementById('stTotal').textContent    = filtered.length;
   document.getElementById('stTotalSub').textContent = catLabel;
+
+  // Atualizar labels de contexto
+  const ctxLabel = selectedMonth
+    ? `de ${MONTHS.find(m=>m.key===selectedMonth)?.label||selectedMonth}`
+    : 'do período';
+  const vcl = document.getElementById('volumeContextLabel');
+  const scl = document.getElementById('slaContextLabel');
+  if (vcl) vcl.textContent = ctxLabel;
+  if (scl) scl.textContent = ctxLabel;
   document.getElementById('stFechados').textContent   = fechados;
   document.getElementById('stFechadosSub').textContent = `${pctRes}% de resolução`;
   document.getElementById('stAbertos').textContent   = abertos;
@@ -358,6 +376,14 @@ function render() {
   slaEl.style.color = pct === null ? 'var(--muted)' : pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--yellow)' : 'var(--red)';
   document.getElementById('kpiSlaSub').textContent = pct !== null
     ? `${noPrazo.length}/${comSLA.length} encerrados c/ SLA` : 'sem SLA configurado';
+  // Contexto do SLA
+  const slaCtxEl = document.getElementById('kpiSlaCtx');
+  if (slaCtxEl) {
+    slaCtxEl.textContent = selectedMonth
+      ? `Considera tickets encerrados em ${MONTHS.find(m=>m.key===selectedMonth)?.label||selectedMonth} — independente de quando foram abertos`
+      : 'Considera todos os tickets encerrados no período — independente de quando foram abertos';
+  }
+
   const slaBadge = document.getElementById('kpiSlaBadge');
   if (pct !== null) {
     const cls = pct >= 80 ? 'ok' : pct >= 60 ? 'warn' : 'bad';
