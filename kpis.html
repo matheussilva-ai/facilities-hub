@@ -186,11 +186,13 @@ h1 { font-size: 22px; font-weight: 700; color: #fff; }
       <div class="kpi-lbl">Corretivas</div>
       <div class="kpi-val" id="kpiCorr" style="color:var(--red)">—</div>
       <div class="kpi-sub" id="kpiCorrSub">—</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:6px;line-height:1.4;opacity:.7;">Abertas pelo time<br>operacional das CGs</div>
     </div>
     <div class="kpi-card k-prev" id="kpiPrevCard">
       <div class="kpi-lbl">Preventivas</div>
       <div class="kpi-val" id="kpiPrev" style="color:var(--green)">—</div>
       <div class="kpi-sub" id="kpiPrevSub">—</div>
+      <div style="font-size:10px;color:var(--muted);margin-top:6px;line-height:1.4;opacity:.7;">Abertas pelo time<br>de Facilities</div>
     </div>
     <div class="kpi-card k-csat">
       <div class="kpi-lbl">CSAT</div>
@@ -371,9 +373,9 @@ function render() {
   const corr  = manut.length - prev;
   const pctC  = manut.length ? Math.round((corr/manut.length)*100) : 0;
   document.getElementById('kpiCorr').textContent    = corr;
-  document.getElementById('kpiCorrSub').textContent = `${pctC}% manutenção`;
+  document.getElementById('kpiCorrSub').textContent = `${pctC}% do total de manutenção`;
   document.getElementById('kpiPrev').textContent    = prev;
-  document.getElementById('kpiPrevSub').textContent = `${100-pctC}% manutenção`;
+  document.getElementById('kpiPrevSub').textContent = `${100-pctC}% do total de manutenção`;
 
   // Gráficos — SLA usa todos os tickets (sem filtro de mês) agrupando por closedTime
   const allCatFiltered = selectedCat === 'all' ? allTickets : allTickets.filter(t => getCat(t) === selectedCat);
