@@ -663,6 +663,14 @@ function normEspaco(e) {
   return e.trim().toLowerCase().replace(/[\s.,]+/g,' ');
 }
 
+// Equipamentos fixos — ignora cf_espaco e agrupa só por palavra-chave + unidade
+const EQUIPAMENTOS_FIXOS = ['elevador','ar-condicionado','condicionado','filtro','gerador','interfone','portão','bomba'];
+
+function isEquipamentoFixo(subject) {
+  const s = (subject||'').toLowerCase();
+  return EQUIPAMENTOS_FIXOS.some(e => s.includes(e));
+}
+
 function diasEntre(d1, d2) {
   try { return Math.abs((new Date(d1) - new Date(d2)) / 86400000); } catch { return 0; }
 }
@@ -712,9 +720,10 @@ function detectarRecorrencias(tickets, mesFiltro) {
         if (vistos.has(par)) continue;
         vistos.add(par);
 
-        // Chave do grupo
-        const espaco = e1 || e2 || '';
-        const chave  = `${unidade}||${espaco}||${[...comum].sort().join(',')}`;
+        // Chave do grupo — equipamentos fixos ignoram cf_espaco
+        const ehEquip = isEquipamentoFixo(t1.subject) || isEquipamentoFixo(t2.subject);
+        const espaco  = ehEquip ? '' : (e1 || e2 || '');
+        const chave   = `${unidade}||${espaco}||${[...comum].sort().join(',')}`;
         if (!grupos[chave]) {
           grupos[chave] = {
             unidade, espaco,
@@ -732,10 +741,11 @@ function detectarRecorrencias(tickets, mesFiltro) {
   // Converter para array — expandir cada grupo para pegar TODOS os tickets similares
   let resultado = Object.values(grupos).map(g => {
     // Buscar todos os tickets da unidade+espaço com palavras em comum (não só os pares)
+    const ehEquip = isEquipamentoFixo(g.problema);
     const candidatos = (porUnidade[g.unidade] || []).filter(t => {
       const eT = normEspaco(t.cf?.cf_espaco);
-      // Espaço deve bater (se ambos têm)
-      if (g.espaco && eT && eT !== g.espaco) return false;
+      // Equipamentos fixos ignoram cf_espaco; outros devem ter o mesmo espaço
+      if (!ehEquip && g.espaco && eT && eT !== g.espaco) return false;
       // Deve ter pelo menos 2 palavras em comum com o grupo
       const kwT = extrairKW(t.subject);
       const comum = new Set([...g.palavras].filter(k => kwT.has(k)));
