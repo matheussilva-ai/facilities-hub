@@ -729,8 +729,19 @@ function detectarRecorrencias(tickets, mesFiltro) {
     }
   }
 
-  // Converter para array e filtrar por mês se necessário
+  // Converter para array — expandir cada grupo para pegar TODOS os tickets similares
   let resultado = Object.values(grupos).map(g => {
+    // Buscar todos os tickets da unidade+espaço com palavras em comum (não só os pares)
+    const candidatos = (porUnidade[g.unidade] || []).filter(t => {
+      const eT = normEspaco(t.cf?.cf_espaco);
+      // Espaço deve bater (se ambos têm)
+      if (g.espaco && eT && eT !== g.espaco) return false;
+      // Deve ter pelo menos 2 palavras em comum com o grupo
+      const kwT = extrairKW(t.subject);
+      const comum = new Set([...g.palavras].filter(k => kwT.has(k)));
+      return comum.size >= 2;
+    });
+    candidatos.forEach(t => g.tickets.add(t.ticketNumber));
     const tksDoGrupo = manut.filter(t => g.tickets.has(t.ticketNumber));
     const meses = [...new Set(tksDoGrupo.map(t => monthOf(t.createdTime)).filter(Boolean))].sort();
     return { ...g, meses, count: g.tickets.size };
