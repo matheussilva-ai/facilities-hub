@@ -116,6 +116,29 @@ h1 { font-size: 22px; font-weight: 700; color: #fff; }
 .note { background: var(--surface2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 10px 14px; font-size: 12px; color: var(--muted); margin-top: 12px; line-height: 1.5; }
 .last-update { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 24px; }
 
+/* RECORRÊNCIAS */
+.rec-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 14px; overflow: hidden; }
+.rec-header { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.rec-title { font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 8px; }
+.rec-row { display: flex; align-items: flex-start; gap: 12px; padding: 12px 20px; border-bottom: 0.5px solid var(--border); }
+.rec-row:last-child { border-bottom: none; }
+.rec-row:hover { background: rgba(124,92,252,0.04); }
+.rec-badge { font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 1px; }
+.rec-badge.alto { background: var(--red-dim); color: var(--red); }
+.rec-badge.medio { background: var(--yellow-dim); color: var(--yellow); }
+.rec-info { flex: 1; min-width: 0; }
+.rec-prob { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.rec-local { font-size: 12px; color: var(--muted); margin-bottom: 5px; }
+.rec-meses { display: flex; gap: 4px; flex-wrap: wrap; }
+.rec-mes { padding: 1px 7px; border-radius: 20px; background: var(--surface2); border: 1px solid var(--border); font-size: 10px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+.rec-mes.destaque { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+.rec-empty { text-align: center; padding: 28px; font-size: 13px; color: var(--muted); }
+.rec-kpi-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-bottom: 14px; }
+.rec-kpi { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+.rec-kpi-lbl { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 8px; }
+.rec-kpi-val { font-size: 26px; font-weight: 700; font-family: 'JetBrains Mono', monospace; color: var(--yellow); }
+.rec-kpi-sub { font-size: 11px; color: var(--muted); margin-top: 3px; }
+
 @media (max-width: 640px) {
   .status-row, .kpi-row { grid-template-columns: 1fr 1fr; }
   .charts-row { grid-template-columns: 1fr; }
@@ -244,6 +267,36 @@ h1 { font-size: 22px; font-weight: 700; color: #fff; }
   </div>
 
   <div id="slaNote" class="note" style="display:none"></div>
+  <!-- RECORRÊNCIAS -->
+  <div class="rec-kpi-row">
+    <div class="rec-kpi">
+      <div class="rec-kpi-lbl">Problemas recorrentes</div>
+      <div class="rec-kpi-val" id="recTotal">—</div>
+      <div class="rec-kpi-sub">problemas distintos que voltaram</div>
+    </div>
+    <div class="rec-kpi">
+      <div class="rec-kpi-lbl">Total de tickets recorrentes</div>
+      <div class="rec-kpi-val" id="recTickets">—</div>
+      <div class="rec-kpi-sub">tickets de manutenção recorrente</div>
+    </div>
+    <div class="rec-kpi">
+      <div class="rec-kpi-lbl">Unidade com mais recorrências</div>
+      <div class="rec-kpi-val" id="recUnidade" style="font-size:18px;margin-top:4px">—</div>
+      <div class="rec-kpi-sub" id="recUnidadeSub">—</div>
+    </div>
+  </div>
+
+  <div class="rec-section">
+    <div class="rec-header">
+      <div class="rec-title">
+        <span class="dot" style="background:var(--yellow)"></span>
+        Problemas recorrentes — manutenção
+      </div>
+      <span style="font-size:11px;color:var(--muted)" id="recPeriodoLabel">jan – ago 2026</span>
+    </div>
+    <div id="recList"></div>
+  </div>
+
   <div class="last-update" id="lastUpdate"></div>
 </div>
 
@@ -402,6 +455,9 @@ function render() {
   document.getElementById('kpiCorrSub').textContent = `${pctC}% do total de manutenção`;
   document.getElementById('kpiPrev').textContent    = prev;
   document.getElementById('kpiPrevSub').textContent = `${100-pctC}% do total de manutenção`;
+
+  // Recorrências
+  renderRecorrencias(allTickets);
 
   // Gráficos — SLA usa todos os tickets (sem filtro de mês) agrupando por closedTime
   const allCatFiltered = selectedCat === 'all' ? allTickets : allTickets.filter(t => getCat(t) === selectedCat);
@@ -579,6 +635,163 @@ function buildMonths() {
 }
 
 // ─── INIT ─────────────────────────────────────────────────────
+// ── RECORRÊNCIAS ─────────────────────────────────────────────
+const MESES_PT = {
+  '2026-01':'jan/26','2026-02':'fev/26','2026-03':'mar/26','2026-04':'abr/26',
+  '2026-05':'mai/26','2026-06':'jun/26','2026-07':'jul/26','2026-08':'ago/26',
+  '2026-09':'set/26','2026-10':'out/26','2026-11':'nov/26','2026-12':'dez/26',
+};
+
+const STOPWORDS_REC = new Set([
+  'de','da','do','das','dos','em','no','na','com','para','por','um','uma',
+  'o','a','e','é','está','não','que','se','os','as','ao','ser','ter','foi',
+  'são','há','já','mais','como','mas','ou','vai','sua','seu','isso','esse',
+  'essa','pelo','pela','apenas','ainda','até','nunca','todo','toda','todos',
+  'todas','cg','solicitação','solicito','favor','precisa','urgente','urgência',
+  'problema','problemas','funcionando','funcionar','fazer','novo','nova',
+  'troca','trocar','reparo','reparar','verificar','ajuste','ajustar',
+]);
+
+function extrairKW(texto) {
+  if (!texto) return new Set();
+  const palavras = texto.toLowerCase().replace(/[^\w\s]/g,' ').split(/\s+/);
+  return new Set(palavras.filter(p => p.length > 3 && !STOPWORDS_REC.has(p)));
+}
+
+function normEspaco(e) {
+  if (!e) return null;
+  return e.trim().toLowerCase().replace(/[\s.,]+/g,' ');
+}
+
+function diasEntre(d1, d2) {
+  try { return Math.abs((new Date(d1) - new Date(d2)) / 86400000); } catch { return 0; }
+}
+
+function detectarRecorrencias(tickets, mesFiltro) {
+  // Filtrar só manutenção e sem checklist em massa
+  const manut = tickets.filter(t => {
+    const motivo = (t.cf?.cf_motivo_da_solicitacao||'').toLowerCase();
+    if (motivo !== 'manutenção') return false;
+    if (/\[\s*cg\s+\w+\s*\]\s+sala\s+\d+\s+—/i.test(t.subject||'')) return false;
+    return true;
+  });
+
+  // Agrupar por unidade
+  const porUnidade = {};
+  [...manut].sort((a,b) => (a.createdTime||'').localeCompare(b.createdTime||''))
+    .forEach(t => {
+      const u = t.cf?.cf_unidade || '';
+      if (!u) return;
+      if (!porUnidade[u]) porUnidade[u] = [];
+      porUnidade[u].push(t);
+    });
+
+  // Detectar pares recorrentes
+  const vistos = new Set();
+  const grupos = {}; // chave = unidade+espaco+kwjoin → {unidade, espaco, tickets:[]}
+
+  for (const [unidade, tks] of Object.entries(porUnidade)) {
+    for (let i = 0; i < tks.length; i++) {
+      const t1 = tks[i];
+      const kw1 = extrairKW(t1.subject);
+      const e1  = normEspaco(t1.cf?.cf_espaco);
+      if (kw1.size < 1) continue;
+
+      for (let j = i+1; j < tks.length; j++) {
+        const t2 = tks[j];
+        if (diasEntre(t1.createdTime, t2.createdTime) < 30) continue;
+
+        const e2  = normEspaco(t2.cf?.cf_espaco);
+        if (e1 && e2 && e1 !== e2) continue;
+
+        const kw2   = extrairKW(t2.subject);
+        const comum = new Set([...kw1].filter(k => kw2.has(k)));
+        if (comum.size < 2) continue;
+
+        const par = [t1.ticketNumber, t2.ticketNumber].sort().join('-');
+        if (vistos.has(par)) continue;
+        vistos.add(par);
+
+        // Chave do grupo
+        const espaco = e1 || e2 || '';
+        const chave  = `${unidade}||${espaco}||${[...comum].sort().join(',')}`;
+        if (!grupos[chave]) {
+          grupos[chave] = {
+            unidade, espaco,
+            problema: t1.subject || '',
+            palavras: comum,
+            tickets: new Set(),
+          };
+        }
+        grupos[chave].tickets.add(t1.ticketNumber);
+        grupos[chave].tickets.add(t2.ticketNumber);
+      }
+    }
+  }
+
+  // Converter para array e filtrar por mês se necessário
+  let resultado = Object.values(grupos).map(g => {
+    const tksDoGrupo = manut.filter(t => g.tickets.has(t.ticketNumber));
+    const meses = [...new Set(tksDoGrupo.map(t => monthOf(t.createdTime)).filter(Boolean))].sort();
+    return { ...g, meses, count: g.tickets.size };
+  });
+
+  // Filtro de mês: manter grupos que têm pelo menos um ticket no mês selecionado
+  if (mesFiltro) {
+    resultado = resultado.filter(g => g.meses.includes(mesFiltro));
+  }
+
+  // Ordenar por count decrescente
+  resultado.sort((a,b) => b.count - a.count);
+  return resultado;
+}
+
+function renderRecorrencias(tickets) {
+  const grupos = detectarRecorrencias(tickets, selectedMonth);
+
+  // KPI cards
+  document.getElementById('recTotal').textContent = grupos.length || '—';
+  const totalTickets = grupos.reduce((s,g) => s + g.count, 0);
+  document.getElementById('recTickets').textContent = totalTickets || '—';
+
+  // Unidade com mais recorrências
+  const porUnid = {};
+  grupos.forEach(g => { porUnid[g.unidade] = (porUnid[g.unidade]||0) + 1; });
+  const topUnid = Object.entries(porUnid).sort((a,b) => b[1]-a[1])[0];
+  document.getElementById('recUnidade').textContent = topUnid ? topUnid[0] : '—';
+  document.getElementById('recUnidadeSub').textContent = topUnid ? `${topUnid[1]} problema${topUnid[1]!==1?'s':''} recorrente${topUnid[1]!==1?'s':''}` : '';
+
+  // Label do período
+  const label = selectedMonth
+    ? `ocorrências em ${MESES_PT[selectedMonth] || selectedMonth}`
+    : 'jan – ago 2026';
+  document.getElementById('recPeriodoLabel').textContent = label;
+
+  // Lista
+  const list = document.getElementById('recList');
+  if (grupos.length === 0) {
+    list.innerHTML = `<div class="rec-empty">✓ Nenhum problema recorrente detectado no período</div>`;
+    return;
+  }
+
+  list.innerHTML = grupos.map(g => {
+    const cls = g.count >= 3 ? 'alto' : 'medio';
+    const mesesHtml = g.meses.map(m => {
+      const isDestaque = selectedMonth && m === selectedMonth;
+      return `<span class="rec-mes${isDestaque?' destaque':''}">${MESES_PT[m]||m}</span>`;
+    }).join('');
+    const localInfo = [g.espaco, g.unidade].filter(Boolean).join(' · ');
+    return `<div class="rec-row">
+      <span class="rec-badge ${cls}">${g.count}x</span>
+      <div class="rec-info">
+        <div class="rec-prob">${g.problema.slice(0,60)}</div>
+        <div class="rec-local">${localInfo}</div>
+        <div class="rec-meses">${mesesHtml}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
 async function init() {
   buildTabs();
   try {
