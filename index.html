@@ -140,6 +140,7 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <a class="ni" href="#s3" data-s="s3"><span class="ni-ico">🧾</span>Financeiro</a>
     <a class="ni" href="#s4" data-s="s4"><span class="ni-ico">🧹</span>Limpeza</a>
     <a class="ni" href="#s5" data-s="s5"><span class="ni-ico">⚡</span>Atalhos</a>
+    <a class="ni" href="terceiros.html" style="margin-left:auto;"><span class="ni-ico">👷</span>Terceiros</a>
   </nav>
 
   <div class="hero-date" id="heroDate"></div>
@@ -194,7 +195,34 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
     <div class="sec-hdr"><span class="sec-lbl">Operação</span><div class="sec-line"></div><span class="ptag pt-all">Matheus + Marina</span></div>
     <div class="g3">
       <a href="https://checklist-genial.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico it">✅</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tt">Inspeção</div></div><div class="ct-name">Checklist de Unidades</div><div class="ct-desc">Inspeções nas Casas Geniais com fotos e acompanhamento por unidade.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Matheus + Técnicos</div></a>
-      <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico ig">📦</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tg">Almoxarifado</div></div><div class="ct-name">Controle de Estoque</div><div class="ct-desc">Materiais de manutenção, solicitações de compra e movimentações por unidade.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>      <a href="/kpis.html" target="_blank" class="card ct">
+      <a href="https://estoque-ghc.vercel.app/" target="_blank" class="card ct"><div class="ct-top"><div class="ct-ico ig">📦</div><div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div></div><div><div class="ct-tag tg">Almoxarifado</div></div><div class="ct-name">Controle de Estoque</div><div class="ct-desc">Materiais de manutenção, solicitações de compra e movimentações por unidade.</div><div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>      <a href="terceiros.html" class="card ct" id="terceirosCard">
+        <div class="ct-top">
+          <div class="ct-ico" style="background:rgba(239,159,39,.10);border:1px solid rgba(239,159,39,.16);">👷</div>
+          <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+        </div>
+        <div><div class="ct-tag to">Terceiros</div></div>
+        <div class="ct-name">Controle de Terceiros</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0;">
+          <div style="padding:8px 10px;background:rgba(110,105,173,.08);border:1px solid rgba(110,105,173,.14);border-radius:9px;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--v1);margin-bottom:4px;">GHC · Manutenção</div>
+            <div style="display:flex;align-items:baseline;gap:5px;">
+              <span id="hubGhcFaltas" style="font-size:20px;font-weight:800;color:var(--tx);">–</span>
+              <span style="font-size:10px;color:var(--tm);">faltas s/ repos.</span>
+            </div>
+            <div style="font-size:10px;color:var(--td);margin-top:2px;" id="hubGhcNames">Derival · Gomes</div>
+          </div>
+          <div style="padding:8px 10px;background:rgba(176,224,228,.08);border:1px solid rgba(176,224,228,.14);border-radius:9px;">
+            <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--t1);margin-bottom:4px;">Vigilante · Tatuapé</div>
+            <div style="display:flex;align-items:baseline;gap:5px;">
+              <span id="hubVigFaltas" style="font-size:20px;font-weight:800;color:var(--tx);">–</span>
+              <span style="font-size:10px;color:var(--tm);">faltas s/ repos.</span>
+            </div>
+            <div style="font-size:10px;color:var(--td);margin-top:2px;">Marcelo</div>
+          </div>
+        </div>
+        <div class="ct-foot"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Somente Matheus</div>
+      </a>
+      <a href="/kpis.html" target="_blank" class="card ct">
         <div class="ct-top">
           <div class="ct-ico ik">📊</div>
           <div class="arr"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
@@ -1080,6 +1108,36 @@ function loadKPIPreview(){
   }).catch(()=>{});
 }
 
+// ── TERCEIROS · RESUMO NO HUB ────────────────────────────────
+function loadTerceirosPreview() {
+  const today = new Date();
+  const y = today.getFullYear(), m = today.getMonth();
+  const monthKey = `${y}-${String(m+1).padStart(2,'0')}`;
+  const days = new Date(y,m+1,0).getDate();
+
+  function countAbsent(group, techs) {
+    let n = 0;
+    try {
+      const data = JSON.parse(localStorage.getItem(`facilities-terceiros-${group}-${monthKey}`) || '{}');
+      for(let d=1;d<=days;d++){
+        const dk=`${monthKey}-${String(d).padStart(2,'0')}`;
+        const date=new Date(y,m,d); const w=date.getDay();
+        if(w===0||w===6) continue;
+        techs.forEach(tid=>{ if((data[dk]?.[tid]?.status||'present')==='absent') n++; });
+      }
+    } catch(e){}
+    return n;
+  }
+
+  const ghcFaltas = countAbsent('ghc', ['derival','gomes']);
+  const vigFaltas = countAbsent('vigilante', ['marcelo']);
+
+  const elG = document.getElementById('hubGhcFaltas');
+  const elV = document.getElementById('hubVigFaltas');
+  if(elG){ elG.textContent=ghcFaltas; elG.style.color=ghcFaltas>0?'var(--red)':'var(--green)'; }
+  if(elV){ elV.textContent=vigFaltas; elV.style.color=vigFaltas>0?'var(--red)':'var(--green)'; }
+}
+
 // ── INICIALIZAR ───────────────────────────────────────────────
 loadPreventivas();
 loadCGInfo();
@@ -1088,6 +1146,7 @@ loadFeriados();
 loadZoho();
 initDeludaPreview();
 loadKPIPreview();
+loadTerceirosPreview();
 
 </script>
 </body>
