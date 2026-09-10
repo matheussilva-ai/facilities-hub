@@ -569,21 +569,22 @@ renderCalendar('ghc');
 renderCalendar('vigilante');
 updateHubSummary();
 
-// Status inicial do sync
 window.addEventListener('DOMContentLoaded', () => {
   const el = document.getElementById('sync-status');
   if (el) {
     el.textContent = SHEETS_ENDPOINT ? '● Sheets conectado' : '● Somente local (configure endpoint)';
     el.style.color = SHEETS_ENDPOINT ? 'var(--green)' : 'var(--td)';
   }
-  // Se tiver endpoint, sincroniza automaticamente ao abrir
   if (SHEETS_ENDPOINT) {
     const today = new Date();
-    // Primeiro envia dados locais pendentes, depois sincroniza
-    await pushPendingToSheets('ghc', today.getFullYear(), today.getMonth());
-    await pushPendingToSheets('vigilante', today.getFullYear(), today.getMonth());
-    syncFromSheets('ghc', today.getFullYear(), today.getMonth());
-    syncFromSheets('vigilante', today.getFullYear(), today.getMonth());
+    const y = today.getFullYear(), m = today.getMonth();
+    // Roda em background sem bloquear a UI
+    setTimeout(async () => {
+      await pushPendingToSheets('ghc', y, m);
+      await pushPendingToSheets('vigilante', y, m);
+      syncFromSheets('ghc', y, m);
+      syncFromSheets('vigilante', y, m);
+    }, 500);
   }
 });
 </script>
