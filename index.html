@@ -207,6 +207,7 @@ footer{padding:24px 0 0;border-top:1px solid var(--b1);display:flex;align-items:
         <div><div class="ct-tag to">Terceiros</div></div>
         <div class="ct-name">Controle de Terceiros</div>
         <div class="ct-desc">Presenças GHC e vigilante — conferência mensal de fatura.</div>
+        <div style="font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--td);margin-bottom:4px;" id="hubMesAtual"></div>
         <div style="display:flex;flex-direction:column;gap:5px;margin:2px 0;">
           <div style="display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:rgba(110,105,173,.08);border:1px solid rgba(110,105,173,.14);border-radius:8px;">
             <span style="font-size:10px;font-weight:600;color:var(--v1);">GHC · Derival &amp; Gomes</span>
@@ -1131,6 +1132,11 @@ function loadTerceirosPreview() {
 
   const elG = document.getElementById('hubGhcFaltas');
   const elV = document.getElementById('hubVigFaltas');
+  const elM = document.getElementById('hubMesAtual');
+  if(elM){
+    const nomeMes = today.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).replace(/^\w/,c=>c.toUpperCase());
+    elM.textContent = '📅 ' + nomeMes;
+  }
   if(elG){ elG.textContent=ghcFaltas; elG.style.color=ghcFaltas>0?'var(--red)':'var(--green)'; }
   if(elV){ elV.textContent=vigFaltas; elV.style.color=vigFaltas>0?'var(--red)':'var(--green)'; }
 }
