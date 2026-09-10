@@ -248,32 +248,43 @@ function saveData(group, y, m, data) {
 }
 
 // Envia um registro individual pro Sheets
+// Apps Script exige no-cors no POST (não retorna resposta legível, mas grava)
 async function pushToSheets(group, date, techId, status, note) {
   if (!SHEETS_ENDPOINT) return;
   try {
+    const params = new URLSearchParams({ group, date, techId, status, note: note||'' });
     await fetch(SHEETS_ENDPOINT, {
       method: 'POST',
-      body: JSON.stringify({ group, date, techId, status, note }),
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: params.toString(),
     });
-  } catch(e) { console.warn('Sheets sync falhou (sem internet?):', e); }
+  } catch(e) { console.warn('Sheets push falhou:', e); }
 }
 
-// Carrega dados do Sheets e atualiza cache local
-async function syncFromSheets(group, y, m) {
+// Carrega dados do Sheets via JSONP (contorna CORS no GET)
+function syncFromSheets(group, y, m) {
   if (!SHEETS_ENDPOINT) return;
   const month = `${y}-${String(m+1).padStart(2,'0')}`;
-  try {
-    showSyncStatus('Sincronizando...');
-    const res = await fetch(`${SHEETS_ENDPOINT}?group=${group}&month=${month}`);
-    const json = await res.json();
-    if (json.ok && json.data) {
+  showSyncStatus('Sincronizando...');
+  const cbName = `__sheetsCallback_${group}_${Date.now()}`;
+  const url = `${SHEETS_ENDPOINT}?group=${group}&month=${month}&callback=${cbName}`;
+  window[cbName] = function(json) {
+    delete window[cbName];
+    document.getElementById('jsonp-loader')?.remove();
+    if (json && json.ok && json.data) {
       localStorage.setItem(storageKey(group,y,m), JSON.stringify(json.data));
       renderCalendar(group);
+      showSyncStatus('Sincronizado ✓', true);
+    } else {
+      showSyncStatus('Sem dados novos', false, true);
     }
-    showSyncStatus('Sincronizado ✓', true);
-  } catch(e) {
-    showSyncStatus('Offline — dados locais', false, true);
-  }
+  };
+  const s = document.createElement('script');
+  s.id = 'jsonp-loader';
+  s.src = url;
+  s.onerror = () => { showSyncStatus('Erro ao conectar', false, true); s.remove(); };
+  document.head.appendChild(s);
 }
 
 function showSyncStatus(msg, ok=false, warn=false) {
