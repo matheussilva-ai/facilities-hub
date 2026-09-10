@@ -136,6 +136,8 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
         <div class="month-label" id="month-label-ghc"></div>
         <button onclick="changeMonth('ghc',1)">›</button>
       </div>
+      <span id="sync-status" style="font-size:11px;color:var(--td);margin-left:4px;">● Somente local</span>
+      <button class="copy-btn" id="sync-btn-ghc" onclick="syncFromSheets('ghc', curMonth.ghc.getFullYear(), curMonth.ghc.getMonth())" title="Buscar dados do Sheets" style="padding:6px 10px;">↻</button>
       <button class="copy-btn" id="copy-btn-ghc" onclick="copySummary('ghc')">Copiar resumo</button>
     </div>
     <div class="legend">
@@ -226,14 +228,60 @@ const STATUS_CHIP_COLOR  = { present:'#3BEBA8', absent:'#FF6B6B', replaced:'#EF9
 const curMonth = { ghc: new Date(), vigilante: new Date() };
 curMonth.ghc.setDate(1); curMonth.vigilante.setDate(1);
 
+// ── CONFIGURAÇÃO GOOGLE SHEETS ────────────────────────────────
+// Após publicar o Apps Script, cole a URL abaixo.
+// Enquanto não configurar, funciona só com localStorage (cache local).
+const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxEMC8mqvle9pP3dZR5OwesgBMPFb_SES5NydhpzKKVuD0jP5K-5NDJF9HW4pOYh7hjow/exec';
+
 function storageKey(group, y, m) {
   return `facilities-terceiros-${group}-${y}-${String(m+1).padStart(2,'0')}`;
 }
+
+// Carrega do localStorage (cache). Se tiver endpoint, sincroniza em background.
 function loadData(group, y, m) {
   try { return JSON.parse(localStorage.getItem(storageKey(group,y,m)) || '{}'); } catch(e){ return {}; }
 }
+
+// Salva localmente E envia pro Sheets se endpoint configurado
 function saveData(group, y, m, data) {
   localStorage.setItem(storageKey(group,y,m), JSON.stringify(data));
+}
+
+// Envia um registro individual pro Sheets
+async function pushToSheets(group, date, techId, status, note) {
+  if (!SHEETS_ENDPOINT) return;
+  try {
+    await fetch(SHEETS_ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify({ group, date, techId, status, note }),
+    });
+  } catch(e) { console.warn('Sheets sync falhou (sem internet?):', e); }
+}
+
+// Carrega dados do Sheets e atualiza cache local
+async function syncFromSheets(group, y, m) {
+  if (!SHEETS_ENDPOINT) return;
+  const month = `${y}-${String(m+1).padStart(2,'0')}`;
+  try {
+    showSyncStatus('Sincronizando...');
+    const res = await fetch(`${SHEETS_ENDPOINT}?group=${group}&month=${month}`);
+    const json = await res.json();
+    if (json.ok && json.data) {
+      localStorage.setItem(storageKey(group,y,m), JSON.stringify(json.data));
+      renderCalendar(group);
+    }
+    showSyncStatus('Sincronizado ✓', true);
+  } catch(e) {
+    showSyncStatus('Offline — dados locais', false, true);
+  }
+}
+
+function showSyncStatus(msg, ok=false, warn=false) {
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.color = ok ? 'var(--green)' : warn ? 'var(--yellow)' : 'var(--tm)';
+  if (ok) setTimeout(()=>{ el.textContent = SHEETS_ENDPOINT ? '● Sheets conectado' : '● Somente local'; el.style.color='var(--td)'; }, 2500);
 }
 
 // ── TABS ──────────────────────────────────────────────────────
@@ -404,7 +452,10 @@ function saveModal(group, dk) {
     const sel = document.querySelector(`.status-opt.sel[data-tech="${t.id}"]`);
     const note = document.getElementById(`note-${t.id}`)?.value||'';
     if(!data[dk]) data[dk]={};
-    data[dk][t.id] = { status: sel?sel.dataset.status:'present', note };
+    const status = sel?sel.dataset.status:'present';
+    data[dk][t.id] = { status, note };
+    // Envia pro Sheets em background (não bloqueia a UI)
+    pushToSheets(group, dk, t.id, status, note);
   });
   saveData(group, y, m, data);
   closeModal();
@@ -474,6 +525,21 @@ function updateHubSummary() {
 renderCalendar('ghc');
 renderCalendar('vigilante');
 updateHubSummary();
+
+// Status inicial do sync
+window.addEventListener('DOMContentLoaded', () => {
+  const el = document.getElementById('sync-status');
+  if (el) {
+    el.textContent = SHEETS_ENDPOINT ? '● Sheets conectado' : '● Somente local (configure endpoint)';
+    el.style.color = SHEETS_ENDPOINT ? 'var(--green)' : 'var(--td)';
+  }
+  // Se tiver endpoint, sincroniza automaticamente ao abrir
+  if (SHEETS_ENDPOINT) {
+    const today = new Date();
+    syncFromSheets('ghc', today.getFullYear(), today.getMonth());
+    syncFromSheets('vigilante', today.getFullYear(), today.getMonth());
+  }
+});
 </script>
 </body>
 </html>
