@@ -273,7 +273,23 @@ function syncFromSheets(group, y, m) {
     delete window[cbName];
     document.getElementById('jsonp-loader')?.remove();
     if (json && json.ok && json.data) {
-      localStorage.setItem(storageKey(group,y,m), JSON.stringify(json.data));
+      // Mescla: localStorage tem prioridade (dados locais são mais recentes)
+      const local = loadData(group, y, m);
+      const remote = json.data;
+      // Pega todas as datas do Sheets que não existem localmente
+      Object.keys(remote).forEach(date => {
+        if (!local[date]) {
+          local[date] = remote[date];
+        } else {
+          // Para cada técnico, usa o remoto só se não tiver dado local
+          Object.keys(remote[date]).forEach(techId => {
+            if (!local[date][techId]) {
+              local[date][techId] = remote[date][techId];
+            }
+          });
+        }
+      });
+      localStorage.setItem(storageKey(group,y,m), JSON.stringify(local));
       renderCalendar(group);
       showSyncStatus('Sincronizado ✓', true);
     } else {
@@ -295,7 +311,23 @@ function showSyncStatus(msg, ok=false, warn=false) {
   if (ok) setTimeout(()=>{ el.textContent = SHEETS_ENDPOINT ? '● Sheets conectado' : '● Somente local'; el.style.color='var(--td)'; }, 2500);
 }
 
-// ── TABS ──────────────────────────────────────────────────────
+// Ao abrir, envia pro Sheets qualquer dado local que não esteja lá ainda
+async function pushPendingToSheets(group, y, m) {
+  if (!SHEETS_ENDPOINT) return;
+  const local = loadData(group, y, m);
+  const days = new Date(y, m+1, 0).getDate();
+  const techs = GROUPS[group].techs;
+  for (let d = 1; d <= days; d++) {
+    const dk = dayKey(y, m, d);
+    if (isWeekend(new Date(y, m, d))) continue;
+    for (const t of techs) {
+      const entry = local[dk]?.[t.id];
+      if (entry) {
+        await pushToSheets(group, dk, t.id, entry.status, entry.note||'');
+      }
+    }
+  }
+}
 function switchTab(tab, el) {
   document.getElementById('tab-ghc').style.display = tab==='ghc'?'':'none';
   document.getElementById('tab-vigilante').style.display = tab==='vigilante'?'':'none';
@@ -547,6 +579,9 @@ window.addEventListener('DOMContentLoaded', () => {
   // Se tiver endpoint, sincroniza automaticamente ao abrir
   if (SHEETS_ENDPOINT) {
     const today = new Date();
+    // Primeiro envia dados locais pendentes, depois sincroniza
+    await pushPendingToSheets('ghc', today.getFullYear(), today.getMonth());
+    await pushPendingToSheets('vigilante', today.getFullYear(), today.getMonth());
     syncFromSheets('ghc', today.getFullYear(), today.getMonth());
     syncFromSheets('vigilante', today.getFullYear(), today.getMonth());
   }
