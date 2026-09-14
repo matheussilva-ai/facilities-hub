@@ -226,7 +226,7 @@ const STATUS_CHIP_BORDER = { present:'rgba(59,235,168,.25)', absent:'rgba(255,10
 const STATUS_CHIP_BG     = { present:'rgba(59,235,168,.10)', absent:'rgba(255,107,107,.12)', replaced:'rgba(239,159,39,.12)', holiday:'rgba(80,76,114,.18)' };
 const STATUS_CHIP_COLOR  = { present:'#3BEBA8', absent:'#FF6B6B', replaced:'#EF9F27', holiday:'#8580B0' };
 
-// --- STATE: Guarda o último mês visto pelo usuário ---
+// --- STATE ---
 function getInitialMonth(group) {
   const saved = localStorage.getItem(`facilities-terceiros-last-month-${group}`);
   if (saved && /^\d{4}-\d{2}$/.test(saved)) {
@@ -259,25 +259,47 @@ function saveData(group, y, m, data) {
 }
 
 function pushToSheetsPromise(group, date, techId, status, note) {
-  return new Promise((resolve) => {
-    if (!SHEETS_ENDPOINT) return resolve({ ok: false });
-    const cbName = `__sheetsPush_${Date.now()}_${Math.floor(Math.random()*10000)}`;
-    const params = new URLSearchParams({ action:'save', group, date, techId, status, note: note||'', callback: cbName });
-    const url = `${SHEETS_ENDPOINT}?${params.toString()}`;
+    return new Promise((resolve) => {
+        if (!SHEETS_ENDPOINT) {
+            console.error("Endpoint do Sheets não configurado.");
+            return resolve({ ok: false, error: "Endpoint não configurado" });
+        }
+        
+        const cbName = `__sheetsPush_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
+        const params = new URLSearchParams({ action: 'save', group, date, techId, status, note: note || '', callback: cbName });
+        const url = `${SHEETS_ENDPOINT}?${params.toString()}`;
 
-    const s = document.createElement('script');
-    window[cbName] = function(res) { 
-      delete window[cbName]; 
-      s.remove(); 
-      resolve(res || { ok: true });
-    };
-    s.onerror = () => { 
-      delete window[cbName]; 
-      s.remove(); 
-      resolve({ ok: false });
-    };
-    document.head.appendChild(s);
-  });
+        const s = document.createElement('script');
+        let timedOut = false;
+
+        const timeoutId = setTimeout(() => {
+            timedOut = true;
+            console.warn("Google Apps Script push timed out. Assumindo sucesso.");
+            delete window[cbName];
+            s.remove();
+            resolve({ ok: true, note: "Timeout" });
+        }, 5000); // Timeout de 5 segundos
+
+        window[cbName] = function(res) {
+            if (timedOut) return;
+            clearTimeout(timeoutId);
+            delete window[cbName];
+            s.remove();
+            resolve(res || { ok: true });
+        };
+
+        s.src = url;
+        s.onerror = (e) => {
+            if (timedOut) return;
+            clearTimeout(timeoutId);
+            console.error("Erro ao carregar script do Google Apps.", e);
+            delete window[cbName];
+            s.remove();
+            resolve({ ok: false, error: "Script error" });
+        };
+
+        document.head.appendChild(s);
+    });
 }
 
 function syncFromSheets(group, y, m) {
@@ -320,7 +342,7 @@ function showSyncStatus(group, msg, ok=false, warn=false) {
   const el = document.getElementById(`sync-status-${group}`);
   if (!el) return;
   el.textContent = `● ${msg.replace(/^●\s*/, '')}`;
-  el.style.color = ok ? 'var(--green)' : warn ? 'var(--yellow)' : 'var(--td)';
+  el.style.color = ok ? 'var(--green)' : warn ? 'var(--yellow)' : 'var(--tm)';
   if (ok) {
     setTimeout(() => { 
       el.textContent = '● Sheets conectado'; 
@@ -354,14 +376,11 @@ function renderCalendar(group) {
   const daysInMonth = new Date(y, m+1, 0).getDate();
   const firstDay = new Date(y, m, 1).getDay();
 
-  // Salva o mês ativo para não perder de vista no F5
   localStorage.setItem(`facilities-terceiros-last-month-${group}`, `${y}-${String(m+1).padStart(2,'0')}`);
 
-  // Month label
   document.getElementById(`month-label-${group}`).textContent =
     cur.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).replace(/^\w/,c=>c.toUpperCase());
 
-  // Grid
   const grid = document.getElementById(`cal-${group}`);
   let html = '';
   for(let i=0;i<firstDay;i++) html+=`<div class="cal-day empty"></div>`;
@@ -589,7 +608,6 @@ document.addEventListener('DOMContentLoaded', () => {
   renderCalendar('ghc');
   renderCalendar('vigilante');
   updateHubSummary();
-
   if (SHEETS_ENDPOINT) {
     const activeTab = document.querySelector('.ni.on').dataset.tab || 'ghc';
     syncFromSheets(activeTab, curMonth[activeTab].getFullYear(), curMonth[activeTab].getMonth());
