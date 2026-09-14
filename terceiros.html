@@ -247,18 +247,14 @@ function saveData(group, y, m, data) {
   localStorage.setItem(storageKey(group,y,m), JSON.stringify(data));
 }
 
-// Envia um registro individual pro Sheets
-// Apps Script exige no-cors no POST (não retorna resposta legível, mas grava)
+// Envia registro pro Sheets via GET (sem problema de CORS)
 async function pushToSheets(group, date, techId, status, note) {
   if (!SHEETS_ENDPOINT) return;
   try {
-    const params = new URLSearchParams({ group, date, techId, status, note: note||'' });
-    await fetch(SHEETS_ENDPOINT, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: params.toString(),
-    });
+    const params = new URLSearchParams({ action: 'save', group, date, techId, status, note: note||'' });
+    const url = `${SHEETS_ENDPOINT}?${params.toString()}`;
+    // Usa fetch com no-cors só pra disparar — o GAS processa pelo doGet
+    await fetch(url, { mode: 'no-cors' });
   } catch(e) { console.warn('Sheets push falhou:', e); }
 }
 
