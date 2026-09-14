@@ -237,23 +237,23 @@ function storageKey(group, y, m) {
   return `facilities-terceiros-${group}-${y}-${String(m+1).padStart(2,'0')}`;
 }
 
-// Carrega do cache local
+// Carrega dados locais (fallback)
 function loadData(group, y, m) {
   try { return JSON.parse(localStorage.getItem(storageKey(group,y,m)) || '{}'); } catch(e){ return {}; }
 }
 
-// Salva localmente
+// Salva dados locais
 function saveData(group, y, m, data) {
   localStorage.setItem(storageKey(group,y,m), JSON.stringify(data));
 }
 
-// Envia registro pro Sheets via JSONP
+// Envia registro para a planilha via JSONP (GET com action=save)
 function pushToSheets(group, date, techId, status, note) {
   if (!SHEETS_ENDPOINT) return;
   const cbName = `__sheetsPush_${Date.now()}_${Math.floor(Math.random()*1000)}`;
   const params = new URLSearchParams({ action:'save', group, date, techId, status, note: note||'', callback: cbName });
   const url = `${SHEETS_ENDPOINT}?${params.toString()}`;
-  
+
   const s = document.createElement('script');
   window[cbName] = function() { 
     delete window[cbName]; 
@@ -269,7 +269,7 @@ function pushToSheets(group, date, techId, status, note) {
   document.head.appendChild(s);
 }
 
-// Carrega dados do Sheets via JSONP — A Planilha é a Fonte Primária da Verdade
+// Busca dados da planilha via JSONP — Prioridade absoluta aos dados remotos
 function syncFromSheets(group, y, m) {
   if (!SHEETS_ENDPOINT) {
     showSyncStatus(group, '● Somente local', false);
@@ -279,15 +279,15 @@ function syncFromSheets(group, y, m) {
   showSyncStatus(group, 'Sincronizando com a planilha...');
   const cbName = `__sheetsCallback_${group}_${Date.now()}`;
   const url = `${SHEETS_ENDPOINT}?group=${group}&month=${month}&callback=${cbName}`;
-  
+
   const s = document.createElement('script');
   s.id = `jsonp-loader-${group}`;
-  
+
   window[cbName] = function(json) {
     delete window[cbName];
     s.remove();
     if (json && json.ok && json.data) {
-      // Prioridade absoluta para a planilha: substitui o cache local com os dados remotos
+      // Grava no storage e redesenha a tela diretamente da planilha
       const remote = json.data;
       localStorage.setItem(storageKey(group, y, m), JSON.stringify(remote));
       renderCalendar(group);
@@ -324,8 +324,8 @@ function switchTab(tab, el) {
   document.getElementById('tab-vigilante').style.display = tab==='vigilante'?'':'none';
   document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
   el.classList.add('on');
-  
-  // Ao trocar de aba, garante atualização automática daquela aba
+
+  // Ao trocar de aba, busca os dados da planilha para a aba ativa
   const y = curMonth[tab].getFullYear(), m = curMonth[tab].getMonth();
   syncFromSheets(tab, y, m);
 }
@@ -434,7 +434,7 @@ function renderSummary(group, y, m, data, days) {
 function changeMonth(group, dir) {
   curMonth[group].setMonth(curMonth[group].getMonth()+dir);
   renderCalendar(group);
-  // Sincroniza automaticamente com o Sheets para o novo mês navegado
+  // Ao trocar de mês, busca os dados da planilha para o novo mês selecionado
   syncFromSheets(group, curMonth[group].getFullYear(), curMonth[group].getMonth());
 }
 
@@ -494,7 +494,7 @@ function saveModal(group, dk) {
     if(!data[dk]) data[dk]={};
     const status = sel?sel.dataset.status:'present';
     data[dk][t.id] = { status, note };
-    // Envia pro Sheets imediatamente em background
+    // Envia para o Sheets imediatamente
     pushToSheets(group, dk, t.id, status, note);
   });
   saveData(group, y, m, data);
@@ -569,7 +569,7 @@ window.addEventListener('DOMContentLoaded', () => {
   if (SHEETS_ENDPOINT) {
     const today = new Date();
     const y = today.getFullYear(), m = today.getMonth();
-    // Busca direto da planilha assim que a página abre, sem delay e sem sobreposição do local
+    // Busca direto da planilha assim que abre a página
     syncFromSheets('ghc', y, m);
     syncFromSheets('vigilante', y, m);
   }
