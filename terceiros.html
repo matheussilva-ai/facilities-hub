@@ -226,7 +226,7 @@ function showSyncStatus(group, msg, isSuccess=false) {
   if (isSuccess) setTimeout(() => { el.textContent = '● Sheets sincronizado'; el.style.color='var(--td)'; }, 3000);
 }
 
-// BUSCA DADOS DA PLANILHA (GET com JSONP para evitar bloqueio)
+// BUSCA DADOS DA PLANILHA (GET com JSONP)
 function syncFromSheets(group, year, month) {
   const monthKey = `${year}-${String(month+1).padStart(2,'0')}`;
   showSyncStatus(group, 'Buscando dados da planilha...');
@@ -255,19 +255,41 @@ function syncFromSheets(group, year, month) {
   document.head.appendChild(script);
 }
 
-// SALVA DADOS NA PLANILHA (POST em segundo plano)
+// Função auxiliar para salvar via GET (JSONP) - Evita bloqueios do Google
+function pushToSheetsJSONP(group, date, techId, status, note) {
+  return new Promise((resolve) => {
+    if (!SHEETS_ENDPOINT) return resolve({ ok: false });
+    const cbName = `__sheetsPush_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
+    const params = new URLSearchParams({ action: 'save', group, date, techId, status, note: note || '', callback: cbName });
+    const url = `${SHEETS_ENDPOINT}?${params.toString()}`;
+
+    const script = document.createElement('script');
+    window[cbName] = function(res) {
+      delete window[cbName];
+      script.remove();
+      resolve(res || { ok: true });
+    };
+    script.onerror = function() {
+      delete window[cbName];
+      script.remove();
+      resolve({ ok: false });
+    };
+    script.src = url;
+    document.head.appendChild(script);
+  });
+}
+
+// SALVA DADOS NA PLANILHA (Atualização Otimista + Background)
 async function saveModal(group, dk) {
-  // Desativa botão para evitar cliques múltiplos
   document.getElementById('btn-save-modal').disabled = true;
 
   const dateObj = new Date(dk + 'T00:00:00');
   const year = dateObj.getFullYear(), month = dateObj.getMonth();
   const monthKey = `${year}-${String(month+1).padStart(2,'0')}`;
 
-  // Prepara os dados para salvar
   const data = localStore.get(group, monthKey);
   if(!data[dk]) data[dk] = {};
-  const updates = [];
+  const pushPromises = [];
 
   GROUPS[group].techs.forEach(t => {
     const sel = document.querySelector(`.status-opt.sel[data-tech="${t.id}"]`);
@@ -276,24 +298,18 @@ async function saveModal(group, dk) {
 
     // Salva localmente IMEDIATAMENTE (Optimistic UI)
     data[dk][t.id] = { status, note };
-    updates.push({ group, date: dk, techId: t.id, status, note });
+    pushPromises.push(pushToSheetsJSONP(group, dk, t.id, status, note));
   });
 
   // Atualiza a tela antes mesmo da internet responder!
   localStore.set(group, monthKey, data);
   renderCalendar(group, year, month);
   closeModal(); 
-  
+
   showSyncStatus(group, 'Salvando no Google...');
 
   try {
-    // Envia os dados silenciosamente via POST (modo no-cors bypassa bloqueios)
-    await fetch(SHEETS_ENDPOINT, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(updates)
-    });
+    await Promise.all(pushPromises);
     showSyncStatus(group, 'Salvo ✓', true);
   } catch(e) {
     console.error(e);
@@ -326,7 +342,7 @@ function renderCalendar(group, year, month) {
     const dk = dayKey(year, month, d);
     const isWE = isWeekend(new Date(year, month, d));
     let cls = 'cal-day' + (isWE ? ' weekend' : '') + (dk === todayKey ? ' today' : '');
-    
+
     html += `<div class="${cls}"${!isWE ? ` onclick="openModal('${group}','${dk}')"` : ''}><div class="day-num">${d}</div><div class="tech-chips">`;
     if (!isWE) {
       techs.forEach(t => {
@@ -354,7 +370,7 @@ function renderStatsAndSummary(group, y, m, data, days) {
       const status = data[dayKey(y, m, d)]?.[t.id]?.status || 'present';
       const note = data[dayKey(y, m, d)]?.[t.id]?.note || '';
       const ds = `${String(d).padStart(2, '0')}/${String(m + 1).padStart(2, '0')}`;
-      
+
       if (status === 'absent') absent.push(note ? `${ds}(${note})` : ds);
       else if (status === 'replaced') replaced.push(note ? `${ds}(${note})` : ds);
       else if (status === 'present') present++;
@@ -432,7 +448,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Renderiza a interface local IMEDIATAMENTE antes da internet carregar
   renderCalendar('ghc', curMonth.ghc.getFullYear(), curMonth.ghc.getMonth());
   renderCalendar('vigilante', curMonth.vigilante.getFullYear(), curMonth.vigilante.getMonth());
-  
+
   // Puxa as novidades do Google Sheets em segundo plano
   syncFromSheets('ghc', curMonth.ghc.getFullYear(), curMonth.ghc.getMonth());
 });
