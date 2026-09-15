@@ -535,14 +535,10 @@ renderCalendar('ghc');
 renderCalendar('vigilante');
 updateHubSummary();
 
-window.addEventListener('DOMContentLoaded', () => {
-  const el = document.getElementById('sync-status');
-  if (el) { el.textContent = '● Conectando...'; el.style.color = 'var(--tm)'; }
-  // Sincroniza do Sheets ao abrir (preenche dados de qualquer browser)
-  const today = new Date();
-  syncFromSheets('ghc', today.getFullYear(), today.getMonth());
-  syncFromSheets('vigilante', today.getFullYear(), today.getMonth());
-});
+// Sincroniza do Sheets automaticamente ao abrir
+const _today = new Date();
+syncFromSheets('ghc', _today.getFullYear(), _today.getMonth());
+syncFromSheets('vigilante', _today.getFullYear(), _today.getMonth());
 </script>
 </body>
 </html>
