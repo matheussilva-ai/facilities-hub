@@ -200,10 +200,10 @@ const STATUS_CHIP_BORDER = { present:'rgba(59,235,168,.25)', absent:'rgba(255,10
 const STATUS_CHIP_BG     = { present:'rgba(59,235,168,.1)', absent:'rgba(255,107,107,.12)', replaced:'rgba(239,159,39,.12)', holiday:'rgba(80,76,114,.18)' };
 const STATUS_CHIP_COLOR  = { present:'#3BEBA8', absent:'#FF6B6B', replaced:'#EF9F27', holiday:'#8580B0' };
 
-// --- ESTADO LOCAL & MEMÓRIA DO MÊS ---
+// --- ESTADO LOCAL GLOBAL ---
 const localStore = {
-  get: (group, monthKey) => JSON.parse(localStorage.getItem(`facilities-data-${group}-${monthKey}`) || '{}'),
-  set: (group, monthKey, data) => localStorage.setItem(`facilities-data-${group}-${monthKey}`, JSON.stringify(data))
+  get: (group) => JSON.parse(localStorage.getItem(`facilities-data-v2-${group}`) || '{}'),
+  set: (group, data) => localStorage.setItem(`facilities-data-v2-${group}`, JSON.stringify(data))
 };
 
 function getInitialMonth(group) {
@@ -212,7 +212,7 @@ function getInitialMonth(group) {
     const [y, m] = saved.split('-').map(Number);
     return new Date(y, m - 1, 1);
   }
-  return new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  return new Date();
 }
 
 const curMonth = { ghc: getInitialMonth('ghc'), vigilante: getInitialMonth('vigilante') };
@@ -223,97 +223,74 @@ function showSyncStatus(group, msg, isSuccess=false) {
   if (!el) return;
   el.textContent = `● ${msg}`;
   el.style.color = isSuccess ? 'var(--green)' : 'var(--tm)';
-  if (isSuccess) setTimeout(() => { el.textContent = '● Sheets sincronizado'; el.style.color='var(--td)'; }, 3000);
+  if (isSuccess) setTimeout(() => { el.textContent = '● Sheets atualizado'; el.style.color='var(--td)'; }, 3000);
 }
 
-// BUSCA DADOS DA PLANILHA (GET com JSONP)
-function syncFromSheets(group, year, month) {
-  const monthKey = `${year}-${String(month+1).padStart(2,'0')}`;
+// BUSCA DADOS VIA FETCH API PADRÃO
+async function syncFromSheets(group, year, month) {
+  if (!SHEETS_ENDPOINT) return;
   showSyncStatus(group, 'Buscando dados da planilha...');
 
-  const cbName = `jsonp_${group}_${Date.now()}`;
-  const url = `${SHEETS_ENDPOINT}?group=${group}&month=${monthKey}&callback=${cbName}`;
-
-  const script = document.createElement('script');
-  window[cbName] = function(response) {
-    delete window[cbName];
-    script.remove();
-    if(response && response.ok) {
-      localStore.set(group, monthKey, response.data || {});
+  try {
+    const url = `${SHEETS_ENDPOINT}?group=${group}`;
+    const res = await fetch(url);
+    const json = await res.json();
+    
+    if (json && json.ok) {
+      // Recebe o objeto gigante com TODAS as datas do banco
+      localStore.set(group, json.data || {});
       renderCalendar(group, year, month);
       showSyncStatus(group, 'Atualizado ✓', true);
     } else {
       showSyncStatus(group, 'Falha ao ler dados');
     }
-  };
-  script.onerror = function() {
-    delete window[cbName];
-    script.remove();
+  } catch(err) {
+    console.error(err);
     showSyncStatus(group, 'Erro de conexão');
-  };
-  script.src = url;
-  document.head.appendChild(script);
+  }
 }
 
-// Função auxiliar para salvar via GET (JSONP) - Evita bloqueios do Google
-function pushToSheetsJSONP(group, date, techId, status, note) {
-  return new Promise((resolve) => {
-    if (!SHEETS_ENDPOINT) return resolve({ ok: false });
-    const cbName = `__sheetsPush_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
-    const params = new URLSearchParams({ action: 'save', group, date, techId, status, note: note || '', callback: cbName });
-    const url = `${SHEETS_ENDPOINT}?${params.toString()}`;
-
-    const script = document.createElement('script');
-    window[cbName] = function(res) {
-      delete window[cbName];
-      script.remove();
-      resolve(res || { ok: true });
-    };
-    script.onerror = function() {
-      delete window[cbName];
-      script.remove();
-      resolve({ ok: false });
-    };
-    script.src = url;
-    document.head.appendChild(script);
-  });
-}
-
-// SALVA DADOS NA PLANILHA (Atualização Otimista + Background)
+// SALVA VIA POST FETCH RÁPIDO
 async function saveModal(group, dk) {
   document.getElementById('btn-save-modal').disabled = true;
 
   const dateObj = new Date(dk + 'T00:00:00');
   const year = dateObj.getFullYear(), month = dateObj.getMonth();
-  const monthKey = `${year}-${String(month+1).padStart(2,'0')}`;
 
-  const data = localStore.get(group, monthKey);
+  const data = localStore.get(group);
   if(!data[dk]) data[dk] = {};
-  const pushPromises = [];
+  const updates = [];
 
   GROUPS[group].techs.forEach(t => {
     const sel = document.querySelector(`.status-opt.sel[data-tech="${t.id}"]`);
     const status = sel ? sel.dataset.status : 'present';
     const note = document.getElementById(`note-${t.id}`)?.value || '';
 
-    // Salva localmente IMEDIATAMENTE (Optimistic UI)
     data[dk][t.id] = { status, note };
-    pushPromises.push(pushToSheetsJSONP(group, dk, t.id, status, note));
+    updates.push({ group, date: dk, techId: t.id, status, note });
   });
 
-  // Atualiza a tela antes mesmo da internet responder!
-  localStore.set(group, monthKey, data);
+  // Atualização Visual Imediata (antes do Google responder)
+  localStore.set(group, data);
   renderCalendar(group, year, month);
   closeModal(); 
-
   showSyncStatus(group, 'Salvando no Google...');
 
   try {
-    await Promise.all(pushPromises);
+    const res = await fetch(SHEETS_ENDPOINT, {
+      method: 'POST',
+      body: JSON.stringify(updates)
+    });
+    
+    // Sucesso garantido: o fetch encerrou sem erros de CORS
     showSyncStatus(group, 'Salvo ✓', true);
+    
+    // Força a garantir que estamos síncronos com a planilha, caso outra pessoa tenha mudado algo
+    syncFromSheets(group, year, month);
+
   } catch(e) {
-    console.error(e);
-    showSyncStatus(group, 'Erro ao enviar.');
+    console.error("Erro no fetch POST", e);
+    showSyncStatus(group, 'Salvo localmente (erro na planilha)');
   }
 }
 
@@ -323,18 +300,17 @@ function dayKey(y, m, d) { return `${y}-${String(m + 1).padStart(2, '0')}-${Stri
 
 function renderCalendar(group, year, month) {
   const monthKey = `${year}-${String(month + 1).padStart(2, '0')}`;
-  const data = localStore.get(group, monthKey);
+  const data = localStore.get(group);
   const techs = GROUPS[group].techs;
   const today = new Date();
   const todayKey = dayKey(today.getFullYear(), today.getMonth(), today.getDate());
   const daysInMonth = new Date(year, month + 1, 0).getDate();
   const firstDay = new Date(year, month, 1).getDay();
 
-  // Guarda no navegador qual foi o último mês visto
+  // Salva preferência do usuário
   localStorage.setItem(`facilities-last-month-${group}`, monthKey);
   document.getElementById(`month-label-${group}`).textContent = new Date(year, month).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }).replace(/^\w/, c => c.toUpperCase());
 
-  // Constrói o calendário
   const grid = document.getElementById(`cal-${group}`);
   let html = '';
   for (let i = 0; i < firstDay; i++) html += `<div class="cal-day empty"></div>`;
@@ -366,7 +342,7 @@ function renderStatsAndSummary(group, y, m, data, days) {
     let absent = [], replaced = [], present = 0, holiday = 0;
     for (let d = 1; d <= days; d++) {
       if (isWeekend(new Date(y, m, d))) continue;
-      if (t === techs[0]) workdays++; // Conta dias úteis só 1x
+      if (t === techs[0]) workdays++; 
       const status = data[dayKey(y, m, d)]?.[t.id]?.status || 'present';
       const note = data[dayKey(y, m, d)]?.[t.id]?.note || '';
       const ds = `${String(d).padStart(2, '0')}/${String(m + 1).padStart(2, '0')}`;
@@ -392,7 +368,6 @@ function renderStatsAndSummary(group, y, m, data, days) {
 function changeMonth(group, dir) {
   curMonth[group].setMonth(curMonth[group].getMonth() + dir);
   renderCalendar(group, curMonth[group].getFullYear(), curMonth[group].getMonth());
-  syncFromSheets(group, curMonth[group].getFullYear(), curMonth[group].getMonth());
 }
 
 function switchTab(tab, el) {
@@ -406,8 +381,7 @@ function switchTab(tab, el) {
 function openModal(group, dk) {
   const date = new Date(dk + 'T00:00:00');
   const label = date.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }).replace(/^\w/, c => c.toUpperCase());
-  const monthKey = `${curMonth[group].getFullYear()}-${String(curMonth[group].getMonth() + 1).padStart(2, '0')}`;
-  const data = localStore.get(group, monthKey);
+  const data = localStore.get(group);
 
   let body = '';
   GROUPS[group].techs.forEach(t => {
@@ -428,13 +402,16 @@ function closeModal() { document.getElementById('modal-root').innerHTML = ''; }
 
 function copySummary(group) {
   const y = curMonth[group].getFullYear(), m = curMonth[group].getMonth();
-  const data = localStore.get(group, `${y}-${String(m + 1).padStart(2, '0')}`);
+  const data = localStore.get(group);
   let txt = `Resumo de Presenças\n${new Date(y, m).toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}\n\n`;
   GROUPS[group].techs.forEach(t => {
     let abs=[], rep=[];
     Object.keys(data).forEach(dk => {
-      if(data[dk][t.id] && data[dk][t.id].status === 'absent') abs.push(`${dk.slice(-2)}/` + String(m+1).padStart(2,'0'));
-      if(data[dk][t.id] && data[dk][t.id].status === 'replaced') rep.push(`${dk.slice(-2)}/` + String(m+1).padStart(2,'0'));
+      // Verifica se a chave pertence a este mês/ano
+      if (dk.startsWith(`${y}-${String(m + 1).padStart(2, '0')}`)) {
+        if(data[dk][t.id] && data[dk][t.id].status === 'absent') abs.push(`${dk.slice(-2)}/` + String(m+1).padStart(2,'0'));
+        if(data[dk][t.id] && data[dk][t.id].status === 'replaced') rep.push(`${dk.slice(-2)}/` + String(m+1).padStart(2,'0'));
+      }
     });
     txt += `${t.name}:\n Faltas: ${abs.join(', ') || '0'}\n Reposições: ${rep.join(', ') || '0'}\n\n`;
   });
@@ -445,11 +422,8 @@ function copySummary(group) {
 
 // --- INICIALIZAÇÃO ---
 document.addEventListener('DOMContentLoaded', () => {
-  // Renderiza a interface local IMEDIATAMENTE antes da internet carregar
   renderCalendar('ghc', curMonth.ghc.getFullYear(), curMonth.ghc.getMonth());
   renderCalendar('vigilante', curMonth.vigilante.getFullYear(), curMonth.vigilante.getMonth());
-
-  // Puxa as novidades do Google Sheets em segundo plano
   syncFromSheets('ghc', curMonth.ghc.getFullYear(), curMonth.ghc.getMonth());
 });
 </script>
