@@ -275,10 +275,10 @@ function pushToSheetsPromise(group, date, techId, status, note) {
         const timeoutId = setTimeout(() => {
             timedOut = true;
             console.warn("Google Apps Script push timed out. Assumindo sucesso.");
-            delete window[cbName];
+            if(window[cbName]) delete window[cbName];
             s.remove();
             resolve({ ok: true, note: "Timeout" });
-        }, 5000); // Timeout de 5 segundos
+        }, 5000);
 
         window[cbName] = function(res) {
             if (timedOut) return;
@@ -515,35 +515,31 @@ function selectOpt(el) {
 }
 
 async function saveModal(group, dk) {
-  const saveBtn = document.getElementById('btn-save-modal');
-  if (saveBtn) {
-    saveBtn.textContent = 'Gravando...';
-    saveBtn.disabled = true;
-  }
+    const saveBtn = document.getElementById('btn-save-modal');
+    if (saveBtn) {
+        saveBtn.textContent = 'Gravando...';
+        saveBtn.disabled = true;
+    }
 
-  const y=curMonth[group].getFullYear(), m=curMonth[group].getMonth();
-  const data = loadData(group, y, m);
-  const techs = GROUPS[group].techs;
+    const y = curMonth[group].getFullYear();
+    const m = curMonth[group].getMonth();
+    const techs = GROUPS[group].techs;
 
-  const pushPromises = [];
+    const pushPromises = [];
 
-  techs.forEach(t=>{
-    const sel = document.querySelector(`.status-opt.sel[data-tech="${t.id}"]`);
-    const note = document.getElementById(`note-${t.id}`)?.value||'';
-    if(!data[dk]) data[dk]={};
-    const status = sel?sel.dataset.status:'present';
-    data[dk][t.id] = { status, note };
-    pushPromises.push(pushToSheetsPromise(group, dk, t.id, status, note));
-  });
+    techs.forEach(t => {
+        const sel = document.querySelector(`.status-opt.sel[data-tech="${t.id}"]`);
+        const note = document.getElementById(`note-${t.id}`)?.value || '';
+        const status = sel ? sel.dataset.status : 'present';
+        pushPromises.push(pushToSheetsPromise(group, dk, t.id, status, note));
+    });
 
-  saveData(group, y, m, data);
-  renderCalendar(group);
-  updateHubSummary();
+    await Promise.all(pushPromises);
 
-  await Promise.all(pushPromises);
-
-  closeModal();
-  showSyncStatus(group, 'Salvo no Sheets ✓', true);
+    closeModal();
+    // Força a releitura da planilha para garantir que a tela está 100% sincronizada
+    syncFromSheets(group, y, m);
+    updateHubSummary();
 }
 
 function closeModal() {
@@ -567,8 +563,8 @@ function copySummary(group) {
       const st=data[dk]?.[t.id]?.status||'present';
       const note=data[dk]?.[t.id]?.note||'';
       const ds=`${String(d).padStart(2,'0')}/${String(m+1).padStart(2,'0')}`;
-      if(st==='absent') absent.push(note?`${ds} (${note})`:ds);
-      if(st==='replaced') replaced.push(note?`${ds} (${note})`:ds);
+      if(st==='absent') absent.push(note?`${ds}(${note})`:ds);
+      if(st==='replaced') replaced.push(note?`${ds}(${note})`:ds);
     }
     txt+=`\n${t.name}\n`;
     if(absent.length) txt+=`  ✕ Faltas s/ reposição (${absent.length}): ${absent.join(', ')}\n`;
