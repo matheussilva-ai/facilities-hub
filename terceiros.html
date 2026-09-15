@@ -257,33 +257,20 @@ async function pushToSheets(group, date, techId, status, note) {
   } catch(e) { console.warn('Sheets push falhou:', e); }
 }
 
-// Carrega dados do Sheets e mescla com localStorage
+// Carrega dados do Sheets — Sheets é a fonte da verdade, sobrescreve local
 async function syncFromSheets(group, y, m) {
   const month = `${y}-${String(m+1).padStart(2,'0')}`;
   showSyncStatus('Sincronizando...');
   try {
     const res = await fetch(`${API_URL}?group=${group}&month=${month}`);
     const json = await res.json();
-    if (json.ok && json.data) {
-      const local = loadData(group, y, m);
-      const remote = json.data;
-      // Mescla: Sheets preenche o que não existe localmente
-      Object.keys(remote).forEach(date => {
-        if (!local[date]) {
-          local[date] = remote[date];
-        } else {
-          Object.keys(remote[date]).forEach(techId => {
-            if (!local[date][techId]) {
-              local[date][techId] = remote[date][techId];
-            }
-          });
-        }
-      });
-      localStorage.setItem(storageKey(group,y,m), JSON.stringify(local));
+    if (json.ok && json.data && Object.keys(json.data).length > 0) {
+      // Sheets é a fonte da verdade — substitui o local
+      localStorage.setItem(storageKey(group,y,m), JSON.stringify(json.data));
       renderCalendar(group);
       showSyncStatus('Sincronizado ✓', true);
     } else {
-      showSyncStatus('Sem dados novos', false, true);
+      showSyncStatus('Nenhum dado no Sheets', false, true);
     }
   } catch(e) {
     showSyncStatus('Offline — dados locais', false, true);
@@ -458,23 +445,31 @@ function selectOpt(el) {
   el.classList.add('sel');
 }
 
-function saveModal(group, dk) {
+async function saveModal(group, dk) {
   const y=curMonth[group].getFullYear(), m=curMonth[group].getMonth();
   const data = loadData(group, y, m);
   const techs = GROUPS[group].techs;
+  const pushes = [];
   techs.forEach(t=>{
     const sel = document.querySelector(`.status-opt.sel[data-tech="${t.id}"]`);
     const note = document.getElementById(`note-${t.id}`)?.value||'';
     if(!data[dk]) data[dk]={};
     const status = sel?sel.dataset.status:'present';
     data[dk][t.id] = { status, note };
-    // Envia pro Sheets em background (não bloqueia a UI)
-    pushToSheets(group, dk, t.id, status, note);
+    pushes.push(pushToSheets(group, dk, t.id, status, note));
   });
   saveData(group, y, m, data);
   closeModal();
   renderCalendar(group);
   updateHubSummary();
+  // Aguarda todas as gravações no Sheets terminarem
+  showSyncStatus('Salvando no Sheets...');
+  try {
+    await Promise.all(pushes);
+    showSyncStatus('Salvo ✓', true);
+  } catch(e) {
+    showSyncStatus('Erro ao salvar', false, true);
+  }
 }
 
 function closeModal() {
