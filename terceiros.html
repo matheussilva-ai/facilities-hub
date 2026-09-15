@@ -7,106 +7,89 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
+:root{--v:#6E69AD;--v1:#9B97D4;--v2:#CECBF6;--t:#B0E0E4;--t1:#7BBFC4;--t2:#4AACB4;--bg:#05050F;--s0:#080818;--s1:#0C0C1E;--s2:#101028;--s3:#161630;--b0:rgba(110,105,173,.1);--b1:rgba(110,105,173,.18);--b2:rgba(110,105,173,.32);--tx:#F0EEFF;--tm:#8580B0;--td:#504C72;--red:#FF6B6B;--yellow:#FFB830;--green:#3BEBA8;--r:16px;--amber:#EF9F27}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --v:#6E69AD;--v1:#9B97D4;--v2:#CECBF6;
-  --t:#B0E0E4;--t1:#7BBFC4;--t2:#4AACB4;
-  --bg:#05050F;--s0:#080818;--s1:#0C0C1E;--s2:#101028;--s3:#161630;
-  --b0:rgba(110,105,173,.10);--b1:rgba(110,105,173,.18);--b2:rgba(110,105,173,.32);
-  --tx:#F0EEFF;--tm:#8580B0;--td:#504C72;
-  --red:#FF6B6B;--yellow:#FFB830;--green:#3BEBA8;--r:16px;
-  --amber:#EF9F27;
-}
-html,body{min-height:100%;font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased;}
-body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 60% 50% at 0% 0%,rgba(110,105,173,.18),transparent 60%),radial-gradient(ellipse 40% 40% at 100% 100%,rgba(176,224,228,.10),transparent 55%);}
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(var(--b0) 1px,transparent 1px),linear-gradient(90deg,var(--b0) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 80% at 50% 0%,black 30%,transparent 100%);}
-.app{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:0 44px 80px;}
-header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 18px;border-bottom:1px solid var(--b1);margin-bottom:0;}
-.brand{display:flex;align-items:center;gap:14px;}
-.brand-sub{font-size:11px;color:var(--tm);letter-spacing:.04em;font-weight:500;}
-.back-btn{display:flex;align-items:center;gap:7px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--tm);background:var(--s2);border:1px solid var(--b1);border-radius:999px;text-decoration:none;transition:border-color .2s,color .2s;}
-.back-btn:hover{border-color:var(--b2);color:var(--tx);}
-.page-title{font-size:22px;font-weight:800;letter-spacing:-.03em;padding:28px 0 6px;}
-.page-sub{font-size:13px;color:var(--tm);margin-bottom:28px;}
-/* NAV */
-.nav{position:sticky;top:0;z-index:20;background:rgba(5,5,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);margin:0 -44px 36px;padding:0 44px;display:flex;align-items:center;gap:4px;}
-.ni{display:flex;align-items:center;gap:7px;padding:13px 16px;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--td);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;cursor:pointer;}
-.ni:hover{color:var(--tm);}
-.ni.on{color:var(--v1);border-bottom-color:var(--v);}
-/* STATS */
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px;}
-.sc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:16px 18px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;transition:border-color .2s;}
-.sc:hover{border-color:var(--b2);}
-.sc-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
-.sc-val{font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--tx);}
-.sc-val.r{color:var(--red);}
-.sc-val.g{color:var(--green);}
-.sc-val.y{color:var(--yellow);}
-.sc-lbl{font-size:11px;color:var(--tm);margin-top:4px;font-weight:500;}
-/* CONTROLES */
-.controls{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
-.month-nav{display:flex;align-items:center;gap:8px;}
-.month-nav button{background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Outfit',sans-serif;transition:border-color .15s,color .15s;}
-.month-nav button:hover{border-color:var(--b2);color:var(--tx);}
-.month-label{font-size:15px;font-weight:700;color:var(--tx);min-width:160px;text-align:center;font-family:'JetBrains Mono',monospace;}
-.copy-btn{margin-left:auto;background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s;}
-.copy-btn:hover{border-color:var(--b2);color:var(--tx);}
-.copy-btn.ok{border-color:rgba(59,235,168,.4);color:var(--green);}
-/* LEGEND */
-.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;align-items:center;}
-.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--tm);}
-.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-/* CALENDÁRIO */
-.cal-section{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:24px;margin-bottom:24px;}
-.cal-section-title{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--td);margin-bottom:16px;display:flex;align-items:center;gap:8px;}
-.cal-section-title span{display:inline-block;width:8px;height:8px;border-radius:50%;}
-.grid-header{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px;}
-.grid-header div{text-align:center;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--td);padding:4px 0;text-transform:uppercase;}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;}
-.cal-day{border:1px solid var(--b0);border-radius:10px;padding:5px;min-height:68px;background:var(--s2);cursor:pointer;transition:border-color .15s,transform .12s;}
-.cal-day:hover{border-color:var(--b1);transform:translateY(-1px);}
-.cal-day.empty{background:transparent;border-color:transparent;cursor:default;pointer-events:none;}
-.cal-day.today{border-color:rgba(110,105,173,.5);}
-.cal-day.weekend{opacity:.38;cursor:default;pointer-events:none;}
-.day-num{font-size:10px;font-weight:700;color:var(--td);margin-bottom:4px;font-family:'JetBrains Mono',monospace;}
-.tech-chips{display:flex;flex-direction:column;gap:2px;}
-.chip{font-size:9px;font-weight:700;padding:2px 5px;border-radius:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em;}
-/* MODAL */
-.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px;}
-.modal{background:var(--s1);border:1px solid var(--b2);border-radius:20px;width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.6);}
-.modal-head{padding:22px 24px 16px;border-bottom:1px solid var(--b0);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;}
-.modal-head h3{font-size:16px;font-weight:800;letter-spacing:-.02em;color:var(--tx);}
-.modal-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--b1);background:var(--s3);color:var(--tm);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:color .15s;}
-.modal-close:hover{color:var(--tx);}
-.modal-body{overflow-y:auto;padding:20px 24px 24px;flex:1;display:flex;flex-direction:column;gap:18px;}
-.tech-block{}
-.tech-block-name{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;padding:3px 8px;border-radius:6px;display:inline-block;}
-.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px;}
-.status-opt{display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:9px;border:1px solid var(--b0);cursor:pointer;font-size:12px;font-weight:500;color:var(--tm);transition:all .12s;}
-.status-opt:hover{border-color:var(--b1);color:var(--tx);}
-.status-opt.sel{border-color:rgba(110,105,173,.5);background:rgba(110,105,173,.12);color:var(--v2);}
-.status-dot-s{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.note-input{width:100%;background:var(--s2);border:1px solid var(--b0);border-radius:8px;padding:7px 10px;font-size:11px;color:var(--tx);font-family:'Outfit',sans-serif;resize:none;outline:none;transition:border-color .15s;}
-.note-input:focus{border-color:var(--b1);}
-.modal-footer{padding:14px 24px 20px;border-top:1px solid var(--b0);display:flex;justify-content:flex-end;gap:10px;flex-shrink:0;}
-.btn{padding:8px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;border:1px solid var(--b1);background:transparent;color:var(--tm);transition:all .15s;}
-.btn:hover{color:var(--tx);border-color:var(--b2);}
-.btn.primary{background:var(--v);border-color:var(--v);color:#fff;}
-.btn.primary:hover{background:var(--v1);border-color:var(--v1);}
-/* SUMMARY */
-.summary-section{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:24px;}
-.summary-title{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--td);margin-bottom:16px;}
-.summary-table{width:100%;border-collapse:collapse;}
-.summary-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--td);padding:0 10px 10px;text-align:left;}
-.summary-table td{padding:8px 10px;font-size:13px;border-top:1px solid var(--b0);}
-.summary-table tr:first-child td{border-top:none;}
-.name-cell{font-weight:700;}
-.badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap;}
-.badge-red{background:rgba(255,107,107,.12);color:var(--red);border:1px solid rgba(255,107,107,.2);}
-.badge-amber{background:rgba(239,159,39,.12);color:var(--amber);border:1px solid rgba(239,159,39,.2);}
-.badge-green{background:rgba(59,235,168,.10);color:var(--green);border:1px solid rgba(59,235,168,.18);}
-.badge-gray{background:rgba(80,76,114,.18);color:var(--tm);border:1px solid var(--b0);}
-.dates-cell{font-size:11px;color:var(--td);font-family:'JetBrains Mono',monospace;}
+html,body{min-height:100%;font-family:'Outfit',sans-serif;background:var(--bg);color:var(--tx);-webkit-font-smoothing:antialiased}
+body::before,body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:0}
+body::before{background:radial-gradient(ellipse 60% 50% at 0 0,rgba(110,105,173,.18),transparent 60%),radial-gradient(ellipse 40% 40% at 100% 100%,rgba(176,224,228,.1),transparent 55%)}
+body::after{background-image:linear-gradient(var(--b0) 1px,transparent 1px),linear-gradient(90deg,var(--b0) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 80% at 50% 0,black 30%,transparent 100%)}
+.app{position:relative;z-index:1;max-width:1320px;margin:0 auto;padding:0 44px 80px}
+header{display:flex;align-items:center;justify-content:space-between;padding:20px 0 18px;border-bottom:1px solid var(--b1);margin-bottom:0}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-sub{font-size:11px;color:var(--tm);letter-spacing:.04em;font-weight:500}
+.back-btn{display:flex;align-items:center;gap:7px;padding:7px 14px;font-size:12px;font-weight:600;color:var(--tm);background:var(--s2);border:1px solid var(--b1);border-radius:999px;text-decoration:none;transition:border-color .2s,color .2s}
+.back-btn:hover{border-color:var(--b2);color:var(--tx)}
+.page-title{font-size:22px;font-weight:800;letter-spacing:-.03em;padding:28px 0 6px}
+.page-sub{font-size:13px;color:var(--tm);margin-bottom:28px}
+.nav{position:sticky;top:0;z-index:20;background:rgba(5,5,15,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--b1);margin:0 -44px 36px;padding:0 44px;display:flex;align-items:center;gap:4px}
+.ni{display:flex;align-items:center;gap:7px;padding:13px 16px;font-size:12px;font-weight:600;letter-spacing:.02em;color:var(--td);text-decoration:none;border-bottom:2px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;cursor:pointer}
+.ni:hover{color:var(--tm)}
+.ni.on{color:var(--v1);border-bottom-color:var(--v)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+.sc{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:16px 18px;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden;transition:border-color .2s}
+.sc:hover{border-color:var(--b2)}
+.sc-ico{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.sc-val{font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1;color:var(--tx)}
+.sc-val.r{color:var(--red)}.sc-val.g{color:var(--green)}.sc-val.y{color:var(--yellow)}
+.sc-lbl{font-size:11px;color:var(--tm);margin-top:4px;font-weight:500}
+.controls{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.month-nav{display:flex;align-items:center;gap:8px}
+.month-nav button{background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:6px 12px;font-size:13px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Outfit',sans-serif;transition:border-color .15s,color .15s}
+.month-nav button:hover{border-color:var(--b2);color:var(--tx)}
+.month-label{font-size:15px;font-weight:700;color:var(--tx);min-width:160px;text-align:center;font-family:'JetBrains Mono',monospace}
+.copy-btn{margin-left:auto;background:var(--s2);border:1px solid var(--b1);border-radius:8px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--tm);cursor:pointer;font-family:'Outfit',sans-serif;transition:all .15s}
+.copy-btn:hover{border-color:var(--b2);color:var(--tx)}
+.copy-btn.ok{border-color:rgba(59,235,168,.4);color:var(--green)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--tm)}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.cal-section{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:24px;margin-bottom:24px}
+.cal-section-title{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--td);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.cal-section-title span{display:inline-block;width:8px;height:8px;border-radius:50%}
+.grid-header{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px}
+.grid-header div{text-align:center;font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--td);padding:4px 0;text-transform:uppercase}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
+.cal-day{border:1px solid var(--b0);border-radius:10px;padding:5px;min-height:68px;background:var(--s2);cursor:pointer;transition:border-color .15s,transform .12s}
+.cal-day:hover{border-color:var(--b1);transform:translateY(-1px)}
+.cal-day.empty{background:transparent;border-color:transparent;cursor:default;pointer-events:none}
+.cal-day.today{border-color:rgba(110,105,173,.5)}
+.cal-day.weekend{opacity:.38;cursor:default;pointer-events:none}
+.day-num{font-size:10px;font-weight:700;color:var(--td);margin-bottom:4px;font-family:'JetBrains Mono',monospace}
+.tech-chips{display:flex;flex-direction:column;gap:2px}
+.chip{font-size:9px;font-weight:700;padding:2px 5px;border-radius:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;letter-spacing:.02em}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);z-index:999;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal{background:var(--s1);border:1px solid var(--b2);border-radius:20px;width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.6)}
+.modal-head{padding:22px 24px 16px;border-bottom:1px solid var(--b0);flex-shrink:0;display:flex;align-items:center;justify-content:space-between}
+.modal-head h3{font-size:16px;font-weight:800;letter-spacing:-.02em;color:var(--tx)}
+.modal-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--b1);background:var(--s3);color:var(--tm);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:color .15s}
+.modal-close:hover{color:var(--tx)}
+.modal-body{overflow-y:auto;padding:20px 24px 24px;flex:1;display:flex;flex-direction:column;gap:18px}
+.tech-block-name{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;padding:3px 8px;border-radius:6px;display:inline-block}
+.status-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+.status-opt{display:flex;align-items:center;gap:7px;padding:8px 10px;border-radius:9px;border:1px solid var(--b0);cursor:pointer;font-size:12px;font-weight:500;color:var(--tm);transition:all .12s}
+.status-opt:hover{border-color:var(--b1);color:var(--tx)}
+.status-opt.sel{border-color:rgba(110,105,173,.5);background:rgba(110,105,173,.12);color:var(--v2)}
+.status-dot-s{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.note-input{width:100%;background:var(--s2);border:1px solid var(--b0);border-radius:8px;padding:7px 10px;font-size:11px;color:var(--tx);font-family:'Outfit',sans-serif;resize:none;outline:none;transition:border-color .15s}
+.note-input:focus{border-color:var(--b1)}
+.modal-footer{padding:14px 24px 20px;border-top:1px solid var(--b0);display:flex;justify-content:flex-end;gap:10px;flex-shrink:0}
+.btn{padding:8px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;border:1px solid var(--b1);background:transparent;color:var(--tm);transition:all .15s}
+.btn:hover{color:var(--tx);border-color:var(--b2)}
+.btn.primary{background:var(--v);border-color:var(--v);color:#fff}
+.btn.primary:hover{background:var(--v1);border-color:var(--v1)}
+.summary-section{background:var(--s1);border:1px solid var(--b1);border-radius:var(--r);padding:24px}
+.summary-title{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--td);margin-bottom:16px}
+.summary-table{width:100%;border-collapse:collapse}
+.summary-table th{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--td);padding:0 10px 10px;text-align:left}
+.summary-table td{padding:8px 10px;font-size:13px;border-top:1px solid var(--b0)}
+.summary-table tr:first-child td{border-top:none}
+.name-cell{font-weight:700}
+.badge{font-size:10px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.badge-red{background:rgba(255,107,107,.12);color:var(--red);border:1px solid rgba(255,107,107,.2)}
+.badge-amber{background:rgba(239,159,39,.12);color:var(--amber);border:1px solid rgba(239,159,39,.2)}
+.badge-green{background:rgba(59,235,168,.1);color:var(--green);border:1px solid rgba(59,235,168,.18)}
+.badge-gray{background:rgba(80,76,114,.18);color:var(--tm);border:1px solid var(--b0)}
+.dates-cell{font-size:11px;color:var(--td);font-family:'JetBrains Mono',monospace}
 @media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}.app{padding:0 20px 56px}.nav{margin:0 -20px 28px;padding:0 20px}}
 @media(max-width:580px){.stats{grid-template-columns:1fr 1fr}.chip{font-size:8px}}
 </style>
@@ -118,7 +101,6 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
       <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjI3NyAyOTAgMTQyMCA1MzAiPgogIDxzdHlsZT4uc3Qwe2ZpbGw6IzZFNjlBRDt9LnN0MntmaWxsOiNCMEUwRTQ7fTwvc3R5bGU+CiAgPHBhdGggY2xhc3M9InN0MiIgZD0iTTU0Ny4yLDM1MC4wNmMtMzAuNTYsMC01OC4yNywxMi4yMS03OC41MywzMi4wMWw0MC4wNmMxMC4wOS05LjM3LDIzLjYxLTE1LjEsMzguNDYtMTUuMWMzMS4yNCwwLDU2LjU3LDI1LjMzLDU2LjU3LDU2LjU3cy0yNS4zMyw1Ni41Ny01Ni41Nyw1Ni41N2MtMTQuOTIsMC0yOC40OS01Ljc5LTM4LjYtMTUuMjNsLTAuMDEsMC4wMWwtMC4yMS0wLjIxYy0wLjE2LTAuMTUtMC4zMS0wLjMxLTAuNDYtMC40NmMtMC41My0wLjUxLTEuMDUtMS4wMy0xLjU2LTEuNTZjLTAuNTItMC41NC0xLjA0LTEuMDktMS41NC0xLjY2bC03Ny4wNi03OS41bDAsMGMtMTAuMDQtOS4wOC0yMy4zNy0xNC41OS0zOC4wMy0xNC41NGMtMzEuMjQsMC4xMS01Ni41NywyNS4zMy01Ni41Nyw1Ni41N2MwLDMxLjI0LDI1LjMzLDU2LjU3LDU2LjU3LDU2LjU3YzE1LjY0LDAsMjkuNzctNi4zNCwzOS45OS0xNi42bDMzLjU4LDMzLjU4YzIwLjU4LDIzLjA4LDUwLjUzLDM3LjYyLDgzLjg5LDM3LjYyYzYyLjA1LDAsMTEyLjM2LTUwLjMsMTEyLjM2LTExMi4zNlM2MDkuMjUsMzUwLjA2LDU0Ny4yLDM1MC4wNnoiLz48cGF0aCBjbGFzcz0ic3QwIiBkPSJNNTQ3LjIsNDA3LjAzYy0xNC44NiwwLTI4LjM3LDUuNzMtMzguNDYsMTUuMWwtMzguMDItMzguMDJjLTIwLjQ2LTIxLjQ3LTQ5LjM0LTM0Ljg2LTgxLjM1LTM0Ljg2Yy02Mi4wNSwwLTExMi4zNiw1MC4zLTExMi4zNiwxMTIuMzZzNTAuMywxMTIuMzYsMTEyLjM2LDExMi4zNmMzMC42MiwwLDU4LjM3LTEyLjI1LDc4LjY0LTMyLjEybC0zOC4yOC0zOC4yOGMtMTAuMjMsMTAuMjUtMjQuMzYsMTYuNi0zOS45OSwxNi42Yy0zMS4yNCwwLTU2LjU3LTI1LjMzLTU2LjU3LTU2LjU3YzAtMzEuMjQsMjUuMzMtNTYuNDYsNTYuNTctNTYuNTdjMTQuNjUtMC4wNSwyNy45OSw1LjQ2LDM4LjAzLDE0LjU0bDAsMGw3Ny4wNiw3OS41YzEuMTMsMS4yOCwyLjMyLDIuNSwzLjU2LDMuNjdsMC4yMSwwLjIxbDAuMDEtMC4wMWMxMC4xMSw5LjQ0LDIzLjY3LDE1LjIzLDM4LjYsMTUuMjNjMzEuMjQsMCw1Ni41Ny0yNS4zMyw1Ni41Ny01Ni41N1M1NzguNDQsNDA3LjAzLDU0Ny4yLDQwNy4wM3oiLz48L3N2Zz4=" alt="Genial Care" style="height:32px;width:auto;display:block;"/>
       <div class="brand-sub">Facilities &nbsp;·&nbsp; Controle de Terceiros</div>
     </div>
-    <a href="index.html" class="back-btn">← Hub principal</a>
   </header>
 
   <nav class="nav">
@@ -126,9 +108,10 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
     <a class="ni" href="#" data-tab="vigilante" onclick="switchTab('vigilante',this);return false;">🛡️ Vigilante · Tatuapé</a>
   </nav>
 
-  <div id="tab-ghc">
+  <!-- ABA: GHC -->
+  <div id="tab-ghc" class="tab-content">
     <div class="page-title">GHC · Manutenção</div>
-    <div class="page-sub">Controle de presença de Derival e Gomes — conferência mensal de fatura</div>
+    <div class="page-sub">Controle de presença de Derival e Gomes</div>
     <div id="stats-ghc" class="stats"></div>
     <div class="controls">
       <div class="month-nav">
@@ -136,12 +119,11 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
         <div class="month-label" id="month-label-ghc"></div>
         <button onclick="changeMonth('ghc',1)">›</button>
       </div>
-      <span id="sync-status-ghc" style="font-size:11px;color:var(--td);margin-left:4px;">● Conectando ao Sheets...</span>
-      <button class="copy-btn" id="sync-btn-ghc" onclick="syncFromSheets('ghc', curMonth.ghc.getFullYear(), curMonth.ghc.getMonth())" title="Recarregar do Sheets" style="padding:6px 10px;">↻</button>
+      <span id="sync-status-ghc" style="font-size:11px;color:var(--td);margin-left:4px;">●</span>
+      <button class="copy-btn" onclick="syncFromSheets('ghc', curMonth.ghc.getFullYear(), curMonth.ghc.getMonth())" style="padding:6px 10px;">↻</button>
       <button class="copy-btn" id="copy-btn-ghc" onclick="copySummary('ghc')">Copiar resumo</button>
     </div>
     <div class="legend">
-      <span style="font-size:11px;color:var(--td);font-weight:600;">Legenda:</span>
       <div class="legend-item"><span class="legend-dot" style="background:#3BEBA8"></span>Presente</div>
       <div class="legend-item"><span class="legend-dot" style="background:#FF6B6B"></span>Falta s/ reposição</div>
       <div class="legend-item"><span class="legend-dot" style="background:#EF9F27"></span>Falta c/ reposição</div>
@@ -161,9 +143,10 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
     </div>
   </div>
 
-  <div id="tab-vigilante" style="display:none;">
+  <!-- ABA: VIGILANTE -->
+  <div id="tab-vigilante" class="tab-content" style="display:none;">
     <div class="page-title">Vigilante · Tatuapé</div>
-    <div class="page-sub">Controle de presença do Marcelo — conferência mensal de fatura</div>
+    <div class="page-sub">Controle de presença do Marcelo</div>
     <div id="stats-vigilante" class="stats"></div>
     <div class="controls">
       <div class="month-nav">
@@ -171,12 +154,11 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
         <div class="month-label" id="month-label-vigilante"></div>
         <button onclick="changeMonth('vigilante',1)">›</button>
       </div>
-      <span id="sync-status-vigilante" style="font-size:11px;color:var(--td);margin-left:4px;">● Conectando ao Sheets...</span>
-      <button class="copy-btn" id="sync-btn-vigilante" onclick="syncFromSheets('vigilante', curMonth.vigilante.getFullYear(), curMonth.vigilante.getMonth())" title="Recarregar do Sheets" style="padding:6px 10px;">↻</button>
+      <span id="sync-status-vigilante" style="font-size:11px;color:var(--td);margin-left:4px;">●</span>
+      <button class="copy-btn" onclick="syncFromSheets('vigilante', curMonth.vigilante.getFullYear(), curMonth.vigilante.getMonth())" style="padding:6px 10px;">↻</button>
       <button class="copy-btn" id="copy-btn-vigilante" onclick="copySummary('vigilante')">Copiar resumo</button>
     </div>
     <div class="legend">
-      <span style="font-size:11px;color:var(--td);font-weight:600;">Legenda:</span>
       <div class="legend-item"><span class="legend-dot" style="background:#3BEBA8"></span>Presente</div>
       <div class="legend-item"><span class="legend-dot" style="background:#FF6B6B"></span>Falta s/ reposição</div>
       <div class="legend-item"><span class="legend-dot" style="background:#EF9F27"></span>Falta c/ reposição</div>
@@ -200,414 +182,259 @@ header{display:flex;align-items:center;justify-content:space-between;padding:20p
 </div>
 
 <script>
-// --- CONFIG ---
+// --- COLOQUE SUA URL DO GOOGLE SHEETS AQUI ---
+const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxEMC8mqvle9pP3dZR5OwesgBMPFb_SES5NydhpzKKVuD0jP5K-5NDJF9HW4pOYh7hjow/exec';
+
+// --- CONFIGURAÇÕES ---
 const GROUPS = {
-  ghc: {
-    techs: [
-      { id:'derival', name:'Derival', color:'#9B97D4', bg:'rgba(110,105,173,.18)', chipBg:'rgba(110,105,173,.2)', chipColor:'#CECBF6' },
-      { id:'gomes',   name:'Gomes',   color:'#7BBFC4', bg:'rgba(176,224,228,.15)', chipBg:'rgba(176,224,228,.18)', chipColor:'#B0E0E4' },
-    ]
-  },
-  vigilante: {
-    techs: [
-      { id:'marcelo', name:'Marcelo', color:'#EF9F27', bg:'rgba(239,159,39,.15)', chipBg:'rgba(239,159,39,.2)', chipColor:'#FAC775' },
-    ]
-  }
+  ghc: { techs: [ { id:'derival', name:'Derival', color:'#9B97D4', chipBg:'rgba(110,105,173,.2)', chipColor:'#CECBF6' }, { id:'gomes', name:'Gomes', color:'#7BBFC4', chipBg:'rgba(176,224,228,.18)', chipColor:'#B0E0E4' } ] },
+  vigilante: { techs: [ { id:'marcelo', name:'Marcelo', color:'#EF9F27', chipBg:'rgba(239,159,39,.2)', chipColor:'#FAC775' } ] }
 };
-
 const STATUS = [
-  { id:'present',  label:'Presente',           dot:'#3BEBA8', chipIcon:'✓' },
-  { id:'absent',   label:'Falta s/ reposição', dot:'#FF6B6B', chipIcon:'✕' },
+  { id:'present', label:'Presente', dot:'#3BEBA8', chipIcon:'✓' },
+  { id:'absent', label:'Falta s/ reposição', dot:'#FF6B6B', chipIcon:'✕' },
   { id:'replaced', label:'Falta c/ reposição', dot:'#EF9F27', chipIcon:'↺' },
-  { id:'holiday',  label:'Feriado / folga',    dot:'#504C72', chipIcon:'—' },
+  { id:'holiday', label:'Feriado / folga', dot:'#504C72', chipIcon:'—' },
 ];
-
 const STATUS_CHIP_BORDER = { present:'rgba(59,235,168,.25)', absent:'rgba(255,107,107,.35)', replaced:'rgba(239,159,39,.35)', holiday:'rgba(80,76,114,.35)' };
-const STATUS_CHIP_BG     = { present:'rgba(59,235,168,.10)', absent:'rgba(255,107,107,.12)', replaced:'rgba(239,159,39,.12)', holiday:'rgba(80,76,114,.18)' };
+const STATUS_CHIP_BG     = { present:'rgba(59,235,168,.1)', absent:'rgba(255,107,107,.12)', replaced:'rgba(239,159,39,.12)', holiday:'rgba(80,76,114,.18)' };
 const STATUS_CHIP_COLOR  = { present:'#3BEBA8', absent:'#FF6B6B', replaced:'#EF9F27', holiday:'#8580B0' };
 
-// --- STATE ---
+// --- ESTADO LOCAL & MEMÓRIA DO MÊS ---
+const localStore = {
+  get: (group, monthKey) => JSON.parse(localStorage.getItem(`facilities-data-${group}-${monthKey}`) || '{}'),
+  set: (group, monthKey, data) => localStorage.setItem(`facilities-data-${group}-${monthKey}`, JSON.stringify(data))
+};
+
 function getInitialMonth(group) {
-  const saved = localStorage.getItem(`facilities-terceiros-last-month-${group}`);
+  const saved = localStorage.getItem(`facilities-last-month-${group}`);
   if (saved && /^\d{4}-\d{2}$/.test(saved)) {
     const [y, m] = saved.split('-').map(Number);
     return new Date(y, m - 1, 1);
   }
-  const d = new Date();
-  d.setDate(1);
-  return d;
+  return new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 }
 
-const curMonth = { 
-  ghc: getInitialMonth('ghc'), 
-  vigilante: getInitialMonth('vigilante') 
-};
+const curMonth = { ghc: getInitialMonth('ghc'), vigilante: getInitialMonth('vigilante') };
 
-// --- GOOGLE SHEETS & DATA HANDLING ---
-const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbxEMC8mqvle9pP3dZR5OwesgBMPFb_SES5NydhpzKKVuD0jP5K-5NDJF9HW4pOYh7hjow/exec';
-
-function storageKey(group, y, m) {
-  return `facilities-terceiros-${group}-${y}-${String(m+1).padStart(2,'0')}`;
-}
-
-function loadData(group, y, m) {
-  try { return JSON.parse(localStorage.getItem(storageKey(group,y,m)) || '{}'); } catch(e){ return {}; }
-}
-
-function saveData(group, y, m, data) {
-  localStorage.setItem(storageKey(group,y,m), JSON.stringify(data));
-}
-
-function pushToSheetsPromise(group, date, techId, status, note) {
-    return new Promise((resolve) => {
-        if (!SHEETS_ENDPOINT) {
-            console.error("Endpoint do Sheets não configurado.");
-            return resolve({ ok: false, error: "Endpoint não configurado" });
-        }
-        
-        const cbName = `__sheetsPush_${Date.now()}_${Math.floor(Math.random() * 10000)}`;
-        const params = new URLSearchParams({ action: 'save', group, date, techId, status, note: note || '', callback: cbName });
-        const url = `${SHEETS_ENDPOINT}?${params.toString()}`;
-
-        const s = document.createElement('script');
-        let timedOut = false;
-
-        const timeoutId = setTimeout(() => {
-            timedOut = true;
-            console.warn("Google Apps Script push timed out. Assumindo sucesso.");
-            if(window[cbName]) delete window[cbName];
-            s.remove();
-            resolve({ ok: true, note: "Timeout" });
-        }, 5000);
-
-        window[cbName] = function(res) {
-            if (timedOut) return;
-            clearTimeout(timeoutId);
-            delete window[cbName];
-            s.remove();
-            resolve(res || { ok: true });
-        };
-
-        s.src = url;
-        s.onerror = (e) => {
-            if (timedOut) return;
-            clearTimeout(timeoutId);
-            console.error("Erro ao carregar script do Google Apps.", e);
-            delete window[cbName];
-            s.remove();
-            resolve({ ok: false, error: "Script error" });
-        };
-
-        document.head.appendChild(s);
-    });
-}
-
-function syncFromSheets(group, y, m) {
-  if (!SHEETS_ENDPOINT) {
-    showSyncStatus(group, 'Somente local', false);
-    return;
-  }
-  const month = `${y}-${String(m+1).padStart(2,'0')}`;
-  showSyncStatus(group, 'Carregando dados da planilha...');
-  const cbName = `__sheetsCallback_${group}_${Date.now()}`;
-  const url = `${SHEETS_ENDPOINT}?group=${group}&month=${month}&callback=${cbName}`;
-
-  const s = document.createElement('script');
-  s.id = `jsonp-loader-${group}`;
-
-  window[cbName] = function(json) {
-    delete window[cbName];
-    s.remove();
-    if (json && json.ok && json.data) {
-      const remote = json.data;
-      localStorage.setItem(storageKey(group, y, m), JSON.stringify(remote));
-      renderCalendar(group);
-      const totalKeys = Object.keys(remote).length;
-      showSyncStatus(group, `Planilha conectada (${totalKeys} registros) ✓`, true);
-    } else {
-      showSyncStatus(group, 'Sem dados novos na planilha', false, true);
-    }
-  };
-
-  s.src = url;
-  s.onerror = () => { 
-    delete window[cbName];
-    showSyncStatus(group, 'Erro ao conectar à planilha', false, true); 
-    s.remove(); 
-  };
-  document.head.appendChild(s);
-}
-
-function showSyncStatus(group, msg, ok=false, warn=false) {
+// --- COMUNICAÇÃO COM O GOOGLE SHEETS ---
+function showSyncStatus(group, msg, isSuccess=false) {
   const el = document.getElementById(`sync-status-${group}`);
   if (!el) return;
-  el.textContent = `● ${msg.replace(/^●\s*/, '')}`;
-  el.style.color = ok ? 'var(--green)' : warn ? 'var(--yellow)' : 'var(--tm)';
-  if (ok) {
-    setTimeout(() => { 
-      el.textContent = '● Sheets conectado'; 
-      el.style.color = 'var(--td)'; 
-    }, 3000);
+  el.textContent = `● ${msg}`;
+  el.style.color = isSuccess ? 'var(--green)' : 'var(--tm)';
+  if (isSuccess) setTimeout(() => { el.textContent = '● Sheets sincronizado'; el.style.color='var(--td)'; }, 3000);
+}
+
+// BUSCA DADOS DA PLANILHA (GET com JSONP para evitar bloqueio)
+function syncFromSheets(group, year, month) {
+  const monthKey = `${year}-${String(month+1).padStart(2,'0')}`;
+  showSyncStatus(group, 'Buscando dados da planilha...');
+
+  const cbName = `jsonp_${group}_${Date.now()}`;
+  const url = `${SHEETS_ENDPOINT}?group=${group}&month=${monthKey}&callback=${cbName}`;
+
+  const script = document.createElement('script');
+  window[cbName] = function(response) {
+    delete window[cbName];
+    script.remove();
+    if(response && response.ok) {
+      localStore.set(group, monthKey, response.data || {});
+      renderCalendar(group, year, month);
+      showSyncStatus(group, 'Atualizado ✓', true);
+    } else {
+      showSyncStatus(group, 'Falha ao ler dados');
+    }
+  };
+  script.onerror = function() {
+    delete window[cbName];
+    script.remove();
+    showSyncStatus(group, 'Erro de conexão');
+  };
+  script.src = url;
+  document.head.appendChild(script);
+}
+
+// SALVA DADOS NA PLANILHA (POST em segundo plano)
+async function saveModal(group, dk) {
+  // Desativa botão para evitar cliques múltiplos
+  document.getElementById('btn-save-modal').disabled = true;
+
+  const dateObj = new Date(dk + 'T00:00:00');
+  const year = dateObj.getFullYear(), month = dateObj.getMonth();
+  const monthKey = `${year}-${String(month+1).padStart(2,'0')}`;
+
+  // Prepara os dados para salvar
+  const data = localStore.get(group, monthKey);
+  if(!data[dk]) data[dk] = {};
+  const updates = [];
+
+  GROUPS[group].techs.forEach(t => {
+    const sel = document.querySelector(`.status-opt.sel[data-tech="${t.id}"]`);
+    const status = sel ? sel.dataset.status : 'present';
+    const note = document.getElementById(`note-${t.id}`)?.value || '';
+
+    // Salva localmente IMEDIATAMENTE (Optimistic UI)
+    data[dk][t.id] = { status, note };
+    updates.push({ group, date: dk, techId: t.id, status, note });
+  });
+
+  // Atualiza a tela antes mesmo da internet responder!
+  localStore.set(group, monthKey, data);
+  renderCalendar(group, year, month);
+  closeModal(); 
+  
+  showSyncStatus(group, 'Salvando no Google...');
+
+  try {
+    // Envia os dados silenciosamente via POST (modo no-cors bypassa bloqueios)
+    await fetch(SHEETS_ENDPOINT, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(updates)
+    });
+    showSyncStatus(group, 'Salvo ✓', true);
+  } catch(e) {
+    console.error(e);
+    showSyncStatus(group, 'Erro ao enviar.');
   }
 }
 
-function switchTab(tab, el) {
-  document.getElementById('tab-ghc').style.display = tab==='ghc'?'':'none';
-  document.getElementById('tab-vigilante').style.display = tab==='vigilante'?'':'none';
-  document.querySelectorAll('.ni').forEach(n=>n.classList.remove('on'));
-  el.classList.add('on');
+// --- RENDERIZAÇÃO DA INTERFACE ---
+function isWeekend(d) { const w = d.getDay(); return w === 0 || w === 6; }
+function dayKey(y, m, d) { return `${y}-${String(m + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`; }
 
-  const y = curMonth[tab].getFullYear(), m = curMonth[tab].getMonth();
-  syncFromSheets(tab, y, m);
-}
-
-// --- HELPERS ---
-function isWeekend(d) { const w=d.getDay(); return w===0||w===6; }
-function dayKey(y,m,d) { return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
-
-// --- RENDER CALENDAR ---
-function renderCalendar(group) {
-  const cur = curMonth[group];
-  const y = cur.getFullYear(), m = cur.getMonth();
-  const data = loadData(group, y, m);
+function renderCalendar(group, year, month) {
+  const monthKey = `${year}-${String(month + 1).padStart(2, '0')}`;
+  const data = localStore.get(group, monthKey);
   const techs = GROUPS[group].techs;
   const today = new Date();
   const todayKey = dayKey(today.getFullYear(), today.getMonth(), today.getDate());
-  const daysInMonth = new Date(y, m+1, 0).getDate();
-  const firstDay = new Date(y, m, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const firstDay = new Date(year, month, 1).getDay();
 
-  localStorage.setItem(`facilities-terceiros-last-month-${group}`, `${y}-${String(m+1).padStart(2,'0')}`);
+  // Guarda no navegador qual foi o último mês visto
+  localStorage.setItem(`facilities-last-month-${group}`, monthKey);
+  document.getElementById(`month-label-${group}`).textContent = new Date(year, month).toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' }).replace(/^\w/, c => c.toUpperCase());
 
-  document.getElementById(`month-label-${group}`).textContent =
-    cur.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).replace(/^\w/,c=>c.toUpperCase());
-
+  // Constrói o calendário
   const grid = document.getElementById(`cal-${group}`);
   let html = '';
-  for(let i=0;i<firstDay;i++) html+=`<div class="cal-day empty"></div>`;
-  for(let d=1;d<=daysInMonth;d++) {
-    const dk = dayKey(y,m,d);
-    const date = new Date(y,m,d);
-    const isWE = isWeekend(date);
-    const isToday = dk===todayKey;
-    let cls = 'cal-day';
-    if(isWE) cls+=' weekend';
-    if(isToday) cls+=' today';
-    html += `<div class="${cls}"${!isWE?` onclick="openModal('${group}','${dk}')"`:''}>`;
-    html += `<div class="day-num">${d}</div><div class="tech-chips">`;
-    if(!isWE) {
-      techs.forEach(t=>{
-        const st = data[dk]?.[t.id]?.status||'present';
-        const icon = STATUS.find(s=>s.id===st)?.chipIcon||'✓';
-        html += `<div class="chip" style="background:${STATUS_CHIP_BG[st]};color:${STATUS_CHIP_COLOR[st]};border:1px solid ${STATUS_CHIP_BORDER[st]}">${t.name.slice(0,3)} ${icon}</div>`;
+  for (let i = 0; i < firstDay; i++) html += `<div class="cal-day empty"></div>`;
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dk = dayKey(year, month, d);
+    const isWE = isWeekend(new Date(year, month, d));
+    let cls = 'cal-day' + (isWE ? ' weekend' : '') + (dk === todayKey ? ' today' : '');
+    
+    html += `<div class="${cls}"${!isWE ? ` onclick="openModal('${group}','${dk}')"` : ''}><div class="day-num">${d}</div><div class="tech-chips">`;
+    if (!isWE) {
+      techs.forEach(t => {
+        const status = data[dk]?.[t.id]?.status || 'present';
+        const icon = STATUS.find(s => s.id === status)?.chipIcon || '✓';
+        html += `<div class="chip" style="background:${STATUS_CHIP_BG[status]};color:${STATUS_CHIP_COLOR[status]};border:1px solid ${STATUS_CHIP_BORDER[status]}">${t.name.slice(0, 3)} ${icon}</div>`;
       });
     }
     html += `</div></div>`;
   }
   grid.innerHTML = html;
-  renderStats(group, y, m, data, daysInMonth);
-  renderSummary(group, y, m, data, daysInMonth);
+  renderStatsAndSummary(group, year, month, data, daysInMonth);
 }
 
-// --- STATS ---
-function renderStats(group, y, m, data, days) {
+function renderStatsAndSummary(group, y, m, data, days) {
   const techs = GROUPS[group].techs;
-  let totalAbsent=0, totalReplaced=0, totalPresent=0, workdays=0;
-  for(let d=1;d<=days;d++) {
-    if(isWeekend(new Date(y,m,d))) continue;
-    workdays++;
-    techs.forEach(t=>{
-      const st = data[dayKey(y,m,d)]?.[t.id]?.status||'present';
-      if(st==='absent') totalAbsent++;
-      else if(st==='replaced') totalReplaced++;
-      else if(st==='present') totalPresent++;
-    });
-  }
-  const container = document.getElementById(`stats-${group}`);
-  container.innerHTML = `
-    <div class="sc"><div class="sc-ico" style="background:rgba(59,235,168,.10);border:1px solid rgba(59,235,168,.18);">📅</div><div><div class="sc-val g">${workdays}</div><div class="sc-lbl">Dias úteis no mês</div></div></div>
-    <div class="sc"><div class="sc-ico" style="background:rgba(59,235,168,.10);border:1px solid rgba(59,235,168,.18);">✅</div><div><div class="sc-val g">${totalPresent}</div><div class="sc-lbl">Presenças registradas</div></div></div>
-    <div class="sc"><div class="sc-ico" style="background:rgba(255,107,107,.10);border:1px solid rgba(255,107,107,.18);">✕</div><div><div class="sc-val${totalAbsent>0?' r':''}">${totalAbsent}</div><div class="sc-lbl">Faltas s/ reposição</div></div></div>
-    <div class="sc"><div class="sc-ico" style="background:rgba(239,159,39,.10);border:1px solid rgba(239,159,39,.18);">↺</div><div><div class="sc-val${totalReplaced>0?' y':''}">${totalReplaced}</div><div class="sc-lbl">Faltas c/ reposição</div></div></div>
-  `;
-}
+  let totalAbsent = 0, totalReplaced = 0, totalPresent = 0, workdays = 0;
+  let summaryHtml = '';
 
-// --- SUMMARY TABLE ---
-function renderSummary(group, y, m, data, days) {
-  const techs = GROUPS[group].techs;
-  const tbody = document.getElementById(`summary-${group}`);
-  let html = '';
-  techs.forEach(t=>{
-    let absent=[], replaced=[], present=0, holiday=0;
-    for(let d=1;d<=days;d++) {
-      const dk=dayKey(y,m,d);
-      if(isWeekend(new Date(y,m,d))) continue;
-      const st=data[dk]?.[t.id]?.status||'present';
-      const note=data[dk]?.[t.id]?.note||'';
-      const ds=`${String(d).padStart(2,'0')}/${String(m+1).padStart(2,'0')}`;
-      if(st==='absent') absent.push(note?`${ds}(${note})`:ds);
-      else if(st==='replaced') replaced.push(note?`${ds}(${note})`:ds);
-      else if(st==='present') present++;
-      else if(st==='holiday') holiday++;
+  techs.forEach(t => {
+    let absent = [], replaced = [], present = 0, holiday = 0;
+    for (let d = 1; d <= days; d++) {
+      if (isWeekend(new Date(y, m, d))) continue;
+      if (t === techs[0]) workdays++; // Conta dias úteis só 1x
+      const status = data[dayKey(y, m, d)]?.[t.id]?.status || 'present';
+      const note = data[dayKey(y, m, d)]?.[t.id]?.note || '';
+      const ds = `${String(d).padStart(2, '0')}/${String(m + 1).padStart(2, '0')}`;
+      
+      if (status === 'absent') absent.push(note ? `${ds}(${note})` : ds);
+      else if (status === 'replaced') replaced.push(note ? `${ds}(${note})` : ds);
+      else if (status === 'present') present++;
+      else if (status === 'holiday') holiday++;
     }
-    html += `<tr>
-      <td class="name-cell" style="color:${t.color}">${t.name}</td>
-      <td><span class="badge badge-green">${present}</span></td>
-      <td><span class="badge ${absent.length?'badge-red':'badge-gray'}">${absent.length}</span></td>
-      <td><span class="badge ${replaced.length?'badge-amber':'badge-gray'}">${replaced.length}</span></td>
-      <td><span class="badge badge-gray">${holiday}</span></td>
-      <td class="dates-cell">${absent.length?absent.join(' · '):replaced.length?'':'-'}</td>
-    </tr>`;
+    totalAbsent += absent.length; totalReplaced += replaced.length; totalPresent += present;
+    summaryHtml += `<tr><td class="name-cell" style="color:${t.color}">${t.name}</td><td><span class="badge badge-green">${present}</span></td><td><span class="badge ${absent.length?'badge-red':'badge-gray'}">${absent.length}</span></td><td><span class="badge ${replaced.length?'badge-amber':'badge-gray'}">${replaced.length}</span></td><td><span class="badge badge-gray">${holiday}</span></td><td class="dates-cell">${absent.join(' · ') || '-'}</td></tr>`;
   });
-  tbody.innerHTML = html || `<tr><td colspan="6" style="text-align:center;color:var(--td);font-size:12px;padding:16px;">Nenhum dado registrado</td></tr>`;
+
+  document.getElementById(`stats-${group}`).innerHTML = `
+    <div class="sc"><div class="sc-ico" style="background:rgba(59,235,168,.1);">📅</div><div><div class="sc-val g">${workdays}</div><div class="sc-lbl">Dias úteis</div></div></div>
+    <div class="sc"><div class="sc-ico" style="background:rgba(59,235,168,.1);">✅</div><div><div class="sc-val g">${totalPresent}</div><div class="sc-lbl">Presenças</div></div></div>
+    <div class="sc"><div class="sc-ico" style="background:rgba(255,107,107,.1);">✕</div><div><div class="sc-val${totalAbsent>0?' r':''}">${totalAbsent}</div><div class="sc-lbl">Faltas s/ reposição</div></div></div>
+    <div class="sc"><div class="sc-ico" style="background:rgba(239,159,39,.1);">↺</div><div><div class="sc-val${totalReplaced>0?' y':''}">${totalReplaced}</div><div class="sc-lbl">Faltas c/ reposição</div></div></div>`;
+  document.getElementById(`summary-${group}`).innerHTML = summaryHtml || `<tr><td colspan="6" style="text-align:center;padding:16px;">Sem dados</td></tr>`;
 }
 
-// --- MONTH NAV ---
+// --- INTERAÇÕES DO USUÁRIO ---
 function changeMonth(group, dir) {
-  curMonth[group].setMonth(curMonth[group].getMonth()+dir);
-  renderCalendar(group);
+  curMonth[group].setMonth(curMonth[group].getMonth() + dir);
+  renderCalendar(group, curMonth[group].getFullYear(), curMonth[group].getMonth());
   syncFromSheets(group, curMonth[group].getFullYear(), curMonth[group].getMonth());
 }
 
-// --- MODAL ---
+function switchTab(tab, el) {
+  document.querySelectorAll('.tab-content').forEach(n => n.style.display = 'none');
+  document.getElementById(`tab-${tab}`).style.display = 'block';
+  document.querySelectorAll('.ni').forEach(n => n.classList.remove('on'));
+  el.classList.add('on');
+  syncFromSheets(tab, curMonth[tab].getFullYear(), curMonth[tab].getMonth());
+}
+
 function openModal(group, dk) {
-  const date = new Date(dk+'T00:00:00');
-  const label = date.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long'}).replace(/^\w/,c=>c.toUpperCase());
-  const y=curMonth[group].getFullYear(), m=curMonth[group].getMonth();
-  const data = loadData(group, y, m);
-  const techs = GROUPS[group].techs;
+  const date = new Date(dk + 'T00:00:00');
+  const label = date.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' }).replace(/^\w/, c => c.toUpperCase());
+  const monthKey = `${curMonth[group].getFullYear()}-${String(curMonth[group].getMonth() + 1).padStart(2, '0')}`;
+  const data = localStore.get(group, monthKey);
 
   let body = '';
-  techs.forEach(t=>{
-    const curSt = data[dk]?.[t.id]?.status||'present';
-    const note = data[dk]?.[t.id]?.note||'';
-    body += `<div class="tech-block">
-      <div class="tech-block-name" style="background:${t.chipBg};color:${t.chipColor}">${t.name}</div>
-      <div class="status-grid">
-        ${STATUS.map(s=>`
-          <div class="status-opt${curSt===s.id?' sel':''}" data-tech="${t.id}" data-status="${s.id}" onclick="selectOpt(this)">
-            <span class="status-dot-s" style="background:${s.dot}"></span>${s.label}
-          </div>`).join('')}
-      </div>
-      <textarea class="note-input" id="note-${t.id}" rows="2" placeholder="Observação (ex: avisou antecipado, enviaram substituto...)">${note}</textarea>
-    </div>`;
+  GROUPS[group].techs.forEach(t => {
+    const curSt = data[dk]?.[t.id]?.status || 'present';
+    const note = data[dk]?.[t.id]?.note || '';
+    body += `<div class="tech-block"><div class="tech-block-name" style="background:${t.chipBg};color:${t.chipColor}">${t.name}</div><div class="status-grid">${STATUS.map(s => `<div class="status-opt${curSt === s.id ? ' sel' : ''}" data-tech="${t.id}" data-status="${s.id}" onclick="selectOpt(this)"><span class="status-dot-s" style="background:${s.dot}"></span>${s.label}</div>`).join('')}</div><textarea class="note-input" id="note-${t.id}" rows="2" placeholder="Observação...">${note}</textarea></div>`;
   });
 
-  document.getElementById('modal-root').innerHTML = `
-    <div class="modal-bg" onclick="if(event.target===this)closeModal()">
-      <div class="modal">
-        <div class="modal-head">
-          <h3>${label}</h3>
-          <button class="modal-close" onclick="closeModal()">✕</button>
-        </div>
-        <div class="modal-body">${body}</div>
-        <div class="modal-footer">
-          <button class="btn" onclick="closeModal()">Cancelar</button>
-          <button class="btn primary" id="btn-save-modal" onclick="saveModal('${group}','${dk}')">Salvar</button>
-        </div>
-      </div>
-    </div>`;
+  document.getElementById('modal-root').innerHTML = `<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modal-head"><h3>${label}</h3><button class="modal-close" onclick="closeModal()">✕</button></div><div class="modal-body">${body}</div><div class="modal-footer"><button class="btn" onclick="closeModal()">Cancelar</button><button class="btn primary" id="btn-save-modal" onclick="saveModal('${group}','${dk}')">Salvar</button></div></div></div>`;
 }
 
 function selectOpt(el) {
-  const techId = el.dataset.tech;
-  document.querySelectorAll(`.status-opt[data-tech="${techId}"]`).forEach(e=>e.classList.remove('sel'));
+  document.querySelectorAll(`.status-opt[data-tech="${el.dataset.tech}"]`).forEach(e => e.classList.remove('sel'));
   el.classList.add('sel');
 }
 
-async function saveModal(group, dk) {
-    const saveBtn = document.getElementById('btn-save-modal');
-    if (saveBtn) {
-        saveBtn.textContent = 'Gravando...';
-        saveBtn.disabled = true;
-    }
+function closeModal() { document.getElementById('modal-root').innerHTML = ''; }
 
-    const y = curMonth[group].getFullYear();
-    const m = curMonth[group].getMonth();
-    const techs = GROUPS[group].techs;
-
-    const pushPromises = [];
-
-    techs.forEach(t => {
-        const sel = document.querySelector(`.status-opt.sel[data-tech="${t.id}"]`);
-        const note = document.getElementById(`note-${t.id}`)?.value || '';
-        const status = sel ? sel.dataset.status : 'present';
-        pushPromises.push(pushToSheetsPromise(group, dk, t.id, status, note));
-    });
-
-    await Promise.all(pushPromises);
-
-    closeModal();
-    // Força a releitura da planilha para garantir que a tela está 100% sincronizada
-    syncFromSheets(group, y, m);
-    updateHubSummary();
-}
-
-function closeModal() {
-  document.getElementById('modal-root').innerHTML='';
-}
-
-// --- COPY SUMMARY ---
 function copySummary(group) {
-  const cur=curMonth[group], y=cur.getFullYear(), m=cur.getMonth();
-  const days=new Date(y,m+1,0).getDate();
-  const data=loadData(group,y,m);
-  const techs=GROUPS[group].techs;
-  const label=cur.toLocaleDateString('pt-BR',{month:'long',year:'numeric'}).replace(/^\w/,c=>c.toUpperCase());
-  const groupLabel=group==='ghc'?'GHC · Manutenção':'Vigilante · Tatuapé';
-  let txt=`Controle de Terceiros — ${groupLabel}\n${label}\n${'─'.repeat(40)}\n`;
-  techs.forEach(t=>{
-    let absent=[],replaced=[];
-    for(let d=1;d<=days;d++){
-      const dk=dayKey(y,m,d);
-      if(isWeekend(new Date(y,m,d))) continue;
-      const st=data[dk]?.[t.id]?.status||'present';
-      const note=data[dk]?.[t.id]?.note||'';
-      const ds=`${String(d).padStart(2,'0')}/${String(m+1).padStart(2,'0')}`;
-      if(st==='absent') absent.push(note?`${ds}(${note})`:ds);
-      if(st==='replaced') replaced.push(note?`${ds}(${note})`:ds);
-    }
-    txt+=`\n${t.name}\n`;
-    if(absent.length) txt+=`  ✕ Faltas s/ reposição (${absent.length}): ${absent.join(', ')}\n`;
-    if(replaced.length) txt+=`  ↺ Faltas c/ reposição (${replaced.length}): ${replaced.join(', ')}\n`;
-    if(!absent.length&&!replaced.length) txt+=`  ✓ Sem ocorrências\n`;
+  const y = curMonth[group].getFullYear(), m = curMonth[group].getMonth();
+  const data = localStore.get(group, `${y}-${String(m + 1).padStart(2, '0')}`);
+  let txt = `Resumo de Presenças\n${new Date(y, m).toLocaleDateString('pt-BR',{month:'long',year:'numeric'})}\n\n`;
+  GROUPS[group].techs.forEach(t => {
+    let abs=[], rep=[];
+    Object.keys(data).forEach(dk => {
+      if(data[dk][t.id] && data[dk][t.id].status === 'absent') abs.push(`${dk.slice(-2)}/` + String(m+1).padStart(2,'0'));
+      if(data[dk][t.id] && data[dk][t.id].status === 'replaced') rep.push(`${dk.slice(-2)}/` + String(m+1).padStart(2,'0'));
+    });
+    txt += `${t.name}:\n Faltas: ${abs.join(', ') || '0'}\n Reposições: ${rep.join(', ') || '0'}\n\n`;
   });
-  navigator.clipboard.writeText(txt).then(()=>{
-    const btn=document.getElementById(`copy-btn-${group}`);
-    btn.textContent='Copiado ✓'; btn.classList.add('ok');
-    setTimeout(()=>{btn.textContent='Copiar resumo';btn.classList.remove('ok');},2000);
-  }).catch(()=>{});
+  navigator.clipboard.writeText(txt);
+  const btn = document.getElementById(`copy-btn-${group}`);
+  btn.textContent = 'Copiado!'; setTimeout(() => btn.textContent = 'Copiar resumo', 2000);
 }
 
-// --- HUB SUMMARY SYNC ---
-function updateHubSummary() {
-  const today=new Date(), y=today.getFullYear(), m=today.getMonth();
-  const days=new Date(y,m+1,0).getDate();
-  let totalAbsent=0;
-  ['ghc','vigilante'].forEach(group=>{
-    const data=loadData(group,y,m);
-    const techs=GROUPS[group].techs;
-    for(let d=1;d<=days;d++){
-      if(isWeekend(new Date(y,m,d))) continue;
-      techs.forEach(t=>{
-        const st=data[dayKey(y,m,d)]?.[t.id]?.status||'present';
-        if(st==='absent') totalAbsent++;
-      });
-    }
-  });
-  localStorage.setItem('facilities-terceiros-hub-summary', JSON.stringify({
-    totalAbsent, month: `${y}-${String(m+1).padStart(2,'0')}`, updatedAt: new Date().toISOString()
-  }));
-}
-
-// --- INIT ---
+// --- INICIALIZAÇÃO ---
 document.addEventListener('DOMContentLoaded', () => {
-  renderCalendar('ghc');
-  renderCalendar('vigilante');
-  updateHubSummary();
-  if (SHEETS_ENDPOINT) {
-    const activeTab = document.querySelector('.ni.on').dataset.tab || 'ghc';
-    syncFromSheets(activeTab, curMonth[activeTab].getFullYear(), curMonth[activeTab].getMonth());
-  }
+  // Renderiza a interface local IMEDIATAMENTE antes da internet carregar
+  renderCalendar('ghc', curMonth.ghc.getFullYear(), curMonth.ghc.getMonth());
+  renderCalendar('vigilante', curMonth.vigilante.getFullYear(), curMonth.vigilante.getMonth());
+  
+  // Puxa as novidades do Google Sheets em segundo plano
+  syncFromSheets('ghc', curMonth.ghc.getFullYear(), curMonth.ghc.getMonth());
 });
 </script>
 </body>
